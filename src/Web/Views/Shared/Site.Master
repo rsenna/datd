@@ -1,0 +1,55 @@
+<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+
+    <link href="../../Content/Site.css" rel="stylesheet" type="text/css" />
+
+    <script type="text/javascript" language="javascript" src="../../Scripts/jquery-1.3.2.js" ></script>
+    <script type="text/javascript" language="javascript" src="../../Scripts/jquery.validate.min.js" ></script>
+    <script type="text/javascript" language="javascript" src="../../Scripts/jquery.autoNumeric-1.0.2.js" ></script>
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+</head>
+<body>
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <h1>Dilab Online <%= ViewData["Tenant.Name"] %></h1>
+            </div>
+            <div id="logindisplay">
+            <%
+                if (Request.IsAuthenticated) {
+            %>
+                Olá <b><%= Html.Encode(Page.User.Identity.Name) %></b>! [ <%= Html.ActionLink("Sair", "LogOff", "Account") %> ]
+            <%
+                }
+            %> 
+                &nbsp;
+            </div>
+            <div id="menucontainer">
+                <ul id="menu">
+                    <li><%= Html.ActionLink("Principal", "Index", "Home")%></li>
+                    <%
+                        if (Request.IsAuthenticated) {
+                    %>
+                        <li><%= Html.ActionLink("Ordens de Serviço", "Index", "Os")%></li>
+                        <li><%= Html.ActionLink("Nova OS", "Nova", "Os")%></li>
+                        <li><%= Html.ActionLink("Financeiro", "Index", "Financeiro")%></li>
+                        <li><%= Html.ActionLink("Minha conta", "MinhaConta", "Account")%></li>
+                    <%
+                        }
+                    %> 
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

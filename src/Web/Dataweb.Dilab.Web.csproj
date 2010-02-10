@@ -1,0 +1,207 @@
+﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ACC91C01-268F-4AFA-BA5F-B497B7C93751}</ProjectGuid>
+    <ProjectTypeGuids>{603c0e0b-db56-11dc-be95-000d561079b0};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Dataweb.Dilab.Web</RootNamespace>
+    <AssemblyName>Dataweb.Dilab.Web</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.ServiceModel">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\DilabSection.cs" />
+    <Compile Include="Configuration\TenantCollection.cs" />
+    <Compile Include="Configuration\TenantElement.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\FinanceiroController.cs" />
+    <Compile Include="Controllers\ControllerBase.cs" />
+    <Compile Include="Controllers\OsController.cs" />
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Model\HomeViewModel.cs" />
+    <Compile Include="Model\IHasTenant.cs" />
+    <Compile Include="Model\OsNovaViewModel.cs" />
+    <Compile Include="Model\Tenant.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ClienteServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\OrdemServicoServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="WebHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\____auto.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <None Include="Service References\ClienteServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ClienteServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ClienteServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\OrdemServicoServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\OrdemServicoServiceReference\configuration.svcinfo" />
+    <None Include="Service References\OrdemServicoServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\jquery.rules.os.nova.js" />
+    <Content Include="Scripts\jquery.autoNumeric-1.0.2.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Views\Financeiro\Index.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Os\Nova.aspx" />
+    <Content Include="Views\Os\Index.aspx" />
+    <Content Include="Web.config" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.3.2.js" />
+    <Content Include="Scripts\jquery-1.3.2.min.js" />
+    <None Include="Scripts\jquery-1.3.2-vsdoc.js" />
+    <None Include="Scripts\jquery-1.3.2.min-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Views\Account\MinhaConta.aspx" />
+    <Content Include="Views\Account\MinhaContaSucesso.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Dataweb.Dilab.Model.csproj">
+      <Project>{E5788FCF-7B3A-4831-9208-64E23C097C0E}</Project>
+      <Name>Dataweb.Dilab.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Wcf\Dataweb.Dilab.Model.Wcf.csproj">
+      <Project>{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}</Project>
+      <Name>Dataweb.Dilab.Model.Wcf</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Cliente.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Familia.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Material.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.OrdemServico.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.ProdutoServico.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.Dto.Cliente.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.Dto.User.datasource" />
+    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.DataTransfer1.xsd" />
+    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.Wcf.xsd" />
+    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model1.xsd" />
+    <None Include="Service References\ClienteServiceReference\service1.wsdl" />
+    <None Include="Service References\ClienteServiceReference\service2.xsd" />
+    <None Include="Service References\ClienteServiceReference\service21.xsd" />
+    <None Include="Service References\OrdemServicoServiceReference\Dataweb.Dilab.Model.DataTransfer.xsd" />
+    <None Include="Service References\OrdemServicoServiceReference\Dataweb.Dilab.Model.xsd" />
+    <None Include="Service References\OrdemServicoServiceReference\service.wsdl" />
+    <None Include="Service References\OrdemServicoServiceReference\service.xsd" />
+    <None Include="Service References\OrdemServicoServiceReference\service1.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClienteServiceReference\" />
+    <WCFMetadataStorage Include="Service References\OrdemServicoServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)\..\$(ProjectName)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>8374</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
