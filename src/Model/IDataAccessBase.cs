@@ -6,6 +6,7 @@
         where T: DataTransferBase
     {
         T FindByPrimaryKey(object pk);
-        void Update(T dto);
+        T Insert(T dto);
+        T Update(T dto);
     }
 }

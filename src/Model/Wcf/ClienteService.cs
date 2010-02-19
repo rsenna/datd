@@ -1,6 +1,6 @@
 ﻿using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
-using Dataweb.Dilab.Model.Wcf.Contract;
+using Dataweb.Dilab.Model.Service;
 
 namespace Dataweb.Dilab.Model.Wcf
 {
@@ -11,13 +11,19 @@ namespace Dataweb.Dilab.Model.Wcf
         public Cliente FindByLogin(string login)
         {
             clienteDao = DaoFactory.CreateDao<IClienteDao>();
-            return clienteDao.FindByLogin(login);
+
+            // Determina se login é um IDENTIFICADOR ou um CNPJ:
+            int identificador;
+            var isIdentificador = int.TryParse(login, out identificador);
+
+            return isIdentificador?
+                clienteDao.FindByIdentificador(identificador) :
+                clienteDao.FindByCnpj(login);
         }
 
         public bool ValidateLogin(string login, string senha)
         {
-            clienteDao = DaoFactory.CreateDao<IClienteDao>();
-            var cliente = clienteDao.FindByLogin(login);
+            var cliente = FindByLogin(login);
 
             if (cliente == null)
             {
@@ -29,8 +35,7 @@ namespace Dataweb.Dilab.Model.Wcf
 
         public void ChangePassword(string login, string currentPassword, string newPassword)
         {
-            clienteDao = DaoFactory.CreateDao<IClienteDao>();
-            var cliente = clienteDao.FindByLogin(login);
+            var cliente = FindByLogin(login);
 
             if (cliente.Senha != currentPassword)
             {
@@ -43,8 +48,7 @@ namespace Dataweb.Dilab.Model.Wcf
 
         public void ChangeEmail(string login, string emailNotificacao, bool receberNotificacao)
         {
-            clienteDao = DaoFactory.CreateDao<IClienteDao>();
-            var cliente = clienteDao.FindByLogin(login);
+            var cliente = FindByLogin(login);
 
             cliente.EmailNotificacao = emailNotificacao;
             cliente.ReceberNotificacao = receberNotificacao;

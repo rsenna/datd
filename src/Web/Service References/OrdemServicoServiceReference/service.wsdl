@@ -62,6 +62,12 @@
   <wsdl:message name="IOrdemServicoService_FindAllProdutoServico_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindAllProdutoServicoResponse" />
   </wsdl:message>
+  <wsdl:message name="IOrdemServicoService_InsertOrdemServico_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOrdemServico" />
+  </wsdl:message>
+  <wsdl:message name="IOrdemServicoService_InsertOrdemServico_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertOrdemServicoResponse" />
+  </wsdl:message>
   <wsdl:portType name="IOrdemServicoService">
     <wsdl:operation name="FindAllByCodCliente">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrdemServicoService/FindAllByCodCliente" message="tns:IOrdemServicoService_FindAllByCodCliente_InputMessage" />
@@ -98,6 +104,10 @@
     <wsdl:operation name="FindAllProdutoServico">
       <wsdl:input wsaw:Action="http://tempuri.org/IOrdemServicoService/FindAllProdutoServico" message="tns:IOrdemServicoService_FindAllProdutoServico_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IOrdemServicoService/FindAllProdutoServicoResponse" message="tns:IOrdemServicoService_FindAllProdutoServico_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertOrdemServico">
+      <wsdl:input wsaw:Action="http://tempuri.org/IOrdemServicoService/InsertOrdemServico" message="tns:IOrdemServicoService_InsertOrdemServico_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IOrdemServicoService/InsertOrdemServicoResponse" message="tns:IOrdemServicoService_InsertOrdemServico_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IOrdemServicoService" type="tns:IOrdemServicoService">
@@ -176,6 +186,15 @@
     </wsdl:operation>
     <wsdl:operation name="FindAllProdutoServico">
       <soap:operation soapAction="http://tempuri.org/IOrdemServicoService/FindAllProdutoServico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertOrdemServico">
+      <soap:operation soapAction="http://tempuri.org/IOrdemServicoService/InsertOrdemServico" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

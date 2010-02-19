@@ -1,45 +1,68 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
 namespace Dataweb.Dilab.Model.DataTransfer
 {
-    public enum TipoEtapa
-    {
-        Inicial = 0,
-        EmProducao = 1,
-        Expedicao = 2,
-        Despachada = 3,
-        Finalizada = 4
-    }
-
+    /// <summary>
+    /// Representa uma ordem de serviço básica (i.e. não agregada as
+    /// informações de lentes e serviços). O ideal seria que ela não possuisse
+    /// sequer informações específicas de ótica, mas isso acontece por limitação
+    /// das próprias procs expostas.
+    /// </summary>
     [DataContract]
     public class OrdemServico : DataTransferBase
     {
         [DataMember]
-        public int CodEmpresa { get; set; } // RCODEMPRESA
+        public int CodOrdemServico { get; set; }
 
         [DataMember]
-        public int CodTransacao { get; set; } // RCODTRANSACAO
+        public int Numero { get; set; }
+        
+        [DataMember]
+        public int CodEmpresa { get; set; }
 
         [DataMember]
-        public int NumeroOrdemServico { get; set; } // RNUMEROORDEMSERVICO
+        public int CodCliente { get; set; }
 
         [DataMember]
-        public string Referencia { get; set; } // RREFERENCIA
+        public string Observacao { get; set; }
 
         [DataMember]
-        public DateTime Emissao { get; set; } // RDATAHORAEMISSAO
+        public string Referencia { get; set; }
 
         [DataMember]
-        public DateTime? Previsao { get; set; } // RDATAHORAPREVISAO
+        public string DescricaoArmacao { get; set; }
 
         [DataMember]
-        public DateTime? Expedicao { get; set; } // RDATAHORAEXPEDICAO
+        public string ObservacaoArmacao { get; set; }
 
         [DataMember]
-        public TipoEtapa Etapa { get; set; } // RCODETAPA
+        public int CodMaterial { get; set; }
 
         [DataMember]
-        public string AvisoMensagem { get; set; } // RAVISOMENSAGEM
+        public int TipoVt { get; set; }
+
+        [DataMember]
+        public decimal Ta { get; set; }
+
+        [DataMember]
+        public decimal Md { get; set; }
+
+        [DataMember]
+        public decimal Diametro { get; set; }
+
+        [DataMember]
+        public string ObservacaoLente { get; set; }
+
+        [DataMember]
+        public decimal Dp { get; set; }
+
+        [DataMember]
+        public decimal Aa { get; set; }
+
+        [DataMember]
+        public decimal Eixo { get; set; }
+
+        [DataMember]
+        public decimal Ponte { get; set; }
     }
 }

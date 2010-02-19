@@ -24,12 +24,12 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
 
             new ReflectionPermission(ReflectionPermissionFlag.MemberAccess | ReflectionPermissionFlag.RestrictedMemberAccess).Assert();
 
-            const BindingFlags flags = BindingFlags.Instance | BindingFlags.NonPublic;
+            const BindingFlags FLAGS = BindingFlags.Instance | BindingFlags.NonPublic;
 
             try
             {
-                elementField = typeof (ConfigurationElement).GetField("_bReadOnly", flags);
-                collectionField = typeof (ConfigurationElementCollection).GetField("bReadOnly", flags);
+                elementField = typeof (ConfigurationElement).GetField("_bReadOnly", FLAGS);
+                collectionField = typeof (ConfigurationElementCollection).GetField("bReadOnly", FLAGS);
             }
             finally
             {
@@ -52,7 +52,7 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
             elementField.SetValue(element, readOnly);
         }
 
-        private static void SetCollectionIsReadOnly(ConfigurationElementCollection collection, bool readOnly)
+        private static void SetCollectionIsReadOnly(ConfigurationElement collection, bool readOnly)
         {
             SetElementIsReadOnly(collection, readOnly);
             collectionField.SetValue(collection, readOnly);
@@ -121,7 +121,6 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
         public void CanGetByLogin()
         {
             var service = new ClienteService();
-
             //Console.WriteLine(service.GetConnectionString());
         }
     }

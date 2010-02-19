@@ -1,22 +1,22 @@
 using System.ServiceModel;
 using Dataweb.Dilab.Model.DataTransfer;
 
-namespace Dataweb.Dilab.Model.Wcf.Contract
+namespace Dataweb.Dilab.Model.Service
 {
     [ServiceContract]
     public interface IOrdemServicoService : IService
     {
         [OperationContract]
-        OrdemServico[] FindAllByCodCliente(int codCliente);
+        OrdemServicoQuery[] FindAllByCodCliente(int codCliente);
 
         [OperationContract]
-        OrdemServico[] FindAllByCodClienteAndReferencia(int codCliente, string referencia);
+        OrdemServicoQuery[] FindAllByCodClienteAndReferencia(int codCliente, string referencia);
 
         [OperationContract]
-        OrdemServico[] FindAllByLogin(string login);
+        OrdemServicoQuery[] FindAllByLogin(string login);
 
         [OperationContract]
-        OrdemServico[] FindAllByLoginAndReferencia(string login, string referencia);
+        OrdemServicoQuery[] FindAllByLoginAndReferencia(string login, string referencia);
 
         [OperationContract]
         Familia[] FindAllFamilia();
@@ -31,6 +31,9 @@ namespace Dataweb.Dilab.Model.Wcf.Contract
         int GetCountEmProducao(int codCliente);
 
         [OperationContract]
-        ProdutoServico[] FindAllProdutoServico(int? codFamiliaOd, int? codFamiliaOe);
+        ProdutoServico[] FindAllProdutoServico(int codFamilia);
+
+        [OperationContract]
+        void InsertOrdemServico(OrdemServicoOtica dto);
     }
 }

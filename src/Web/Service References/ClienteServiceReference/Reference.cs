@@ -22,7 +22,7 @@ namespace Dataweb.Dilab.Web.ClienteServiceReference {
         bool ValidateLogin(string login, string senha);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClienteService/ChangePassword", ReplyAction="http://tempuri.org/IClienteService/ChangePasswordResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(Dataweb.Dilab.Model.Wcf.DatawebFault), Action="http://tempuri.org/IClienteService/ChangePasswordDatawebFaultFault", Name="DatawebFault", Namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.Wcf")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Dataweb.Dilab.Model.Service.DatawebFault), Action="http://tempuri.org/IClienteService/ChangePasswordDatawebFaultFault", Name="DatawebFault", Namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.Service")]
         void ChangePassword(string login, string currentPassword, string newPassword);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClienteService/ChangeEmail", ReplyAction="http://tempuri.org/IClienteService/ChangeEmailResponse")]

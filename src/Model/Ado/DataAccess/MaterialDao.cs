@@ -30,7 +30,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public override void Update(Material dto)
+        public override Material Update(Material dto)
         {
             throw new NotImplementedException();
         }
@@ -38,6 +38,11 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         public Material[] FindAll()
         {
             return FindAll(SQL_STMT_FIND_ALL);
+        }
+
+        public override Material Insert(Material dto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

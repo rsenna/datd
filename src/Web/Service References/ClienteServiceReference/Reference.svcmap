@@ -25,7 +25,7 @@
     <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="9f14cfa2-b6e0-44d3-871e-3eece91e007b" SourceId="1" SourceUrl="http://localhost:53990/Cliente/mex" />
     <MetadataFile FileName="Dataweb.Dilab.Model.DataTransfer1.xsd" MetadataType="Schema" ID="7399f6aa-7a0e-49e6-9cf1-9da3b2056c0f" SourceId="1" SourceUrl="http://localhost:53990/Cliente/mex" />
     <MetadataFile FileName="Dataweb.Dilab.Model1.xsd" MetadataType="Schema" ID="fb0cf4b4-0312-4dfb-8f49-f0dcce7c42da" SourceId="1" SourceUrl="http://localhost:53990/Cliente/mex" />
-    <MetadataFile FileName="Dataweb.Dilab.Model.Wcf.xsd" MetadataType="Schema" ID="973921a5-8062-4058-8b06-c1701793dab2" SourceId="1" SourceUrl="http://localhost:53990/Cliente/mex" />
+    <MetadataFile FileName="Dataweb.Dilab.Model.Service.xsd" MetadataType="Schema" ID="2e48de3a-ccd6-4d6e-8f44-e3661ce6c28e" SourceId="1" SourceUrl="http://localhost:53990/Cliente/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

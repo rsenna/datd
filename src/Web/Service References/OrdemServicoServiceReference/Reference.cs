@@ -16,16 +16,16 @@ namespace Dataweb.Dilab.Web.OrdemServicoServiceReference {
     public interface IOrdemServicoService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrdemServicoService/FindAllByCodCliente", ReplyAction="http://tempuri.org/IOrdemServicoService/FindAllByCodClienteResponse")]
-        Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByCodCliente(int codCliente);
+        Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByCodCliente(int codCliente);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrdemServicoService/FindAllByCodClienteAndReferencia", ReplyAction="http://tempuri.org/IOrdemServicoService/FindAllByCodClienteAndReferenciaResponse")]
-        Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByCodClienteAndReferencia(int codCliente, string referencia);
+        Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByCodClienteAndReferencia(int codCliente, string referencia);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrdemServicoService/FindAllByLogin", ReplyAction="http://tempuri.org/IOrdemServicoService/FindAllByLoginResponse")]
-        Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByLogin(string login);
+        Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByLogin(string login);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrdemServicoService/FindAllByLoginAndReferencia", ReplyAction="http://tempuri.org/IOrdemServicoService/FindAllByLoginAndReferenciaResponse")]
-        Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByLoginAndReferencia(string login, string referencia);
+        Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByLoginAndReferencia(string login, string referencia);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrdemServicoService/FindAllFamilia", ReplyAction="http://tempuri.org/IOrdemServicoService/FindAllFamiliaResponse")]
         Dataweb.Dilab.Model.DataTransfer.Familia[] FindAllFamilia();
@@ -40,7 +40,10 @@ namespace Dataweb.Dilab.Web.OrdemServicoServiceReference {
         int GetCountEmProducao(int codCliente);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrdemServicoService/FindAllProdutoServico", ReplyAction="http://tempuri.org/IOrdemServicoService/FindAllProdutoServicoResponse")]
-        Dataweb.Dilab.Model.DataTransfer.ProdutoServico[] FindAllProdutoServico(System.Nullable<int> codFamiliaOd, System.Nullable<int> codFamiliaOe);
+        Dataweb.Dilab.Model.DataTransfer.ProdutoServico[] FindAllProdutoServico(int codFamilia);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IOrdemServicoService/InsertOrdemServico", ReplyAction="http://tempuri.org/IOrdemServicoService/InsertOrdemServicoResponse")]
+        void InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica dto);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -70,19 +73,19 @@ namespace Dataweb.Dilab.Web.OrdemServicoServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByCodCliente(int codCliente) {
+        public Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByCodCliente(int codCliente) {
             return base.Channel.FindAllByCodCliente(codCliente);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByCodClienteAndReferencia(int codCliente, string referencia) {
+        public Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByCodClienteAndReferencia(int codCliente, string referencia) {
             return base.Channel.FindAllByCodClienteAndReferencia(codCliente, referencia);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByLogin(string login) {
+        public Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByLogin(string login) {
             return base.Channel.FindAllByLogin(login);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.OrdemServico[] FindAllByLoginAndReferencia(string login, string referencia) {
+        public Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery[] FindAllByLoginAndReferencia(string login, string referencia) {
             return base.Channel.FindAllByLoginAndReferencia(login, referencia);
         }
         
@@ -102,8 +105,12 @@ namespace Dataweb.Dilab.Web.OrdemServicoServiceReference {
             return base.Channel.GetCountEmProducao(codCliente);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.ProdutoServico[] FindAllProdutoServico(System.Nullable<int> codFamiliaOd, System.Nullable<int> codFamiliaOe) {
-            return base.Channel.FindAllProdutoServico(codFamiliaOd, codFamiliaOe);
+        public Dataweb.Dilab.Model.DataTransfer.ProdutoServico[] FindAllProdutoServico(int codFamilia) {
+            return base.Channel.FindAllProdutoServico(codFamilia);
+        }
+        
+        public void InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica dto) {
+            base.Channel.InsertOrdemServico(dto);
         }
     }
 }

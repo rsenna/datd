@@ -3,21 +3,23 @@ using System.Configuration;
 using System.Globalization;
 using System.ServiceModel;
 using System.Threading;
+using System.Web.Mvc;
 using System.Web.Routing;
 using Dataweb.Dilab.Web.ClienteServiceReference;
 using Dataweb.Dilab.Web.Configuration;
 using Dataweb.Dilab.Web.Model;
 using Dataweb.Dilab.Web.OrdemServicoServiceReference;
+using Elmah;
 
 namespace Dataweb.Dilab.Web.Controllers
 {
-    public abstract class ControllerBase : System.Web.Mvc.Controller, IHasTenant
+    public abstract class ControllerBase : Controller, IHasTenant
     {
         private const string CULTURE = "pt-BR";
 
-        public Tenant Tenant { get; set; }
         protected ClienteServiceClient ClienteSC { get; set; }
         protected OrdemServicoServiceClient OrdemServicoSC { get; set; }
+        public Tenant Tenant { get; set; }
 
         protected void InitWcf()
         {
@@ -28,6 +30,30 @@ namespace Dataweb.Dilab.Web.Controllers
 
             ClienteSC = CreateServiceClient<ClienteServiceClient, IClienteService>();
             OrdemServicoSC = CreateServiceClient<OrdemServicoServiceClient, IOrdemServicoService>();
+        }
+
+        protected override void OnException(ExceptionContext context)
+        {
+            base.OnException(context);
+
+            if (context.ExceptionHandled)
+            {
+                return;
+            }
+
+            // Avoid to show YSOD to end-users
+            if (context.HttpContext.IsCustomErrorEnabled)
+            {
+                var controllerName = context.RouteData.GetRequiredString("controller");
+                var actionName = context.RouteData.GetRequiredString("action");
+                var httpContext = System.Web.HttpContext.Current;
+
+                context.ExceptionHandled = true;
+
+                ErrorSignal.FromContext(httpContext).Raise(context.Exception, httpContext);
+
+                View("Error", new HandleErrorInfo(context.Exception, controllerName, actionName)).ExecuteResult(ControllerContext);
+            }
         }
 
         /// <summary>
@@ -43,8 +69,8 @@ namespace Dataweb.Dilab.Web.Controllers
         /// para satisfazer a sintaxe do C#, e não é utilizado diretamente no
         /// código</remarks>
         private T CreateServiceClient<T, TInterface>()
-            where TInterface: class
-            where T: ClientBase<TInterface>, new()
+            where TInterface : class
+            where T : ClientBase<TInterface>, new()
         {
             var clientBase = new T();
 
@@ -71,7 +97,7 @@ namespace Dataweb.Dilab.Web.Controllers
 
             Thread.CurrentThread.CurrentCulture = ci;
             Thread.CurrentThread.CurrentUICulture = ci;
-            
+
             var dilabConfiguration = ConfigurationManager.GetSection("Dilab") as DilabSection;
 
             if (dilabConfiguration == null)

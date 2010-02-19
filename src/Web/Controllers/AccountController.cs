@@ -2,11 +2,10 @@
 using System.ServiceModel;
 using System.Web.Mvc;
 using System.Web.Security;
-using Dataweb.Dilab.Model.Wcf;
+using Dataweb.Dilab.Model.Service;
 
 namespace Dataweb.Dilab.Web.Controllers
 {
-    [HandleError]
     public class AccountController : ControllerBase
     {
         private const int PASSWORD_LENGTH = 5;
@@ -44,7 +43,7 @@ namespace Dataweb.Dilab.Web.Controllers
 
             if (!ClienteSC.ValidateLogin(login, password))
             {
-                return View();
+                throw new Exception("Login inválido. Verifique o usuário e a senha.");
             }
 
             FormsAuthentication.SetAuthCookie(login, rememberMe);

@@ -52,6 +52,8 @@
     <Compile Include="DataAccess\MaterialDao.cs" />
     <Compile Include="DataAccess\FamiliaDao.cs" />
     <Compile Include="DataAccess\OrdemServicoDao.cs" />
+    <Compile Include="DataAccess\OrdemServicoLenteDao.cs" />
+    <Compile Include="DataAccess\OrdemServicoQueryDao.cs" />
     <Compile Include="DataAccess\ProdutoServicoDao.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

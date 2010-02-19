@@ -36,7 +36,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 webrascliente.cod_cliente = @COD_CLIENTE
         ";
 
-        private const string SQL_STMT_FIND_BY_LOGIN = @"
+        private const string SQL_STMT_FIND_BY_IDENTIFICADOR = @"
             SELECT
                 webrascliente.cod_cliente,
                 webrascliente.emailnotificacao,
@@ -52,10 +52,26 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 INNER JOIN webrascliente
                     ON (webrascliente.cod_cliente = pessoacliente.cod_pessoa)
             WHERE
-                (
-                    (pessoacliente.cnpj = @LOGIN) OR
-                    (pessoacliente.identificador = CAST(@LOGIN AS INTEGER))
-                )
+                pessoacliente.identificador = @IDENTIFICADOR
+        ";
+
+        private const string SQL_STMT_FIND_BY_CNPJ = @"
+            SELECT
+                webrascliente.cod_cliente,
+                webrascliente.emailnotificacao,
+                webrascliente.recebernotificacao,
+                webrascliente.senha,
+                pessoacliente.nome,
+                pessoacliente.cnpj,
+                pessoacliente.identificador,
+                COALESCE(pessoacliente.cod_empresa, (SELECT MIN(cfgprincipal.cod_empresamatriz) FROM cfgprincipal)) cod_empresa,
+                (SELECT nome FROM pessoa WHERE cod_pessoa = COALESCE(pessoacliente.cod_empresa, (SELECT MIN(cfgprincipal.cod_empresamatriz) FROM cfgprincipal))) nomeempresa
+            FROM
+                pessoa pessoacliente
+                INNER JOIN webrascliente
+                    ON (webrascliente.cod_cliente = pessoacliente.cod_pessoa)
+            WHERE
+                pessoacliente.cnpj = @CNPJ
         ";
 
         public override Cliente FetchDto(IDataRecord reader)
@@ -73,14 +89,30 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             };
         }
 
-        public Cliente FindByLogin(string login)
+        public Cliente FindByIdentificador(int identificador)
         {
             Cliente result = null;
 
             Helper.UsingCommand(c => {
-                c.CommandText = SQL_STMT_FIND_BY_LOGIN;
+                c.CommandText = SQL_STMT_FIND_BY_IDENTIFICADOR;
 
-                Helper.AddParameter(c, "@LOGIN", DbType.String, login);
+                Helper.AddParameter(c, "@IDENTIFICADOR", DbType.Int32, identificador);
+
+                result = FetchDto(c);
+            });
+
+            return result;
+        }
+
+        public Cliente FindByCnpj(string cnpj)
+        {
+            Cliente result = null;
+
+            Helper.UsingCommand(c =>
+            {
+                c.CommandText = SQL_STMT_FIND_BY_CNPJ;
+
+                Helper.AddParameter(c, "@CNPJ", DbType.String, cnpj);
 
                 result = FetchDto(c);
             });
@@ -114,7 +146,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         /// <remarks>
         /// Atualmente são alterados apenas os campos da tabela "webrascliente"
         /// </remarks>
-        public override void Update(Cliente dto)
+        public override Cliente Update(Cliente dto)
         {
             Helper.UsingCommand(c =>
             {
@@ -128,6 +160,13 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
                 c.ExecuteNonQuery();
             });
+
+            return dto;
+        }
+
+        public override Cliente Insert(Cliente dto)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

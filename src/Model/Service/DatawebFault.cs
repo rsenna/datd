@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using System.ServiceModel;
 
-namespace Dataweb.Dilab.Model.Wcf
+namespace Dataweb.Dilab.Model.Service
 {
     [DataContract]
     public class DatawebFault

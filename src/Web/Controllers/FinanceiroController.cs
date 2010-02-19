@@ -2,7 +2,6 @@
 
 namespace Dataweb.Dilab.Web.Controllers
 {
-    [HandleError]
     public class FinanceiroController : ControllerBase
     {
         [Authorize]

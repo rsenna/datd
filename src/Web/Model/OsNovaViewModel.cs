@@ -11,7 +11,7 @@ namespace Dataweb.Dilab.Web.Model
 
         // Entrada: /////////
 
-        public int NumeroOs { get; set; }
+        public string Referencia { get; set; }
 
         public int FamiliaOd { get; set; }
         public decimal EsfLongeOd { get; set; }
@@ -50,5 +50,7 @@ namespace Dataweb.Dilab.Web.Model
         public string ObservacaoArmacao { get; set; }
         public int MaterialArmacao { get; set; }
         public string ObservacaoGeral { get; set; }
+
+        public string[] Servicos { get; set; }
     }
 }

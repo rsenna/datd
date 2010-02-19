@@ -1,11 +1,11 @@
 ﻿/*----------------------------------------------------------
-The base color for this template is #5c87b2. If you'd like
+The base color for this template is Window. If you'd like
 to use a different color start by replacing all instances of
-#5c87b2 with your new color.
+Window with your new color.
 ----------------------------------------------------------*/
 body
 {
-    background-color: #5c87b2;
+    background-color: Window;
     font-size: .75em;
     font-family: Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -132,7 +132,7 @@ page width. Or, you can specify an exact pixel width. */
 ----------------------------------------------------------*/
 ul#menu
 {
-    border-bottom: 1px #5C87B2 solid;
+    border-bottom: 1px Window solid;
     padding: 0 0 2px;
     position: relative;
     margin: 0;
@@ -330,33 +330,33 @@ div#divResumo { float:left; width:300px; }
 
 form#formNovaOs { width: 700px; }
 
-#divLentes { position:relative; height:430px; }
+div#divLentes { position:relative; }
+div#divInfo { position:relative; }
+div.coluna { float:left; width:300px;}
 
-#divOD { float:left; width:300px; }
-#divOE { float:left; width:300px; }
+div.divcom1 { width:100%; margin-left:auto; margin-right:auto; }
+div.divcom1 input { width:96%; }
+div.divcom1 select { width:96%; }
+div.divcom1 textarea { width:94%; height:100px; }
 
-div.divcom1 { width:80%; margin-left:auto; margin-right:auto; }
-div.divcom1 input { width:100%; }
-div.divcom1 select { width:100%; }
-
-div.divcom3 { width:80%; margin-left:auto; margin-right:auto; }
+div.divcom3 { width:100%; margin-left:auto; margin-right:auto; }
 
 div.div1de3 { float:left; width:33%; }
 div.div1de3 input { width:90%; }
 
-div.divcom2 { width:80%; margin-left:auto; margin-right:auto; }
+div.divcom2 { width:100%; margin-left:auto; margin-right:auto; }
 
 div.div1de2 { float:left; width:50%; }
-div.div1de2 input { width:90%; }
-div.div1de2 select { width:90%; }
+div.div1de2 input { width:91%; }
+div.div1de2 select { width:91%; }
 div.div1de2 textarea { width:90%; height:100px; }
 
-#divcom6 { width:90%; margin-left:auto; margin-right:auto; }
+#divcom6 { width:100%; margin-left:auto; margin-right:auto; }
 
-div.div1de6 { float:left; width:15%; }
+div.div1de6 { float:left; width:14%; }
 div.div1de6 input { width:90%; }
 
-div#divServicos { border-style:inset; border-width:1px; border-color:Black; background-color:ButtonFace; padding:5px; }
+div#divServicos { border-style:inset; border-width:1px; border-color:Black; background-color:ButtonFace; padding:5px; width:576px;}
 div#divMsgSemServicos { padding:5px; }
 div#divServicosOD { padding:10px; }
 div#divServicosOE { padding:10px; }

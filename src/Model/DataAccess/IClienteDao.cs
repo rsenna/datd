@@ -4,6 +4,7 @@ namespace Dataweb.Dilab.Model.DataAccess
 {
     public interface IClienteDao : IDataAccessBase<Cliente>
     {
-        Cliente FindByLogin(string login);
+        Cliente FindByIdentificador(int identificador);
+        Cliente FindByCnpj(string cnpj);
     }
 }

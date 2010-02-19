@@ -1,9 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System.ServiceModel;
+using System.Web.Mvc;
+using Dataweb.Dilab.Model.DataTransfer;
+using Dataweb.Dilab.Model.Service;
 using Dataweb.Dilab.Web.Model;
 
 namespace Dataweb.Dilab.Web.Controllers
 {
-    [HandleError]
     public class OsController : ControllerBase
     {
         [Authorize]
@@ -24,9 +26,96 @@ namespace Dataweb.Dilab.Web.Controllers
 
         [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Nova([Bind(Prefix = "")]OsNovaViewModel os)
+        public ActionResult Nova(OsNovaViewModel viewModel)
         {
-            return View(os);
+            InitWcf();
+            var cliente = ClienteSC.FindByLogin(GetLogin());
+
+            var os = new OrdemServico {
+                CodCliente = cliente.CodCliente,
+                Observacao = viewModel.ObservacaoGeral,
+                Referencia = viewModel.Referencia,
+                DescricaoArmacao = string.Empty,
+                ObservacaoArmacao = viewModel.ObservacaoArmacao,
+                CodMaterial = viewModel.MaterialArmacao,
+                TipoVt = 1,
+                Ta = viewModel.Ta,
+                Md = viewModel.Md,
+                Diametro = viewModel.Diametro,
+                ObservacaoLente = string.Empty,
+                Dp = viewModel.Dp,
+                Aa = viewModel.Aa,
+                Eixo = viewModel.Eixo,
+                Ponte = viewModel.Ponte
+            };
+
+            var lenteOd = new OrdemServicoLente
+            {
+                TipoLente = TipoLente.OlhoDireito,
+                CodFamilia = viewModel.FamiliaOd,
+                Descricao = viewModel.DescricaoLenteOd,
+                LongeEsf = viewModel.EsfLongeOd,
+                LongeCil = viewModel.CilLongeOd,
+                LongeEixo = viewModel.EixoLongeOd,
+                Adicao = viewModel.AdicaoOd,
+                PertoEsf = viewModel.EsfPertoOd,
+                PertoCil = viewModel.CilPertoOd,
+                PertoEixo = viewModel.EixoPertoOd,
+                Dnp = viewModel.DnpOd,
+                Alt = viewModel.AltOd
+            };
+
+            var lenteOe = new OrdemServicoLente {
+                TipoLente = TipoLente.OlhoEsquerdo,
+                CodFamilia = viewModel.FamiliaOe,
+                Descricao = viewModel.DescricaoLenteOe,
+                LongeEsf = viewModel.EsfLongeOe,
+                LongeCil = viewModel.CilLongeOe,
+                LongeEixo = viewModel.EixoLongeOe,
+                Adicao = viewModel.AdicaoOe,
+                PertoEsf = viewModel.EsfPertoOe,
+                PertoCil = viewModel.CilPertoOe,
+                PertoEixo = viewModel.EixoPertoOe,
+                Dnp = viewModel.DnpOe,
+                Alt = viewModel.AltOe
+            };
+
+            // Determina a quantidade dos serviços a partir das famílias selecionadas:
+            var quantidade = lenteOd.CodFamilia == lenteOe.CodFamilia? 2 : 1;
+            var servicos = new ServicoOrdemServico[viewModel.Servicos.Length];
+
+            for (var i = 0; i < servicos.Length; i++)
+            {
+                var servico = new ServicoOrdemServico {
+                    CodItem = viewModel.Servicos[i],
+                    Quantidade = quantidade
+                };
+
+                servicos[i] = servico;
+            }
+
+            var oso = new OrdemServicoOtica {
+                OrdemServico = os,
+                LenteOd = lenteOd,
+                LenteOe = lenteOe,
+                Servicos = servicos
+            };
+
+            try
+            {
+                OrdemServicoSC.InsertOrdemServico(oso);
+            }
+            catch (FaultException<DatawebFault> ex)
+            {
+                ModelState.AddModelError("ordemServicoMsg", ex.Detail.Message);
+            }
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("NovaSucesso");
+            }
+
+            return View();
         }
 
         [Authorize]
@@ -46,11 +135,18 @@ namespace Dataweb.Dilab.Web.Controllers
             return View(viewModel);
         }
 
-        public ActionResult ListarServicos(int? familia)
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult NovaSucesso()
+        {
+            return View();
+        }
+
+        public ActionResult ListarServicos(int familia)
         {
             InitWcf(); 
 
-            var result = OrdemServicoSC.FindAllProdutoServico(familia, null);
+            var result = OrdemServicoSC.FindAllProdutoServico(familia);
             return new JsonResult {Data = result};
         }
     }

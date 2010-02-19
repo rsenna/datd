@@ -41,7 +41,8 @@ namespace Dataweb.Dilab.Model.Ado
         }
 
         public abstract T FindByPrimaryKey(object pk);
-        public abstract void Update(T dto);
+        public abstract T Insert(T dto);
+        public abstract T Update(T dto);
 
         protected T[] FindAll(string sqlStmt)
         {

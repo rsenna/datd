@@ -7,59 +7,36 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class OrdemServicoDao : DataAccessBase<OrdemServico>, IOrdemServicoDao
     {
-        private const string SQL_STMT_FIND_ALL = @"
-            SELECT
-                RCODEMPRESA,
-                RCODTRANSACAO,
-                RNUMEROORDEMSERVICO,
-                RREFERENCIA,
-                RDATAHORAEMISSAO,
-                RDATAHORAPREVISAO,
-                RDATAHORAEXPEDICAO,
-                RCODETAPA,
-                RAVISOMENSAGEM
-            FROM
-                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE)
-        ";
+        private const string SQL_STMT_INSERT = @"
+            EXECUTE PROCEDURE STP_WEBORDEMSERVICO_ABRIR(
+                @PCOD_CLIENTE,
+                @POBSERVACAO,
+                @PREFERENCIA,
+                @PDESCRICAOARMACAO,
+                @POBSERVACAOARMACAO,
+                @PCOD_OTICALENTEMATERIAL,
+                @PTIPOVT,
+                @PTA,
+                @PMD,
+                @PDIAMETRO,
+                @POBSERVACAOLENTE,
+                @PDP,
+                @PAA,
+                @PEIXO,
+                @PPONTE
+            )";
 
-        private const string SQL_STMT_COUNT_FECHADAS = @"
-            SELECT
-                COUNT(*)
-            FROM
-                transacao
-            WHERE
-                (tipotransacao = 'OS') AND
-                (dataencerramento = CURRENT_DATE) AND
-                (cod_pessoa = @PCOD_CLIENTE)
-        ";
+        private const string SQL_STMT_INSERT_SERVICO = @"
+            EXECUTE PROCEDURE STP_WEBORDEMSERVICO_ADICIONAR(
+                @PCOD_EMPRESA,
+                @PCOD_ORDEMSERVICO,
+                @PCOD_ITEM,
+                @PQUANTIDADE
+            )";
 
-        private const string SQL_STMT_COUNT_EM_PRODUCAO = @"
-            SELECT
-                COUNT(*)
-            FROM
-                oticarascaixa OTRC
-                INNER JOIN oticarasordemservico OTOS ON
-                    (OTOS.cod_oticarasordemservico = OTRC.cod_oticarasordemservico)
-                INNER JOIN pessoa PESS ON
-                    (PESS.nome = OTOS.nomecliente)
-            WHERE
-                (OTRC.numerocaixa IS NOT NULL) AND
-                (PESS.cod_pessoa = @PCOD_CLIENTE)
-        ";
-
-        public override OrdemServico FetchDto(IDataRecord reader)
+        public override OrdemServico FetchDto(IDataRecord record)
         {
-            return new OrdemServico {
-                CodEmpresa = Helper.ReadInt32(reader, "RCODEMPRESA").Value,
-                CodTransacao = Helper.ReadInt32(reader, "RCODTRANSACAO").Value,
-                NumeroOrdemServico = Helper.ReadInt32(reader, "RNUMEROORDEMSERVICO").Value,
-                Referencia = Helper.ReadString(reader, "RREFERENCIA"),
-                Emissao = Helper.ReadDateTime(reader, "RDATAHORAEMISSAO").Value,
-                Previsao = Helper.ReadDateTime(reader, "RDATAHORAPREVISAO"),
-                Expedicao = Helper.ReadDateTime(reader, "RDATAHORAEXPEDICAO"),
-                Etapa = (TipoEtapa)Helper.ReadInt32(reader, "RCODETAPA"),
-                AvisoMensagem = Helper.ReadString(reader, "RAVISOMENSAGEM")
-            };
+            throw new NotImplementedException();
         }
 
         public override OrdemServico FindByPrimaryKey(object pk)
@@ -67,47 +44,78 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public override void Update(OrdemServico dto)
+        public OrdemServico[] FindAll(int codCliente)
         {
             throw new NotImplementedException();
         }
 
-        public OrdemServico[] FindAll(int codCliente)
+        public override OrdemServico Insert(OrdemServico dto)
         {
-            OrdemServico[] result = null;
-
             Helper.UsingCommand(c =>
             {
-                c.CommandText = SQL_STMT_FIND_ALL;
-                Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
-                result = FetchDtos(c);
+                c.CommandText = SQL_STMT_INSERT;
+
+                // Entrada:
+                Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, dto.CodCliente);
+                Helper.AddParameter(c, "@POBSERVACAO", DbType.String, dto.Observacao);
+                Helper.AddParameter(c, "@PREFERENCIA", DbType.String, dto.Referencia);
+                Helper.AddParameter(c, "@PDESCRICAOARMACAO", DbType.String, dto.DescricaoArmacao);
+                Helper.AddParameter(c, "@POBSERVACAOARMACAO", DbType.String, dto.ObservacaoArmacao);
+                Helper.AddParameter(c, "@PCOD_OTICALENTEMATERIAL", DbType.Int32, dto.CodMaterial);
+                Helper.AddParameter(c, "@PTIPOVT", DbType.Int32, dto.TipoVt);
+                Helper.AddParameter(c, "@PTA", DbType.Decimal, dto.Ta);
+                Helper.AddParameter(c, "@PMD", DbType.Decimal, dto.Md);
+                Helper.AddParameter(c, "@PDIAMETRO", DbType.Decimal, dto.Diametro);
+                Helper.AddParameter(c, "@POBSERVACAOLENTE", DbType.String, dto.ObservacaoLente);
+                Helper.AddParameter(c, "@PDP", DbType.Decimal, dto.Dp);
+                Helper.AddParameter(c, "@PAA", DbType.Decimal, dto.Aa);
+                Helper.AddParameter(c, "@PEIXO", DbType.Decimal, dto.Eixo);
+                Helper.AddParameter(c, "@PPONTE", DbType.Decimal, dto.Ponte);
+
+                // Saída:
+                var paramCodEmpresa = Helper.AddReturnParameter(c, "@RCOD_EMPRESA", DbType.Int32);
+                var paramCodOs = Helper.AddReturnParameter(c, "@RCOD_ORDEMSERVICO", DbType.Int32);
+                var paramNumero = Helper.AddReturnParameter(c, "@RNUMEROORDEMSERVICO", DbType.Int32);
+
+                c.ExecuteNonQuery();
+
+                dto.CodEmpresa = (int) paramCodEmpresa.Value;
+                dto.CodOrdemServico = (int) paramCodOs.Value;
+                dto.Numero = (int) paramNumero.Value;
             });
 
-            return result;
+            return dto;
         }
 
-        protected int ExecuteScalarInt32(string sqlStmt, int codCliente)
+        public virtual ServicoOrdemServico[] InsertServicos(ServicoOrdemServico[] dtos)
         {
-            var result = 0;
-
-            Helper.UsingCommand(c =>
+            // Utilizando uma transação única; ou gravo todos os serviços, ou não gravo nenhum.
+            Helper.UsingTransaction(t =>
             {
-                c.CommandText = sqlStmt;
-                Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
-                result = Convert.ToInt32(c.ExecuteScalar());
+                foreach (var dto in dtos)
+                {
+                    var servico = dto; // P/ evitar warning; objeto será acessado dentro do delegate.
+
+                    Helper.UsingCommand(t, c =>
+                    {
+                        c.CommandText = SQL_STMT_INSERT_SERVICO;
+
+                        Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, servico.CodEmpresa);
+                        Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, servico.CodOrdemServico);
+                        Helper.AddParameter(c, "@PCOD_ITEM", DbType.String, servico.CodItem);
+                        Helper.AddParameter(c, "@PQUANTIDADE", DbType.Decimal, servico.Quantidade);
+
+                        c.ExecuteNonQuery();
+                    });
+                }
             });
 
-            return result;
+            return dtos; // Deveriam ser atualizados a partir dos registros completos na base.
         }
 
-        public int GetCountFechadas(int codCliente)
+        public override OrdemServico Update(OrdemServico dto)
         {
-            return ExecuteScalarInt32(SQL_STMT_COUNT_FECHADAS, codCliente);
-        }
-
-        public int GetCountEmProducao(int codCliente)
-        {
-            return ExecuteScalarInt32(SQL_STMT_COUNT_EM_PRODUCAO, codCliente);
+            throw new NotImplementedException();
         }
     }
 }

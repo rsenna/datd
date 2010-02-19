@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" />
-  <xs:complexType name="ArrayOfOrdemServico">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="ArrayOfOrdemServicoQuery">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdemServico" nillable="true" type="tns:OrdemServico" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrdemServicoQuery" nillable="true" type="tns:OrdemServicoQuery" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfOrdemServico" nillable="true" type="tns:ArrayOfOrdemServico" />
-  <xs:complexType name="OrdemServico">
+  <xs:element name="ArrayOfOrdemServicoQuery" nillable="true" type="tns:ArrayOfOrdemServicoQuery" />
+  <xs:complexType name="OrdemServicoQuery">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q1:DataTransferBase">
         <xs:sequence>
@@ -24,7 +25,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="OrdemServico" nillable="true" type="tns:OrdemServico" />
+  <xs:element name="OrdemServicoQuery" nillable="true" type="tns:OrdemServicoQuery" />
   <xs:simpleType name="TipoEtapa">
     <xs:restriction base="xs:string">
       <xs:enumeration value="Inicial" />
@@ -88,4 +89,101 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ProdutoServico" nillable="true" type="tns:ProdutoServico" />
+  <xs:complexType name="OrdemServicoOtica">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="LenteOD" nillable="true" type="tns:OrdemServicoLente" />
+      <xs:element minOccurs="0" name="LenteOE" nillable="true" type="tns:OrdemServicoLente" />
+      <xs:element minOccurs="0" name="OrdemServico" nillable="true" type="tns:OrdemServico" />
+      <xs:element minOccurs="0" name="Servicos" nillable="true" type="tns:ArrayOfServicoOrdemServico" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OrdemServicoOtica" nillable="true" type="tns:OrdemServicoOtica" />
+  <xs:complexType name="OrdemServicoLente">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q5:DataTransferBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Adicao" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Alt" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
+          <xs:element minOccurs="0" name="CodFamilia" type="xs:int" />
+          <xs:element minOccurs="0" name="CodOrdemServico" type="xs:int" />
+          <xs:element minOccurs="0" name="Descricao" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Dnp" type="xs:decimal" />
+          <xs:element minOccurs="0" name="LongeCil" type="xs:decimal" />
+          <xs:element minOccurs="0" name="LongeEixo" type="xs:decimal" />
+          <xs:element minOccurs="0" name="LongeEsf" type="xs:decimal" />
+          <xs:element minOccurs="0" name="PertoCil" type="xs:decimal" />
+          <xs:element minOccurs="0" name="PertoEixo" type="xs:decimal" />
+          <xs:element minOccurs="0" name="PertoEsf" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TipoLente" type="tns:TipoLente" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OrdemServicoLente" nillable="true" type="tns:OrdemServicoLente" />
+  <xs:simpleType name="TipoLente">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OlhoDireito">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OlhoEsquerdo">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TipoLente" nillable="true" type="tns:TipoLente" />
+  <xs:complexType name="OrdemServico">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q6:DataTransferBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Aa" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CodCliente" type="xs:int" />
+          <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
+          <xs:element minOccurs="0" name="CodMaterial" type="xs:int" />
+          <xs:element minOccurs="0" name="CodOrdemServico" type="xs:int" />
+          <xs:element minOccurs="0" name="DescricaoArmacao" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Diametro" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Dp" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Eixo" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Md" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Numero" type="xs:int" />
+          <xs:element minOccurs="0" name="Observacao" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ObservacaoArmacao" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ObservacaoLente" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Ponte" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Referencia" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Ta" type="xs:decimal" />
+          <xs:element minOccurs="0" name="TipoVt" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="OrdemServico" nillable="true" type="tns:OrdemServico" />
+  <xs:complexType name="ArrayOfServicoOrdemServico">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ServicoOrdemServico" nillable="true" type="tns:ServicoOrdemServico" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfServicoOrdemServico" nillable="true" type="tns:ArrayOfServicoOrdemServico" />
+  <xs:complexType name="ServicoOrdemServico">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q7:DataTransferBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
+          <xs:element minOccurs="0" name="CodItem" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CodOrdemServico" type="xs:int" />
+          <xs:element minOccurs="0" name="Quantidade" type="xs:int" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ServicoOrdemServico" nillable="true" type="tns:ServicoOrdemServico" />
 </xs:schema>

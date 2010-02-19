@@ -7,6 +7,16 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class FamiliaDao : DataAccessBase<Familia>, IFamiliaDao
     {
+        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
+            SELECT
+                 PRFA.cod_produtofamilia,
+                 PRFA.descricao
+            FROM
+                produtofamilia PRFA
+            WHERE
+                PRFA.cod_produtofamilia = @PCOD_PRODUTOFAMILIA
+        ";
+
         private const string SQL_STMT_FIND_ALL = @"
             SELECT
                  PRFA.cod_produtofamilia,
@@ -29,10 +39,19 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override Familia FindByPrimaryKey(object pk)
         {
-            throw new NotImplementedException();
+            Familia result = null;
+
+            Helper.UsingCommand(c =>
+            {
+                c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
+                Helper.AddParameter(c, "@PCOD_PRODUTOFAMILIA", DbType.Int32, pk);
+                result = FetchDto(c);
+            });
+
+            return result;
         }
 
-        public override void Update(Familia dto)
+        public override Familia Update(Familia dto)
         {
             throw new NotImplementedException();
         }
@@ -40,6 +59,11 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         public Familia[] FindAll()
         {
             return FindAll(SQL_STMT_FIND_ALL);
+        }
+
+        public override Familia Insert(Familia dto)
+        {
+            throw new NotImplementedException();
         }
     }
 }

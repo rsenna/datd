@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<OrdemServico[]>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<OrdemServicoQuery[]>" %>
 <%@ Import Namespace="Dataweb.Dilab.Web"%>
 <%@ Import Namespace="Dataweb.Dilab.Model.DataTransfer"%>
 

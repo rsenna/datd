@@ -6,7 +6,7 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.Wcf" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.Service" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IClienteService_FindByLogin_InputMessage">
@@ -28,7 +28,7 @@
     <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
   </wsdl:message>
   <wsdl:message name="IClienteService_ChangePassword_DatawebFaultFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.Wcf" name="detail" element="q1:DatawebFault" />
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.Service" name="detail" element="q1:DatawebFault" />
   </wsdl:message>
   <wsdl:message name="IClienteService_ChangeEmail_InputMessage">
     <wsdl:part name="parameters" element="tns:ChangeEmail" />

@@ -3,7 +3,6 @@ using Dataweb.Dilab.Web.Model;
 
 namespace Dataweb.Dilab.Web.Controllers
 {
-    [HandleError]
     public class HomeController : ControllerBase
     {
         [Authorize]

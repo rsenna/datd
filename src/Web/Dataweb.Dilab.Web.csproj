@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah, Version=1.1.11517.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
@@ -94,7 +98,10 @@
     <Compile Include="WebHelper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\____auto.css" />
+    <Content Include="Content\Farol\Site.css" />
+    <Content Include="Content\img\ajax-loader.gif" />
+    <Content Include="Content\img\bg_top_table.gif" />
+    <Content Include="Content\Sturmer\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <None Include="Service References\ClienteServiceReference\configuration91.svcinfo" />
@@ -116,6 +123,7 @@
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Views\Os\Nova.aspx" />
     <Content Include="Views\Os\Index.aspx" />
+    <Content Include="Views\Os\NovaSucesso.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\jquery-1.3.2.js" />
@@ -141,10 +149,6 @@
       <Project>{E5788FCF-7B3A-4831-9208-64E23C097C0E}</Project>
       <Name>Dataweb.Dilab.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Model\Wcf\Dataweb.Dilab.Model.Wcf.csproj">
-      <Project>{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}</Project>
-      <Name>Dataweb.Dilab.Model.Wcf</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -154,11 +158,12 @@
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Familia.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Material.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.OrdemServico.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.OrdemServicoQuery.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.ProdutoServico.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.Dto.Cliente.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.Dto.User.datasource" />
     <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.DataTransfer1.xsd" />
-    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.Wcf.xsd" />
+    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.Service.xsd" />
     <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model1.xsd" />
     <None Include="Service References\ClienteServiceReference\service1.wsdl" />
     <None Include="Service References\ClienteServiceReference\service2.xsd" />
@@ -204,4 +209,8 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>echo Fetching external binaries...
+xcopy /d/r/y ..\..\..\lib</PreBuildEvent>
+  </PropertyGroup>
 </Project>

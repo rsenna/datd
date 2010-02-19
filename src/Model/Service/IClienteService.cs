@@ -1,7 +1,7 @@
 using System.ServiceModel;
 using Dataweb.Dilab.Model.DataTransfer;
 
-namespace Dataweb.Dilab.Model.Wcf.Contract
+namespace Dataweb.Dilab.Model.Service
 {
     [ServiceContract]
     public interface IClienteService : IService

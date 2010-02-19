@@ -32,6 +32,19 @@ namespace Dataweb.Dilab.Model.Ado
             command.Parameters.Add(parameter);
         }
 
+        public static DbParameter AddReturnParameter(DbCommand command, string parameterName, DbType dbtype)
+        {
+            var parameter = command.CreateParameter();
+
+            parameter.ParameterName = parameterName;
+            parameter.DbType = dbtype;
+            parameter.Direction = ParameterDirection.Output;
+
+            command.Parameters.Add(parameter);
+
+            return parameter;
+        }
+
         public static void UsingConnection(Action<DbConnection> action)
         {
             var connectionString = GetConnectionString();
@@ -69,13 +82,16 @@ namespace Dataweb.Dilab.Model.Ado
 
         public static void UsingCommand(Action<DbCommand> action)
         {
-            UsingTransaction(t => {
-                using (var command = t.Connection.CreateCommand())
-                {
-                    command.Transaction = t;
-                    action(command);
-                }
-            });
+            UsingTransaction(t => UsingCommand(t, action));
+        }
+
+        public static void UsingCommand(DbTransaction t, Action<DbCommand> action)
+        {
+            using (var command = t.Connection.CreateCommand())
+            {
+                command.Transaction = t;
+                action(command);
+            }
         }
 
         public static object ReadObject(IDataRecord record, string name)

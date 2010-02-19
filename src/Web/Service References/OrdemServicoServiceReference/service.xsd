@@ -11,7 +11,7 @@
   <xs:element name="FindAllByCodClienteResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByCodClienteResult" nillable="true" type="q1:ArrayOfOrdemServico" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByCodClienteResult" nillable="true" type="q1:ArrayOfOrdemServicoQuery" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -26,7 +26,7 @@
   <xs:element name="FindAllByCodClienteAndReferenciaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByCodClienteAndReferenciaResult" nillable="true" type="q2:ArrayOfOrdemServico" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByCodClienteAndReferenciaResult" nillable="true" type="q2:ArrayOfOrdemServicoQuery" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -40,7 +40,7 @@
   <xs:element name="FindAllByLoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByLoginResult" nillable="true" type="q3:ArrayOfOrdemServico" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByLoginResult" nillable="true" type="q3:ArrayOfOrdemServicoQuery" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -55,7 +55,7 @@
   <xs:element name="FindAllByLoginAndReferenciaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByLoginAndReferenciaResult" nillable="true" type="q4:ArrayOfOrdemServico" />
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllByLoginAndReferenciaResult" nillable="true" type="q4:ArrayOfOrdemServicoQuery" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -114,8 +114,7 @@
   <xs:element name="FindAllProdutoServico">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codFamiliaOd" nillable="true" type="xs:int" />
-        <xs:element minOccurs="0" name="codFamiliaOe" nillable="true" type="xs:int" />
+        <xs:element minOccurs="0" name="codFamilia" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -124,6 +123,18 @@
       <xs:sequence>
         <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllProdutoServicoResult" nillable="true" type="q7:ArrayOfProdutoServico" />
       </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertOrdemServico">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q8:OrdemServicoOtica" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertOrdemServicoResponse">
+    <xs:complexType>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
 </xs:schema>

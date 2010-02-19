@@ -49,11 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contract\IOrdemServicoService.cs" />
-    <Compile Include="Contract\IService.cs" />
-    <Compile Include="DatawebFault.cs" />
     <Compile Include="OrdemServicoService.cs" />
-    <Compile Include="Contract\IClienteService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ClienteService.cs" />
   </ItemGroup>
