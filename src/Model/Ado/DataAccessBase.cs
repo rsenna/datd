@@ -40,6 +40,7 @@ namespace Dataweb.Dilab.Model.Ado
             return result.ToArray();
         }
 
+        public abstract T[] FindAll();
         public abstract T FindByPrimaryKey(object pk);
         public abstract T Insert(T dto);
         public abstract T Update(T dto);

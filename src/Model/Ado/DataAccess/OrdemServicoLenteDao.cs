@@ -24,6 +24,11 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 @PALT
             )";
 
+        public override OrdemServicoLente[] FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public override OrdemServicoLente FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();

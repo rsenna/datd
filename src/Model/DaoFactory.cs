@@ -4,15 +4,14 @@ namespace Dataweb.Dilab.Model
 {
     public class DaoFactory
     {
-        // TODO: ASSEMBLY_NAME deveria vir de um arquivo de configuração.
-        private const string ASSEMBLY_NAME = "Dataweb.Dilab.Model.Ado";
+        public static string AssemblyName { get; set; }
 
         public static T CreateDao<T>() where T : IDataAccessBase
         {
             var interfaceName = typeof(T).Name;
             var className = interfaceName.Remove(0, 1);
-            var fullClassName = string.Format("{0}.DataAccess.{1}", ASSEMBLY_NAME, className);
-            var objectHandle = Activator.CreateInstance(ASSEMBLY_NAME, fullClassName);
+            var fullClassName = string.Format("{0}.DataAccess.{1}", AssemblyName, className);
+            var objectHandle = Activator.CreateInstance(AssemblyName, fullClassName);
 
             if (objectHandle != null)
             {
