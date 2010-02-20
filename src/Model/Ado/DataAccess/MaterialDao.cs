@@ -35,7 +35,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public Material[] FindAll()
+        public override Material[] FindAll()
         {
             return FindAll(SQL_STMT_FIND_ALL);
         }

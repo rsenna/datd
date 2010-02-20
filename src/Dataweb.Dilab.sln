@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Model.Wcf.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Service", "Service\Dataweb.Dilab.Service.csproj", "{6A135686-E29A-4D37-8F30-35CD02A0640E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Model.Mock", "Model\Mock\Dataweb.Dilab.Model.Mock.csproj", "{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{6A135686-E29A-4D37-8F30-35CD02A0640E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A135686-E29A-4D37-8F30-35CD02A0640E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A135686-E29A-4D37-8F30-35CD02A0640E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

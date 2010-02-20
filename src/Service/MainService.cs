@@ -17,15 +17,8 @@ namespace Dataweb.Dilab.Service
 
         protected override void OnStart(string[] args)
         {
-            if (clienteServiceHost != null)
-            {
-                clienteServiceHost.Close();
-            }
-
-            if (ordemServicoServiceHost != null)
-            {
-                ordemServicoServiceHost.Close();
-            }
+            Dispose(ref clienteServiceHost);
+            Dispose(ref ordemServicoServiceHost);
 
             clienteServiceHost = new ServiceHost(typeof (ClienteService));
             ordemServicoServiceHost = new ServiceHost(typeof (OrdemServicoService));
@@ -36,17 +29,19 @@ namespace Dataweb.Dilab.Service
 
         protected override void OnStop()
         {
-            if (clienteServiceHost != null)
+            Dispose(ref clienteServiceHost);
+            Dispose(ref ordemServicoServiceHost);
+        }
+
+        private static void Dispose(ref ServiceHost host)
+        {
+            if (host == null)
             {
-                clienteServiceHost.Close();
-                clienteServiceHost = null;
+                return;
             }
 
-            if (ordemServicoServiceHost != null)
-            {
-                ordemServicoServiceHost.Close();
-                ordemServicoServiceHost = null;
-            }
+            host.Close();
+            host = null;
         }
     }
 }

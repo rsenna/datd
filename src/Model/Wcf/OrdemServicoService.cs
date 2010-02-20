@@ -14,6 +14,11 @@ namespace Dataweb.Dilab.Model.Wcf
         private IOrdemServicoDao ordemServicoDao;
         private IOrdemServicoLenteDao ordemServicoLenteDao;
 
+        public OrdemServicoService()
+        {
+            DaoFactory.AssemblyName = ConfigHelper.ModelAssemblyName;
+        }
+
         private static int GetCodClienteByLogin(string login)
         {
             var clienteService = new ClienteService(); // Obs.: a instância, neste caso, é LOCAL (e não remota).

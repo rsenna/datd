@@ -8,6 +8,11 @@ namespace Dataweb.Dilab.Model.Wcf
     {
         private IClienteDao clienteDao;
 
+        public ClienteService()
+        {
+            DaoFactory.AssemblyName = ConfigHelper.ModelAssemblyName;
+        }
+
         public Cliente FindByLogin(string login)
         {
             clienteDao = DaoFactory.CreateDao<IClienteDao>();

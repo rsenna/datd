@@ -38,6 +38,11 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
+        public override ProdutoServico[] FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public override ProdutoServico FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();

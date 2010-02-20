@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 
@@ -118,6 +119,11 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             });
 
             return result;
+        }
+
+        public override Cliente[] FindAll()
+        {
+            throw new NotImplementedException();
         }
 
         public override Cliente FindByPrimaryKey(object primaryKey)

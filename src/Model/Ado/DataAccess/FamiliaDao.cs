@@ -56,7 +56,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public Familia[] FindAll()
+        public override Familia[] FindAll()
         {
             return FindAll(SQL_STMT_FIND_ALL);
         }

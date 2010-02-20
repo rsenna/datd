@@ -62,6 +62,11 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             };
         }
 
+        public override OrdemServicoQuery[] FindAll()
+        {
+            throw new NotImplementedException();
+        }
+
         public override OrdemServicoQuery FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();
