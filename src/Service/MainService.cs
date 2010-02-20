@@ -1,6 +1,5 @@
 ﻿using System.ServiceModel;
 using System.ServiceProcess;
-using Dataweb.Dilab.Model;
 using Dataweb.Dilab.Model.Wcf;
 
 namespace Dataweb.Dilab.Service
@@ -14,7 +13,6 @@ namespace Dataweb.Dilab.Service
         {
             InitializeComponent();
             ServiceName = "DatawebDilabService";
-            DaoFactory.AssemblyName = System.Configuration.ConfigurationManager.AppSettings["modelAssembly"];
         }
 
         protected override void OnStart(string[] args)

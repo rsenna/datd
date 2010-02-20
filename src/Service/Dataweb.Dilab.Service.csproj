@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6A135686-E29A-4D37-8F30-35CD02A0640E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -67,6 +67,10 @@
     <ProjectReference Include="..\Model\Dataweb.Dilab.Model.csproj">
       <Project>{E5788FCF-7B3A-4831-9208-64E23C097C0E}</Project>
       <Name>Dataweb.Dilab.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Model\Mock\Dataweb.Dilab.Model.Mock.csproj">
+      <Project>{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}</Project>
+      <Name>Dataweb.Dilab.Model.Mock</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Wcf\Dataweb.Dilab.Model.Wcf.csproj">
       <Project>{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}</Project>
