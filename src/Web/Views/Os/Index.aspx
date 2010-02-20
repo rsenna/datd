@@ -19,7 +19,7 @@
         <tr>
             <td><b><%=item.NumeroOrdemServico %></b><br /><%=WebHelper.FormatDate(item.Emissao) %></td>
             <td><%=item.Referencia %></td>
-            <td><%=item.Etapa %></td>
+            <td><%=WebHelper.ToString(item.Etapa) %></td>
             <td><%=WebHelper.FormatDate(item.Previsao) %></td>
         </tr>
     <% } // end-foreach %>

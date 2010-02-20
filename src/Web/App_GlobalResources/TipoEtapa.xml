@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<enum type="Dataweb.Dilab.Model.DataTransfer.TipoEtapa">
+  <item value="Inicial" text="Inicial"/>
+  <item value="EmProducao" text="Em Produção"/>
+  <item value="Expedicao" text="Expedição"/>
+  <item value="Despachada" text="Despachada"/>
+  <item value="Finalizada" text="Finalizada"/>
+</enum>

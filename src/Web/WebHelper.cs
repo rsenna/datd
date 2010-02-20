@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Web;
+using System.Xml.Linq;
 
 namespace Dataweb.Dilab.Web
 {
@@ -36,6 +38,28 @@ namespace Dataweb.Dilab.Web
 
             fileUrl = string.Format("{0}/{1}", BASE_URL, FILE_NAME);
             return fileUrl;
+        }
+
+        public static string ToString<T>(T value)
+        {
+            var type = typeof (T);
+            var sValue = value.ToString();
+
+            if (!type.IsEnum)
+            {
+                return sValue;
+            }
+
+            var url = string.Format("~/App_GlobalResources/{0}.xml", type.Name);
+            var path = HttpContext.Current.Request.MapPath(url);
+            var xDoc = XDocument.Load(path);
+
+            var q =
+                from c in xDoc.Descendants("item")
+                where (string) c.Attribute("value") == sValue
+                select (string) c.Attribute("text");
+
+            return q.FirstOrDefault() ?? sValue;
         }
     }
 }

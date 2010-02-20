@@ -9,7 +9,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
         {
             return new Familia {
                 CodFamilia = GenerateInt32(),
-                Descricao = GenerateText(100)
+                Descricao = GenerateName(4).ToUpper()
             };
         }
     }

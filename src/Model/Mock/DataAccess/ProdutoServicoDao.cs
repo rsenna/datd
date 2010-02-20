@@ -31,7 +31,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return new ProdutoServico {
                 CodItem = GenerateCode(10),
                 Obrigatorio = GenerateBoolean(),
-                Descricao = GenerateText(100),
+                Descricao = GenerateName(4),
                 ServicoInterno = GenerateBoolean()
             };
         }

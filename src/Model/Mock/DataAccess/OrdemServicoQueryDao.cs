@@ -16,12 +16,12 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
                 CodEmpresa = GenerateInt32(),
                 CodTransacao = GenerateInt32(),
                 NumeroOrdemServico = GenerateInt32(),
-                Referencia = GenerateText(10),
+                Referencia = GenerateCode(7),
                 Emissao = GenerateDateTime(-MAX_DIAS),
                 Previsao = GenerateDateTime(MAX_DIAS),
                 Expedicao = GenerateDateTime(MAX_DIAS),
                 Etapa = (TipoEtapa)GenerateInt32(4),
-                AvisoMensagem = GenerateText(100)
+                AvisoMensagem = GenerateParagraph()
             };
         }
 
