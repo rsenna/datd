@@ -7,18 +7,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class ClienteDao : DataAccessBase<Cliente>, IClienteDao
     {
-        private const string SQL_STMT_UPDATE = @"
-            UPDATE
-                webrascliente
-            SET
-                emailnotificacao = @EMAILNOTIFICACAO,
-                recebernotificacao = @RECEBERNOTIFICACAO,
-                senha = @SENHA
-            WHERE
-                cod_cliente = @COD_CLIENTE
-        ";
-
-        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
+        private const string SQL_STMT_FIND_BY_CNPJ = @"
             SELECT
                 webrascliente.cod_cliente,
                 webrascliente.emailnotificacao,
@@ -34,7 +23,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 INNER JOIN webrascliente
                     ON (webrascliente.cod_cliente = pessoacliente.cod_pessoa)
             WHERE
-                webrascliente.cod_cliente = @COD_CLIENTE
+                pessoacliente.cnpj = @CNPJ
         ";
 
         private const string SQL_STMT_FIND_BY_IDENTIFICADOR = @"
@@ -56,7 +45,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 pessoacliente.identificador = @IDENTIFICADOR
         ";
 
-        private const string SQL_STMT_FIND_BY_CNPJ = @"
+        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
             SELECT
                 webrascliente.cod_cliente,
                 webrascliente.emailnotificacao,
@@ -72,23 +61,19 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 INNER JOIN webrascliente
                     ON (webrascliente.cod_cliente = pessoacliente.cod_pessoa)
             WHERE
-                pessoacliente.cnpj = @CNPJ
+                webrascliente.cod_cliente = @COD_CLIENTE
         ";
 
-        public override Cliente FetchDto(IDataRecord reader)
-        {
-            return new Cliente {
-                CodCliente = Helper.ReadInt32(reader, "COD_CLIENTE").Value,
-                Identificador = Helper.ReadInt32(reader, "IDENTIFICADOR").Value,
-                Cnpj = Helper.ReadString(reader, "CNPJ"),
-                Nome = Helper.ReadString(reader, "NOME"),
-                Senha = Helper.ReadString(reader, "SENHA"),
-                CodEmpresa = Helper.ReadInt32(reader, "COD_EMPRESA").Value,
-                NomeEmpresa = Helper.ReadString(reader, "NOMEEMPRESA"),
-                EmailNotificacao = Helper.ReadString(reader, "EMAILNOTIFICACAO"),
-                ReceberNotificacao = Helper.ReadBoolean(reader, "RECEBERNOTIFICACAO").Value
-            };
-        }
+        private const string SQL_STMT_UPDATE = @"
+            UPDATE
+                webrascliente
+            SET
+                emailnotificacao = @EMAILNOTIFICACAO,
+                recebernotificacao = @RECEBERNOTIFICACAO,
+                senha = @SENHA
+            WHERE
+                cod_cliente = @COD_CLIENTE
+        ";
 
         public Cliente FindByIdentificador(int identificador)
         {
@@ -109,8 +94,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Cliente result = null;
 
-            Helper.UsingCommand(c =>
-            {
+            Helper.UsingCommand(c => {
                 c.CommandText = SQL_STMT_FIND_BY_CNPJ;
 
                 Helper.AddParameter(c, "@CNPJ", DbType.String, cnpj);
@@ -139,12 +123,6 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
-        public virtual Cliente FindByPrimaryKey(int codCliente)
-        {
-            return FindByPrimaryKey((object) codCliente);
-        }
-
-        
         /// <summary>
         /// Altera um registro da entidade Cliente
         /// </summary>
@@ -154,8 +132,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         /// </remarks>
         public override Cliente Update(Cliente dto)
         {
-            Helper.UsingCommand(c =>
-            {
+            Helper.UsingCommand(c => {
                 c.CommandText = SQL_STMT_UPDATE;
 
                 Helper.AddParameter(c, "@EMAILNOTIFICACAO", DbType.String, dto.EmailNotificacao);
@@ -172,7 +149,27 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override Cliente Insert(Cliente dto)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
+        }
+
+        public override Cliente FetchDto(IDataRecord reader)
+        {
+            return new Cliente {
+                CodCliente = Helper.ReadInt32(reader, "COD_CLIENTE").Value,
+                Identificador = Helper.ReadInt32(reader, "IDENTIFICADOR").Value,
+                Cnpj = Helper.ReadString(reader, "CNPJ"),
+                Nome = Helper.ReadString(reader, "NOME"),
+                Senha = Helper.ReadString(reader, "SENHA"),
+                CodEmpresa = Helper.ReadInt32(reader, "COD_EMPRESA").Value,
+                NomeEmpresa = Helper.ReadString(reader, "NOMEEMPRESA"),
+                EmailNotificacao = Helper.ReadString(reader, "EMAILNOTIFICACAO"),
+                ReceberNotificacao = Helper.ReadBoolean(reader, "RECEBERNOTIFICACAO").Value
+            };
+        }
+
+        public virtual Cliente FindByPrimaryKey(int codCliente)
+        {
+            return FindByPrimaryKey((object) codCliente);
         }
     }
 }

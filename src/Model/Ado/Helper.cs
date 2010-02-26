@@ -7,15 +7,15 @@ namespace Dataweb.Dilab.Model.Ado
 {
     public static class Helper
     {
-        public const string ConnectionStringName = "DilabDatabase";
+        public const string CONNECTION_STRING_NAME = "DilabDatabase";
 
         public static ConnectionStringSettings GetConnectionString()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName];
+            var connectionString = ConfigurationManager.ConnectionStrings[CONNECTION_STRING_NAME];
 
             if (connectionString == null)
             {
-                throw new ConfigurationErrorsException(String.Format("Connection string '{0}' is undefined.", ConnectionStringName));
+                throw new ConfigurationErrorsException(String.Format("Connection string '{0}' is undefined.", CONNECTION_STRING_NAME));
             }
 
             return connectionString;
@@ -96,22 +96,43 @@ namespace Dataweb.Dilab.Model.Ado
 
         public static object ReadObject(IDataRecord record, string name)
         {
-            return record[name];
+            // O codigo abaixo eh mais extenso que "return record[name]", mas
+            // permite identificar mais facilmente algum erro de nome ou tipo
+            // de campo:
+            var fieldIndex = record.GetOrdinal(name);
+            var result = record.GetValue(fieldIndex);
+            return result;
         }
 
         public static int? ReadInt32(IDataRecord record, string name)
         {
-            return ReadObject(record, name) as int?;
+            var result = ReadObject(record, name);
+            return result == null || result == DBNull.Value? (int?) null : Convert.ToInt32(result);
         }
 
         public static long? ReadInt64(IDataRecord record, string name)
         {
-            return ReadObject(record, name) as long?;
+            var result = ReadObject(record, name);
+            return result == null || result == DBNull.Value? (long?) null : Convert.ToInt64(result);
         }
 
         public static DateTime? ReadDateTime(IDataRecord record, string name)
         {
-            return ReadObject(record, name) as DateTime?;
+            var result = ReadObject(record, name);
+            return result == null || result == DBNull.Value? (DateTime?) null : Convert.ToDateTime(result);
+        }
+
+        public static decimal? ReadDecimal(IDataRecord record, string name)
+        {
+            var fieldIndex = record.GetOrdinal(name);
+
+            if (record.IsDBNull(fieldIndex))
+            {
+                return null;
+            }
+
+            var result = record.GetDecimal(fieldIndex);
+            return result;
         }
 
         public static string ReadString(IDataRecord record, string name)

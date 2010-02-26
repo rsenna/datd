@@ -18,5 +18,14 @@ namespace Dataweb.Dilab.Model.Service
 
         [OperationContract]
         void ChangeEmail(string login, string emailNotificacao, bool receberNotificacao);
+
+        [OperationContract]
+        PacoteCredito FindPacoteCredito(int codCliente, string codPacoteCliente);
+
+        [OperationContract]
+        PacoteCredito[] FindAllPacoteCredito(int codCliente);
+
+        [OperationContract]
+        PacoteHistorico[] FindAllPacoteHistorico(int codCliente, string codPacoteCliente);
     }
 }

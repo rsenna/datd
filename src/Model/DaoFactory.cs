@@ -4,23 +4,51 @@ namespace Dataweb.Dilab.Model
 {
     public class DaoFactory
     {
-        public static string AssemblyName { get; set; }
+        private static string assemblyName;
+        public static string AssemblyName
+        {
+            get { return assemblyName; }
+
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    assemblyName = value;
+                }
+            }
+        }
+
+        private const string ASSEMBLY_NAME_DEFAULT = "Dataweb.Dilab.Model.Ado";
+
+        static DaoFactory()
+        {
+            assemblyName = ASSEMBLY_NAME_DEFAULT;
+        }
 
         public static T CreateDao<T>() where T : IDataAccessBase
         {
             var interfaceName = typeof(T).Name;
             var className = interfaceName.Remove(0, 1);
+
             var fullClassName = string.Format("{0}.DataAccess.{1}", AssemblyName, className);
-            var objectHandle = Activator.CreateInstance(AssemblyName, fullClassName);
 
-            if (objectHandle != null)
+            try
             {
-                var instance = objectHandle.Unwrap();
+                var objectHandle = Activator.CreateInstance(AssemblyName, fullClassName);
 
-                if (instance != null && instance is T)
+                if (objectHandle != null)
                 {
-                    return (T) instance;
+                    var instance = objectHandle.Unwrap();
+
+                    if (instance != null && instance is T)
+                    {
+                        return (T) instance;
+                    }
                 }
+            }
+            catch(Exception ex)
+            {
+                return default(T);
             }
 
             return default(T);

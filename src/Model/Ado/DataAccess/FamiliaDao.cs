@@ -9,8 +9,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
     {
         private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
             SELECT
-                 PRFA.cod_produtofamilia,
-                 PRFA.descricao
+                PRFA.cod_produtofamilia,
+                PRFA.descricao
             FROM
                 produtofamilia PRFA
             WHERE
@@ -19,8 +19,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         private const string SQL_STMT_FIND_ALL = @"
             SELECT
-                 PRFA.cod_produtofamilia,
-                 PRFA.descricao
+                PRFA.cod_produtofamilia,
+                PRFA.descricao
             FROM
                 produtofamilia PRFA
             WHERE

@@ -96,7 +96,7 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
             }
 
             AddConnectionString(new ConnectionStringSettings("DilabDatabase",
-                @"server=SERVER;database=D:\Share\Firebird\Sturmer.dataweb;username=SYSDBA;password=masterkey",
+                @"server=SERVER;database=D:\Share\Firebird\Farol.dataweb;username=SYSDBA;password=masterkey",
                 "FirebirdSql.Data.FirebirdClient"));
         }
 
@@ -104,8 +104,9 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
         public void CanCheckPassword()
         {
             var service = new ClienteService();
-            Assert.IsNull(service.FindByLogin("0"));
+            Assert.IsNull(service.FindByLogin("LOGIN INEXISTENTE"));
 
+            /*
             var userById = service.FindByLogin("1630");
             Assert.IsNotNull(userById);
             Assert.AreEqual(userById.Identificador, 1630);
@@ -115,13 +116,42 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
             Assert.IsNotNull(userByCnpj);
             Assert.AreEqual(userByCnpj.Identificador, 1630);
             Assert.AreEqual(userByCnpj.Cnpj, "05859449000123");
+             */
         }
 
         [Test]
         public void CanGetByLogin()
         {
             var service = new ClienteService();
-            //Console.WriteLine(service.GetConnectionString());
+            Assert.IsNotNull(service);
+        }
+
+        [Test]
+        public void CanListPacotes()
+        {
+            var service = new ClienteService();
+            var result = service.FindAllPacoteCredito(526); // VISUAL - URUGUAIANA
+            Assert.Greater(result.Length, 0);
+        }
+
+        [Test]
+        public void CanFindPacote()
+        {
+            var service = new ClienteService();
+            var result = service.FindPacoteCredito(526, "1020967");
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void CanDetailPacotes()          
+        {
+            var service = new ClienteService();
+
+            var result1 = service.FindPacoteCredito(526, "1018760");
+            Assert.IsNotNull(result1);
+
+            var result2 = service.FindAllPacoteHistorico(526, "1018760");
+            Assert.Greater(result2.Length, 0);
         }
     }
 }

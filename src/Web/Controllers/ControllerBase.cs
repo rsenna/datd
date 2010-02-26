@@ -89,6 +89,13 @@ namespace Dataweb.Dilab.Web.Controllers
             return userIdentity.Name;
         }
 
+        protected virtual int GetCodCliente()
+        {
+            // TODO: poderia utilizar sessao; metodo foi criado com este objetivo.
+            var cliente = ClienteSC.FindByLogin(GetLogin());
+            return cliente.CodCliente;
+        }
+
         protected override void Initialize(RequestContext requestContext)
         {
             base.Initialize(requestContext);

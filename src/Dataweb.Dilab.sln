@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Web", "Web\Dataweb.Dilab.Web.csproj", "{ACC91C01-268F-4AFA-BA5F-B497B7C93751}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Model.Wcf", "Model\Wcf\Dataweb.Dilab.Model.Wcf.csproj", "{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Model", "Model\Dataweb.Dilab.Model.csproj", "{E5788FCF-7B3A-4831-9208-64E23C097C0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Model.Ado", "Model\Ado\Dataweb.Dilab.Model.Ado.csproj", "{CA392110-894D-432E-A465-B618032324B9}"
@@ -14,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Service", "Service\Dataweb.Dilab.Service.csproj", "{6A135686-E29A-4D37-8F30-35CD02A0640E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Model.Mock", "Model\Mock\Dataweb.Dilab.Model.Mock.csproj", "{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dataweb.Dilab.Model.Wcf", "Model\Wcf\Dataweb.Dilab.Model.Wcf.csproj", "{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +25,6 @@ Global
 		{ACC91C01-268F-4AFA-BA5F-B497B7C93751}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ACC91C01-268F-4AFA-BA5F-B497B7C93751}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ACC91C01-268F-4AFA-BA5F-B497B7C93751}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E5788FCF-7B3A-4831-9208-64E23C097C0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E5788FCF-7B3A-4831-9208-64E23C097C0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5788FCF-7B3A-4831-9208-64E23C097C0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,6 +45,10 @@ Global
 		{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5420D8EF-69A2-4C88-82BD-09A4F5B9E11F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DFF51BA-2AE1-4CCD-957A-FA13F6E13AFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

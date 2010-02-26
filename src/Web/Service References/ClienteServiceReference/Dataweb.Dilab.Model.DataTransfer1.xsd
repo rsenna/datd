@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
   <xs:complexType name="Cliente">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q1:DataTransferBase">
@@ -19,4 +20,61 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="Cliente" nillable="true" type="tns:Cliente" />
+  <xs:complexType name="PacoteCredito">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q2:DataTransferBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodPacoteCredito" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Descricao" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Quantidade" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PacoteCredito" nillable="true" type="tns:PacoteCredito" />
+  <xs:complexType name="ArrayOfPacoteCredito">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PacoteCredito" nillable="true" type="tns:PacoteCredito" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPacoteCredito" nillable="true" type="tns:ArrayOfPacoteCredito" />
+  <xs:complexType name="ArrayOfPacoteHistorico">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PacoteHistorico" nillable="true" type="tns:PacoteHistorico" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPacoteHistorico" nillable="true" type="tns:ArrayOfPacoteHistorico" />
+  <xs:complexType name="PacoteHistorico">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q3:DataTransferBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Data" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="NumeroOS" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="Quantidade" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Tipo" type="tns:TipoPacoteHistorico" />
+          <xs:element minOccurs="0" name="Valor" nillable="true" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PacoteHistorico" nillable="true" type="tns:PacoteHistorico" />
+  <xs:simpleType name="TipoPacoteHistorico">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Compra">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Uso">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TipoPacoteHistorico" nillable="true" type="tns:TipoPacoteHistorico" />
 </xs:schema>

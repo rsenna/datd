@@ -54,6 +54,8 @@
     <Compile Include="DataAccess\OrdemServicoDao.cs" />
     <Compile Include="DataAccess\OrdemServicoLenteDao.cs" />
     <Compile Include="DataAccess\OrdemServicoQueryDao.cs" />
+    <Compile Include="DataAccess\PacoteCreditoDao.cs" />
+    <Compile Include="DataAccess\PacoteHistoricoDao.cs" />
     <Compile Include="DataAccess\ProdutoServicoDao.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

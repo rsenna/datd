@@ -370,3 +370,6 @@ th
 }
 
 td { text-align: center; }
+
+tr.summary td { border-left: hidden; border-right: hidden; border-bottom: hidden; font-style: italic; }
+.title { font-weight: bold; }

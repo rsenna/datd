@@ -17,10 +17,10 @@
         </tr>
     <% foreach (var item in Model) { %>
         <tr>
-            <td><b><%=item.NumeroOrdemServico %></b><br /><%=WebHelper.FormatDate(item.Emissao) %></td>
+            <td><b><%=item.NumeroOrdemServico %></b><br /><%=Html.EncodeDate(item.Emissao) %></td>
             <td><%=item.Referencia %></td>
-            <td><%=WebHelper.ToString(item.Etapa) %></td>
-            <td><%=WebHelper.FormatDate(item.Previsao) %></td>
+            <td><%=Html.Encode<TipoEtapa>(item.Etapa) %></td>
+            <td><%=Html.EncodeDate(item.Previsao) %></td>
         </tr>
     <% } // end-foreach %>
     </table>

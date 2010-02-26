@@ -29,10 +29,9 @@ namespace Dataweb.Dilab.Web.Controllers
         public ActionResult Nova(OsNovaViewModel viewModel)
         {
             InitWcf();
-            var cliente = ClienteSC.FindByLogin(GetLogin());
 
             var os = new OrdemServico {
-                CodCliente = cliente.CodCliente,
+                CodCliente = GetCodCliente(),
                 Observacao = viewModel.ObservacaoGeral,
                 Referencia = viewModel.Referencia,
                 DescricaoArmacao = string.Empty,
@@ -149,5 +148,6 @@ namespace Dataweb.Dilab.Web.Controllers
             var result = OrdemServicoSC.FindAllProdutoServico(familia);
             return new JsonResult {Data = result};
         }
+
     }
 }

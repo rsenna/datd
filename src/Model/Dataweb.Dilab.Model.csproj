@@ -51,17 +51,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\IPacoteHistoricoDao.cs" />
+    <Compile Include="DataAccess\IPacoteCreditoDao.cs" />
     <Compile Include="DataAccess\IOrdemServicoLenteDao.cs" />
     <Compile Include="DataAccess\IOrdemServicoDao.cs" />
     <Compile Include="DataAccess\IProdutoServicoDao.cs" />
     <Compile Include="DataAccess\IMaterialDao.cs" />
     <Compile Include="DataAccess\IFamiliaDao.cs" />
     <Compile Include="DataAccess\IOrdemServicoQueryDao.cs" />
+    <Compile Include="DataTransfer\PacoteCredito.cs" />
+    <Compile Include="DataTransfer\PacoteHistorico.cs" />
     <Compile Include="DataTransfer\Material.cs" />
     <Compile Include="DataTransfer\Familia.cs" />
     <Compile Include="DataTransfer\OrdemServico.cs" />
     <Compile Include="DataTransfer\OrdemServicoLente.cs" />
     <Compile Include="DataTransfer\OrdemServicoOtica.cs" />
+    <Compile Include="DataTransfer\Pedido.cs" />
     <Compile Include="DataTransfer\ProdutoServico.cs" />
     <Compile Include="DataTransfer\ServicoOrdemServico.cs" />
     <Compile Include="IDataAccessBase.cs" />

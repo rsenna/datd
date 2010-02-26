@@ -27,6 +27,15 @@ namespace Dataweb.Dilab.Web.ClienteServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClienteService/ChangeEmail", ReplyAction="http://tempuri.org/IClienteService/ChangeEmailResponse")]
         void ChangeEmail(string login, string emailNotificacao, bool receberNotificacao);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClienteService/FindPacoteCredito", ReplyAction="http://tempuri.org/IClienteService/FindPacoteCreditoResponse")]
+        Dataweb.Dilab.Model.DataTransfer.PacoteCredito FindPacoteCredito(int codCliente, string codPacoteCliente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClienteService/FindAllPacoteCredito", ReplyAction="http://tempuri.org/IClienteService/FindAllPacoteCreditoResponse")]
+        Dataweb.Dilab.Model.DataTransfer.PacoteCredito[] FindAllPacoteCredito(int codCliente);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IClienteService/FindAllPacoteHistorico", ReplyAction="http://tempuri.org/IClienteService/FindAllPacoteHistoricoResponse")]
+        Dataweb.Dilab.Model.DataTransfer.PacoteHistorico[] FindAllPacoteHistorico(int codCliente, string codPacoteCliente);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -70,6 +79,18 @@ namespace Dataweb.Dilab.Web.ClienteServiceReference {
         
         public void ChangeEmail(string login, string emailNotificacao, bool receberNotificacao) {
             base.Channel.ChangeEmail(login, emailNotificacao, receberNotificacao);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.PacoteCredito FindPacoteCredito(int codCliente, string codPacoteCliente) {
+            return base.Channel.FindPacoteCredito(codCliente, codPacoteCliente);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.PacoteCredito[] FindAllPacoteCredito(int codCliente) {
+            return base.Channel.FindAllPacoteCredito(codCliente);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.PacoteHistorico[] FindAllPacoteHistorico(int codCliente, string codPacoteCliente) {
+            return base.Channel.FindAllPacoteHistorico(codCliente, codPacoteCliente);
         }
     }
 }

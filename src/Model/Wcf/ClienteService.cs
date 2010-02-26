@@ -4,9 +4,12 @@ using Dataweb.Dilab.Model.Service;
 
 namespace Dataweb.Dilab.Model.Wcf
 {
+    // TODO: Servico generico - renomear
     public class ClienteService : IClienteService
     {
         private IClienteDao clienteDao;
+        private IPacoteCreditoDao pacoteCreditoDao;
+        private IPacoteHistoricoDao pacoteHistoricoDao;
 
         public ClienteService()
         {
@@ -59,6 +62,24 @@ namespace Dataweb.Dilab.Model.Wcf
             cliente.ReceberNotificacao = receberNotificacao;
 
             clienteDao.Update(cliente);
+        }
+
+        public PacoteCredito[] FindAllPacoteCredito(int codCliente)
+        {
+            pacoteCreditoDao = DaoFactory.CreateDao<IPacoteCreditoDao>();
+            return pacoteCreditoDao.FindAll(codCliente);
+        }
+
+        public PacoteCredito FindPacoteCredito(int codCliente, string codPacoteCliente)
+        {
+            pacoteCreditoDao = DaoFactory.CreateDao<IPacoteCreditoDao>();
+            return pacoteCreditoDao.FindByPrimaryKey(codCliente, codPacoteCliente);
+        }
+
+        public PacoteHistorico[] FindAllPacoteHistorico(int codCliente, string codPacoteCliente)
+        {
+            pacoteHistoricoDao = DaoFactory.CreateDao<IPacoteHistoricoDao>();
+            return pacoteHistoricoDao.FindAll(codCliente, codPacoteCliente);
         }
     }
 }

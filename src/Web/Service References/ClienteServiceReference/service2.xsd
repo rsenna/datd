@@ -58,4 +58,48 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="FindPacoteCredito">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codCliente" type="xs:int" />
+        <xs:element minOccurs="0" name="codPacoteCliente" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindPacoteCreditoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindPacoteCreditoResult" nillable="true" type="q2:PacoteCredito" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllPacoteCredito">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codCliente" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllPacoteCreditoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllPacoteCreditoResult" nillable="true" type="q3:ArrayOfPacoteCredito" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllPacoteHistorico">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codCliente" type="xs:int" />
+        <xs:element minOccurs="0" name="codPacoteCliente" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllPacoteHistoricoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllPacoteHistoricoResult" nillable="true" type="q4:ArrayOfPacoteHistorico" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -91,8 +91,8 @@
   <xs:element name="ProdutoServico" nillable="true" type="tns:ProdutoServico" />
   <xs:complexType name="OrdemServicoOtica">
     <xs:sequence>
-      <xs:element minOccurs="0" name="LenteOD" nillable="true" type="tns:OrdemServicoLente" />
-      <xs:element minOccurs="0" name="LenteOE" nillable="true" type="tns:OrdemServicoLente" />
+      <xs:element minOccurs="0" name="LenteOd" nillable="true" type="tns:OrdemServicoLente" />
+      <xs:element minOccurs="0" name="LenteOe" nillable="true" type="tns:OrdemServicoLente" />
       <xs:element minOccurs="0" name="OrdemServico" nillable="true" type="tns:OrdemServico" />
       <xs:element minOccurs="0" name="Servicos" nillable="true" type="tns:ArrayOfServicoOrdemServico" />
     </xs:sequence>

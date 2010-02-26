@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <link href="<%= ResolveUrl(WebHelper.GetCssFilePath(ViewData["Tenant.Name"].ToString())) %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl(Html.GetCssFilePath(ViewData["Tenant.Name"].ToString())) %>" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery-1.3.2.js") %>"></script>
     <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
@@ -37,6 +37,8 @@
                     %>
                         <li><%= Html.ActionLink("Ordens de Serviço", "Index", "Os")%></li>
                         <li><%= Html.ActionLink("Nova OS", "Nova", "Os")%></li>
+                        <li><%= Html.ActionLink("Pacotes", "Index", "Pacotes")%></li>
+                        <li><%= Html.ActionLink("Pedidos", "Index", "Pedidos")%></li>
                         <li><%= Html.ActionLink("Financeiro", "Index", "Financeiro")%></li>
                         <li><%= Html.ActionLink("Minha conta", "MinhaConta", "Account")%></li>
                     <%
