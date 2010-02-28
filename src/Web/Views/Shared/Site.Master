@@ -20,30 +20,22 @@
                 <h1>Dilab Online <%= ViewData["Tenant.Name"] %></h1>
             </div>
             <div id="logindisplay">
-            <%
-                if (Request.IsAuthenticated) {
-            %>
-                Olá <b><%= Html.Encode(Page.User.Identity.Name) %></b>! [ <%= Html.ActionLink("Sair", "LogOff", "Account") %> ]
-            <%
-                }
-            %> 
+                <% if (Request.IsAuthenticated) { %>
+                    Olá <b><%= Html.Encode(Page.User.Identity.Name) %></b>! [ <%= Html.ActionLink("Sair", "LogOff", "Account") %> ]
+                <% } %> 
                 &nbsp;
             </div>
             <div id="menucontainer">
                 <ul id="menu">
                     <li><%= Html.ActionLink("Principal", "Index", "Home")%></li>
-                    <%
-                        if (Request.IsAuthenticated) {
-                    %>
-                        <li><%= Html.ActionLink("Ordens de Serviço", "Index", "Os")%></li>
-                        <li><%= Html.ActionLink("Nova OS", "Nova", "Os")%></li>
+                    <% if (Request.IsAuthenticated) { %>
+                        <li><%= Html.ActionLink("Minhas Compras", "Index", "Compras")%></li>
+                        <li><%= Html.ActionLink("Nova OS", "NovaOs", "Compras")%></li>
+                        <li><%= Html.ActionLink("Novo Pedido", "NovoPedido", "Compras")%></li>
                         <li><%= Html.ActionLink("Pacotes", "Index", "Pacotes")%></li>
-                        <li><%= Html.ActionLink("Pedidos", "Index", "Pedidos")%></li>
                         <li><%= Html.ActionLink("Financeiro", "Index", "Financeiro")%></li>
-                        <li><%= Html.ActionLink("Minha conta", "MinhaConta", "Account")%></li>
-                    <%
-                        }
-                    %> 
+                        <li><%= Html.ActionLink("Minha Conta", "MinhaConta", "Account")%></li>
+                    <% } %> 
                 </ul>
             </div>
         </div>

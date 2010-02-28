@@ -14,9 +14,10 @@ namespace Dataweb.Dilab.Model.Mock
         public const int FIND_ALL_MAX_COUNT = 100;
         public const int MAX_NAME_LENGTH = 50;
 
-        public static readonly string NameGenerator = Lipsums.RobinsonoKruso;
-        private static readonly Random Random = new Random();
+        public static readonly string NameGenerator = Lipsums.LoremIpsum;
         public static readonly string TextGenerator = Lipsums.LoremIpsum;
+
+        private static readonly Random random = new Random();
 
         public virtual T FindByPrimaryKey(object pk)
         {
@@ -55,7 +56,7 @@ namespace Dataweb.Dilab.Model.Mock
 
         protected static int GenerateInt32(int maxValue)
         {
-            var rand = Random.Next(0, Math.Abs(maxValue) + 1);
+            var rand = random.Next(0, Math.Abs(maxValue) + 1);
             return rand * Math.Sign(maxValue);
         }
 
@@ -66,13 +67,13 @@ namespace Dataweb.Dilab.Model.Mock
 
         protected static decimal GenerateDecimal()
         {
-            var idx = Random.NextDouble();
+            var idx = random.NextDouble();
             return decimal.MaxValue * (decimal) idx;
         }
 
         protected static decimal GenerateDecimal(decimal maxValue)
         {
-            var idx = Random.NextDouble();
+            var idx = random.NextDouble();
             return (maxValue + 1) * (decimal)idx;
         }
 

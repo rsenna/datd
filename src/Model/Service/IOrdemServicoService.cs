@@ -31,7 +31,10 @@ namespace Dataweb.Dilab.Model.Service
         int GetCountEmProducao(int codCliente);
 
         [OperationContract]
-        ProdutoServico[] FindAllProdutoServico(int codFamilia);
+        Servico[] FindAllServico(int codFamilia);
+
+        [OperationContract]
+        Produto[] FindAllProduto(int codFamilia);
 
         [OperationContract]
         void InsertOrdemServico(OrdemServicoOtica dto);

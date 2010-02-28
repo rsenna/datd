@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CA392110-894D-432E-A465-B618032324B9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -56,7 +56,7 @@
     <Compile Include="DataAccess\OrdemServicoQueryDao.cs" />
     <Compile Include="DataAccess\PacoteCreditoDao.cs" />
     <Compile Include="DataAccess\PacoteHistoricoDao.cs" />
-    <Compile Include="DataAccess\ProdutoServicoDao.cs" />
+    <Compile Include="DataAccess\ServicoDao.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataAccess\ClienteDao.cs" />

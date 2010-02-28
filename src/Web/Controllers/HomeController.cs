@@ -1,5 +1,5 @@
 ﻿using System.Web.Mvc;
-using Dataweb.Dilab.Web.Model;
+using Dataweb.Dilab.Web.Models;
 
 namespace Dataweb.Dilab.Web.Controllers
 {

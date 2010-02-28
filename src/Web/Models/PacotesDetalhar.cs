@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Dataweb.Dilab.Model.DataTransfer;
 
-namespace Dataweb.Dilab.Web.Model
+namespace Dataweb.Dilab.Web.Models
 {
-    public class OsDetalharPacoteViewModel
+    public class PacotesDetalhar
     {
         public string Descricao { get; set; }
 

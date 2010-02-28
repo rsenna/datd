@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Dataweb.Dilab.Model.DataTransfer;
-using Dataweb.Dilab.Web.Model;
+using Dataweb.Dilab.Web.Models;
 
 namespace Dataweb.Dilab.Web.Controllers
 {
@@ -21,7 +21,7 @@ namespace Dataweb.Dilab.Web.Controllers
             InitWcf();
 
             var codCliente = GetCodCliente();
-            var viewModel = new OsDetalharPacoteViewModel();
+            var viewModel = new PacotesDetalhar();
             var pacoteCliente = ClienteSC.FindPacoteCredito(codCliente, id);
 
             if (pacoteCliente != null)

@@ -4,35 +4,34 @@ using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class ProdutoServicoDao : DataAccessBase<ProdutoServico>, IProdutoServicoDao
+    public class ProdutoDao : DataAccessBase<Produto>, IProdutoDao
     {
-        public ProdutoServico[] FindAll(int codFamilia)
+        public Produto[] FindAll(int codFamilia)
         {
             return FindAll();
         }
 
-        public override ProdutoServico FindByPrimaryKey(object pk)
+        public override Produto FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();
         }
 
-        public override ProdutoServico Update(ProdutoServico dto)
+        public override Produto Update(Produto dto)
         {
             throw new NotImplementedException();
         }
 
-        public override ProdutoServico Insert(ProdutoServico dto)
+        public override Produto Insert(Produto dto)
         {
             throw new NotImplementedException();
         }
 
-        public override ProdutoServico FetchDto()
+        public override Produto FetchDto()
         {
-            return new ProdutoServico {
+            return new Produto {
                 CodItem = GenerateCode(10),
                 Obrigatorio = GenerateBoolean(),
                 Descricao = GenerateName(4),
-                ServicoInterno = GenerateBoolean()
             };
         }
     }

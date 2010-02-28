@@ -1,6 +1,6 @@
 ﻿using Dataweb.Dilab.Model.DataTransfer;
 
-namespace Dataweb.Dilab.Web.Model
+namespace Dataweb.Dilab.Web.Models
 {
     public class HomeViewModel
     {

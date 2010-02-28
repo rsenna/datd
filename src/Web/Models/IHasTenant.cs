@@ -1,4 +1,4 @@
-﻿namespace Dataweb.Dilab.Web.Model
+﻿namespace Dataweb.Dilab.Web.Models
 {
     public interface IHasTenant
     {

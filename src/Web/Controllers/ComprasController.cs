@@ -2,11 +2,11 @@
 using System.Web.Mvc;
 using Dataweb.Dilab.Model.DataTransfer;
 using Dataweb.Dilab.Model.Service;
-using Dataweb.Dilab.Web.Model;
+using Dataweb.Dilab.Web.Models;
 
 namespace Dataweb.Dilab.Web.Controllers
 {
-    public class OsController : ControllerBase
+    public class ComprasController : ControllerBase
     {
         [Authorize]
         [AcceptVerbs(HttpVerbs.Get)]
@@ -25,8 +25,26 @@ namespace Dataweb.Dilab.Web.Controllers
         }
 
         [Authorize]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult NovaOs()
+        {
+            InitWcf();
+
+            var familias = OrdemServicoSC.FindAllFamilia();
+            var materiais = OrdemServicoSC.FindAllMaterial();
+
+            var viewModel = new ComprasNovaOs
+            {
+                Familias = familias,
+                Materiais = materiais
+            };
+
+            return View(viewModel);
+        }
+
+        [Authorize]
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Nova(OsNovaViewModel viewModel)
+        public ActionResult NovaOs(ComprasNovaOs viewModel)
         {
             InitWcf();
 
@@ -119,35 +137,42 @@ namespace Dataweb.Dilab.Web.Controllers
 
         [Authorize]
         [AcceptVerbs(HttpVerbs.Get)]
-        public ActionResult Nova()
-        {
-            InitWcf();
-
-            var familias = OrdemServicoSC.FindAllFamilia();
-            var materiais = OrdemServicoSC.FindAllMaterial();
-
-            var viewModel = new OsNovaViewModel {
-                Familias = familias,
-                Materiais = materiais
-            };
-
-            return View(viewModel);
-        }
-
-        [Authorize]
-        [AcceptVerbs(HttpVerbs.Get)]
-        public ActionResult NovaSucesso()
+        public ActionResult NovaOsSucesso()
         {
             return View();
         }
 
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult NovoPedido()
+        {
+            InitWcf();
+
+            var model = new ComprasNovoPedido {
+                Familias = OrdemServicoSC.FindAllFamilia()
+            };
+
+            return View(model);
+        }
+
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult ListarServicos(int familia)
         {
             InitWcf(); 
 
-            var result = OrdemServicoSC.FindAllProdutoServico(familia);
+            var result = OrdemServicoSC.FindAllServico(familia);
             return new JsonResult {Data = result};
         }
 
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult ListarProdutos(int familia)
+        {
+            InitWcf(); 
+
+            var result = OrdemServicoSC.FindAllProduto(familia);
+            return new JsonResult {Data = result};
+        }
     }
 }

@@ -1,5 +1,5 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ViewPage<OsDetalharPacoteViewModel>" %>
-<%@ Import Namespace="Dataweb.Dilab.Web.Model"%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="ViewPage<PacotesDetalhar>" %>
+<%@ Import Namespace="Dataweb.Dilab.Web.Models"%>
 <%@ Import Namespace="Dataweb.Dilab.Model.DataTransfer"%>
 <%@ Import Namespace="Dataweb.Dilab.Web"%>
 

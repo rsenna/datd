@@ -111,24 +111,38 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="FindAllProdutoServico">
+  <xs:element name="FindAllServico">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="codFamilia" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="FindAllProdutoServicoResponse">
+  <xs:element name="FindAllServicoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllProdutoServicoResult" nillable="true" type="q7:ArrayOfProdutoServico" />
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllServicoResult" nillable="true" type="q7:ArrayOfServico" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllProduto">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codFamilia" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllProdutoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllProdutoResult" nillable="true" type="q8:ArrayOfProduto" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertOrdemServico">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q8:OrdemServicoOtica" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q9:OrdemServicoOtica" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

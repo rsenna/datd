@@ -5,7 +5,7 @@ using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class ProdutoServicoDao : DataAccessBase<ProdutoServico>, IProdutoServicoDao
+    public class ServicoDao : DataAccessBase<Servico>, IServicoDao
     {
         private const string SQL_STMT_FIND_PRODUTO_SERVICO = @"
             SELECT
@@ -25,9 +25,9 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 ITEM.descricao
         ";
 
-        public ProdutoServico[] FindAll(int codFamilia)
+        public Servico[] FindAll(int codFamilia)
         {
-            ProdutoServico[] result = null;
+            Servico[] result = null;
 
             Helper.UsingCommand(c => {
                 c.CommandText = SQL_STMT_FIND_PRODUTO_SERVICO;
@@ -38,29 +38,29 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
-        public override ProdutoServico[] FindAll()
+        public override Servico[] FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public override ProdutoServico FindByPrimaryKey(object pk)
+        public override Servico FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();
         }
 
-        public override ProdutoServico Update(ProdutoServico dto)
+        public override Servico Update(Servico dto)
         {
             throw new NotImplementedException();
         }
 
-        public override ProdutoServico Insert(ProdutoServico dto)
+        public override Servico Insert(Servico dto)
         {
             throw new NotImplementedException();
         }
 
-        public override ProdutoServico FetchDto(IDataRecord record)
+        public override Servico FetchDto(IDataRecord record)
         {
-            return new ProdutoServico {
+            return new Servico {
                 CodItem = Helper.ReadString(record, "cod_item"),
                 Obrigatorio = Helper.ReadBoolean(record, "obrigatorio").Value,
                 Descricao = Helper.ReadString(record, "descricao"),

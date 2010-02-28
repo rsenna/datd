@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E5788FCF-7B3A-4831-9208-64E23C097C0E}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -51,14 +51,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\IProdutoDao.cs" />
     <Compile Include="DataAccess\IPacoteHistoricoDao.cs" />
     <Compile Include="DataAccess\IPacoteCreditoDao.cs" />
     <Compile Include="DataAccess\IOrdemServicoLenteDao.cs" />
     <Compile Include="DataAccess\IOrdemServicoDao.cs" />
-    <Compile Include="DataAccess\IProdutoServicoDao.cs" />
     <Compile Include="DataAccess\IMaterialDao.cs" />
     <Compile Include="DataAccess\IFamiliaDao.cs" />
     <Compile Include="DataAccess\IOrdemServicoQueryDao.cs" />
+    <Compile Include="DataAccess\IServicoDao.cs" />
+    <Compile Include="DataTransfer\Produto.cs" />
     <Compile Include="DataTransfer\PacoteCredito.cs" />
     <Compile Include="DataTransfer\PacoteHistorico.cs" />
     <Compile Include="DataTransfer\Material.cs" />
@@ -67,7 +69,7 @@
     <Compile Include="DataTransfer\OrdemServicoLente.cs" />
     <Compile Include="DataTransfer\OrdemServicoOtica.cs" />
     <Compile Include="DataTransfer\Pedido.cs" />
-    <Compile Include="DataTransfer\ProdutoServico.cs" />
+    <Compile Include="DataTransfer\Servico.cs" />
     <Compile Include="DataTransfer\ServicoOrdemServico.cs" />
     <Compile Include="IDataAccessBase.cs" />
     <Compile Include="DataTransferBase.cs" />
@@ -79,7 +81,9 @@
     <Compile Include="Service\DatawebFault.cs" />
     <Compile Include="Service\IClienteService.cs" />
     <Compile Include="Service\IOrdemServicoService.cs" />
-    <Compile Include="Service\IService.cs" />
+    <Compile Include="Service\IService.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -10,7 +10,8 @@ namespace Dataweb.Dilab.Model.Wcf
         private IOrdemServicoQueryDao ordemServicoQueryDao;
         private IFamiliaDao familiaDao;
         private IMaterialDao materialDao;
-        private IProdutoServicoDao produtoServicoDao;
+        private IServicoDao servicoDao;
+        private IProdutoDao produtoDao;
         private IOrdemServicoDao ordemServicoDao;
         private IOrdemServicoLenteDao ordemServicoLenteDao;
 
@@ -82,10 +83,16 @@ namespace Dataweb.Dilab.Model.Wcf
             return ordemServicoQueryDao.GetCountEmProducao(codCliente);
         }
 
-        public ProdutoServico[] FindAllProdutoServico(int codFamilia)
+        public Servico[] FindAllServico(int codFamilia)
         {
-            produtoServicoDao = DaoFactory.CreateDao<IProdutoServicoDao>();
-            return produtoServicoDao.FindAll(codFamilia);
+            servicoDao = DaoFactory.CreateDao<IServicoDao>();
+            return servicoDao.FindAll(codFamilia);
+        }
+
+        public Produto[] FindAllProduto(int codFamilia)
+        {
+            produtoDao = DaoFactory.CreateDao<IProdutoDao>();
+            return produtoDao.FindAll(codFamilia);
         }
 
         // TODO: definição da transação deveria ser aqui - InsertOrdemServico é atômico, apesar de se constituir de pelo menos 3 gravações distintas. Avaliar transações em WCF (via atributos e/ou Web.Config).

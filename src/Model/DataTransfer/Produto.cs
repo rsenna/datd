@@ -3,7 +3,7 @@
 namespace Dataweb.Dilab.Model.DataTransfer
 {
     [DataContract]
-    public class ProdutoServico : DataTransferBase
+    public class Produto : DataTransferBase
     {
         [DataMember]
         public string CodItem { get; set; }
@@ -13,8 +13,5 @@ namespace Dataweb.Dilab.Model.DataTransfer
 
         [DataMember]
         public string Descricao { get; set; }
-
-        [DataMember]
-        public bool ServicoInterno { get; set; }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<HomeViewModel>" %>
-<%@ Import Namespace="Dataweb.Dilab.Web.Model"%>
+<%@ Import Namespace="Dataweb.Dilab.Web.Models"%>
 
 <asp:Content ID="indexTitle" ContentPlaceHolderID="TitleContent" runat="server">
     Bem-vindo ao Dilab Online

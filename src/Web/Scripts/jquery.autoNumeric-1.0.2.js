@@ -206,8 +206,8 @@
 	};
 	function autoCode(ii, d){ // function to update the defaults settings
 		var fCode = $('#'+ii).attr('format');
-		var lookUp = 'dp' + fCode.charAt(5); 
-		if (fCode !== ''){
+		if (fCode && fCode !== ''){
+			var lookUp = 'dp' + fCode.charAt(5); 
 			d.aSign = (fCode.charAt(0) === 'n') ? '-' : ''; //Negative allowed?
 			d.mNum = (fCode.charAt(1) === '0') ? d.mNum = 15 : fCode.charAt(1) * 1; // max interger value 
 			if (fCode.charAt(2) != 'c'){ // thousand seperator

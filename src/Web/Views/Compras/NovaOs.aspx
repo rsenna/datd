@@ -1,12 +1,12 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<OsNovaViewModel>" %>
-<%@ Import Namespace="Dataweb.Dilab.Web.Model"%>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ComprasNovaOs>" %>
+<%@ Import Namespace="Dataweb.Dilab.Web.Models"%>
 
 <asp:Content ID="headContent" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" language="javascript">
         // Global utilizada por jquery.rules.os.nova.js; contém o caminho do gif de loader ajax:
         ajaxLoaderGifUrl = '<%= ResolveUrl("~/Content/img/ajax-loader.gif") %>';
     </script>
-    <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.rules.os.nova.js") %>"></script>
+    <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.rules.js") %>"></script>
 </asp:Content>
 
 <asp:Content ID="titleContent" ContentPlaceHolderID="TitleContent" runat="server">
@@ -14,7 +14,7 @@
 </asp:Content>
 
 <asp:Content ID="mainContent" ContentPlaceHolderID="MainContent" runat="server">
-    <form id="formNovaOs" action="" method="post">
+    <form id="frmNovaOs" action="" method="post">
         <h2>Nova OS</h2>
 
         <div id="divNumeroOS">

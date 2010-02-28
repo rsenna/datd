@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using Dataweb.Dilab.Web.ClienteServiceReference;
 using Dataweb.Dilab.Web.Configuration;
-using Dataweb.Dilab.Web.Model;
+using Dataweb.Dilab.Web.Models;
 using Dataweb.Dilab.Web.OrdemServicoServiceReference;
 using Elmah;
 
