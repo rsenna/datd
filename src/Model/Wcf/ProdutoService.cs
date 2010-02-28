@@ -5,7 +5,7 @@ using Dataweb.Dilab.Model.Service;
 
 namespace Dataweb.Dilab.Model.Wcf
 {
-    public class OrdemServicoService : IOrdemServicoService
+    public class ProdutoService : IProdutoService
     {
         private IOrdemServicoQueryDao ordemServicoQueryDao;
         private IFamiliaDao familiaDao;
@@ -14,8 +14,9 @@ namespace Dataweb.Dilab.Model.Wcf
         private IProdutoDao produtoDao;
         private IOrdemServicoDao ordemServicoDao;
         private IOrdemServicoLenteDao ordemServicoLenteDao;
+        private IPedidoDao pedidoDao;
 
-        public OrdemServicoService()
+        public ProdutoService()
         {
             DaoFactory.AssemblyName = ConfigHelper.ModelAssemblyName;
         }
@@ -96,7 +97,7 @@ namespace Dataweb.Dilab.Model.Wcf
         }
 
         // TODO: definição da transação deveria ser aqui - InsertOrdemServico é atômico, apesar de se constituir de pelo menos 3 gravações distintas. Avaliar transações em WCF (via atributos e/ou Web.Config).
-        public void InsertOrdemServico(OrdemServicoOtica dto)
+        public OrdemServicoOtica InsertOrdemServico(OrdemServicoOtica dto)
         {
             ordemServicoDao = DaoFactory.CreateDao<IOrdemServicoDao>();
             ordemServicoLenteDao = DaoFactory.CreateDao<IOrdemServicoLenteDao>();
@@ -128,6 +129,28 @@ namespace Dataweb.Dilab.Model.Wcf
 
             // Grava os serviços que serão executados na OS:
             ordemServicoDao.InsertServicos(dto.Servicos);
+
+            return dto;
+        }
+
+        public Pedido InsertPedido(Pedido dto)
+        {
+            pedidoDao = DaoFactory.CreateDao<IPedidoDao>();
+
+            // Grava parte básica do pedido:
+            pedidoDao.Insert(dto);
+
+            // Como só agora foi obtido dto.CodPedido e dto.CodEmpresa, atualizo os demais DTO's:
+            foreach (var produto in dto.Produtos)
+            {
+                produto.CodPedido = dto.CodPedido;
+                produto.CodEmpresa = dto.CodEmpresa;
+            }
+
+            // Grava os produtos registrados no pedido:
+            pedidoDao.InsertProdutos(dto.Produtos);
+
+            return dto;
         }
     }
 }

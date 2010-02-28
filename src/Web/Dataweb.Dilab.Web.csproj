@@ -88,17 +88,17 @@
     <Compile Include="Models\PacotesDetalhar.cs" />
     <Compile Include="Models\Tenant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="HtmlHelper.cs" />
     <Compile Include="Service References\ClienteServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\OrdemServicoServiceReference\Reference.cs">
+    <Compile Include="Service References\ProdutoServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="HtmlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Farol\Site.css" />
@@ -107,18 +107,6 @@
     <Content Include="Content\Sturmer\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <None Include="Service References\ClienteServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\ClienteServiceReference\configuration.svcinfo" />
-    <None Include="Service References\ClienteServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Service References\OrdemServicoServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\OrdemServicoServiceReference\configuration.svcinfo" />
-    <None Include="Service References\OrdemServicoServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Scripts\jquery.autoNumeric-1.0.2.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Views\Financeiro\Index.aspx" />
@@ -167,31 +155,44 @@
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Servico.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.Dto.Cliente.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.Dto.User.datasource" />
-    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.DataTransfer1.xsd" />
+    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.DataTransfer.xsd" />
     <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.Service.xsd" />
-    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model1.xsd" />
-    <None Include="Service References\ClienteServiceReference\service1.wsdl" />
-    <None Include="Service References\ClienteServiceReference\service2.xsd" />
-    <None Include="Service References\ClienteServiceReference\service21.xsd" />
-    <None Include="Service References\OrdemServicoServiceReference\Dataweb.Dilab.Model.DataTransfer.xsd" />
-    <None Include="Service References\OrdemServicoServiceReference\Dataweb.Dilab.Model.xsd" />
-    <None Include="Service References\OrdemServicoServiceReference\service.wsdl" />
-    <None Include="Service References\OrdemServicoServiceReference\service.xsd" />
-    <None Include="Service References\OrdemServicoServiceReference\service1.xsd" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ClienteServiceReference\" />
-    <WCFMetadataStorage Include="Service References\OrdemServicoServiceReference\" />
+    <None Include="Service References\ClienteServiceReference\Dataweb.Dilab.Model.xsd" />
+    <None Include="Service References\ClienteServiceReference\service.wsdl" />
+    <None Include="Service References\ClienteServiceReference\service.xsd" />
+    <None Include="Service References\ClienteServiceReference\service1.xsd" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\TipoEtapa.xml" />
     <Content Include="Scripts\jquery.rules.js" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Pedido.datasource" />
+    <None Include="Service References\ClienteServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ClienteServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ProdutoServiceReference\Dataweb.Dilab.Model.DataTransfer.xsd" />
+    <None Include="Service References\ProdutoServiceReference\Dataweb.Dilab.Model.xsd" />
+    <None Include="Service References\ProdutoServiceReference\service.wsdl" />
+    <None Include="Service References\ProdutoServiceReference\service.xsd" />
+    <None Include="Service References\ProdutoServiceReference\service1.xsd" />
+    <None Include="Service References\ProdutoServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ProdutoServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Views\Compras\NovoPedidoSucesso.aspx" />
     <Content Include="Views\Compras\Index.aspx" />
     <Content Include="Views\Compras\NovaOs.aspx" />
     <Content Include="Views\Compras\NovaOsSucesso.aspx" />
     <Content Include="Views\Compras\NovoPedido.aspx" />
     <Content Include="Views\Pacotes\Detalhar.aspx" />
     <Content Include="Views\Pacotes\Index.aspx" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ClienteServiceReference\" />
+    <WCFMetadataStorage Include="Service References\ProdutoServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

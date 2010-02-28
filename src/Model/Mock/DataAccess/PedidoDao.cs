@@ -4,30 +4,30 @@ using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class OrdemServicoDao : DataAccessBase<OrdemServico>, IOrdemServicoDao
+    public class PedidoDao : DataAccessBase<Pedido>, IPedidoDao
     {
-        public override OrdemServico FetchDto()
+        public override Pedido FetchDto()
         {
             throw new NotImplementedException();
         }
 
-        public OrdemServico[] FindAll(int codCliente)
+        public Pedido[] FindAll(int codCliente)
         {
             throw new NotImplementedException();
         }
 
-        public override OrdemServico Insert(OrdemServico dto)
+        public override Pedido Insert(Pedido dto)
         {
             var result = base.Insert(dto);
 
             result.CodEmpresa = GenerateInt32();
-            result.CodOrdemServico = GenerateInt32();
+            result.CodPedido = GenerateInt32();
             result.Numero = GenerateInt32();
 
             return result;
         }
 
-        public ServicoOrdemServico[] InsertServicos(ServicoOrdemServico[] dtos)
+        public ProdutoPedido[] InsertProdutos(ProdutoPedido[] dtos)
         {
             return dtos;
         }

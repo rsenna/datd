@@ -64,14 +64,14 @@
                    */%>
                 <tr class="template">
                     <td>
-                        <input type="hidden" name="produto_{1}" value="{0}" />
+                        <input type="hidden" name="produtos" value="{0}" />
                         {2}
                     </td>
                     <td>
                         {3}
                     </td>
                     <td>
-                        <input type="text" class="itxQtd" name="qtd_{1}" value="{4}" class="numeric" />
+                        <input type="text" class="itxQtd" name="quantidades" value="{4}" class="numeric" />
                     </td>
                     <td class="tdExcluir" id="tdExcluir_{1}">
                         <a href="#" class="linkExcluir">Excluir</a>
@@ -81,7 +81,7 @@
         </div>
         <br />
         Observações<br />
-        <textarea rows="4" cols="40" id="txaObservacoes"></textarea>
+        <textarea rows="4" cols="40" id="txaObservacoes" name="observacao"></textarea>
         <br />
         <input type="submit" value="Finalizar Pedido" />
     </form>

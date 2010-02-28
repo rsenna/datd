@@ -1,4 +1,6 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceModel;
 using System.Web.Mvc;
 using Dataweb.Dilab.Model.DataTransfer;
 using Dataweb.Dilab.Model.Service;
@@ -16,8 +18,8 @@ namespace Dataweb.Dilab.Web.Controllers
 
             var login = GetLogin();
             var items = string.IsNullOrEmpty(referencia)?
-                OrdemServicoSC.FindAllByLogin(login) :
-                OrdemServicoSC.FindAllByLoginAndReferencia(login, referencia);
+                ProdutoSC.FindAllByLogin(login) :
+                ProdutoSC.FindAllByLoginAndReferencia(login, referencia);
 
             ViewData.Model = items;
 
@@ -30,8 +32,8 @@ namespace Dataweb.Dilab.Web.Controllers
         {
             InitWcf();
 
-            var familias = OrdemServicoSC.FindAllFamilia();
-            var materiais = OrdemServicoSC.FindAllMaterial();
+            var familias = ProdutoSC.FindAllFamilia();
+            var materiais = ProdutoSC.FindAllMaterial();
 
             var viewModel = new ComprasNovaOs
             {
@@ -120,7 +122,7 @@ namespace Dataweb.Dilab.Web.Controllers
 
             try
             {
-                OrdemServicoSC.InsertOrdemServico(oso);
+                oso = ProdutoSC.InsertOrdemServico(oso);
             }
             catch (FaultException<DatawebFault> ex)
             {
@@ -129,7 +131,7 @@ namespace Dataweb.Dilab.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                return RedirectToAction("NovaSucesso");
+                return RedirectToAction("NovaOsSucesso", new {id = oso.OrdemServico.Numero});
             }
 
             return View();
@@ -137,8 +139,9 @@ namespace Dataweb.Dilab.Web.Controllers
 
         [Authorize]
         [AcceptVerbs(HttpVerbs.Get)]
-        public ActionResult NovaOsSucesso()
+        public ActionResult NovaOsSucesso(string id)
         {
+            ViewData["num"] = id;
             return View();
         }
 
@@ -148,11 +151,67 @@ namespace Dataweb.Dilab.Web.Controllers
         {
             InitWcf();
 
-            var model = new ComprasNovoPedido {
-                Familias = OrdemServicoSC.FindAllFamilia()
+            var model = new ComprasNovoPedido
+            {
+                Familias = ProdutoSC.FindAllFamilia()
             };
 
             return View(model);
+        }
+
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult NovoPedido(ComprasNovoPedido viewModel)
+        {
+            InitWcf();
+
+            var pedido = new Pedido {
+                CodCliente = GetCodCliente(),
+                Emissao = DateTime.Now,
+                EnviadoEmail = false,
+                Observacao = viewModel.Observacao,
+                Status = StatusPedido.Aberto
+            };
+
+            var produtos = new List<ProdutoPedido>();
+
+            // Obs: notar que laço começa em 1, não em 0. É necessário ignorar
+            // a primeira linha da tabela, que serve como template para frontend.
+            for (var i = 1; i < viewModel.Produtos.Length; i++)
+            {
+                var produto = new ProdutoPedido {
+                    CodItem = viewModel.Produtos[i],
+                    Quantidade = Convert.ToInt32(viewModel.Quantidades[i])
+                };
+
+                produtos.Add(produto);
+            }
+
+            pedido.Produtos = produtos.ToArray();
+
+            try
+            {
+                pedido = ProdutoSC.InsertPedido(pedido);
+            }
+            catch (FaultException<DatawebFault> ex)
+            {
+                ModelState.AddModelError("pedidoMsg", ex.Detail.Message);
+            }
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("NovoPedidoSucesso", new {id = pedido.Numero});
+            }
+
+            return View();
+        }
+
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult NovoPedidoSucesso(string id)
+        {
+            ViewData["num"] = id;
+            return View();
         }
 
         [Authorize]
@@ -161,7 +220,7 @@ namespace Dataweb.Dilab.Web.Controllers
         {
             InitWcf(); 
 
-            var result = OrdemServicoSC.FindAllServico(familia);
+            var result = ProdutoSC.FindAllServico(familia);
             return new JsonResult {Data = result};
         }
 
@@ -171,7 +230,7 @@ namespace Dataweb.Dilab.Web.Controllers
         {
             InitWcf(); 
 
-            var result = OrdemServicoSC.FindAllProduto(familia);
+            var result = ProdutoSC.FindAllProduto(familia);
             return new JsonResult {Data = result};
         }
     }

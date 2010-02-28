@@ -7,7 +7,7 @@ namespace Dataweb.Dilab.Service
     public partial class MainService : ServiceBase
     {
         private ServiceHost clienteServiceHost;
-        private ServiceHost ordemServicoServiceHost;
+        private ServiceHost produtoServiceHost;
 
         public MainService()
         {
@@ -18,19 +18,19 @@ namespace Dataweb.Dilab.Service
         protected override void OnStart(string[] args)
         {
             Dispose(ref clienteServiceHost);
-            Dispose(ref ordemServicoServiceHost);
+            Dispose(ref produtoServiceHost);
 
             clienteServiceHost = new ServiceHost(typeof (ClienteService));
-            ordemServicoServiceHost = new ServiceHost(typeof (OrdemServicoService));
+            produtoServiceHost = new ServiceHost(typeof (ProdutoService));
 
             clienteServiceHost.Open();
-            ordemServicoServiceHost.Open();
+            produtoServiceHost.Open();
         }
 
         protected override void OnStop()
         {
             Dispose(ref clienteServiceHost);
-            Dispose(ref ordemServicoServiceHost);
+            Dispose(ref produtoServiceHost);
         }
 
         private static void Dispose(ref ServiceHost host)

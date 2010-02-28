@@ -148,7 +148,23 @@
   </xs:element>
   <xs:element name="InsertOrdemServicoResponse">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="InsertOrdemServicoResult" nillable="true" type="q10:OrdemServicoOtica" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertPedido">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q11:Pedido" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="InsertPedidoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="InsertPedidoResult" nillable="true" type="q12:Pedido" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
 </xs:schema>

@@ -204,4 +204,47 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="ServicoOrdemServico" nillable="true" type="tns:ServicoOrdemServico" />
+  <xs:complexType name="Pedido">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q9:DataTransferBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CodCliente" type="xs:int" />
+          <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
+          <xs:element minOccurs="0" name="CodPedido" type="xs:int" />
+          <xs:element minOccurs="0" name="Emissao" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Encerramento" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="EnviadoEmail" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Expedicao" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Numero" type="xs:int" />
+          <xs:element minOccurs="0" name="Observacao" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Produtos" nillable="true" type="tns:ArrayOfProdutoPedido" />
+          <xs:element minOccurs="0" name="Status" type="tns:StatusPedido" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="Pedido" nillable="true" type="tns:Pedido" />
+  <xs:complexType name="ArrayOfProdutoPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ProdutoPedido" nillable="true" type="tns:ProdutoPedido" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfProdutoPedido" nillable="true" type="tns:ArrayOfProdutoPedido" />
+  <xs:complexType name="ProdutoPedido">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
+      <xs:element minOccurs="0" name="CodItem" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CodPedido" type="xs:int" />
+      <xs:element minOccurs="0" name="Quantidade" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ProdutoPedido" nillable="true" type="tns:ProdutoPedido" />
+  <xs:simpleType name="StatusPedido">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Aberto" />
+      <xs:enumeration value="Fechado" />
+      <xs:enumeration value="Cancelado" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StatusPedido" nillable="true" type="tns:StatusPedido" />
 </xs:schema>

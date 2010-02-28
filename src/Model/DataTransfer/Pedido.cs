@@ -42,5 +42,8 @@ namespace Dataweb.Dilab.Model.DataTransfer
 
         [DataMember]
         public StatusPedido Status { get; set; }
+
+        [DataMember]
+        public ProdutoPedido[] Produtos { get; set; }
     }
 }

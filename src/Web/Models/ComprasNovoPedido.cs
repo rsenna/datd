@@ -8,6 +8,8 @@ namespace Dataweb.Dilab.Web.Models
         public Familia[] Familias { get; set; }
 
         // Submit:
-        public string[] ProdutosPedido { get; set; }
+        public string[] Produtos { get; set; }
+        public string[] Quantidades { get; set; }
+        public string Observacao { get; set; }
     }
 }

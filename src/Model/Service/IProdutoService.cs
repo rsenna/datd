@@ -4,7 +4,7 @@ using Dataweb.Dilab.Model.DataTransfer;
 namespace Dataweb.Dilab.Model.Service
 {
     [ServiceContract]
-    public interface IOrdemServicoService : IService
+    public interface IProdutoService : IService
     {
         [OperationContract]
         OrdemServicoQuery[] FindAllByCodCliente(int codCliente);
@@ -37,6 +37,9 @@ namespace Dataweb.Dilab.Model.Service
         Produto[] FindAllProduto(int codFamilia);
 
         [OperationContract]
-        void InsertOrdemServico(OrdemServicoOtica dto);
+        OrdemServicoOtica InsertOrdemServico(OrdemServicoOtica dto);
+
+        [OperationContract]
+        Pedido InsertPedido(Pedido dto);
     }
 }

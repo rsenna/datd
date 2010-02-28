@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\IPedidoDao.cs" />
     <Compile Include="DataAccess\IProdutoDao.cs" />
     <Compile Include="DataAccess\IPacoteHistoricoDao.cs" />
     <Compile Include="DataAccess\IPacoteCreditoDao.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="DataTransfer\OrdemServicoLente.cs" />
     <Compile Include="DataTransfer\OrdemServicoOtica.cs" />
     <Compile Include="DataTransfer\Pedido.cs" />
+    <Compile Include="DataTransfer\ProdutoPedido.cs" />
     <Compile Include="DataTransfer\Servico.cs" />
     <Compile Include="DataTransfer\ServicoOrdemServico.cs" />
     <Compile Include="IDataAccessBase.cs" />
@@ -80,7 +82,7 @@
     <Compile Include="DaoFactory.cs" />
     <Compile Include="Service\DatawebFault.cs" />
     <Compile Include="Service\IClienteService.cs" />
-    <Compile Include="Service\IOrdemServicoService.cs" />
+    <Compile Include="Service\IProdutoService.cs" />
     <Compile Include="Service\IService.cs">
       <SubType>Code</SubType>
     </Compile>

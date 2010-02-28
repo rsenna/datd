@@ -8,7 +8,7 @@ using System.Web.Routing;
 using Dataweb.Dilab.Web.ClienteServiceReference;
 using Dataweb.Dilab.Web.Configuration;
 using Dataweb.Dilab.Web.Models;
-using Dataweb.Dilab.Web.OrdemServicoServiceReference;
+using Dataweb.Dilab.Web.ProdutoServiceReference;
 using Elmah;
 
 namespace Dataweb.Dilab.Web.Controllers
@@ -18,7 +18,7 @@ namespace Dataweb.Dilab.Web.Controllers
         private const string CULTURE = "pt-BR";
 
         protected ClienteServiceClient ClienteSC { get; set; }
-        protected OrdemServicoServiceClient OrdemServicoSC { get; set; }
+        protected ProdutoServiceClient ProdutoSC { get; set; }
         public Tenant Tenant { get; set; }
 
         protected void InitWcf()
@@ -29,7 +29,7 @@ namespace Dataweb.Dilab.Web.Controllers
             }
 
             ClienteSC = CreateServiceClient<ClienteServiceClient, IClienteService>();
-            OrdemServicoSC = CreateServiceClient<OrdemServicoServiceClient, IOrdemServicoService>();
+            ProdutoSC = CreateServiceClient<ProdutoServiceClient, IProdutoService>();
         }
 
         protected override void OnException(ExceptionContext context)

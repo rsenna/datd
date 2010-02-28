@@ -13,8 +13,8 @@ namespace Dataweb.Dilab.Web.Controllers
             var login = GetLogin();
             var viewModel = new HomeViewModel {Cliente = ClienteSC.FindByLogin(login)};
 
-            viewModel.EmProducao = OrdemServicoSC.GetCountEmProducao(viewModel.Cliente.CodCliente);
-            viewModel.Fechadas = OrdemServicoSC.GetCountFechadas(viewModel.Cliente.CodCliente);
+            viewModel.EmProducao = ProdutoSC.GetCountEmProducao(viewModel.Cliente.CodCliente);
+            viewModel.Fechadas = ProdutoSC.GetCountFechadas(viewModel.Cliente.CodCliente);
 
             return View(viewModel);
         }
