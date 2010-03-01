@@ -60,6 +60,11 @@ namespace Dataweb.Dilab.Model.Mock
             return rand * Math.Sign(maxValue);
         }
 
+        protected static int GenerateInt32(int minValue, int maxValue)
+        {
+            return GenerateInt32(maxValue - minValue) + minValue;
+        }
+
         protected static int GenerateInt32()
         {
             return GenerateInt32(int.MaxValue - 1);

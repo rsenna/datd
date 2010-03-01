@@ -5,7 +5,7 @@ using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class OrdemServicoDao : DataAccessBase<OrdemServico>, IOrdemServicoDao
+    public class PedidoDao : DataAccessBase<Pedido>, IPedidoDao
     {
         private const string SQL_STMT_INSERT = @"
             EXECUTE PROCEDURE STP_WEBORDEMSERVICO_ABRIR(
@@ -40,27 +40,27 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 @PCOD_ORDEMSERVICO
             )";
 
-        public override OrdemServico FetchDto(IDataRecord record)
+        public override Pedido FetchDto(IDataRecord record)
         {
             throw new NotImplementedException();
         }
 
-        public override OrdemServico[] FindAll()
+        public override Pedido[] FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public OrdemServico[] FindAll(int codCliente)
+        public Pedido[] FindAll(int codCliente)
         {
             throw new NotImplementedException();
         }
 
-        public override OrdemServico FindByPrimaryKey(object pk)
+        public override Pedido FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();
         }
 
-        public override OrdemServico Insert(OrdemServico dto)
+        public override Pedido Insert(Pedido dto)
         {
             Helper.UsingCommand(c =>
             {
@@ -69,19 +69,21 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 // Entrada:
                 Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, dto.CodCliente);
                 Helper.AddParameter(c, "@POBSERVACAO", DbType.String, dto.Observacao);
-                Helper.AddParameter(c, "@PREFERENCIA", DbType.String, dto.Referencia);
-                Helper.AddParameter(c, "@PDESCRICAOARMACAO", DbType.String, dto.DescricaoArmacao);
-                Helper.AddParameter(c, "@POBSERVACAOARMACAO", DbType.String, dto.ObservacaoArmacao);
-                Helper.AddParameter(c, "@PCOD_OTICALENTEMATERIAL", DbType.Int32, dto.CodMaterial);
-                Helper.AddParameter(c, "@PTIPOVT", DbType.Int32, dto.TipoVt);
-                Helper.AddParameter(c, "@PTA", DbType.Decimal, dto.Ta);
-                Helper.AddParameter(c, "@PMD", DbType.Decimal, dto.Md);
-                Helper.AddParameter(c, "@PDIAMETRO", DbType.Decimal, dto.Diametro);
-                Helper.AddParameter(c, "@POBSERVACAOLENTE", DbType.String, dto.ObservacaoLente);
-                Helper.AddParameter(c, "@PDP", DbType.Decimal, dto.Dp);
-                Helper.AddParameter(c, "@PAA", DbType.Decimal, dto.Aa);
-                Helper.AddParameter(c, "@PEIXO", DbType.Decimal, dto.Eixo);
-                Helper.AddParameter(c, "@PPONTE", DbType.Decimal, dto.Ponte);
+
+                // Parâmetros abaixo só são utilizados para OS, portanto vão em branco:
+                Helper.AddParameter(c, "@PREFERENCIA", DbType.String, DBNull.Value);
+                Helper.AddParameter(c, "@PDESCRICAOARMACAO", DbType.String, DBNull.Value);
+                Helper.AddParameter(c, "@POBSERVACAOARMACAO", DbType.String, DBNull.Value);
+                Helper.AddParameter(c, "@PCOD_OTICALENTEMATERIAL", DbType.Int32, DBNull.Value);
+                Helper.AddParameter(c, "@PTIPOVT", DbType.Int32, 0);
+                Helper.AddParameter(c, "@PTA", DbType.Decimal, DBNull.Value);
+                Helper.AddParameter(c, "@PMD", DbType.Decimal, DBNull.Value);
+                Helper.AddParameter(c, "@PDIAMETRO", DbType.Decimal, DBNull.Value);
+                Helper.AddParameter(c, "@POBSERVACAOLENTE", DbType.String, DBNull.Value);
+                Helper.AddParameter(c, "@PDP", DbType.Decimal, DBNull.Value);
+                Helper.AddParameter(c, "@PAA", DbType.Decimal, DBNull.Value);
+                Helper.AddParameter(c, "@PEIXO", DbType.Decimal, DBNull.Value);
+                Helper.AddParameter(c, "@PPONTE", DbType.Decimal, DBNull.Value);
 
                 // Saída:
                 var paramCodEmpresa = Helper.AddReturnParameter(c, "@RCOD_EMPRESA", DbType.Int32);
@@ -91,30 +93,30 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 c.ExecuteNonQuery();
 
                 dto.CodEmpresa = (int) paramCodEmpresa.Value;
-                dto.CodOrdemServico = (int) paramCodOs.Value;
+                dto.CodPedido = (int) paramCodOs.Value;
                 dto.Numero = (int) paramNumero.Value;
             });
 
             return dto;
         }
 
-        public virtual ServicoOrdemServico[] InsertItens(ServicoOrdemServico[] dtos)
+        public virtual ProdutoPedido[] InsertItens(ProdutoPedido[] dtos)
         {
             // Utilizando uma transação única; ou gravo todos os serviços, ou não gravo nenhum.
             Helper.UsingTransaction(t =>
             {
                 foreach (var dto in dtos)
                 {
-                    var servico = dto; // P/ evitar warning; objeto será acessado dentro do delegate.
+                    var item = dto; // P/ evitar warning; objeto será acessado dentro do delegate.
 
                     Helper.UsingCommand(t, c =>
                     {
                         c.CommandText = SQL_STMT_INSERT_ITEM;
 
-                        Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, servico.CodEmpresa);
-                        Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, servico.CodOrdemServico);
-                        Helper.AddParameter(c, "@PCOD_ITEM", DbType.String, servico.CodItem);
-                        Helper.AddParameter(c, "@PQUANTIDADE", DbType.Decimal, servico.Quantidade);
+                        Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, item.CodEmpresa);
+                        Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, item.CodPedido);
+                        Helper.AddParameter(c, "@PCOD_ITEM", DbType.String, item.CodItem);
+                        Helper.AddParameter(c, "@PQUANTIDADE", DbType.Decimal, item.Quantidade);
 
                         c.ExecuteNonQuery();
                     });
@@ -124,12 +126,12 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return dtos; // Deveriam ser atualizados a partir dos registros completos na base.
         }
 
-        public override OrdemServico Update(OrdemServico dto)
+        public override Pedido Update(Pedido dto)
         {
             throw new NotImplementedException();
         }
 
-        public OrdemServico Close(OrdemServico dto)
+        public Pedido Close(Pedido dto)
         {
             Helper.UsingCommand(c =>
             {
@@ -137,7 +139,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
                 // Entrada:
                 Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, dto.CodCliente);
-                Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, dto.CodOrdemServico);
+                Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, dto.CodPedido);
 
                 c.ExecuteNonQuery();
             });

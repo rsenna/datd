@@ -8,29 +8,29 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IProdutoService_FindAllByCodCliente_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByCodCliente" />
+  <wsdl:message name="IProdutoService_FindAllCompraByCodCliente_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByCodCliente" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllByCodCliente_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByCodClienteResponse" />
+  <wsdl:message name="IProdutoService_FindAllCompraByCodCliente_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByCodClienteResponse" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllByCodClienteAndReferencia_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByCodClienteAndReferencia" />
+  <wsdl:message name="IProdutoService_FindAllCompraByCodClienteAndReferencia_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByCodClienteAndReferencia" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllByCodClienteAndReferencia_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByCodClienteAndReferenciaResponse" />
+  <wsdl:message name="IProdutoService_FindAllCompraByCodClienteAndReferencia_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByCodClienteAndReferenciaResponse" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllByLogin_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByLogin" />
+  <wsdl:message name="IProdutoService_FindAllCompraByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByLogin" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllByLogin_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByLoginResponse" />
+  <wsdl:message name="IProdutoService_FindAllCompraByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByLoginResponse" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllByLoginAndReferencia_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByLoginAndReferencia" />
+  <wsdl:message name="IProdutoService_FindAllCompraByLoginAndReferencia_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByLoginAndReferencia" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllByLoginAndReferencia_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllByLoginAndReferenciaResponse" />
+  <wsdl:message name="IProdutoService_FindAllCompraByLoginAndReferencia_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllCompraByLoginAndReferenciaResponse" />
   </wsdl:message>
   <wsdl:message name="IProdutoService_FindAllFamilia_InputMessage">
     <wsdl:part name="parameters" element="tns:FindAllFamilia" />
@@ -81,21 +81,21 @@
     <wsdl:part name="parameters" element="tns:InsertPedidoResponse" />
   </wsdl:message>
   <wsdl:portType name="IProdutoService">
-    <wsdl:operation name="FindAllByCodCliente">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllByCodCliente" message="tns:IProdutoService_FindAllByCodCliente_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllByCodClienteResponse" message="tns:IProdutoService_FindAllByCodCliente_OutputMessage" />
+    <wsdl:operation name="FindAllCompraByCodCliente">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByCodCliente" message="tns:IProdutoService_FindAllCompraByCodCliente_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByCodClienteResponse" message="tns:IProdutoService_FindAllCompraByCodCliente_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FindAllByCodClienteAndReferencia">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllByCodClienteAndReferencia" message="tns:IProdutoService_FindAllByCodClienteAndReferencia_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllByCodClienteAndReferenciaResponse" message="tns:IProdutoService_FindAllByCodClienteAndReferencia_OutputMessage" />
+    <wsdl:operation name="FindAllCompraByCodClienteAndReferencia">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByCodClienteAndReferencia" message="tns:IProdutoService_FindAllCompraByCodClienteAndReferencia_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByCodClienteAndReferenciaResponse" message="tns:IProdutoService_FindAllCompraByCodClienteAndReferencia_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FindAllByLogin">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllByLogin" message="tns:IProdutoService_FindAllByLogin_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllByLoginResponse" message="tns:IProdutoService_FindAllByLogin_OutputMessage" />
+    <wsdl:operation name="FindAllCompraByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLogin" message="tns:IProdutoService_FindAllCompraByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLoginResponse" message="tns:IProdutoService_FindAllCompraByLogin_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FindAllByLoginAndReferencia">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllByLoginAndReferencia" message="tns:IProdutoService_FindAllByLoginAndReferencia_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllByLoginAndReferenciaResponse" message="tns:IProdutoService_FindAllByLoginAndReferencia_OutputMessage" />
+    <wsdl:operation name="FindAllCompraByLoginAndReferencia">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferencia" message="tns:IProdutoService_FindAllCompraByLoginAndReferencia_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferenciaResponse" message="tns:IProdutoService_FindAllCompraByLoginAndReferencia_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindAllFamilia">
       <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllFamilia" message="tns:IProdutoService_FindAllFamilia_InputMessage" />
@@ -132,8 +132,8 @@
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProdutoService" type="tns:IProdutoService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="FindAllByCodCliente">
-      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllByCodCliente" style="document" />
+    <wsdl:operation name="FindAllCompraByCodCliente">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllCompraByCodCliente" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -141,8 +141,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindAllByCodClienteAndReferencia">
-      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllByCodClienteAndReferencia" style="document" />
+    <wsdl:operation name="FindAllCompraByCodClienteAndReferencia">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllCompraByCodClienteAndReferencia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -150,8 +150,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindAllByLogin">
-      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllByLogin" style="document" />
+    <wsdl:operation name="FindAllCompraByLogin">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllCompraByLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -159,8 +159,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindAllByLoginAndReferencia">
-      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllByLoginAndReferencia" style="document" />
+    <wsdl:operation name="FindAllCompraByLoginAndReferencia">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferencia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

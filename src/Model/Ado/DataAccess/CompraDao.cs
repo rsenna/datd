@@ -5,7 +5,7 @@ using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class OrdemServicoQueryDao : DataAccessBase<OrdemServicoQuery>, IOrdemServicoQueryDao
+    public class CompraDao : DataAccessBase<Compra>, ICompraDao
     {
         private const string SQL_STMT_FIND_ALL = @"
             SELECT
@@ -17,7 +17,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RDATAHORAPREVISAO,
                 RDATAHORAEXPEDICAO,
                 RCODETAPA,
-                RAVISOMENSAGEM
+                RAVISOMENSAGEM,
+                RTIPO
             FROM
                 STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE)
         ";
@@ -47,39 +48,40 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 (PESS.cod_pessoa = @PCOD_CLIENTE)
         ";
 
-        public override OrdemServicoQuery FetchDto(IDataRecord record)
+        public override Compra FetchDto(IDataRecord record)
         {
-            return new OrdemServicoQuery {
+            return new Compra {
                 CodEmpresa = Helper.ReadInt32(record, "RCODEMPRESA").Value,
                 CodTransacao = Helper.ReadInt32(record, "RCODTRANSACAO").Value,
-                NumeroOrdemServico = Helper.ReadInt32(record, "RNUMEROORDEMSERVICO").Value,
+                Numero = Helper.ReadInt32(record, "RNUMEROORDEMSERVICO").Value,
                 Referencia = Helper.ReadString(record, "RREFERENCIA"),
                 Emissao = Helper.ReadDateTime(record, "RDATAHORAEMISSAO").Value,
                 Previsao = Helper.ReadDateTime(record, "RDATAHORAPREVISAO"),
                 Expedicao = Helper.ReadDateTime(record, "RDATAHORAEXPEDICAO"),
                 Etapa = (TipoEtapa)Helper.ReadInt32(record, "RCODETAPA"),
-                AvisoMensagem = Helper.ReadString(record, "RAVISOMENSAGEM")
+                AvisoMensagem = Helper.ReadString(record, "RAVISOMENSAGEM"),
+                Tipo = (TipoCompra)Helper.ReadInt32(record, "RTIPO")
             };
         }
 
-        public override OrdemServicoQuery[] FindAll()
+        public override Compra[] FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public override OrdemServicoQuery FindByPrimaryKey(object pk)
+        public override Compra FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();
         }
 
-        public override OrdemServicoQuery Update(OrdemServicoQuery dto)
+        public override Compra Update(Compra dto)
         {
             throw new NotImplementedException();
         }
 
-        public OrdemServicoQuery[] FindAll(int codCliente)
+        public Compra[] FindAll(int codCliente)
         {
-            OrdemServicoQuery[] result = null;
+            Compra[] result = null;
 
             Helper.UsingCommand(c =>
             {
@@ -115,7 +117,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return ExecuteScalarInt32(SQL_STMT_COUNT_EM_PRODUCAO, codCliente);
         }
 
-        public override OrdemServicoQuery Insert(OrdemServicoQuery dto)
+        public override Compra Insert(Compra dto)
         {
             throw new NotImplementedException();
         }

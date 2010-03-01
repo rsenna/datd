@@ -7,7 +7,7 @@
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
     <link href="<%= ResolveUrl(Html.GetCssFilePath(ViewData["Tenant.Name"].ToString())) %>" rel="stylesheet" type="text/css" />
 
-    <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery-1.3.2.js") %>"></script>
+    <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery-1.4.2.js") %>"></script>
     <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
     <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.autoNumeric-1.0.2.js") %>"></script>
 

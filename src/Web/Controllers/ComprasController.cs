@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel;
 using System.Web.Mvc;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -17,13 +18,16 @@ namespace Dataweb.Dilab.Web.Controllers
             InitWcf();
 
             var login = GetLogin();
-            var items = string.IsNullOrEmpty(referencia)?
-                ProdutoSC.FindAllByLogin(login) :
-                ProdutoSC.FindAllByLoginAndReferencia(login, referencia);
+            var compras = string.IsNullOrEmpty(referencia)?
+                ProdutoSC.FindAllCompraByLogin(login) :
+                ProdutoSC.FindAllCompraByLoginAndReferencia(login, referencia);
 
-            ViewData.Model = items;
+            var viewModel = new ComprasIndex {
+                OrdensServico = compras.Where(item => item.Tipo == TipoCompra.OrdemServico),
+                Pedidos = compras.Where(item => item.Tipo == TipoCompra.Pedido)
+            };
 
-            return View();
+            return View(viewModel);
         }
 
         [Authorize]
@@ -35,8 +39,7 @@ namespace Dataweb.Dilab.Web.Controllers
             var familias = ProdutoSC.FindAllFamilia();
             var materiais = ProdutoSC.FindAllMaterial();
 
-            var viewModel = new ComprasNovaOs
-            {
+            var viewModel = new ComprasNovaOs {
                 Familias = familias,
                 Materiais = materiais
             };
@@ -167,10 +170,7 @@ namespace Dataweb.Dilab.Web.Controllers
 
             var pedido = new Pedido {
                 CodCliente = GetCodCliente(),
-                Emissao = DateTime.Now,
-                EnviadoEmail = false,
                 Observacao = viewModel.Observacao,
-                Status = StatusPedido.Aberto
             };
 
             var produtos = new List<ProdutoPedido>();

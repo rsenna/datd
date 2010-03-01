@@ -30,7 +30,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
         {
             return new Produto {
                 CodItem = GenerateCode(10),
-                Obrigatorio = GenerateBoolean(),
+                CodBarra = GenerateCode(10),
                 Descricao = GenerateName(4),
             };
         }

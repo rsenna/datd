@@ -5,7 +5,7 @@ to use a different color start by replacing all instances of
 ----------------------------------------------------------*/
 body
 {
-    background-color: #5c87b2;
+    background-color: #9D2C2C;
     font-size: .75em;
     font-family: Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -132,7 +132,7 @@ page width. Or, you can specify an exact pixel width. */
 ----------------------------------------------------------*/
 ul#menu
 {
-    border-bottom: 1px #5C87B2 solid;
+    border-bottom: 1px Window solid;
     padding: 0 0 2px;
     position: relative;
     margin: 0;
@@ -316,8 +316,9 @@ div#title
     color: #ff0000;
 }
 
+.template { display: none; }
 
-.numeric { float:left; TEXT-ALIGN: right; } /* jquery.autoNumeric-1.0.2.js */
+.numeric { float:left; text-align: right; } /* jquery.autoNumeric-1.0.2.js */
 
 /* Home */
 
@@ -326,9 +327,9 @@ div#divIdentificacao { float:left; width:300px; }
 div#divReferencia { float:left; width:300px; }
 div#divResumo { float:left; width:300px; }
 
-/* OS/Nova.aspx */
+/* Compras/NovaOs.aspx */
 
-form#formNovaOs { width: 700px; }
+form#frmNovaOs { width: 700px; }
 
 div#divLentes { position:relative; }
 div#divInfo { position:relative; }
@@ -364,9 +365,40 @@ div#divServicosOE { padding:10px; }
 th 
 {
     border-left:1px solid #CCCCCC;
-    height:24px;
     padding:5px;
     text-align: center;
 }
 
 td { text-align: center; }
+
+tr.summary td { border-left: hidden; border-right: hidden; border-bottom: hidden; font-style: italic; }
+.title { font-weight: bold; }
+
+/* Compras/NovoPedido.aspx */
+div.container {
+	border-style: inset;
+	border-width: 1px;
+	border-color: Black;
+	background-color: ButtonFace;
+	padding: 10px;
+	width: 700px;
+}
+
+div#divProdutosDisponiveis div { float: left; margin-right: 10px; }
+div#divProdutosDisponiveis select { width: 253px; }
+div#divProdutosDisponiveis input#itxFiltroQuantidade { width: 80px; }
+div#divProdutosDisponiveis input#ibtAdicionar { height: 40px; }
+
+div#divItens table { width: 100%; }
+div#divItens td { background-color: window; }
+div#divItens td.tdExcluir { width: 90px; }
+div#divItens input.itxFamilia { width: 243px; border-style: none; }
+div#divItens input.itxProduto { width: 243px; border-style: none; }
+div#divItens input.itxQtd { width: 70px; text-align: right; }
+
+textarea#txaObservacoes { width: 716px; }
+input#ibtFinalizar { width: 723px; }
+
+table#tabItens { display: none; }
+
+div#divCompras table td { width: 100px; }

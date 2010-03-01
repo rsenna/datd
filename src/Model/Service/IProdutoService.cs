@@ -7,16 +7,16 @@ namespace Dataweb.Dilab.Model.Service
     public interface IProdutoService : IService
     {
         [OperationContract]
-        OrdemServicoQuery[] FindAllByCodCliente(int codCliente);
+        Compra[] FindAllCompraByCodCliente(int codCliente);
 
         [OperationContract]
-        OrdemServicoQuery[] FindAllByCodClienteAndReferencia(int codCliente, string referencia);
+        Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia);
 
         [OperationContract]
-        OrdemServicoQuery[] FindAllByLogin(string login);
+        Compra[] FindAllCompraByLogin(string login);
 
         [OperationContract]
-        OrdemServicoQuery[] FindAllByLoginAndReferencia(string login, string referencia);
+        Compra[] FindAllCompraByLoginAndReferencia(string login, string referencia);
 
         [OperationContract]
         Familia[] FindAllFamilia();

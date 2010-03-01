@@ -5,6 +5,7 @@ namespace Dataweb.Dilab.Model.DataAccess
     public interface IPedidoDao : IDataAccessBase<Pedido>
     {
         Pedido[] FindAll(int codCliente);
-        ProdutoPedido[] InsertProdutos(ProdutoPedido[] dtos);
+        ProdutoPedido[] InsertItens(ProdutoPedido[] dtos);
+        Pedido Close(Pedido dto);
     }
 }

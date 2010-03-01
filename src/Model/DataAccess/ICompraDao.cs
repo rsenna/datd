@@ -2,9 +2,9 @@
 
 namespace Dataweb.Dilab.Model.DataAccess
 {
-    public interface IOrdemServicoQueryDao : IDataAccessBase<OrdemServicoQuery>
+    public interface ICompraDao : IDataAccessBase<Compra>
     {
-        OrdemServicoQuery[] FindAll(int codCliente);
+        Compra[] FindAll(int codCliente);
         int GetCountFechadas(int codCliente);
         int GetCountEmProducao(int codCliente);
     }

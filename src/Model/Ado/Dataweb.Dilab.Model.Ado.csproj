@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CA392110-894D-432E-A465-B618032324B9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -49,13 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessBase.cs" />
+    <Compile Include="DataAccess\CompraDao.cs" />
     <Compile Include="DataAccess\MaterialDao.cs" />
     <Compile Include="DataAccess\FamiliaDao.cs" />
     <Compile Include="DataAccess\OrdemServicoDao.cs" />
     <Compile Include="DataAccess\OrdemServicoLenteDao.cs" />
-    <Compile Include="DataAccess\OrdemServicoQueryDao.cs" />
     <Compile Include="DataAccess\PacoteCreditoDao.cs" />
     <Compile Include="DataAccess\PacoteHistoricoDao.cs" />
+    <Compile Include="DataAccess\PedidoDao.cs" />
+    <Compile Include="DataAccess\ProdutoDao.cs" />
     <Compile Include="DataAccess\ServicoDao.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

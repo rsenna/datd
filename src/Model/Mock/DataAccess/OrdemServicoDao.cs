@@ -27,9 +27,14 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return result;
         }
 
-        public ServicoOrdemServico[] InsertServicos(ServicoOrdemServico[] dtos)
+        public ServicoOrdemServico[] InsertItens(ServicoOrdemServico[] dtos)
         {
             return dtos;
+        }
+
+        public OrdemServico Close(OrdemServico dto)
+        {
+            return dto;
         }
     }
 }

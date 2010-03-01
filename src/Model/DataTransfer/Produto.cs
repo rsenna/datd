@@ -9,7 +9,7 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public string CodItem { get; set; }
 
         [DataMember]
-        public bool Obrigatorio { get; set; }
+        public string CodBarra { get; set; }
 
         [DataMember]
         public string Descricao { get; set; }

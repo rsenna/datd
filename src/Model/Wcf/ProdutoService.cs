@@ -7,7 +7,7 @@ namespace Dataweb.Dilab.Model.Wcf
 {
     public class ProdutoService : IProdutoService
     {
-        private IOrdemServicoQueryDao ordemServicoQueryDao;
+        private ICompraDao compraDao;
         private IFamiliaDao familiaDao;
         private IMaterialDao materialDao;
         private IServicoDao servicoDao;
@@ -28,16 +28,16 @@ namespace Dataweb.Dilab.Model.Wcf
             return cliente.CodCliente;
         }
 
-        public OrdemServicoQuery[] FindAllByCodCliente(int codCliente)
+        public Compra[] FindAllCompraByCodCliente(int codCliente)
         {
-            ordemServicoQueryDao = DaoFactory.CreateDao<IOrdemServicoQueryDao>();
-            return ordemServicoQueryDao.FindAll(codCliente);
+            compraDao = DaoFactory.CreateDao<ICompraDao>();
+            return compraDao.FindAll(codCliente);
         }
 
-        public OrdemServicoQuery[] FindAllByCodClienteAndReferencia(int codCliente, string referencia)
+        public Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia)
         {
-            var total = FindAllByCodCliente(codCliente);
-            var parcial = new List<OrdemServicoQuery>();
+            var total = FindAllCompraByCodCliente(codCliente);
+            var parcial = new List<Compra>();
 
             foreach (var os in total)
             {
@@ -50,14 +50,14 @@ namespace Dataweb.Dilab.Model.Wcf
             return parcial.ToArray();
         }
 
-        public OrdemServicoQuery[] FindAllByLogin(string login)
+        public Compra[] FindAllCompraByLogin(string login)
         {
-            return FindAllByCodCliente(GetCodClienteByLogin(login));
+            return FindAllCompraByCodCliente(GetCodClienteByLogin(login));
         }
 
-        public OrdemServicoQuery[] FindAllByLoginAndReferencia(string login, string referencia)
+        public Compra[] FindAllCompraByLoginAndReferencia(string login, string referencia)
         {
-            return FindAllByCodClienteAndReferencia(GetCodClienteByLogin(login), referencia);
+            return FindAllCompraByCodClienteAndReferencia(GetCodClienteByLogin(login), referencia);
         }
 
         public Familia[] FindAllFamilia()
@@ -74,14 +74,14 @@ namespace Dataweb.Dilab.Model.Wcf
 
         public int GetCountFechadas(int codCliente)
         {
-            ordemServicoQueryDao = DaoFactory.CreateDao<IOrdemServicoQueryDao>();
-            return ordemServicoQueryDao.GetCountFechadas(codCliente);
+            compraDao = DaoFactory.CreateDao<ICompraDao>();
+            return compraDao.GetCountFechadas(codCliente);
         }
 
         public int GetCountEmProducao(int codCliente)
         {
-            ordemServicoQueryDao = DaoFactory.CreateDao<IOrdemServicoQueryDao>();
-            return ordemServicoQueryDao.GetCountEmProducao(codCliente);
+            compraDao = DaoFactory.CreateDao<ICompraDao>();
+            return compraDao.GetCountEmProducao(codCliente);
         }
 
         public Servico[] FindAllServico(int codFamilia)
@@ -128,7 +128,10 @@ namespace Dataweb.Dilab.Model.Wcf
             ordemServicoLenteDao.Insert(dto.LenteOe);
 
             // Grava os serviços que serão executados na OS:
-            ordemServicoDao.InsertServicos(dto.Servicos);
+            ordemServicoDao.InsertItens(dto.Servicos);
+
+            // Conclui a ordem de serviço:
+            ordemServicoDao.Close(dto.OrdemServico);
 
             return dto;
         }
@@ -148,7 +151,7 @@ namespace Dataweb.Dilab.Model.Wcf
             }
 
             // Grava os produtos registrados no pedido:
-            pedidoDao.InsertProdutos(dto.Produtos);
+            pedidoDao.InsertItens(dto.Produtos);
 
             return dto;
         }

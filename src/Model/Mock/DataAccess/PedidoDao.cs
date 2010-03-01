@@ -27,9 +27,14 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return result;
         }
 
-        public ProdutoPedido[] InsertProdutos(ProdutoPedido[] dtos)
+        public ProdutoPedido[] InsertItens(ProdutoPedido[] dtos)
         {
             return dtos;
+        }
+
+        public Pedido Close(Pedido dto)
+        {
+            return dto;
         }
     }
 }

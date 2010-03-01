@@ -396,6 +396,9 @@ div#divItens input.itxFamilia { width: 243px; border-style: none; }
 div#divItens input.itxProduto { width: 243px; border-style: none; }
 div#divItens input.itxQtd { width: 70px; text-align: right; }
 
-textarea#txaObservacoes { width: 715px; }
+textarea#txaObservacoes { width: 716px; }
+input#ibtFinalizar { width: 723px; }
 
 table#tabItens { display: none; }
+
+div#divCompras table td { width: 100px; }

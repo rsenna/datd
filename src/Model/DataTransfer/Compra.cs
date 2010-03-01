@@ -12,8 +12,14 @@ namespace Dataweb.Dilab.Model.DataTransfer
         Finalizada = 4
     }
 
+    public enum TipoCompra
+    {
+        Pedido = 1,
+        OrdemServico = 2
+    }
+
     [DataContract]
-    public class OrdemServicoQuery : DataTransferBase
+    public class Compra : DataTransferBase
     {
         [DataMember]
         public int CodEmpresa { get; set; } // RCODEMPRESA
@@ -22,7 +28,7 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public int CodTransacao { get; set; } // RCODTRANSACAO
 
         [DataMember]
-        public int NumeroOrdemServico { get; set; } // RNUMEROORDEMSERVICO
+        public int Numero { get; set; } // RNUMEROORDEMSERVICO
 
         [DataMember]
         public string Referencia { get; set; } // RREFERENCIA
@@ -41,5 +47,8 @@ namespace Dataweb.Dilab.Model.DataTransfer
 
         [DataMember]
         public string AvisoMensagem { get; set; } // RAVISOMENSAGEM
+
+        [DataMember]
+        public TipoCompra Tipo { get; set; }
     }
 }
