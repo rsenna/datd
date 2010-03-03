@@ -29,7 +29,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Servico[] result = null;
 
-            Helper.UsingCommand(c => {
+            Helper.UsingCommand(Connection, c => {
                 c.CommandText = SQL_STMT_FIND_PRODUTO_SERVICO;
                 Helper.AddParameter(c, "@COD_PRODUTOFAMILIA", DbType.Int32, codFamilia);
                 result = FetchDtos(c);

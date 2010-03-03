@@ -22,7 +22,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             PacoteHistorico[] result = null;
 
-            Helper.UsingCommand(c =>
+            Helper.UsingCommand(Connection, c =>
             {
                 c.CommandText = SQL_STMT_FIND_BY_COD_CLIENTE_AND_COD_PACOTE;
                 Helper.AddParameter(c, "@PCODCLIENTE", DbType.Int32, codCliente);

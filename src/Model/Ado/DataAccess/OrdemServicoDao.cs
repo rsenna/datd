@@ -62,7 +62,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override OrdemServico Insert(OrdemServico dto)
         {
-            Helper.UsingCommand(c =>
+            Helper.UsingCommand(Connection, c =>
             {
                 c.CommandText = SQL_STMT_INSERT;
 
@@ -100,26 +100,22 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public virtual ServicoOrdemServico[] InsertItens(ServicoOrdemServico[] dtos)
         {
-            // Utilizando uma transação única; ou gravo todos os serviços, ou não gravo nenhum.
-            Helper.UsingTransaction(t =>
+            foreach (var dto in dtos)
             {
-                foreach (var dto in dtos)
+                var servico = dto; // P/ evitar warning; objeto será acessado dentro do delegate.
+
+                Helper.UsingCommand(Connection, c =>
                 {
-                    var servico = dto; // P/ evitar warning; objeto será acessado dentro do delegate.
+                    c.CommandText = SQL_STMT_INSERT_ITEM;
 
-                    Helper.UsingCommand(t, c =>
-                    {
-                        c.CommandText = SQL_STMT_INSERT_ITEM;
+                    Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, servico.CodEmpresa);
+                    Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, servico.CodOrdemServico);
+                    Helper.AddParameter(c, "@PCOD_ITEM", DbType.String, servico.CodItem);
+                    Helper.AddParameter(c, "@PQUANTIDADE", DbType.Decimal, servico.Quantidade);
 
-                        Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, servico.CodEmpresa);
-                        Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, servico.CodOrdemServico);
-                        Helper.AddParameter(c, "@PCOD_ITEM", DbType.String, servico.CodItem);
-                        Helper.AddParameter(c, "@PQUANTIDADE", DbType.Decimal, servico.Quantidade);
-
-                        c.ExecuteNonQuery();
-                    });
-                }
-            });
+                    c.ExecuteNonQuery();
+                });
+            }
 
             return dtos; // Deveriam ser atualizados a partir dos registros completos na base.
         }
@@ -131,8 +127,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public OrdemServico Close(OrdemServico dto)
         {
-            Helper.UsingCommand(c =>
-            {
+            Helper.UsingCommand(Connection, c => {
                 c.CommandText = SQL_STMT_CLOSE;
 
                 // Entrada:

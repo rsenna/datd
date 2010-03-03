@@ -31,27 +31,19 @@ namespace Dataweb.Dilab.Model
             var className = interfaceName.Remove(0, 1);
 
             var fullClassName = string.Format("{0}.DataAccess.{1}", AssemblyName, className);
+            var objectHandle = Activator.CreateInstance(AssemblyName, fullClassName);
 
-            try
+            if (objectHandle != null)
             {
-                var objectHandle = Activator.CreateInstance(AssemblyName, fullClassName);
+                var instance = objectHandle.Unwrap();
 
-                if (objectHandle != null)
+                if (instance != null && instance is T)
                 {
-                    var instance = objectHandle.Unwrap();
-
-                    if (instance != null && instance is T)
-                    {
-                        return (T) instance;
-                    }
+                    return (T) instance;
                 }
             }
-            catch(Exception ex)
-            {
-                return default(T);
-            }
 
-            return default(T);
+            throw new ArgumentException("Tipo de DAO desconhecido.", interfaceName);
         }
     }
 }

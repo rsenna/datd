@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using System.ServiceModel;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 using Dataweb.Dilab.Model.Service;
+using System.Transactions;
 
 namespace Dataweb.Dilab.Model.Wcf
 {
+    [ServiceBehavior(TransactionIsolationLevel = IsolationLevel.ReadCommitted)]
     public class ProdutoService : IProdutoService
     {
         private ICompraDao compraDao;
@@ -21,6 +24,7 @@ namespace Dataweb.Dilab.Model.Wcf
             DaoFactory.AssemblyName = ConfigHelper.ModelAssemblyName;
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         private static int GetCodClienteByLogin(string login)
         {
             var clienteService = new ClienteService(); // Obs.: a instância, neste caso, é LOCAL (e não remota).
@@ -28,6 +32,7 @@ namespace Dataweb.Dilab.Model.Wcf
             return cliente.CodCliente;
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Compra[] FindAllCompraByCodCliente(int codCliente)
         {
             compraDao = DaoFactory.CreateDao<ICompraDao>();
@@ -50,53 +55,61 @@ namespace Dataweb.Dilab.Model.Wcf
             return parcial.ToArray();
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Compra[] FindAllCompraByLogin(string login)
         {
             return FindAllCompraByCodCliente(GetCodClienteByLogin(login));
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Compra[] FindAllCompraByLoginAndReferencia(string login, string referencia)
         {
             return FindAllCompraByCodClienteAndReferencia(GetCodClienteByLogin(login), referencia);
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Familia[] FindAllFamilia()
         {
             familiaDao = DaoFactory.CreateDao<IFamiliaDao>();
             return familiaDao.FindAll();
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Material[] FindAllMaterial()
         {
             materialDao = DaoFactory.CreateDao<IMaterialDao>();
             return materialDao.FindAll();
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public int GetCountFechadas(int codCliente)
         {
             compraDao = DaoFactory.CreateDao<ICompraDao>();
             return compraDao.GetCountFechadas(codCliente);
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public int GetCountEmProducao(int codCliente)
         {
             compraDao = DaoFactory.CreateDao<ICompraDao>();
             return compraDao.GetCountEmProducao(codCliente);
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Servico[] FindAllServico(int codFamilia)
         {
             servicoDao = DaoFactory.CreateDao<IServicoDao>();
             return servicoDao.FindAll(codFamilia);
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Produto[] FindAllProduto(int codFamilia)
         {
             produtoDao = DaoFactory.CreateDao<IProdutoDao>();
             return produtoDao.FindAll(codFamilia);
         }
 
-        // TODO: definição da transação deveria ser aqui - InsertOrdemServico é atômico, apesar de se constituir de pelo menos 3 gravações distintas. Avaliar transações em WCF (via atributos e/ou Web.Config).
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public OrdemServicoOtica InsertOrdemServico(OrdemServicoOtica dto)
         {
             ordemServicoDao = DaoFactory.CreateDao<IOrdemServicoDao>();
@@ -116,7 +129,7 @@ namespace Dataweb.Dilab.Model.Wcf
                 servico.CodEmpresa = dto.OrdemServico.CodEmpresa;
             }
 
-             // TODO: Por enquanto a descrição da lente vai ser igual ao nome da família - isso irá mudar no futuro.
+            // TODO: Por enquanto a descrição da lente vai ser igual ao nome da família - isso irá mudar no futuro.
             familiaDao = DaoFactory.CreateDao<IFamiliaDao>();
             var familiaOd = familiaDao.FindByPrimaryKey(dto.LenteOd.CodFamilia);
             var familiaOe = familiaDao.FindByPrimaryKey(dto.LenteOe.CodFamilia);
@@ -136,6 +149,7 @@ namespace Dataweb.Dilab.Model.Wcf
             return dto;
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Pedido InsertPedido(Pedido dto)
         {
             pedidoDao = DaoFactory.CreateDao<IPedidoDao>();
@@ -152,7 +166,7 @@ namespace Dataweb.Dilab.Model.Wcf
 
             // Grava os produtos registrados no pedido:
             pedidoDao.InsertItens(dto.Produtos);
-
+ 
             return dto;
         }
     }

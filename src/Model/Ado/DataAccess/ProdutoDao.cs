@@ -42,7 +42,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Produto[] result = null;
 
-            Helper.UsingCommand(c =>
+            Helper.UsingCommand(Connection, c =>
             {
                 c.CommandText = SQL_STMT_FIND_ALL_BY_COD_FAMILIA;
                 Helper.AddParameter(c, "@COD_FAMILIA", DbType.Int32, codFamilia);

@@ -45,7 +45,7 @@ namespace Dataweb.Dilab.Model.Ado
             return parameter;
         }
 
-        public static void UsingConnection(Action<DbConnection> action)
+        public static DbConnection OpenConnection()
         {
             var connectionString = GetConnectionString();
             var factory = DbProviderFactories.GetFactory(connectionString.ProviderName);
@@ -55,41 +55,23 @@ namespace Dataweb.Dilab.Model.Ado
                 throw new ConfigurationErrorsException(String.Format("Could not obtain a factory for provider '{0}'.", connectionString.ProviderName));
             }
 
-            using (var connection = factory.CreateConnection())
+            var connection = factory.CreateConnection();
+
+            if (connection == null)
             {
-                if (connection == null)
-                {
-                    throw new Exception("Could not obtain a connection from DB factory.");
-                }
-
-                connection.ConnectionString = connectionString.ConnectionString;
-                connection.Open();
-
-                action(connection);
+                throw new Exception("Could not obtain a connection from DB factory.");
             }
+
+            connection.ConnectionString = connectionString.ConnectionString;
+            connection.Open();
+
+            return connection;
         }
 
-        public static void UsingTransaction(Action<DbTransaction> action)
+        public static void UsingCommand(DbConnection c, Action<DbCommand> action)
         {
-            UsingConnection(c => {
-                using (var transaction = c.BeginTransaction())
-                {
-                    action(transaction);
-                    transaction.Commit();
-                }
-            });
-        }
-
-        public static void UsingCommand(Action<DbCommand> action)
-        {
-            UsingTransaction(t => UsingCommand(t, action));
-        }
-
-        public static void UsingCommand(DbTransaction t, Action<DbCommand> action)
-        {
-            using (var command = t.Connection.CreateCommand())
+            using (var command = c.CreateCommand())
             {
-                command.Transaction = t;
                 action(command);
             }
         }

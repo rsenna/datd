@@ -79,7 +79,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Cliente result = null;
 
-            Helper.UsingCommand(c => {
+            Helper.UsingCommand(Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_IDENTIFICADOR;
 
                 Helper.AddParameter(c, "@IDENTIFICADOR", DbType.Int32, identificador);
@@ -94,7 +94,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Cliente result = null;
 
-            Helper.UsingCommand(c => {
+            Helper.UsingCommand(Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_CNPJ;
 
                 Helper.AddParameter(c, "@CNPJ", DbType.String, cnpj);
@@ -114,7 +114,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Cliente result = null;
 
-            Helper.UsingCommand(c => {
+            Helper.UsingCommand(Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
                 Helper.AddParameter(c, "@COD_CLIENTE", DbType.Int32, primaryKey);
                 result = FetchDto(c);
@@ -132,7 +132,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         /// </remarks>
         public override Cliente Update(Cliente dto)
         {
-            Helper.UsingCommand(c => {
+            Helper.UsingCommand(Connection, c => {
                 c.CommandText = SQL_STMT_UPDATE;
 
                 Helper.AddParameter(c, "@EMAILNOTIFICACAO", DbType.String, dto.EmailNotificacao);

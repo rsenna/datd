@@ -83,7 +83,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Compra[] result = null;
 
-            Helper.UsingCommand(c =>
+            Helper.UsingCommand(Connection, c =>
             {
                 c.CommandText = SQL_STMT_FIND_ALL;
                 Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
@@ -97,8 +97,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             var result = 0;
 
-            Helper.UsingCommand(c =>
-            {
+            Helper.UsingCommand(Connection, c => {
                 c.CommandText = sqlStmt;
                 Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
                 result = Convert.ToInt32(c.ExecuteScalar());
