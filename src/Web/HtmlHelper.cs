@@ -28,10 +28,10 @@ namespace Dataweb.Dilab.Web
             return helper.Encode(str);
         }
 
-        public static string GetCssFilePath(this Mvc.HtmlHelper helper, string tenant)
+        public static string GetThemeCssFilePath(this Mvc.HtmlHelper helper, string tenant)
         {
             const string BASE_URL = "~/Content";
-            const string FILE_NAME = "Site.css";
+            const string FILE_NAME = "Theme.css";
 
             var fileUrl = string.Format("{0}/{1}/{2}", BASE_URL, tenant, FILE_NAME);
             var filePath = HttpContext.Current.Request.MapPath(fileUrl);

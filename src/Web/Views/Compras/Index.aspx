@@ -4,7 +4,7 @@
 <%@ Import Namespace="Dataweb.Dilab.Model.DataTransfer"%>
 
 <asp:Content ID="indexTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    Minhas Compras
+    Dilab Online - Compras - Minhas Compras
 </asp:Content>
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">

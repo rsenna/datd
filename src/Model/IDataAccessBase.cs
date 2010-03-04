@@ -1,6 +1,9 @@
 ﻿namespace Dataweb.Dilab.Model
 {
-    public interface IDataAccessBase {}
+    public interface IDataAccessBase
+    {
+        ISession Session { get; set; }
+    }
 
     public interface IDataAccessBase<T> : IDataAccessBase
         where T: DataTransferBase

@@ -2,7 +2,7 @@
 <%@ Import Namespace="Dataweb.Dilab.Web.Models"%>
 
 <asp:Content ID="indexTitle" ContentPlaceHolderID="TitleContent" runat="server">
-    Bem-vindo ao Dilab Online
+    Dilab Online - Principal
 </asp:Content>
 
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">

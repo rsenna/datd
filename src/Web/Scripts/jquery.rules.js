@@ -84,7 +84,7 @@
                     }
 
                     checkVisibilityServicos();
-                    
+
                     if (force) {
                         atualizarServicosFamilia(tags.thatSelect, false);
                     }
@@ -166,10 +166,7 @@
             var trSelector = 'tr#tr_' + genId(produtoVal);
             var tr = $(trSelector);
 
-            if (tr.length) {
-                alert($('input#alertProduto').val());
-                $(trSelector + ' input.itxQtd').focus();
-            } else {
+            if (!tr.length) {
                 var table = $('table#tabItens');
                 var message = $('span#message');
                 var familiaTxt = $('select#selFiltroFamilia option:selected').text();
@@ -189,41 +186,60 @@
                 table.show();
                 message.hide();
             }
+
+            $(trSelector + ' input.itxQtd')
+                .focus()
+                .parent()
+                    .css('background-color', '#ffffc0')
+                    .siblings().css('background-color', '#ffffc0');
         }
     }
 
+    /* Para usar imagem de espera nas chamadas ajax (ajaxLoaderGifUrl deve ser definido na página, antes de incluir jquery.rules.js, com o caminho da imagem):
+
     $('body').append('<div id="ajaxBusy"><p><img src="' + ajaxLoaderGifUrl + '"></p></div>');
     $('#ajaxBusy').css({
-        display: 'none',
-        margin: '0px',
-        padding: '0px',
-        position: 'absolute',
-        left: '3px',
-        top: '3px',
-        width: 'auto'
+    display: 'none',
+    margin: '0px',
+    padding: '0px',
+    position: 'absolute',
+    left: '3px',
+    top: '3px',
+    width: 'auto'
     });
-    $(document).ajaxStart(function() {
+    */
+
+    $(this).ajaxStart(function() {
         document.body.style.cursor = "wait";
-        $('#ajaxBusy').show();
+        // $('#ajaxBusy').show();
     }).ajaxStop(function() {
-        $('#ajaxBusy').hide();
+        // $('#ajaxBusy').hide();
         document.body.style.cursor = "default";
     });
 
     $('input.numeric').each(function() {
         $(this).css('text-align', 'right');
-    });
-
-    $('input.numeric').focus(function() {
+    }).focus(function() {
         $(this).autoNumeric();
     });
+
+    // MENU:
+    $("ul.subnav").parent().append("<span></span>");
+    $("ul.topnav li span").click(function() {
+        $(this).parent().find("ul.subnav").slideDown('fast').show();
+        $(this).parent().hover(
+            function() {},
+            function() { $(this).parent().find("ul.subnav").slideUp('slow'); }
+        );
+    }).hover(
+        function() { $(this).addClass("subhover"); },
+        function() { $(this).removeClass("subhover"); }
+    );
 
     // NovaOs.aspx:
     $('form#frmNovaOs').each(function() {
         atualizarServicosFamilia('#familiaOD', true);
-    });
-
-    $('form#frmNovaOs').validate({
+    }).validate({
         messages: {
             eixoOD: 'Valor máximo = 180'
         },
@@ -246,13 +262,31 @@
     $('select#selFiltroFamilia').change(function() {
         atualizarProdutosFamilia(false);
     });
-    
+
     $('input#ibtAdicionar').click(function() {
         adicionarProduto();
     });
-    
+
     $('a.linkExcluir').live('click', function() {
         $(this).parent().parent().remove();
         verificarListagemProdutos();
+    });
+
+    $('input.itxQtd').live('focusin', function() {
+        $(this).parent()
+            .css('background-color', '#ffffc0')
+            .siblings().css('background-color', '#ffffc0');
+    }).live('focusout', function() {
+        $(this).parent()
+            .css('background-color', 'window')
+            .siblings().css('background-color', 'window');
+    });
+
+    $('table#tabItens td').live('click', function() {
+        $(this)
+            .css('background-color', '#ffffc0')
+            .siblings()
+                .css('background-color', '#ffffc0')
+                .find('input.itxQtd').focus();
     });
 });

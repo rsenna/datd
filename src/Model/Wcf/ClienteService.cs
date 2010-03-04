@@ -6,16 +6,26 @@ using Dataweb.Dilab.Model.Service;
 
 namespace Dataweb.Dilab.Model.Wcf
 {
-    [ServiceBehavior(TransactionIsolationLevel = IsolationLevel.ReadCommitted)]
+    [ServiceBehavior(TransactionIsolationLevel = IsolationLevel.ReadCommitted, InstanceContextMode = InstanceContextMode.PerSession)]
     public class ClienteService : IClienteService
     {
-        private IClienteDao clienteDao;
-        private IPacoteCreditoDao pacoteCreditoDao;
-        private IPacoteHistoricoDao pacoteHistoricoDao;
+        private readonly ISession session;
 
         public ClienteService()
         {
-            DaoFactory.AssemblyName = ConfigHelper.ModelAssemblyName;
+            DataAccessFactory.AssemblyName = ConfigHelper.ModelAssemblyName;
+            session = DataAccessFactory.CreateSession();
+        }
+
+        internal ClienteService(ISession session)
+        {
+            DataAccessFactory.AssemblyName = ConfigHelper.ModelAssemblyName;
+            this.session = session;
+        }
+
+        public void Dispose()
+        {
+            session.Dispose();
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
@@ -25,11 +35,8 @@ namespace Dataweb.Dilab.Model.Wcf
             int identificador;
             var isIdentificador = int.TryParse(login, out identificador);
 
-            clienteDao = DaoFactory.CreateDao<IClienteDao>();
-
-            return isIdentificador ?
-                clienteDao.FindByIdentificador(identificador) :
-                clienteDao.FindByCnpj(login);
+            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session);
+            return isIdentificador? clienteDao.FindByIdentificador(identificador) :  clienteDao.FindByCnpj(login);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
@@ -48,7 +55,7 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public void ChangePassword(string login, string currentPassword, string newPassword)
         {
-            clienteDao = DaoFactory.CreateDao<IClienteDao>();
+            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session);
             var cliente = FindByLogin(login);
 
             if (cliente.Senha != currentPassword)
@@ -63,7 +70,7 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public void ChangeEmail(string login, string emailNotificacao, bool receberNotificacao)
         {
-            clienteDao = DaoFactory.CreateDao<IClienteDao>();
+            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session);
             var cliente = FindByLogin(login);
 
             cliente.EmailNotificacao = emailNotificacao;
@@ -75,21 +82,21 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public PacoteCredito[] FindAllPacoteCredito(int codCliente)
         {
-            pacoteCreditoDao = DaoFactory.CreateDao<IPacoteCreditoDao>();
+            var pacoteCreditoDao = DataAccessFactory.CreateDao<IPacoteCreditoDao>(session);
             return pacoteCreditoDao.FindAll(codCliente);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public PacoteCredito FindPacoteCredito(int codCliente, string codPacoteCliente)
         {
-            pacoteCreditoDao = DaoFactory.CreateDao<IPacoteCreditoDao>();
+            var pacoteCreditoDao = DataAccessFactory.CreateDao<IPacoteCreditoDao>(session);
             return pacoteCreditoDao.FindByPrimaryKey(codCliente, codPacoteCliente);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public PacoteHistorico[] FindAllPacoteHistorico(int codCliente, string codPacoteCliente)
         {
-            pacoteHistoricoDao = DaoFactory.CreateDao<IPacoteHistoricoDao>();
+            var pacoteHistoricoDao = DataAccessFactory.CreateDao<IPacoteHistoricoDao>(session);
             return pacoteHistoricoDao.FindAll(codCliente, codPacoteCliente);
         }
     }

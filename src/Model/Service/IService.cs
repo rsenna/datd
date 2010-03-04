@@ -1,7 +1,8 @@
-﻿using System.ServiceModel;
+﻿using System;
+using System.ServiceModel;
 
 namespace Dataweb.Dilab.Model.Service
 {
     [ServiceContract]
-    public interface IService { }
+    public interface IService : IDisposable { }
 }

@@ -15,8 +15,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Index(string referencia)
         {
-            InitWcf();
-
             var login = GetLogin();
             var compras = string.IsNullOrEmpty(referencia)?
                 ProdutoSC.FindAllCompraByLogin(login) :
@@ -34,8 +32,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult NovaOs()
         {
-            InitWcf();
-
             var familias = ProdutoSC.FindAllFamilia();
             var materiais = ProdutoSC.FindAllMaterial();
 
@@ -51,8 +47,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult NovaOs(ComprasNovaOs viewModel)
         {
-            InitWcf();
-
             var os = new OrdemServico {
                 CodCliente = GetCodCliente(),
                 Observacao = viewModel.ObservacaoGeral,
@@ -152,8 +146,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult NovoPedido()
         {
-            InitWcf();
-
             var model = new ComprasNovoPedido
             {
                 Familias = ProdutoSC.FindAllFamilia()
@@ -166,8 +158,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult NovoPedido(ComprasNovoPedido viewModel)
         {
-            InitWcf();
-
             var pedido = new Pedido {
                 CodCliente = GetCodCliente(),
                 Observacao = viewModel.Observacao,
@@ -218,8 +208,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult ListarServicos(int familia)
         {
-            InitWcf(); 
-
             var result = ProdutoSC.FindAllServico(familia);
             return new JsonResult {Data = result};
         }
@@ -228,8 +216,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult ListarProdutos(int familia)
         {
-            InitWcf(); 
-
             var result = ProdutoSC.FindAllProduto(familia);
             return new JsonResult {Data = result};
         }

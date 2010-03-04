@@ -8,8 +8,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            InitWcf();
-
             var login = GetLogin();
             var viewModel = new HomeViewModel {Cliente = ClienteSC.FindByLogin(login)};
 

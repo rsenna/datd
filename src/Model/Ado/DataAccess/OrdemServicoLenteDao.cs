@@ -46,7 +46,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override OrdemServicoLente Insert(OrdemServicoLente dto)
         {
-            Helper.UsingCommand(Connection, c => {
+            Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_INSERT;
 
                 Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, dto.CodEmpresa);

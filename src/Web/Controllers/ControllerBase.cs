@@ -17,19 +17,50 @@ namespace Dataweb.Dilab.Web.Controllers
     {
         private const string CULTURE = "pt-BR";
 
-        protected ClienteServiceClient ClienteSC { get; set; }
-        protected ProdutoServiceClient ProdutoSC { get; set; }
+        private ClienteServiceClient clienteSC;
+        private ProdutoServiceClient produtoSC;
+
         public Tenant Tenant { get; set; }
 
-        protected void InitWcf()
+        protected ClienteServiceClient ClienteSC
         {
-            if (Tenant == null)
+            get
             {
-                return;
+                if (clienteSC == null)
+                {
+                    clienteSC = CreateServiceClient<ClienteServiceClient, IClienteService>();
+                }
+
+                return clienteSC;
+            }
+        }
+
+        protected ProdutoServiceClient ProdutoSC
+        {
+            get
+            {
+                if (produtoSC == null)
+                {
+                    produtoSC = CreateServiceClient<ProdutoServiceClient, IProdutoService>();
+                }
+
+                return produtoSC;
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (clienteSC != null)
+            {
+                clienteSC.Close();
             }
 
-            ClienteSC = CreateServiceClient<ClienteServiceClient, IClienteService>();
-            ProdutoSC = CreateServiceClient<ProdutoServiceClient, IProdutoService>();
+            if (produtoSC != null)
+            {
+                produtoSC.Close();
+            }
+
+            base.Dispose(disposing);
         }
 
         protected override void OnException(ExceptionContext context)

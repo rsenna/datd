@@ -18,7 +18,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ContentResult Verify(string userId, string password)
         {
-            InitWcf();
             var result = "0";
 
             try
@@ -39,8 +38,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult LogOn(string login, string password, bool rememberMe, string returnUrl)
         {
-            InitWcf();
-
             if (!ClienteSC.ValidateLogin(login, password))
             {
                 throw new Exception("Login inválido. Verifique o usuário e a senha.");
@@ -65,8 +62,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult MinhaConta()
         {
-            InitWcf();
-
             var cliente = ClienteSC.FindByLogin(GetLogin());
 
             ViewData["emailNotificacao"] = cliente.EmailNotificacao;
@@ -105,8 +100,6 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult MinhaConta(string senhaAtual, string senhaNova, string senhaConfirmacao, string emailNotificacao, bool receberNotificacao)
         {
-            InitWcf();
-
             var login = GetLogin();
             var email = false;
             var senha = false;

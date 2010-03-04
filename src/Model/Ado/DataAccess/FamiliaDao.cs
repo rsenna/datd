@@ -41,8 +41,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             Familia result = null;
 
-            Helper.UsingCommand(Connection, c =>
-            {
+            Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
                 Helper.AddParameter(c, "@PCOD_PRODUTOFAMILIA", DbType.Int32, pk);
                 result = FetchDto(c);

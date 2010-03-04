@@ -46,8 +46,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             PacoteCredito[] result = null;
 
-            Helper.UsingCommand(Connection, c =>
-            {
+            Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_COD_CLIENTE;
                 Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
                 result = FetchDtos(c);
@@ -70,8 +69,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         {
             PacoteCredito result = null;
 
-            Helper.UsingCommand(Connection, c =>
-            {
+            Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
                 Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
                 Helper.AddParameter(c, "@PCOD_PACOTE", DbType.String, codPacoteCliente);

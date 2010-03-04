@@ -5,11 +5,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <link href="<%= ResolveUrl(Html.GetCssFilePath(ViewData["Tenant.Name"].ToString())) %>" rel="stylesheet" type="text/css" />
+    
+    <link href="<%= ResolveUrl("~/Content/Site.css") %>" rel="stylesheet" type="text/css" />
+    <link href="<%= ResolveUrl(Html.GetThemeCssFilePath(ViewData["Tenant.Name"].ToString())) %>" rel="stylesheet" type="text/css" />
 
     <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery-1.4.2.js") %>"></script>
     <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.validate.min.js") %>"></script>
     <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.autoNumeric-1.0.2.js") %>"></script>
+    <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.rules.js") %>"></script>
+
+    <!--[if gte IE 6]>
+    <style>
+        /* Correção de Page Shift (IE 6, 7, 8) */
+        body { height: 100%; margin-bottom: 1px; } /* << Page Shift correction. */
+    </style>
+    <![endif]-->
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
 </head>
@@ -25,13 +35,19 @@
                 <% } %> 
                 &nbsp;
             </div>
+            <div class="disclaimer">Dilab Online by <a href="http://www.dataweb.inf.br/">DataWeb</a>.</div>
             <div id="menucontainer">
-                <ul id="menu">
+                <ul id="menu" class="topnav">
                     <li><%= Html.ActionLink("Principal", "Index", "Home")%></li>
                     <% if (Request.IsAuthenticated) { %>
-                        <li><%= Html.ActionLink("Minhas Compras", "Index", "Compras")%></li>
-                        <li><%= Html.ActionLink("Nova OS", "NovaOs", "Compras")%></li>
-                        <li><%= Html.ActionLink("Novo Pedido", "NovoPedido", "Compras")%></li>
+                        <li>
+                            <%= Html.ActionLink("Compras", "Index", "Compras")%>
+                            <ul class="subnav">
+                                <li><%= Html.ActionLink("Minhas Compras", "Index", "Compras")%></li>
+                                <li><%= Html.ActionLink("Nova OS", "NovaOs", "Compras")%></li>
+                                <li><%= Html.ActionLink("Novo Pedido", "NovoPedido", "Compras")%></li>
+                            </ul>
+                        </li>
                         <li><%= Html.ActionLink("Pacotes", "Index", "Pacotes")%></li>
                         <li><%= Html.ActionLink("Financeiro", "Index", "Financeiro")%></li>
                         <li><%= Html.ActionLink("Minha Conta", "MinhaConta", "Account")%></li>

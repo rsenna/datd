@@ -9,8 +9,6 @@ namespace Dataweb.Dilab.Web.Controllers
     {
         public ActionResult Index()
         {
-            InitWcf();
-
             var result = ClienteSC.FindAllPacoteCredito(GetCodCliente());
 
             return View(result);
@@ -18,8 +16,6 @@ namespace Dataweb.Dilab.Web.Controllers
 
         public ActionResult Detalhar(string id)
         {
-            InitWcf();
-
             var codCliente = GetCodCliente();
             var viewModel = new PacotesDetalhar();
             var pacoteCliente = ClienteSC.FindPacoteCredito(codCliente, id);

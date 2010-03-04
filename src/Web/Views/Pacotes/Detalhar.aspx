@@ -4,7 +4,7 @@
 <%@ Import Namespace="Dataweb.Dilab.Web"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-  Detalhar Pacotes
+    Dilab Online - Pacotes - Detalhe
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

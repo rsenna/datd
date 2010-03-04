@@ -62,8 +62,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override OrdemServico Insert(OrdemServico dto)
         {
-            Helper.UsingCommand(Connection, c =>
-            {
+            Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_INSERT;
 
                 // Entrada:
@@ -104,8 +103,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             {
                 var servico = dto; // P/ evitar warning; objeto será acessado dentro do delegate.
 
-                Helper.UsingCommand(Connection, c =>
-                {
+                Helper.UsingCommand(Session.Connection, c => {
                     c.CommandText = SQL_STMT_INSERT_ITEM;
 
                     Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, servico.CodEmpresa);
@@ -127,7 +125,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public OrdemServico Close(OrdemServico dto)
         {
-            Helper.UsingCommand(Connection, c => {
+            Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_CLOSE;
 
                 // Entrada:

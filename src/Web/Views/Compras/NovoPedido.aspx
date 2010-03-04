@@ -1,16 +1,8 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<ComprasNovoPedido>" %>
 <%@ Import Namespace="Dataweb.Dilab.Web.Models"%>
 
-<asp:Content ID="Content3" ContentPlaceHolderID="HeadContent" runat="server">
-    <script type="text/javascript" language="javascript">
-        // Global utilizada por jquery.rules.os.nova.js; contém o caminho do gif de loader ajax:
-        ajaxLoaderGifUrl = '<%= ResolveUrl("~/Content/img/ajax-loader.gif") %>';
-    </script>
-    <script type="text/javascript" language="javascript" src="<%= ResolveUrl("~/Scripts/jquery.rules.js") %>"></script>
-</asp:Content>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Novo Pedido
+	Dilab Online - Compras - Novo Pedido
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">

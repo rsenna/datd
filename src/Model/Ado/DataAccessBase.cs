@@ -1,37 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Transactions;
 
 namespace Dataweb.Dilab.Model.Ado
 {
-    public abstract class DataAccessBase<T> : IDataAccessBase<T>, IDisposable
+    public abstract class DataAccessBase<T> : IDataAccessBase<T>
         where T: DataTransferBase
     {
-        private static int connectionUseCount;
-        public static DbConnection Connection { get; private set; }
-
         protected DataAccessBase()
         {
             if (Transaction.Current == null)
             {
                 throw new TransactionException("Para criar um DAO, é necessário estar em um TransactionScope.");
             }
-
-            if (connectionUseCount++ == 0)
-            {
-                Connection = Helper.OpenConnection();
-            }
         }
 
-        void IDisposable.Dispose()
-        {
-            if (--connectionUseCount == 0)
-            {
-                Connection.Close();
-            }
-        }
+        public ISession Session { get; set; }
 
         public virtual T FetchDto(DbCommand c)
         {
@@ -75,7 +60,7 @@ namespace Dataweb.Dilab.Model.Ado
         {
             T[] result = null;
 
-            Helper.UsingCommand(Connection, c =>
+            Helper.UsingCommand(Session.Connection, c =>
             {
                 c.CommandText = sqlStmt;
                 result = FetchDtos(c);

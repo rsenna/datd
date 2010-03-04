@@ -19,6 +19,10 @@ namespace Dataweb.Dilab.Model.Mock
 
         private static readonly Random random = new Random();
 
+        public ISession Session { get; set; }
+
+        public void Dispose() { }
+
         public virtual T FindByPrimaryKey(object pk)
         {
             return FetchDto();

@@ -78,8 +78,9 @@
     <Compile Include="DataTransferBase.cs" />
     <Compile Include="DataTransfer\Cliente.cs" />
     <Compile Include="DataAccess\IClienteDao.cs" />
+    <Compile Include="ISession.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DaoFactory.cs" />
+    <Compile Include="DataAccessFactory.cs" />
     <Compile Include="Service\DatawebFault.cs" />
     <Compile Include="Service\IClienteService.cs" />
     <Compile Include="Service\IProdutoService.cs" />

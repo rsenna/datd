@@ -102,10 +102,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Farol\Site.css" />
-    <Content Include="Content\img\ajax-loader.gif" />
-    <Content Include="Content\img\bg_top_table.gif" />
-    <Content Include="Content\Sturmer\Site.css" />
+    <Content Include="Content\Farol\Theme.css" />
+    <Content Include="Content\Sturmer\Theme.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery.autoNumeric-1.0.2.js" />
@@ -161,6 +159,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_GlobalResources\TipoEtapa.xml" />
+    <Content Include="Content\img\ajax-loader.gif" />
+    <Content Include="Content\img\bg_top_table.gif" />
+    <Content Include="Content\img\body_bg.gif" />
+    <Content Include="Content\img\dropdown_linkbg.gif" />
+    <Content Include="Content\img\header_bg.gif" />
+    <Content Include="Content\img\subnav_btn.gif" />
+    <Content Include="Content\img\topnav_bg.gif" />
+    <Content Include="Content\img\topnav_hover.gif" />
     <Content Include="Scripts\jquery-1.4.2.js" />
     <Content Include="Scripts\jquery-1.4.2.min.js" />
     <Content Include="Scripts\jquery.rules.js" />
@@ -197,7 +203,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Pedidos\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

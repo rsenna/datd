@@ -1,105 +1,204 @@
-﻿/*----------------------------------------------------------
-The base color for this template is Window. If you'd like
-to use a different color start by replacing all instances of
-Window with your new color.
-----------------------------------------------------------*/
-body
-{
-    background-color: Window;
-    font-size: .75em;
-    font-family: Verdana, Helvetica, Sans-Serif;
-    margin: 0;
-    padding: 0;
-    color: #696969;
-}
+﻿/* Correção de Page Shift (Mozilla, Opera, Chrome) */
+html { height: 100%; margin-bottom: 1px; }
+html { overflow: -moz-scrollbars-vertical !important; }
 
-a:link
-{
+a:link {
     color: #034af3;
     text-decoration: underline;
 }
-a:visited
-{
+a:visited {
     color: #505abc;
 }
-a:hover
-{
+a:hover {
     color: #1d60ff;
     text-decoration: none;
 }
-a:active
-{
+a:active {
     color: #12eb87;
 }
 
-p, ul
-{
+p, ul {
     margin-bottom: 20px;
     line-height: 1.6em;
 }
 
 /* HEADINGS   
 ----------------------------------------------------------*/
-h1, h2, h3, h4, h5, h6
-{
+h1, h2, h3, h4, h5, h6 {
     font-size: 1.5em;
     color: #000;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-h1
-{
+h1 {
     font-size: 2em;
     padding-bottom: 0;
     margin-bottom: 0;
 }
-h2
-{
+h2 {
     padding: 0 0 10px 0;
 }
-h3
-{
+h3 {
     font-size: 1.2em;
 }
-h4
-{
+h4 {
     padding: 10px 0 -10px 0;
     font-size: 1.1em;
 }
-h5, h6
-{
+h5, h6 {
     font-size: 1em;
 }
 
 /* this rule styles <h2> tags that are the 
 first child of the left and right table columns */
-.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
-{
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2 {
     margin-top: 0;
 }
 
-/* PRIMARY LAYOUT ELEMENTS   
+/* PRIMARY LAYOUT ELEMENTS
 ----------------------------------------------------------*/
 
 /* you can specify a greater or lesser percentage for the 
 page width. Or, you can specify an exact pixel width. */
-.page
-{
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
 
-#header
-{
+body {
+    margin: 0;
+    padding: 0;
+    font: 12px normal Arial, Helvetica, sans-serif;
+    background-color: #e0e0e0;
+    color: #696969;
+}
+.page {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+#main {
+    padding: 15px 30px 15px 30px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    _height: 1px; /* only IE6 applies CSS properties starting with an underscrore */
+}
+#header {
+    margin-top: 100px;
+    background-color: #a0a0a0;
+    height: 150px;
+    position: relative;
+}
+#header .disclaimer {
+    color: #ccc;
+    text-align: right;
+    display: block;
+    position: absolute;
+    right: 10px;
+    font-size: 10px;
+    bottom: 40px;
+}
+#header .disclaimer a {
+    color: #cc0;
+}
+#header h1 {
+    font-weight: bold;
+    padding: 40px 0 0 35px;
+    margin: 0;
+    color: #fff;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 32px !important;
+}
+#footer {
+    color: #999;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin: 0;
+    font-size: .9em;
+}
+ul.topnav {
+    position: absolute;
+    bottom: 0;
+    list-style: none;
+    padding: 0 20px;
+    margin: 0 0 0 0;
+    float: left;
+    width: 920px;
+    background: #222;
+    font-size: 1.2em;
+    background: url(img/topnav_bg.gif) repeat-x;
+}
+ul.topnav li {
+    float: left;
+    margin: 0;
+    padding: 0 15px 0 0;
+    position: relative; /*--Declare X and Y axis base--*/
+}
+ul.topnav li a {
+    padding: 5px 5px;
+    color: #fff;
+    display: block;
+    text-decoration: none;
+    float: left;
+}
+ul.topnav li a:hover {
+    background: url(img/topnav_hover.gif) no-repeat center top;
+}
+ul.topnav li span {
+    /*--Drop down trigger styles--*/
+    width: 17px;
+    height: 35px;
+    float: left;
+    background: url(img/subnav_btn.gif) no-repeat center top;
+}
+ul.topnav li span.subhover {
+    background-position: center bottom;
+    cursor: pointer;
+}
+/*--Hover effect for trigger--*/
+ul.topnav li ul.subnav {
+    list-style: none;
+    position: absolute; /*--Important - Keeps subnav from affecting main navigation flow--*/
+    left: 0;
+    top: 35px;
+    background: #333;
+    margin: 0;
+    padding: 0;
+    display: none;
+    float: left;
+    width: 170px;
+    -moz-border-radius-bottomleft: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    border: 1px solid #111;
+}
+ul.topnav li ul.subnav li {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid #252525; /*--Create bevel effect--*/
+    border-bottom: 1px solid #444; /*--Create bevel effect--*/
+    clear: both;
+    width: 170px;
+}
+html ul.topnav li ul.subnav li a {
+    float: left;
+    width: 145px;
+    background: #333 url(img/dropdown_linkbg.gif) no-repeat 10px center;
+    padding-left: 20px;
+}
+html ul.topnav li ul.subnav li a:hover {
+    /*--Hover effect for subnav links--*/
+    background: #222 url(img/dropdown_linkbg.gif) no-repeat 10px center;
+}
+#header img {
+    margin: 20px 0 10px;
+}
+/*
+#header {
     position: relative;
     margin-bottom: 0px;
     color: #000;
     padding: 0;
 }
-
-#header h1
-{
+#header h1 {
     font-weight: bold;
     padding: 5px 0;
     margin: 0;
@@ -109,17 +208,7 @@ page width. Or, you can specify an exact pixel width. */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 32px !important;
 }
-
-#main
-{
-    padding: 30px 30px 15px 30px;
-    background-color: #fff;
-    margin-bottom: 30px;
-    _height: 1px; /* only IE6 applies CSS properties starting with an underscrore */
-}
-
-#footer
-{
+#footer {
     color: #999;
     padding: 10px 0;
     text-align: center;
@@ -127,101 +216,47 @@ page width. Or, you can specify an exact pixel width. */
     margin: 0;
     font-size: .9em;
 }
+*/
 
 /* TAB MENU   
 ----------------------------------------------------------*/
-ul#menu
-{
-    border-bottom: 1px Window solid;
-    padding: 0 0 2px;
-    position: relative;
-    margin: 0;
-    text-align: right;
-}
-
-ul#menu li
-{
-    display: inline;
-    list-style: none;
-}
-
-ul#menu li#greeting
-{
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    color: #fff;
-}
-
-ul#menu li a
-{
-    padding: 10px 20px;
-    font-weight: bold;
-    text-decoration: none;
-    line-height: 2.8em;
-    background-color: #e8eef4;
-    color: #034af3;
-}
-
-ul#menu li a:hover
-{
-    background-color: #fff;
-    text-decoration: none;
-}
-
-ul#menu li a:active
-{
-    background-color: #a6e2a6;
-    text-decoration: none;
-}
-
-ul#menu li.selected a
-{
-    background-color: #fff;
-    color: #000;
-}
+/*
+ul#menu { border-bottom: 1px Window solid; padding: 0 0 2px; position: relative; margin: 0; text-align: right; }
+ul#menu li { display: inline; list-style: none; }
+ul#menu li#greeting { padding: 10px 20px; font-weight: bold; text-decoration: none; line-height: 2.8em; color: #fff; }
+ul#menu li a { padding: 10px 20px; font-weight: bold; text-decoration: none; line-height: 2.8em; background-color: #e8eef4; color: #034af3; }
+ul#menu li a:hover { background-color: #fff; text-decoration: none; }
+ul#menu li a:active { background-color: #a6e2a6; text-decoration: none; }
+ul#menu li.selected a { background-color: #fff; color: #000; }
+*/
 
 /* FORM LAYOUT ELEMENTS   
 ----------------------------------------------------------*/
 
-fieldset 
-{
+fieldset {
     margin: 1em 0;
     padding: 1em;
     border: 1px solid #CCC;
 }
-
-fieldset p 
-{
+fieldset p {
     margin: 2px 12px 10px 10px;
 }
-
-fieldset label 
-{
+fieldset label {
     display: block;
 }
-
-fieldset label.inline 
-{
+fieldset label.inline {
     display: inline;
 }
-
-legend 
-{
+legend {
     font-size: 1.1em;
     font-weight: 600;
     padding: 2px 4px 8px 4px;
 }
-
-input[type="text"] 
-{
+input[type="text"] {
     width: 200px;
     border: 1px solid #CCC;
 }
-
-input[type="password"] 
-{
+input[type="password"] {
     width: 200px;
     border: 1px solid #CCC;
 }
@@ -229,176 +264,270 @@ input[type="password"]
 /* TABLE
 ----------------------------------------------------------*/
 
-table 
-{
-  border: solid 1px #e8eef4;
-  border-collapse: collapse;
+table {
+    border: solid 1px #e8eef4;
+    border-collapse: collapse;
 }
-
-table td 
-{
-  padding: 5px;   
-  border: solid 1px #e8eef4;
+table td {
+    padding: 5px;
+    border: solid 1px #e8eef4;
 }
-
-table th
-{
-  padding: 6px 5px;
-  background-color: #e8eef4; 
-  border: solid 1px #e8eef4;   
+table th {
+    padding: 6px 5px;
+    background-color: #e8eef4;
+    border: solid 1px #e8eef4;
 }
 
 /* MISC  
 ----------------------------------------------------------*/
-.clear
-{
+
+.clear {
     clear: both;
 }
-
-.error
-{
-    color:Red;
+.error {
+    color: Red;
 }
-
-#menucontainer
-{
-    margin-top:40px;
+div#title {
+    display: block;
+    float: left;
+    text-align: left;
 }
-
-div#title
-{
-    display:block;
-    float:left;
-    text-align:left;
+#logindisplay {
+    font-size: 12px;
+    display: block;
+    text-align: right;
+    margin: 8px;
+    color: White;
+    padding-top: 5px;
 }
-
-#logindisplay
-{
-    font-size:1.1em;
-    display:block;
-    text-align:right;
-    margin:10px;
-    color:White;
-}
-
-#logindisplay a:link
-{
+#logindisplay a:link {
     color: white;
     text-decoration: underline;
 }
-
-#logindisplay a:visited
-{
+#logindisplay a:visited {
     color: white;
     text-decoration: underline;
 }
-
-#logindisplay a:hover
-{
+#logindisplay a:hover {
     color: white;
     text-decoration: none;
 }
-
-.field-validation-error
-{
+.field-validation-error {
     color: #ff0000;
 }
-
-.input-validation-error
-{
+.input-validation-error {
     border: 1px solid #ff0000;
     background-color: #ffeeee;
 }
-
-.validation-summary-errors
-{
+.validation-summary-errors {
     font-weight: bold;
     color: #ff0000;
 }
+.template {
+    display: none;
+}
+.numeric {
+    float: left;
+    text-align: right;
+}
 
-.template { display: none; }
-
-.numeric { float:left; text-align: right; } /* jquery.autoNumeric-1.0.2.js */
+/* jquery.autoNumeric-1.0.2.js */
 
 /* Home */
 
-div#divHome { height:100px; }
-div#divIdentificacao { float:left; width:300px; }
-div#divReferencia { float:left; width:300px; }
-div#divResumo { float:left; width:300px; }
+div#divHome {
+    height: 100px;
+}
+div#divIdentificacao {
+    float: left;
+    width: 300px;
+}
+div#divReferencia {
+    float: left;
+    width: 300px;
+}
+div#divResumo {
+    float: left;
+    width: 300px;
+}
 
 /* Compras/NovaOs.aspx */
 
-form#frmNovaOs { width: 700px; }
+form#frmNovaOs {
+    width: 700px;
+}
 
-div#divLentes { position:relative; }
-div#divInfo { position:relative; }
-div.coluna { float:left; width:300px;}
+div#divLentes {
+    position: relative;
+}
+div#divInfo {
+    position: relative;
+}
+div.coluna {
+    float: left;
+    width: 300px;
+}
 
-div.divcom1 { width:100%; margin-left:auto; margin-right:auto; }
-div.divcom1 input { width:96%; }
-div.divcom1 select { width:96%; }
-div.divcom1 textarea { width:94%; height:100px; }
+div.divcom1 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+div.divcom1 input {
+    width: 96%;
+}
+div.divcom1 select {
+    width: 96%;
+}
+div.divcom1 textarea {
+    width: 94%;
+    height: 100px;
+}
 
-div.divcom3 { width:100%; margin-left:auto; margin-right:auto; }
+div.divcom3 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-div.div1de3 { float:left; width:33%; }
-div.div1de3 input { width:90%; }
+div.div1de3 {
+    float: left;
+    width: 33%;
+}
+div.div1de3 input {
+    width: 90%;
+}
 
-div.divcom2 { width:100%; margin-left:auto; margin-right:auto; }
+div.divcom2 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-div.div1de2 { float:left; width:50%; }
-div.div1de2 input { width:91%; }
-div.div1de2 select { width:91%; }
-div.div1de2 textarea { width:90%; height:100px; }
+div.div1de2 {
+    float: left;
+    width: 50%;
+}
+div.div1de2 input {
+    width: 91%;
+}
+div.div1de2 select {
+    width: 91%;
+}
+div.div1de2 textarea {
+    width: 90%;
+    height: 100px;
+}
 
-#divcom6 { width:100%; margin-left:auto; margin-right:auto; }
+#divcom6 {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-div.div1de6 { float:left; width:14%; }
-div.div1de6 input { width:90%; }
+div.div1de6 {
+    float: left;
+    width: 14%;
+}
+div.div1de6 input {
+    width: 90%;
+}
 
-div#divServicos { border-style:inset; border-width:1px; border-color:Black; background-color:ButtonFace; padding:5px; width:576px;}
-div#divMsgSemServicos { padding:5px; }
-div#divServicosOD { padding:10px; }
-div#divServicosOE { padding:10px; }
+div#divServicos {
+    border-style: inset;
+    border-width: 1px;
+    border-color: Black;
+    background-color: ButtonFace;
+    padding: 5px;
+    width: 576px;
+}
+div#divMsgSemServicos {
+    padding: 5px;
+}
+div#divServicosOD {
+    padding: 10px;
+}
+div#divServicosOE {
+    padding: 10px;
+}
 
-th 
-{
-    border-left:1px solid #CCCCCC;
-    padding:5px;
+th {
+    border-left: 1px solid #CCCCCC;
+    padding: 5px;
+    text-align: center;
+}
+td {
     text-align: center;
 }
 
-td { text-align: center; }
-
-tr.summary td { border-left: hidden; border-right: hidden; border-bottom: hidden; font-style: italic; }
-.title { font-weight: bold; }
-
-/* Compras/NovoPedido.aspx */
-div.container {
-	border-style: inset;
-	border-width: 1px;
-	border-color: Black;
-	background-color: ButtonFace;
-	padding: 10px;
-	width: 700px;
+tr.summary td {
+    border-left: hidden;
+    border-right: hidden;
+    border-bottom: hidden;
+    font-style: italic;
+}
+.title {
+    font-weight: bold;
 }
 
-div#divProdutosDisponiveis div { float: left; margin-right: 10px; }
-div#divProdutosDisponiveis select { width: 253px; }
-div#divProdutosDisponiveis input#itxFiltroQuantidade { width: 80px; }
-div#divProdutosDisponiveis input#ibtAdicionar { height: 40px; }
+/* Compras/NovoPedido.aspx */
 
-div#divItens table { width: 100%; }
-div#divItens td { background-color: window; }
-div#divItens td.tdExcluir { width: 90px; }
-div#divItens input.itxFamilia { width: 243px; border-style: none; }
-div#divItens input.itxProduto { width: 243px; border-style: none; }
-div#divItens input.itxQtd { width: 70px; text-align: right; }
+div.container {
+    border-style: inset;
+    border-width: 1px;
+    border-color: Black;
+    background-color: ButtonFace;
+    padding: 10px;
+    width: 700px;
+}
 
-textarea#txaObservacoes { width: 716px; }
-input#ibtFinalizar { width: 723px; }
+div#divProdutosDisponiveis div {
+    float: left;
+    margin-right: 10px;
+}
+div#divProdutosDisponiveis select {
+    width: 253px;
+}
+div#divProdutosDisponiveis input#itxFiltroQuantidade {
+    width: 80px;
+}
+div#divProdutosDisponiveis input#ibtAdicionar {
+    height: 40px;
+}
 
-table#tabItens { display: none; }
+div#divItens table {
+    width: 100%;
+}
+div#divItens td {
+    background-color: window;
+}
+div#divItens td.tdExcluir {
+    width: 90px;
+}
+div#divItens input.itxFamilia {
+    width: 243px;
+    border-style: none;
+}
+div#divItens input.itxProduto {
+    width: 243px;
+    border-style: none;
+}
+div#divItens input.itxQtd {
+    width: 70px;
+    text-align: right;
+}
 
-div#divCompras table td { width: 100px; }
+textarea#txaObservacoes {
+    width: 716px;
+}
+input#ibtFinalizar {
+    width: 723px;
+}
+
+table#tabItens {
+    display: none;
+}
+
+div#divCompras table td {
+    width: 100px;
+}
