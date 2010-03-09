@@ -83,6 +83,7 @@
   </ProjectExtensions>
   <PropertyGroup>
     <PreBuildEvent>echo Fetching external binaries...
+xcopy /d/r/y ..\..\..\Mock\bin\Debug\NLipsum.Core.dll .
 xcopy /d/r/y ..\..\..\Mock\bin\Debug\Dataweb.Dilab.Model.Mock.* .
 xcopy /d/r/y ..\..\..\Ado\bin\Debug\Dataweb.Dilab.Model.Ado.* .</PreBuildEvent>
   </PropertyGroup>

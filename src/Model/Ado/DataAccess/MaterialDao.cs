@@ -7,6 +7,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class MaterialDao : DataAccessBase<Material>, IMaterialDao
     {
+        // TODO: [STP]
         private const string SQL_STMT_FIND_ALL = @"
             SELECT
                 cod_oticalentematerial,

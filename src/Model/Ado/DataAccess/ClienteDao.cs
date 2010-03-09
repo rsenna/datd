@@ -7,6 +7,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class ClienteDao : DataAccessBase<Cliente>, IClienteDao
     {
+        // TODO: [STP]
         private const string SQL_STMT_FIND_BY_CNPJ = @"
             SELECT
                 webrascliente.cod_cliente,
@@ -26,6 +27,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 pessoacliente.cnpj = @CNPJ
         ";
 
+        // TODO: [STP]
         private const string SQL_STMT_FIND_BY_IDENTIFICADOR = @"
             SELECT
                 webrascliente.cod_cliente,
@@ -45,6 +47,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 pessoacliente.identificador = @IDENTIFICADOR
         ";
 
+        // TODO: [STP]
         private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
             SELECT
                 webrascliente.cod_cliente,
@@ -64,6 +67,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 webrascliente.cod_cliente = @COD_CLIENTE
         ";
 
+        // TODO: [STP]
         private const string SQL_STMT_UPDATE = @"
             UPDATE
                 webrascliente

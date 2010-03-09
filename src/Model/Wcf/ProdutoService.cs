@@ -31,14 +31,13 @@ namespace Dataweb.Dilab.Model.Wcf
             return cliente.CodCliente;
         }
 
-        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Compra[] FindAllCompraByCodCliente(int codCliente)
+        private Compra[] FindAllCompraByCodCliente(int codCliente)
         {
             var compraDao = DataAccessFactory.CreateDao<ICompraDao>(session);
-            return compraDao.FindAll(codCliente);
+            return compraDao.FindAll(codCliente, ProfundidadeConsultaTransacao.Transacao);
         }
 
-        public Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia)
+        private Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia)
         {
             var total = FindAllCompraByCodCliente(codCliente);
             var parcial = new List<Compra>();
@@ -95,79 +94,39 @@ namespace Dataweb.Dilab.Model.Wcf
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Servico[] FindAllServico(int codFamilia)
+        public Item[] FindAllServico(int codFamilia)
         {
-            var servicoDao = DataAccessFactory.CreateDao<IServicoDao>(session);
-            return servicoDao.FindAll(codFamilia);
+            var itemDao = DataAccessFactory.CreateDao<IItemDao>(session);
+            return itemDao.FindAll(codFamilia, TipoItem.Servico);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Produto[] FindAllProduto(int codFamilia)
+        public Item[] FindAllProduto(int codFamilia)
         {
-            var produtoDao = DataAccessFactory.CreateDao<IProdutoDao>(session);
-            return produtoDao.FindAll(codFamilia);
+            var itemDao = DataAccessFactory.CreateDao<IItemDao>(session);
+            return itemDao.FindAll(codFamilia, TipoItem.Produto);
         }
 
-        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public OrdemServicoOtica InsertOrdemServico(OrdemServicoOtica dto)
+        private Compra InsertCompra(Compra dto)
         {
-            var ordemServicoDao = DataAccessFactory.CreateDao<IOrdemServicoDao>(session);
-            var ordemServicoLenteDao = DataAccessFactory.CreateDao<IOrdemServicoLenteDao>(session);
+            var compraDao = DataAccessFactory.CreateDao<ICompraDao>(session);
 
-            // Grava parte básica da OS:
-            ordemServicoDao.Insert(dto.OrdemServico);
-
-            // Como só agora foi obtido dto.CodOrdemServico e dto.CodEmpresa, atualizo os demais DTO's:
-            dto.LenteOd.CodOrdemServico = dto.OrdemServico.CodOrdemServico;
-            dto.LenteOd.CodEmpresa = dto.OrdemServico.CodEmpresa;
-            dto.LenteOe.CodOrdemServico = dto.OrdemServico.CodOrdemServico;
-            dto.LenteOe.CodEmpresa = dto.OrdemServico.CodEmpresa;
-            // ---
-            foreach (var servico in dto.Servicos)
-            {
-                servico.CodOrdemServico = dto.OrdemServico.CodOrdemServico;
-                servico.CodEmpresa = dto.OrdemServico.CodEmpresa;
-            }
-
-            // TODO: Por enquanto a descrição da lente vai ser igual ao nome da família - isso irá mudar no futuro.
-            var familiaDao = DataAccessFactory.CreateDao<IFamiliaDao>(session);
-            var familiaOd = familiaDao.FindByPrimaryKey(dto.LenteOd.CodFamilia);
-            var familiaOe = familiaDao.FindByPrimaryKey(dto.LenteOe.CodFamilia);
-            dto.LenteOd.Descricao = familiaOd.Descricao;
-            dto.LenteOe.Descricao = familiaOe.Descricao;
-
-            // Grava lentes:
-            ordemServicoLenteDao.Insert(dto.LenteOd);
-            ordemServicoLenteDao.Insert(dto.LenteOe);
-
-            // Grava os serviços que serão executados na OS:
-            ordemServicoDao.InsertItens(dto.Servicos);
-
-            // Conclui a ordem de serviço:
-            ordemServicoDao.Close(dto.OrdemServico);
+            dto = compraDao.Insert(dto);
+            compraDao.Close(dto);
 
             return dto;
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public OrdemServico InsertOrdemServico(OrdemServico dto)
+        {
+            return (OrdemServico) InsertCompra(dto);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Pedido InsertPedido(Pedido dto)
         {
-            var pedidoDao = DataAccessFactory.CreateDao<IPedidoDao>(session);
-
-            // Grava parte básica do pedido:
-            pedidoDao.Insert(dto);
-
-            // Como só agora foi obtido dto.CodPedido e dto.CodEmpresa, atualizo os demais DTO's:
-            foreach (var produto in dto.Produtos)
-            {
-                produto.CodPedido = dto.CodPedido;
-                produto.CodEmpresa = dto.CodEmpresa;
-            }
-
-            // Grava os produtos registrados no pedido:
-            pedidoDao.InsertItens(dto.Produtos);
-
-            return dto;
+            return (Pedido) InsertCompra(dto);
         }
     }
 }

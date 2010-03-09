@@ -7,7 +7,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class PacoteCreditoDao : DataAccessBase<PacoteCredito>, IPacoteCreditoDao
     {
-        // TODO: Passar para stp
+        // TODO: [STP]
         private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
             SELECT
                 PACC.cod_pacote AS rcodpacote,

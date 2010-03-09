@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="tqKKxZWQoixJUoxXX5R/pxZdBQE=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="wJqa7a7F1DVybFHpoSGWD7MndV0=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_IProdutoService1">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="BasicHttpBinding_IProdutoService1" contract="ProdutoServiceReference.IProdutoService" bindingType="basicHttpBinding" address="http://localhost:53990/Produto" bindingConfiguration="BasicHttpBinding_IProdutoService1">
+    <endpoint name="BasicHttpBinding_IProdutoService" contract="ProdutoServiceReference.IProdutoService" bindingType="basicHttpBinding" address="http://localhost:53990/Produto" bindingConfiguration="BasicHttpBinding_IProdutoService1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://localhost:53990/Produto</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>BasicHttpBinding_IProdutoService1</serializedValue>
+          <serializedValue>BasicHttpBinding_IProdutoService</serializedValue>
         </property>
       </properties>
     </endpoint>

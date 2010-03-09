@@ -131,9 +131,12 @@ namespace Dataweb.Dilab.Model.Ado
         {
             switch (value)
             {
+                case "S":
                 case "T":
+                case "Y":
                     return true;
                 case "F":
+                case "N":
                     return false;
             }
 

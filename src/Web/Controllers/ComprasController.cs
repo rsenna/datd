@@ -65,8 +65,7 @@ namespace Dataweb.Dilab.Web.Controllers
                 Ponte = viewModel.Ponte
             };
 
-            var lenteOd = new OrdemServicoLente
-            {
+            var lenteOd = new OrdemServicoLente {
                 TipoLente = TipoLente.OlhoDireito,
                 CodFamilia = viewModel.FamiliaOd,
                 Descricao = viewModel.DescricaoLenteOd,
@@ -98,28 +97,25 @@ namespace Dataweb.Dilab.Web.Controllers
 
             // Determina a quantidade dos serviços a partir das famílias selecionadas:
             var quantidade = lenteOd.CodFamilia == lenteOe.CodFamilia? 2 : 1;
-            var servicos = new ServicoOrdemServico[viewModel.Servicos.Length];
+            var itens = new ItemTransacao[viewModel.Servicos.Length];
 
-            for (var i = 0; i < servicos.Length; i++)
+            for (var i = 0; i < itens.Length; i++)
             {
-                var servico = new ServicoOrdemServico {
+                var servico = new ItemTransacao {
                     CodItem = viewModel.Servicos[i],
                     Quantidade = quantidade
                 };
 
-                servicos[i] = servico;
+                itens[i] = servico;
             }
 
-            var oso = new OrdemServicoOtica {
-                OrdemServico = os,
-                LenteOd = lenteOd,
-                LenteOe = lenteOe,
-                Servicos = servicos
-            };
+            os.LenteOd = lenteOd;
+            os.LenteOe = lenteOe;
+            os.Itens = itens;
 
             try
             {
-                oso = ProdutoSC.InsertOrdemServico(oso);
+                os = ProdutoSC.InsertOrdemServico(os);
             }
             catch (FaultException<DatawebFault> ex)
             {
@@ -128,7 +124,7 @@ namespace Dataweb.Dilab.Web.Controllers
 
             if (ModelState.IsValid)
             {
-                return RedirectToAction("NovaOsSucesso", new {id = oso.OrdemServico.Numero});
+                return RedirectToAction("NovaOsSucesso", new {id = os.Numero});
             }
 
             return View();
@@ -146,8 +142,7 @@ namespace Dataweb.Dilab.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult NovoPedido()
         {
-            var model = new ComprasNovoPedido
-            {
+            var model = new ComprasNovoPedido {
                 Familias = ProdutoSC.FindAllFamilia()
             };
 
@@ -163,13 +158,13 @@ namespace Dataweb.Dilab.Web.Controllers
                 Observacao = viewModel.Observacao,
             };
 
-            var produtos = new List<ProdutoPedido>();
+            var produtos = new List<ItemTransacao>();
 
             // Obs: notar que laço começa em 1, não em 0. É necessário ignorar
             // a primeira linha da tabela, que serve como template para frontend.
             for (var i = 1; i < viewModel.Produtos.Length; i++)
             {
-                var produto = new ProdutoPedido {
+                var produto = new ItemTransacao {
                     CodItem = viewModel.Produtos[i],
                     Quantidade = Convert.ToInt32(viewModel.Quantidades[i])
                 };
@@ -177,7 +172,7 @@ namespace Dataweb.Dilab.Web.Controllers
                 produtos.Add(produto);
             }
 
-            pedido.Produtos = produtos.ToArray();
+            pedido.Itens = produtos.ToArray();
 
             try
             {

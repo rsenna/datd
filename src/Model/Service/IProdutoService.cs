@@ -7,12 +7,6 @@ namespace Dataweb.Dilab.Model.Service
     public interface IProdutoService : IService
     {
         [OperationContract]
-        Compra[] FindAllCompraByCodCliente(int codCliente);
-
-        [OperationContract]
-        Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia);
-
-        [OperationContract]
         Compra[] FindAllCompraByLogin(string login);
 
         [OperationContract]
@@ -31,13 +25,13 @@ namespace Dataweb.Dilab.Model.Service
         int GetCountEmProducao(int codCliente);
 
         [OperationContract]
-        Servico[] FindAllServico(int codFamilia);
+        Item[] FindAllServico(int codFamilia);
 
         [OperationContract]
-        Produto[] FindAllProduto(int codFamilia);
+        Item[] FindAllProduto(int codFamilia);
 
         [OperationContract]
-        OrdemServicoOtica InsertOrdemServico(OrdemServicoOtica dto);
+        OrdemServico InsertOrdemServico(OrdemServico dto);
 
         [OperationContract]
         Pedido InsertPedido(Pedido dto);

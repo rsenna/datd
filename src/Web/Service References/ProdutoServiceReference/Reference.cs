@@ -15,13 +15,6 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProdutoServiceReference.IProdutoService")]
     public interface IProdutoService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllCompraByCodCliente", ReplyAction="http://tempuri.org/IProdutoService/FindAllCompraByCodClienteResponse")]
-        Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByCodCliente(int codCliente);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllCompraByCodClienteAndReferencia", ReplyAction="http://tempuri.org/IProdutoService/FindAllCompraByCodClienteAndReferenciaResponse" +
-            "")]
-        Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllCompraByLogin", ReplyAction="http://tempuri.org/IProdutoService/FindAllCompraByLoginResponse")]
         Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByLogin(string login);
         
@@ -41,13 +34,13 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
         int GetCountEmProducao(int codCliente);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllServico", ReplyAction="http://tempuri.org/IProdutoService/FindAllServicoResponse")]
-        Dataweb.Dilab.Model.DataTransfer.Servico[] FindAllServico(int codFamilia);
+        Dataweb.Dilab.Model.DataTransfer.Item[] FindAllServico(int codFamilia);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllProduto", ReplyAction="http://tempuri.org/IProdutoService/FindAllProdutoResponse")]
-        Dataweb.Dilab.Model.DataTransfer.Produto[] FindAllProduto(int codFamilia);
+        Dataweb.Dilab.Model.DataTransfer.Item[] FindAllProduto(int codFamilia);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/InsertOrdemServico", ReplyAction="http://tempuri.org/IProdutoService/InsertOrdemServicoResponse")]
-        Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica dto);
+        Dataweb.Dilab.Model.DataTransfer.OrdemServico InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServico dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/InsertPedido", ReplyAction="http://tempuri.org/IProdutoService/InsertPedidoResponse")]
         Dataweb.Dilab.Model.DataTransfer.Pedido InsertPedido(Dataweb.Dilab.Model.DataTransfer.Pedido dto);
@@ -80,14 +73,6 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByCodCliente(int codCliente) {
-            return base.Channel.FindAllCompraByCodCliente(codCliente);
-        }
-        
-        public Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia) {
-            return base.Channel.FindAllCompraByCodClienteAndReferencia(codCliente, referencia);
-        }
-        
         public Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByLogin(string login) {
             return base.Channel.FindAllCompraByLogin(login);
         }
@@ -112,15 +97,15 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
             return base.Channel.GetCountEmProducao(codCliente);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.Servico[] FindAllServico(int codFamilia) {
+        public Dataweb.Dilab.Model.DataTransfer.Item[] FindAllServico(int codFamilia) {
             return base.Channel.FindAllServico(codFamilia);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.Produto[] FindAllProduto(int codFamilia) {
+        public Dataweb.Dilab.Model.DataTransfer.Item[] FindAllProduto(int codFamilia) {
             return base.Channel.FindAllProduto(codFamilia);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica dto) {
+        public Dataweb.Dilab.Model.DataTransfer.OrdemServico InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServico dto) {
             return base.Channel.InsertOrdemServico(dto);
         }
         

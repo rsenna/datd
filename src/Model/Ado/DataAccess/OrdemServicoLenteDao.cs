@@ -7,6 +7,12 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class OrdemServicoLenteDao : DataAccessBase<OrdemServicoLente>, IOrdemServicoLenteDao
     {
+        // TODO: [STP]
+        // TODO: [Detalhe Transacao] Definir a consulta de lentes por ordem de serviço.
+        private const string SQL_STMT_FIND_ALL_BY_COD_EMPRESA_AND_COD_TRANSACAO = @"
+            A DEFINIR;
+        ";
+
         private const string SQL_STMT_INSERT = @"
             EXECUTE PROCEDURE STP_WEBORDEMSERVICO_ADDLENTE(
                 @PCOD_EMPRESA,
@@ -34,6 +40,21 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
+        public OrdemServicoLente FindByTransacao(Compra compra)
+        {
+            OrdemServicoLente result = null;
+
+            Helper.UsingCommand(Session.Connection, c =>
+            {
+                c.CommandText = SQL_STMT_FIND_ALL_BY_COD_EMPRESA_AND_COD_TRANSACAO;
+                Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, compra.CodCliente);
+                Helper.AddParameter(c, "@PCOD_TRANSACAO", DbType.Int32, compra.CodTransacao);
+                result = FetchDto(c);
+            });
+
+            return result;
+        }
+
         public override OrdemServicoLente Update(OrdemServicoLente dto)
         {
             throw new NotImplementedException();
@@ -50,7 +71,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 c.CommandText = SQL_STMT_INSERT;
 
                 Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, dto.CodEmpresa);
-                Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, dto.CodOrdemServico);
+                Helper.AddParameter(c, "@PCOD_ORDEMSERVICO", DbType.Int32, dto.CodTransacao);
                 Helper.AddParameter(c, "@PCOD_ORDEMSERVICOOTICALENTE", DbType.Int32, (int) dto.TipoLente);
                 Helper.AddParameter(c, "@PDESCRICAOLENTE", DbType.String, dto.Descricao);
                 Helper.AddParameter(c, "@PLONGE_ESF", DbType.Decimal, dto.LongeEsf);
@@ -71,24 +92,22 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override OrdemServicoLente FetchDto(IDataRecord record)
         {
-            throw new NotImplementedException();
-            /* Seria este o começo da implementação (se existisse a necessidade
-            ** de recuperar os registros):
+            // TODO: [Detalhe Transacao] Definir os nomes dos campos da lente.
             return new OrdemServicoLente {
-                CodEmpresa = Helper.ReadInt32(record, )
-                CodOrdemServico =
-                CodOrdemServicoLente =
-                Descricao =
-                LongeEsf =
-                LongeCil =
-                LongeEixo =
-                Adicao =
-                PertoEsf =
-                PertoCil =
-                PertoEixo =
-                Dnp =
-                Alt =
-            **/
+                CodEmpresa = Helper.ReadInt32(record, "").Value,
+                CodTransacao = Helper.ReadInt32(record, "").Value,
+                CodOrdemServicoLente = Helper.ReadInt32(record, "").Value,
+                Descricao = Helper.ReadString(record, ""),
+                LongeEsf = Helper.ReadDecimal(record, "").Value,
+                LongeCil = Helper.ReadDecimal(record, "").Value,
+                LongeEixo = Helper.ReadDecimal(record, "").Value,
+                Adicao = Helper.ReadDecimal(record, "").Value,
+                PertoEsf = Helper.ReadDecimal(record, "").Value,
+                PertoCil = Helper.ReadDecimal(record, "").Value,
+                PertoEixo = Helper.ReadDecimal(record, "").Value,
+                Dnp = Helper.ReadDecimal(record, "").Value,
+                Alt = Helper.ReadDecimal(record, "").Value
+            };
         }
     }
 }

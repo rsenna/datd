@@ -3,13 +3,13 @@
 namespace Dataweb.Dilab.Model.DataTransfer
 {
     [DataContract]
-    public class ServicoOrdemServico : DataTransferBase
+    public class ItemTransacao : DataTransferBase
     {
         [DataMember]
         public int CodEmpresa { get; set; }
 
         [DataMember]
-        public int CodOrdemServico { get; set; }
+        public int CodTransacao { get; set; }
 
         [DataMember]
         public string CodItem { get; set; }

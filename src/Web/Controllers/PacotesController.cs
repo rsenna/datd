@@ -14,15 +14,15 @@ namespace Dataweb.Dilab.Web.Controllers
             return View(result);
         }
 
-        public ActionResult Detalhar(string id)
+        public ActionResult Detalhar(string codPacoteCliente)
         {
             var codCliente = GetCodCliente();
             var viewModel = new PacotesDetalhar();
-            var pacoteCliente = ClienteSC.FindPacoteCredito(codCliente, id);
+            var pacoteCliente = ClienteSC.FindPacoteCredito(codCliente, codPacoteCliente);
 
             if (pacoteCliente != null)
             {
-                var pacotesHistorico = ClienteSC.FindAllPacoteHistorico(codCliente, id);
+                var pacotesHistorico = ClienteSC.FindAllPacoteHistorico(codCliente, codPacoteCliente);
 
                 var compra = new List<PacoteHistorico>();
                 var uso = new List<PacoteHistorico>();

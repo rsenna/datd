@@ -37,7 +37,7 @@
                         <%= Html.Encode(item.Quantidade) %>
                     </td>
                     <td>
-                        <%= Html.ActionLink("Detalhe", "Detalhar", new { id = item.CodPacoteCredito })%>
+                        <%= Html.ActionLink("Detalhe", "Detalhar", new {codPacoteCliente = item.CodPacoteCredito})%>
                     </td>
                 </tr>
 

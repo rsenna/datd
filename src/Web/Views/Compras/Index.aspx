@@ -18,6 +18,7 @@
                     <th>Referência</th>
                     <th>Etapa</th>
                     <th>Previsão<br />Encerramento</th>
+                    <th>&nbsp;</th>
                 </tr>
                 <% foreach (var item in Model.OrdensServico) { %>
                     <tr>
@@ -25,6 +26,7 @@
                         <td><%=item.Referencia %></td>
                         <td><%=Html.Encode<TipoEtapa>(item.Etapa) %></td>
                         <td><%=Html.EncodeDate(item.Previsao) %></td>
+                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao })%></td>
                     </tr>
                 <% } // end-foreach %>
             </table>
@@ -39,6 +41,7 @@
                     <th>Referência</th>
                     <th>Etapa</th>
                     <th>Previsão<br />Encerramento</th>
+                    <th>&nbsp;</th>
                 </tr>
                 <% foreach (var item in Model.Pedidos) { %>
                     <tr>
@@ -46,6 +49,7 @@
                         <td><%=item.Referencia %></td>
                         <td><%=Html.Encode<TipoEtapa>(item.Etapa) %></td>
                         <td><%=Html.EncodeDate(item.Previsao) %></td>
+                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao })%></td>
                     </tr>
                 <% } // end-foreach %>
             </table>

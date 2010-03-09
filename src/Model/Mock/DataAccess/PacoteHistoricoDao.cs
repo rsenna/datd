@@ -10,9 +10,10 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return new PacoteHistorico
             {
                 Data = GenerateDateTime(-10),
+                NumeroOS = GenerateInt32(),
                 Quantidade = GenerateInt32(100),
                 Valor = GenerateDecimal(10000),
-                Tipo = (TipoPacoteHistorico) GenerateInt32(1)
+                Tipo = (TipoPacoteHistorico) GenerateInt32(1, 2)
             };
         }
 

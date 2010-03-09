@@ -7,6 +7,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class FamiliaDao : DataAccessBase<Familia>, IFamiliaDao
     {
+        // TODO: [STP]
         private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
             SELECT
                 PRFA.cod_produtofamilia,
@@ -17,6 +18,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 PRFA.cod_produtofamilia = @PCOD_PRODUTOFAMILIA
         ";
 
+        // TODO: [STP]
         private const string SQL_STMT_FIND_ALL = @"
             SELECT
                 PRFA.cod_produtofamilia,

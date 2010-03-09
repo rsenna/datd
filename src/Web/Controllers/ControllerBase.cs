@@ -122,7 +122,7 @@ namespace Dataweb.Dilab.Web.Controllers
 
         protected virtual int GetCodCliente()
         {
-            // TODO: poderia utilizar sessao; metodo foi criado com este objetivo.
+            // TODO: Deveria ler aqui sessao WEB ou cookie ao invés de WCF; este método foi criado com este objetivo.
             var cliente = ClienteSC.FindByLogin(GetLogin());
             return cliente.CodCliente;
         }
@@ -169,7 +169,7 @@ namespace Dataweb.Dilab.Web.Controllers
             base.Initialize(requestContext);
         }
 
-        // TODO: implementar validação de email
+        // TODO: Implementar validação de email.
         public bool ValidateEmail(string email)
         {
             return true;

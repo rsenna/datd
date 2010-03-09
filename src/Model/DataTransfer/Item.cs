@@ -2,11 +2,20 @@
 
 namespace Dataweb.Dilab.Model.DataTransfer
 {
+    public enum TipoItem
+    {
+        Produto = 1,
+        Servico = 2
+    }
+
     [DataContract]
-    public class Servico : DataTransferBase
+    public class Item : DataTransferBase
     {
         [DataMember]
         public string CodItem { get; set; }
+
+        [DataMember]
+        public string CodBarra { get; set; }
 
         [DataMember]
         public bool Obrigatorio { get; set; }
@@ -16,5 +25,8 @@ namespace Dataweb.Dilab.Model.DataTransfer
 
         [DataMember]
         public bool ServicoInterno { get; set; }
+
+        [DataMember]
+        public TipoItem Tipo { get; set; }
     }
 }

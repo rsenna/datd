@@ -28,6 +28,9 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public int CodTransacao { get; set; } // RCODTRANSACAO
 
         [DataMember]
+        public int CodCliente { get; set; }
+
+        [DataMember]
         public int Numero { get; set; } // RNUMEROORDEMSERVICO
 
         [DataMember]
@@ -49,6 +52,12 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public string AvisoMensagem { get; set; } // RAVISOMENSAGEM
 
         [DataMember]
+        public string Observacao { get; set; }
+
+        [DataMember]
         public TipoCompra Tipo { get; set; }
+
+        [DataMember]
+        public ItemTransacao[] Itens { get; set; }
     }
 }

@@ -12,18 +12,53 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
 
         public override Compra FetchDto()
         {
-            return new Compra {
-                CodEmpresa = GenerateInt32(),
-                CodTransacao = GenerateInt32(),
-                Numero = GenerateInt32(),
-                Referencia = GenerateCode(7),
-                Emissao = GenerateDateTime(-MAX_DIAS),
-                Previsao = GenerateDateTime(MAX_DIAS),
-                Expedicao = GenerateDateTime(MAX_DIAS),
-                Etapa = (TipoEtapa)GenerateInt32(4),
-                AvisoMensagem = GenerateParagraph(),
-                Tipo = (TipoCompra)GenerateInt32(1, 2)
-            };
+            Compra result = null;
+            var tipo = (TipoCompra) GenerateInt32(1, 2);
+
+            switch (tipo)
+            {
+                case TipoCompra.OrdemServico:
+                    result = new OrdemServico();
+                    break;
+
+                case TipoCompra.Pedido:
+                    result = new Pedido();
+                    break;
+            }
+
+            if (result == null) throw new InvalidOperationException();
+
+            result.Tipo = tipo;
+
+            result.CodEmpresa = GenerateInt32();
+            result.CodTransacao = GenerateInt32();
+            result.Numero = GenerateInt32();
+            result.Referencia = GenerateCode(7);
+            result.Emissao = GenerateDateTime(-MAX_DIAS);
+            result.Previsao = GenerateDateTime(MAX_DIAS);
+            result.Expedicao = GenerateDateTime(MAX_DIAS);
+            result.Etapa = (TipoEtapa) GenerateInt32(4);
+            result.AvisoMensagem = GenerateParagraph();
+
+            if (result is OrdemServico)
+            {
+                var os = (OrdemServico) result;
+
+                os.DescricaoArmacao = GenerateParagraph();
+                os.ObservacaoArmacao = GenerateParagraph();
+                os.CodMaterial = GenerateInt32();
+                os.TipoVt = GenerateInt32();
+                os.Ta = GenerateDecimal();
+                os.Md = GenerateDecimal();
+                os.Diametro = GenerateDecimal();
+                os.ObservacaoLente = GenerateParagraph();
+                os.Dp = GenerateDecimal();
+                os.Aa = GenerateDecimal();
+                os.Eixo = GenerateDecimal();
+                os.Ponte = GenerateDecimal();
+            }
+
+            return result;
         }
 
         public override Compra FindByPrimaryKey(object pk)
@@ -36,7 +71,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             throw new NotImplementedException();
         }
 
-        public Compra[] FindAll(int codCliente)
+        public Compra[] FindAll(int codCliente, ProfundidadeConsultaTransacao profundidade)
         {
             return FindAll();
         }
@@ -51,9 +86,15 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return GenerateInt32(MAX_EM_PRODUCAO);
         }
 
+        public Compra Close(Compra dto)
+        {
+            return dto;
+        }
+
         public override Compra Insert(Compra dto)
         {
-            throw new NotImplementedException();
+            dto.Numero = GenerateInt32();
+            return dto;
         }
     }
 }

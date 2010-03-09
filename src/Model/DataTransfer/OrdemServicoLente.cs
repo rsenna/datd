@@ -15,7 +15,10 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public int CodEmpresa { get; set; }
 
         [DataMember]
-        public int CodOrdemServico { get; set; }
+        public int CodTransacao { get; set; }
+
+        [DataMember]
+        public int CodOrdemServicoLente { get; set; }
 
         [DataMember]
         public TipoLente TipoLente { get; set; }

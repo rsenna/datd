@@ -19,7 +19,7 @@
             </div>
 
             <div id="divReferencia">
-                <% Html.BeginForm("Index", "Os", FormMethod.Get); %>
+                <% Html.BeginForm("Index", "Compras", FormMethod.Get); %>
                     <b>Referência:</b> (Somente O.S. em produção)<br />
                     <input type="text" id="txtReferencia" name="referencia" />
                     <input type="submit" value="Enviar" id="btnReferencia" />

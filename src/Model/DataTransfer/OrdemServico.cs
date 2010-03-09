@@ -2,33 +2,9 @@
 
 namespace Dataweb.Dilab.Model.DataTransfer
 {
-    /// <summary>
-    /// Representa uma ordem de serviço básica (i.e. não agregada as
-    /// informações de lentes e serviços). O ideal seria que ela não possuisse
-    /// sequer informações específicas de ótica, mas isso acontece por limitação
-    /// das próprias procs expostas.
-    /// </summary>
     [DataContract]
-    public class OrdemServico : DataTransferBase
+    public class OrdemServico : Compra
     {
-        [DataMember]
-        public int CodOrdemServico { get; set; }
-
-        [DataMember]
-        public int Numero { get; set; }
-        
-        [DataMember]
-        public int CodEmpresa { get; set; }
-
-        [DataMember]
-        public int CodCliente { get; set; }
-
-        [DataMember]
-        public string Observacao { get; set; }
-
-        [DataMember]
-        public string Referencia { get; set; }
-
         [DataMember]
         public string DescricaoArmacao { get; set; }
 
@@ -64,5 +40,16 @@ namespace Dataweb.Dilab.Model.DataTransfer
 
         [DataMember]
         public decimal Ponte { get; set; }
+
+        [DataMember]
+        public OrdemServicoLente LenteOd { get; set; }
+
+        [DataMember]
+        public OrdemServicoLente LenteOe { get; set; }
+
+        public OrdemServico()
+        {
+            Tipo = TipoCompra.OrdemServico;
+        }
     }
 }
