@@ -5,12 +5,12 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
     public class FamiliaDao : DataAccessBase<Familia>, IFamiliaDao
     {
-        public override Familia FetchDto()
+        public override Familia InitDto(Familia dto)
         {
-            return new Familia {
-                CodFamilia = GenerateInt32(),
-                Descricao = GenerateName(4).ToUpper()
-            };
+            dto.CodFamilia = GenerateInt32();
+            dto.Descricao = GenerateName(4).ToUpper();
+
+            return dto;
         }
     }
 }

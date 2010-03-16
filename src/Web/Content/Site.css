@@ -84,9 +84,35 @@ body {
     height: 150px;
     position: relative;
 }
+#header div#title {
+    display: block;
+    float: left;
+    text-align: left;
+    position: absolute;
+    left: 10px;
+}
+#header #logindisplay {
+    color: White;
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+#header #logindisplay a:link {
+    color: white;
+    text-decoration: underline;
+}
+#header #logindisplay a:visited {
+    color: white;
+    text-decoration: underline;
+}
+#header #logindisplay a:hover {
+    color: white;
+    text-decoration: none;
+}
 #header .disclaimer {
     color: #ccc;
-    text-align: right;
     display: block;
     position: absolute;
     right: 10px;
@@ -253,12 +279,15 @@ legend {
     padding: 2px 4px 8px 4px;
 }
 input[type="text"] {
-    width: 200px;
     border: 1px solid #CCC;
 }
 input[type="password"] {
-    width: 200px;
     border: 1px solid #CCC;
+    width: 200px;
+}
+input#login {
+    border: 1px solid #CCC;
+    width: 200px;
 }
 
 /* TABLE
@@ -267,6 +296,7 @@ input[type="password"] {
 table {
     border: solid 1px #e8eef4;
     border-collapse: collapse;
+    width: 900px;
 }
 table td {
     padding: 5px;
@@ -278,6 +308,18 @@ table th {
     border: solid 1px #e8eef4;
 }
 
+/* auto width pra select box (IE)
+----------------------------------------------------------*/
+select.limited-width {
+    width: 200px;
+    position: static;
+}
+
+select.auto-width {
+    width: auto;
+    position: absolute;
+}
+
 /* MISC  
 ----------------------------------------------------------*/
 
@@ -286,31 +328,6 @@ table th {
 }
 .error {
     color: Red;
-}
-div#title {
-    display: block;
-    float: left;
-    text-align: left;
-}
-#logindisplay {
-    font-size: 12px;
-    display: block;
-    text-align: right;
-    margin: 8px;
-    color: White;
-    padding-top: 5px;
-}
-#logindisplay a:link {
-    color: white;
-    text-decoration: underline;
-}
-#logindisplay a:visited {
-    color: white;
-    text-decoration: underline;
-}
-#logindisplay a:hover {
-    color: white;
-    text-decoration: none;
 }
 .field-validation-error {
     color: #ff0000;
@@ -340,21 +357,24 @@ div#divHome {
 }
 div#divIdentificacao {
     float: left;
-    width: 300px;
+    width: 30%;
 }
 div#divReferencia {
     float: left;
-    width: 300px;
+    width: 40%;
 }
 div#divResumo {
     float: left;
-    width: 300px;
+    width: 30%;
+}
+input#txtReferencia {
+    width: 200px;
 }
 
 /* Compras/NovaOs.aspx */
 
-form#frmNovaOs {
-    width: 700px;
+div#divNumeroOS {
+    width: 133px;
 }
 
 div#divLentes {
@@ -365,22 +385,28 @@ div#divInfo {
 }
 div.coluna {
     float: left;
-    width: 300px;
+    width: 440px;
 }
-
+.separador {
+    float: left;
+    width: 20px;
+    height: 35px;
+}
 div.divcom1 {
-    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
-div.divcom1 input {
-    width: 96%;
+form#frmNovaOs input[type="text"]:not(.small) {
+    width: 100%;
 }
-div.divcom1 select {
-    width: 96%;
+form#frmNovaOs input[type="text"].small {
+    width: 133px;
 }
-div.divcom1 textarea {
-    width: 94%;
+form#frmNovaOs select {
+    width: 100%;
+}
+form#frmNovaOs textarea {
+    width: 99%;
     height: 100px;
 }
 
@@ -392,12 +418,8 @@ div.divcom3 {
 
 div.div1de3 {
     float: left;
-    width: 33%;
+    width: 133px;
 }
-div.div1de3 input {
-    width: 90%;
-}
-
 div.divcom2 {
     width: 100%;
     margin-left: auto;
@@ -406,19 +428,8 @@ div.divcom2 {
 
 div.div1de2 {
     float: left;
-    width: 50%;
+    width: 210px;
 }
-div.div1de2 input {
-    width: 91%;
-}
-div.div1de2 select {
-    width: 91%;
-}
-div.div1de2 textarea {
-    width: 90%;
-    height: 100px;
-}
-
 #divcom6 {
     width: 100%;
     margin-left: auto;
@@ -427,27 +438,21 @@ div.div1de2 textarea {
 
 div.div1de6 {
     float: left;
-    width: 14%;
-}
-div.div1de6 input {
-    width: 90%;
+    width: 133px;
 }
 
-div#divServicos {
+div#divItens {
     border-style: inset;
     border-width: 1px;
     border-color: Black;
     background-color: ButtonFace;
-    padding: 5px;
-    width: 576px;
+    padding: 10px;
+    width: 880px;
 }
-div#divMsgSemServicos {
-    padding: 5px;
-}
-div#divServicosOD {
+div#divItensOD {
     padding: 10px;
 }
-div#divServicosOE {
+div#divItensOE {
     padding: 10px;
 }
 
@@ -478,15 +483,12 @@ div.container {
     border-color: Black;
     background-color: ButtonFace;
     padding: 10px;
-    width: 700px;
+    width:880px;
 }
 
 div#divProdutosDisponiveis div {
     float: left;
     margin-right: 10px;
-}
-div#divProdutosDisponiveis select {
-    width: 253px;
 }
 div#divProdutosDisponiveis input#itxFiltroQuantidade {
     width: 80px;
@@ -495,9 +497,19 @@ div#divProdutosDisponiveis input#ibtAdicionar {
     height: 40px;
 }
 
-div#divItens table {
+div#divFiltroFamilia {
+    width: 240px;
+}
+select#selFiltroFamilia {
     width: 100%;
 }
+div#divFiltroProduto {
+    width: 440px;
+}
+select#selFiltroProduto {
+    width: 100%;
+}
+
 div#divItens td {
     background-color: window;
 }
@@ -517,17 +529,21 @@ div#divItens input.itxQtd {
     text-align: right;
 }
 
-textarea#txaObservacoes {
-    width: 716px;
-}
 input#ibtFinalizar {
     width: 723px;
 }
 
 table#tabItens {
     display: none;
+    width: 100%;
 }
 
 div#divCompras table td {
     width: 100px;
 }
+
+form#frmNovoPedido textarea {
+    width: 895px;
+    height: 100px;
+}
+

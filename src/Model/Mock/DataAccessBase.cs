@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using NLipsum.Core;
 
@@ -9,7 +10,7 @@ using NLipsum.Core;
 namespace Dataweb.Dilab.Model.Mock
 {
     public abstract class DataAccessBase<T> : IDataAccessBase<T>
-        where T : DataTransferBase
+        where T : DataTransferBase, new()
     {
         public const int FIND_ALL_MAX_COUNT = 100;
         public const int MAX_NAME_LENGTH = 50;
@@ -19,13 +20,14 @@ namespace Dataweb.Dilab.Model.Mock
 
         private static readonly Random random = new Random();
 
+        public QueryDepth Depth { get; set; }
         public ISession Session { get; set; }
 
         public void Dispose() { }
 
         public virtual T FindByPrimaryKey(object pk)
         {
-            return FetchDto();
+            return InitDto(new T());
         }
 
         public virtual T Insert(T dto)
@@ -38,24 +40,46 @@ namespace Dataweb.Dilab.Model.Mock
             return dto;
         }
 
-        public virtual T[] FindAll()
+        public virtual IEnumerable<T> FindAll()
         {
             var count = GenerateInt32(FIND_ALL_MAX_COUNT);
             var result = new T[count];
 
             for (var i = 0; i < count; i++)
             {
-                result[i] = FetchDto();
+                result[i] = InitDto(new T());
             }
 
             return result;
         }
 
-        public abstract T FetchDto();
+        public abstract T InitDto(T dto);
+
+        // TODO: método teve que ser repetido no Mock e no Ado - refatorar para classe básica ou usando composição
+        protected QueryDepth GetDetailDepth()
+        {
+            switch (Depth)
+            {
+                case QueryDepth.None:
+                case QueryDepth.FirstLevel:
+                    return QueryDepth.None;
+
+                case QueryDepth.Complete:
+                    return QueryDepth.Complete;
+
+                default:
+                    return Depth - 1;
+            }
+        }
 
         protected static DateTime GenerateDateTime(int intervaloDias)
         {
             return DateTime.Now.AddDays(GenerateInt32(intervaloDias));
+        }
+
+        protected static DateTime GenerateDateTime(int inicio, int fim)
+        {
+            return DateTime.Now.AddDays(GenerateInt32(inicio, fim));
         }
 
         protected static int GenerateInt32(int maxValue)
@@ -84,6 +108,17 @@ namespace Dataweb.Dilab.Model.Mock
         {
             var idx = random.NextDouble();
             return (maxValue + 1) * (decimal)idx;
+        }
+
+        protected static decimal GenerateDecimal(decimal minValue, decimal maxValue)
+        {
+            return GenerateDecimal(maxValue - minValue) + minValue;
+        }
+
+        protected static decimal GenerateDecimal(decimal minValue, decimal maxValue, string format)
+        {
+            var result = GenerateDecimal(minValue, maxValue);
+            return Convert.ToDecimal(result.ToString(format));
         }
 
         protected static string GeneratePhrase()

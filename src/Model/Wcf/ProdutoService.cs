@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -8,7 +9,7 @@ using System.Transactions;
 namespace Dataweb.Dilab.Model.Wcf
 {
     [ServiceBehavior(TransactionIsolationLevel = IsolationLevel.ReadCommitted, InstanceContextMode = InstanceContextMode.PerSession)]
-    public class ProdutoService : IProdutoService
+    public sealed class ProdutoService : IProdutoService
     {
         private readonly ISession session;
 
@@ -18,12 +19,18 @@ namespace Dataweb.Dilab.Model.Wcf
             session = DataAccessFactory.CreateSession();
         }
 
+        /// <summary>
+        /// Fecha a sessão quando o serviço for destruído.
+        /// </summary>
+        /// <remarks>
+        /// Como a classe é sealed, implementação do Dispose pode ser simples.
+        /// Ver <see cref="http://www.codeproject.com/KB/cs/idisposable.aspx"/>.
+        /// </remarks>
         public void Dispose()
         {
             session.Dispose();
         }
 
-        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         private int GetCodClienteByLogin(string login)
         {
             var clienteService = new ClienteService(session); // Obs.: a instância do serviço, neste caso, é LOCAL (e não remota).
@@ -31,16 +38,22 @@ namespace Dataweb.Dilab.Model.Wcf
             return cliente.CodCliente;
         }
 
-        private Compra[] FindAllCompraByCodCliente(int codCliente)
+        /// <summary>
+        /// Retorna todas as transações da empresa indicada.
+        /// </summary>
+        /// <param name="codCliente">CodCliente da empresa.</param>
+        /// <returns>Array de transações.</returns>
+        private IEnumerable<Transacao> FindAllTransacaoByCodCliente(int codCliente)
         {
-            var compraDao = DataAccessFactory.CreateDao<ICompraDao>(session);
-            return compraDao.FindAll(codCliente, ProfundidadeConsultaTransacao.Transacao);
+            var transacaoDao = DataAccessFactory.CreateDao<ITransacaoDao>(session);
+            transacaoDao.Depth = QueryDepth.FirstLevel;
+            return transacaoDao.FindAll(codCliente);
         }
 
-        private Compra[] FindAllCompraByCodClienteAndReferencia(int codCliente, string referencia)
+        private IEnumerable<Transacao> FindAllTransacaoByCodClienteAndReferencia(int codCliente, string referencia)
         {
-            var total = FindAllCompraByCodCliente(codCliente);
-            var parcial = new List<Compra>();
+            var total = FindAllTransacaoByCodCliente(codCliente);
+            var parcial = new List<Transacao>();
 
             foreach (var os in total)
             {
@@ -53,27 +66,38 @@ namespace Dataweb.Dilab.Model.Wcf
             return parcial.ToArray();
         }
 
+        /// <summary>
+        /// Busca todas as transações da empresa logada.
+        /// </summary>
+        /// <param name="login">Login da empresa.</param>
+        /// <returns>Array de transações.</returns>
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Compra[] FindAllCompraByLogin(string login)
+        public IEnumerable<Transacao> FindAllTransacaoByLogin(string login)
         {
-            return FindAllCompraByCodCliente(GetCodClienteByLogin(login));
+            return FindAllTransacaoByCodCliente(GetCodClienteByLogin(login));
+        }
+
+        /// <summary>
+        /// Busca todas as transações da empresa logada e com a referência indicada.
+        /// </summary>
+        /// <param name="login">Login da empresa.</param>
+        /// <param name="referencia">Referência a ser buscada.</param>
+        /// <returns>Array de transações.</returns>
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public IEnumerable<Transacao> FindAllTransacaoByLoginAndReferencia(string login, string referencia)
+        {
+            return FindAllTransacaoByCodClienteAndReferencia(GetCodClienteByLogin(login), referencia);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Compra[] FindAllCompraByLoginAndReferencia(string login, string referencia)
-        {
-            return FindAllCompraByCodClienteAndReferencia(GetCodClienteByLogin(login), referencia);
-        }
-
-        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Familia[] FindAllFamilia()
+        public IEnumerable<Familia> FindAllFamilia()
         {
             var familiaDao = DataAccessFactory.CreateDao<IFamiliaDao>(session);
             return familiaDao.FindAll();
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Material[] FindAllMaterial()
+        public IEnumerable<Material> FindAllMaterial()
         {
             var materialDao = DataAccessFactory.CreateDao<IMaterialDao>(session);
             return materialDao.FindAll();
@@ -82,37 +106,63 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public int GetCountFechadas(int codCliente)
         {
-            var compraDao = DataAccessFactory.CreateDao<ICompraDao>(session);
-            return compraDao.GetCountFechadas(codCliente);
+            var transacaoDao = DataAccessFactory.CreateDao<ITransacaoDao>(session);
+            return transacaoDao.GetCountFechadas(codCliente);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public int GetCountEmProducao(int codCliente)
         {
-            var compraDao = DataAccessFactory.CreateDao<ICompraDao>(session);
-            return compraDao.GetCountEmProducao(codCliente);
+            var transacaoDao = DataAccessFactory.CreateDao<ITransacaoDao>(session);
+            return transacaoDao.GetCountEmProducao(codCliente);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Item[] FindAllServico(int codFamilia)
+        public IEnumerable<Item> FindAllServico(int codFamilia)
         {
             var itemDao = DataAccessFactory.CreateDao<IItemDao>(session);
             return itemDao.FindAll(codFamilia, TipoItem.Servico);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Item[] FindAllProduto(int codFamilia)
+        public IEnumerable<Item> FindAllProduto(int codFamilia)
         {
             var itemDao = DataAccessFactory.CreateDao<IItemDao>(session);
             return itemDao.FindAll(codFamilia, TipoItem.Produto);
         }
 
-        private Compra InsertCompra(Compra dto)
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public Transacao GetTransacao(int codEmpresa, int codTransacao)
         {
-            var compraDao = DataAccessFactory.CreateDao<ICompraDao>(session);
+            var transacaoDao = DataAccessFactory.CreateDao<ITransacaoDao>(session);
+            transacaoDao.Depth = QueryDepth.Complete;
+            return transacaoDao.FindByPrimaryKey(codEmpresa, codTransacao);
+        }
 
-            dto = compraDao.Insert(dto);
-            compraDao.Close(dto);
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public OrdemServico GetOrdemServico(int codEmpresa, int codTransacao)
+        {
+            var ordemServicoDao = DataAccessFactory.CreateDao<IOrdemServicoDao>(session);
+            ordemServicoDao.Depth = QueryDepth.Complete;
+            return ordemServicoDao.FindByPrimaryKey(codEmpresa, codTransacao);
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public Pedido GetPedido(int codEmpresa, int codTransacao)
+        {
+            var pedidoDao = DataAccessFactory.CreateDao<IPedidoDao>(session);
+            pedidoDao.Depth = QueryDepth.Complete;
+            return pedidoDao.FindByPrimaryKey(codEmpresa, codTransacao);
+        }
+
+        private T InsertTransacao<TInterface, T>(T dto)
+            where TInterface : ITransacaoDao<T>
+            where T : Transacao
+        {
+            var dao = DataAccessFactory.CreateDao<TInterface>(session);
+
+            dto = dao.Insert(dto);
+            dao.Close(dto);
 
             return dto;
         }
@@ -120,13 +170,53 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public OrdemServico InsertOrdemServico(OrdemServico dto)
         {
-            return (OrdemServico) InsertCompra(dto);
+            return InsertTransacao<IOrdemServicoDao, OrdemServico>(dto);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Pedido InsertPedido(Pedido dto)
         {
-            return (Pedido) InsertCompra(dto);
+            return InsertTransacao<IPedidoDao, Pedido>(dto);
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public IEnumerable<Fatura> FindAllFatura(int codEmpresa)
+        {
+            var faturaDao = DataAccessFactory.CreateDao<IFaturaDao>(session);
+            faturaDao.Depth = QueryDepth.FirstLevel;
+            return faturaDao.FindAll(codEmpresa);
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public IEnumerable<Lancamento> FindAllLancamento(int codEmpresa)
+        {
+            var lancamentoDao = DataAccessFactory.CreateDao<ILancamentoDao>(session);
+            lancamentoDao.Depth = QueryDepth.FirstLevel;
+            return lancamentoDao.FindAll(codEmpresa);
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public IEnumerable<NotaFiscal> FindAllNotaFiscal(int codEmpresa)
+        {
+            var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session);
+            notaFiscalDao.Depth = QueryDepth.FirstLevel;
+            return notaFiscalDao.FindAll(codEmpresa);
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public Fatura GetFatura(int codEmpresa, int codFatura)
+        {
+            var faturaDao = DataAccessFactory.CreateDao<IFaturaDao>(session);
+            faturaDao.Depth = QueryDepth.SecondLevel;
+            return faturaDao.FindByPrimaryKey(codEmpresa, codFatura);
+        }
+
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
+        public NotaFiscal GetNotaFiscal(int codEmpresa, int codNotaFiscal)
+        {
+            var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session);
+            notaFiscalDao.Depth = QueryDepth.SecondLevel;
+            return notaFiscalDao.FindByPrimaryKey(codEmpresa, codNotaFiscal);
         }
     }
 }

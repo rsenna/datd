@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -21,8 +22,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 (SELECT nome FROM pessoa WHERE cod_pessoa = COALESCE(pessoacliente.cod_empresa, (SELECT MIN(cfgprincipal.cod_empresamatriz) FROM cfgprincipal))) nomeempresa
             FROM
                 pessoa pessoacliente
-                INNER JOIN webrascliente
-                    ON (webrascliente.cod_cliente = pessoacliente.cod_pessoa)
+                INNER JOIN webrascliente ON
+                    webrascliente.cod_cliente = pessoacliente.cod_pessoa
             WHERE
                 pessoacliente.cnpj = @CNPJ
         ";
@@ -81,14 +82,14 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public Cliente FindByIdentificador(int identificador)
         {
-            Cliente result = null;
+            var result = new Cliente();
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_IDENTIFICADOR;
 
                 Helper.AddParameter(c, "@IDENTIFICADOR", DbType.Int32, identificador);
 
-                result = FetchDto(c);
+                result = InitDto(c, result);
             });
 
             return result;
@@ -96,32 +97,32 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public Cliente FindByCnpj(string cnpj)
         {
-            Cliente result = null;
+            var result = new Cliente();
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_CNPJ;
 
                 Helper.AddParameter(c, "@CNPJ", DbType.String, cnpj);
 
-                result = FetchDto(c);
+                InitDto(c, result);
             });
 
             return result;
         }
 
-        public override Cliente[] FindAll()
+        public override IEnumerable<Cliente> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public override Cliente FindByPrimaryKey(object primaryKey)
+        public override Cliente FindByPrimaryKey(object pk)
         {
-            Cliente result = null;
+            var result = new Cliente();
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
-                Helper.AddParameter(c, "@COD_CLIENTE", DbType.Int32, primaryKey);
-                result = FetchDto(c);
+                Helper.AddParameter(c, "@COD_CLIENTE", DbType.Int32, pk);
+                result = InitDto(c, result);
             });
 
             return result;
@@ -156,19 +157,19 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public override Cliente FetchDto(IDataRecord reader)
+        public override Cliente InitDto(IDataRecord reader, Cliente dto)
         {
-            return new Cliente {
-                CodCliente = Helper.ReadInt32(reader, "COD_CLIENTE").Value,
-                Identificador = Helper.ReadInt32(reader, "IDENTIFICADOR").Value,
-                Cnpj = Helper.ReadString(reader, "CNPJ"),
-                Nome = Helper.ReadString(reader, "NOME"),
-                Senha = Helper.ReadString(reader, "SENHA"),
-                CodEmpresa = Helper.ReadInt32(reader, "COD_EMPRESA").Value,
-                NomeEmpresa = Helper.ReadString(reader, "NOMEEMPRESA"),
-                EmailNotificacao = Helper.ReadString(reader, "EMAILNOTIFICACAO"),
-                ReceberNotificacao = Helper.ReadBoolean(reader, "RECEBERNOTIFICACAO").Value
-            };
+            dto.CodCliente = Helper.ReadInt32(reader, "COD_CLIENTE").Value;
+            dto.Identificador = Helper.ReadInt32(reader, "IDENTIFICADOR").Value;
+            dto.Cnpj = Helper.ReadString(reader, "CNPJ");
+            dto.Nome = Helper.ReadString(reader, "NOME");
+            dto.Senha = Helper.ReadString(reader, "SENHA");
+            dto.CodEmpresa = Helper.ReadInt32(reader, "COD_EMPRESA").Value;
+            dto.NomeEmpresa = Helper.ReadString(reader, "NOMEEMPRESA");
+            dto.EmailNotificacao = Helper.ReadString(reader, "EMAILNOTIFICACAO");
+            dto.ReceberNotificacao = Helper.ReadBoolean(reader, "RECEBERNOTIFICACAO").Value;
+
+            return dto;
         }
 
         public virtual Cliente FindByPrimaryKey(int codCliente)

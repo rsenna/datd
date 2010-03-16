@@ -11,18 +11,18 @@
 
     Produtos Disponíveis
     <div id="divProdutosDisponiveis" class="container">
-        <div id="divSelecaoFamilia">
+        <div id="divFiltroFamilia">
             Família<br />
-            <select id="selFiltroFamilia">
+            <select id="selFiltroFamilia" class="ieAutoWidth">
                 <option value="" selected="selected">(Selecione uma família)</option>
                 <% foreach(var familia in Model.Familias) { %>
                     <option value="<%=familia.CodFamilia %>"><%=familia.Descricao %></option>
                 <% } // end-foreach %>
             </select>
         </div>
-        <div id="divSelecaoProduto">
+        <div id="divFiltroProduto">
             Produto<br />
-            <select id="selFiltroProduto">
+            <select id="selFiltroProduto" class="ieAutoWidth">
                 <option value="" selected="selected">(Selecione um produto)</option>
             </select>
         </div>
@@ -38,7 +38,7 @@
         <div id="divItens" class="container">
             <span id="message">Adicione produtos ao pedido através do painel superior.</span>
             <input type="hidden" id="alertProduto" value="Este produto já foi adicionado." />
-            <table id="tabItens">
+            <table id="tabItens" summary="Listagem de itens">
                 <tr>
                     <th>Família</th>
                     <th>Produto</th>
@@ -63,7 +63,7 @@
                         {3}
                     </td>
                     <td>
-                        <input type="text" class="itxQtd" name="quantidades" value="{4}" class="numeric" />
+                        <input type="text" name="quantidades" value="{4}" class="itxQtd numeric" />
                     </td>
                     <td class="tdExcluir" id="tdExcluir_{1}">
                         <a href="#" class="linkExcluir">Excluir</a>
@@ -74,6 +74,7 @@
         <br />
         Observações<br />
         <textarea rows="4" cols="40" id="txaObservacoes" name="observacao"></textarea>
+        <br />
         <br />
         <input type="submit" value="Finalizar Pedido" />
     </form>

@@ -8,17 +8,17 @@
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IProdutoService_FindAllCompraByLogin_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllCompraByLogin" />
+  <wsdl:message name="IProdutoService_FindAllTransacaoByLogin_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllTransacaoByLogin" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllCompraByLogin_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllCompraByLoginResponse" />
+  <wsdl:message name="IProdutoService_FindAllTransacaoByLogin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllTransacaoByLoginResponse" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllCompraByLoginAndReferencia_InputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllCompraByLoginAndReferencia" />
+  <wsdl:message name="IProdutoService_FindAllTransacaoByLoginAndReferencia_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllTransacaoByLoginAndReferencia" />
   </wsdl:message>
-  <wsdl:message name="IProdutoService_FindAllCompraByLoginAndReferencia_OutputMessage">
-    <wsdl:part name="parameters" element="tns:FindAllCompraByLoginAndReferenciaResponse" />
+  <wsdl:message name="IProdutoService_FindAllTransacaoByLoginAndReferencia_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllTransacaoByLoginAndReferenciaResponse" />
   </wsdl:message>
   <wsdl:message name="IProdutoService_FindAllFamilia_InputMessage">
     <wsdl:part name="parameters" element="tns:FindAllFamilia" />
@@ -56,6 +56,24 @@
   <wsdl:message name="IProdutoService_FindAllProduto_OutputMessage">
     <wsdl:part name="parameters" element="tns:FindAllProdutoResponse" />
   </wsdl:message>
+  <wsdl:message name="IProdutoService_GetTransacao_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransacao" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetTransacao_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTransacaoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetOrdemServico_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdemServico" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetOrdemServico_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOrdemServicoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetPedido_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPedido" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetPedido_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPedidoResponse" />
+  </wsdl:message>
   <wsdl:message name="IProdutoService_InsertOrdemServico_InputMessage">
     <wsdl:part name="parameters" element="tns:InsertOrdemServico" />
   </wsdl:message>
@@ -68,14 +86,44 @@
   <wsdl:message name="IProdutoService_InsertPedido_OutputMessage">
     <wsdl:part name="parameters" element="tns:InsertPedidoResponse" />
   </wsdl:message>
+  <wsdl:message name="IProdutoService_FindAllFatura_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllFatura" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_FindAllFatura_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllFaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_FindAllLancamento_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllLancamento" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_FindAllLancamento_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllLancamentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_FindAllNotaFiscal_InputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllNotaFiscal" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_FindAllNotaFiscal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FindAllNotaFiscalResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetFatura_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetFatura" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetFatura_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetFaturaResponse" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetNotaFiscal_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotaFiscal" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetNotaFiscal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetNotaFiscalResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProdutoService">
-    <wsdl:operation name="FindAllCompraByLogin">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLogin" message="tns:IProdutoService_FindAllCompraByLogin_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLoginResponse" message="tns:IProdutoService_FindAllCompraByLogin_OutputMessage" />
+    <wsdl:operation name="FindAllTransacaoByLogin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllTransacaoByLogin" message="tns:IProdutoService_FindAllTransacaoByLogin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllTransacaoByLoginResponse" message="tns:IProdutoService_FindAllTransacaoByLogin_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="FindAllCompraByLoginAndReferencia">
-      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferencia" message="tns:IProdutoService_FindAllCompraByLoginAndReferencia_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferenciaResponse" message="tns:IProdutoService_FindAllCompraByLoginAndReferencia_OutputMessage" />
+    <wsdl:operation name="FindAllTransacaoByLoginAndReferencia">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllTransacaoByLoginAndReferencia" message="tns:IProdutoService_FindAllTransacaoByLoginAndReferencia_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllTransacaoByLoginAndReferenciaResponse" message="tns:IProdutoService_FindAllTransacaoByLoginAndReferencia_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="FindAllFamilia">
       <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllFamilia" message="tns:IProdutoService_FindAllFamilia_InputMessage" />
@@ -101,6 +149,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllProduto" message="tns:IProdutoService_FindAllProduto_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllProdutoResponse" message="tns:IProdutoService_FindAllProduto_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetTransacao">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/GetTransacao" message="tns:IProdutoService_GetTransacao_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/GetTransacaoResponse" message="tns:IProdutoService_GetTransacao_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdemServico">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/GetOrdemServico" message="tns:IProdutoService_GetOrdemServico_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/GetOrdemServicoResponse" message="tns:IProdutoService_GetOrdemServico_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPedido">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/GetPedido" message="tns:IProdutoService_GetPedido_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/GetPedidoResponse" message="tns:IProdutoService_GetPedido_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="InsertOrdemServico">
       <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/InsertOrdemServico" message="tns:IProdutoService_InsertOrdemServico_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/InsertOrdemServicoResponse" message="tns:IProdutoService_InsertOrdemServico_OutputMessage" />
@@ -109,11 +169,31 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/InsertPedido" message="tns:IProdutoService_InsertPedido_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/InsertPedidoResponse" message="tns:IProdutoService_InsertPedido_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="FindAllFatura">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllFatura" message="tns:IProdutoService_FindAllFatura_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllFaturaResponse" message="tns:IProdutoService_FindAllFatura_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAllLancamento">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllLancamento" message="tns:IProdutoService_FindAllLancamento_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllLancamentoResponse" message="tns:IProdutoService_FindAllLancamento_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FindAllNotaFiscal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllNotaFiscal" message="tns:IProdutoService_FindAllNotaFiscal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/FindAllNotaFiscalResponse" message="tns:IProdutoService_FindAllNotaFiscal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetFatura">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/GetFatura" message="tns:IProdutoService_GetFatura_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/GetFaturaResponse" message="tns:IProdutoService_GetFatura_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNotaFiscal">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/GetNotaFiscal" message="tns:IProdutoService_GetNotaFiscal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/GetNotaFiscalResponse" message="tns:IProdutoService_GetNotaFiscal_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProdutoService" type="tns:IProdutoService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="FindAllCompraByLogin">
-      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllCompraByLogin" style="document" />
+    <wsdl:operation name="FindAllTransacaoByLogin">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllTransacaoByLogin" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -121,8 +201,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="FindAllCompraByLoginAndReferencia">
-      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferencia" style="document" />
+    <wsdl:operation name="FindAllTransacaoByLoginAndReferencia">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllTransacaoByLoginAndReferencia" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -184,6 +264,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetTransacao">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/GetTransacao" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrdemServico">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/GetOrdemServico" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPedido">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/GetPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="InsertOrdemServico">
       <soap:operation soapAction="http://tempuri.org/IProdutoService/InsertOrdemServico" style="document" />
       <wsdl:input>
@@ -195,6 +302,51 @@
     </wsdl:operation>
     <wsdl:operation name="InsertPedido">
       <soap:operation soapAction="http://tempuri.org/IProdutoService/InsertPedido" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllFatura">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllFatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllLancamento">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllLancamento" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindAllNotaFiscal">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/FindAllNotaFiscal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetFatura">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/GetFatura" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNotaFiscal">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/GetNotaFiscal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

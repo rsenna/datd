@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Collections.Generic;
+using System.ServiceModel;
 using System.Transactions;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -7,7 +8,7 @@ using Dataweb.Dilab.Model.Service;
 namespace Dataweb.Dilab.Model.Wcf
 {
     [ServiceBehavior(TransactionIsolationLevel = IsolationLevel.ReadCommitted, InstanceContextMode = InstanceContextMode.PerSession)]
-    public class ClienteService : IClienteService
+    public sealed class ClienteService : IClienteService
     {
         private readonly ISession session;
 
@@ -23,6 +24,13 @@ namespace Dataweb.Dilab.Model.Wcf
             this.session = session;
         }
 
+        /// <summary>
+        /// Fecha a sessão quando o serviço for destruído.
+        /// </summary>
+        /// <remarks>
+        /// Como a classe é sealed, implementação do Dispose pode ser simples.
+        /// Ver <see cref="http://www.codeproject.com/KB/cs/idisposable.aspx"/>.
+        /// </remarks>
         public void Dispose()
         {
             session.Dispose();
@@ -80,7 +88,7 @@ namespace Dataweb.Dilab.Model.Wcf
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public PacoteCredito[] FindAllPacoteCredito(int codCliente)
+        public IEnumerable<PacoteCredito> FindAllPacoteCredito(int codCliente)
         {
             var pacoteCreditoDao = DataAccessFactory.CreateDao<IPacoteCreditoDao>(session);
             return pacoteCreditoDao.FindAll(codCliente);
@@ -94,7 +102,7 @@ namespace Dataweb.Dilab.Model.Wcf
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public PacoteHistorico[] FindAllPacoteHistorico(int codCliente, string codPacoteCliente)
+        public IEnumerable<PacoteHistorico> FindAllPacoteHistorico(int codCliente, string codPacoteCliente)
         {
             var pacoteHistoricoDao = DataAccessFactory.CreateDao<IPacoteHistoricoDao>(session);
             return pacoteHistoricoDao.FindAll(codCliente, codPacoteCliente);

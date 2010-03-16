@@ -12,7 +12,7 @@
         <h2>Minhas Compras</h2>
         <h3>Ordens de Serviço</h3>
         <% if (Model.OrdensServico.Any()) { %>
-            <table>
+            <table summary="Ordens de Serviço">
                 <tr>
                     <th>Nº/Entrada</th>
                     <th>Referência</th>
@@ -26,7 +26,7 @@
                         <td><%=item.Referencia %></td>
                         <td><%=Html.Encode<TipoEtapa>(item.Etapa) %></td>
                         <td><%=Html.EncodeDate(item.Previsao) %></td>
-                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao })%></td>
+                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao, tipo = TipoTransacao.OrdemServico })%></td>
                     </tr>
                 <% } // end-foreach %>
             </table>
@@ -35,7 +35,7 @@
         <% } %>
         <h3>Pedidos</h3>
         <% if (Model.Pedidos.Any()) { %>
-            <table>
+            <table summary="Pedidos">
                 <tr>
                     <th>Nº/Entrada</th>
                     <th>Referência</th>
@@ -49,7 +49,7 @@
                         <td><%=item.Referencia %></td>
                         <td><%=Html.Encode<TipoEtapa>(item.Etapa) %></td>
                         <td><%=Html.EncodeDate(item.Previsao) %></td>
-                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao })%></td>
+                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao, tipo = TipoTransacao.Pedido })%></td>
                     </tr>
                 <% } // end-foreach %>
             </table>

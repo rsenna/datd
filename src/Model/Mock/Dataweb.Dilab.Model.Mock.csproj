@@ -53,7 +53,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccessBase.cs" />
-    <Compile Include="DataAccess\CompraDao.cs" />
+    <Compile Include="DataAccess\FaturaDao.cs" />
+    <Compile Include="DataAccess\NotaFiscalDao.cs" />
+    <Compile Include="DataAccess\ItemTransacaoDao.cs" />
+    <Compile Include="DataAccess\LancamentoDao.cs" />
+    <Compile Include="DataAccess\OrdemServicoDao.cs" />
+    <Compile Include="DataAccess\PedidoDao.cs" />
+    <Compile Include="DataAccess\TransacaoDao.cs" />
     <Compile Include="DataAccess\ItemDao.cs" />
     <Compile Include="DataAccess\PacoteHistoricoDao.cs" />
     <Compile Include="DataAccess\PacoteCreditoDao.cs" />

@@ -5,7 +5,7 @@ namespace Dataweb.Dilab.Web.Models
 {
     public class ComprasIndex
     {
-        public IEnumerable<Compra> OrdensServico { get; set; }
-        public IEnumerable<Compra> Pedidos { get; set; }
+        public IEnumerable<Transacao> OrdensServico { get; set; }
+        public IEnumerable<Transacao> Pedidos { get; set; }
     }
 }

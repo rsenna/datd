@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ServiceModel;
 using Dataweb.Dilab.Model.DataTransfer;
 
@@ -7,16 +8,16 @@ namespace Dataweb.Dilab.Model.Service
     public interface IProdutoService : IService
     {
         [OperationContract]
-        Compra[] FindAllCompraByLogin(string login);
+        IEnumerable<Transacao> FindAllTransacaoByLogin(string login);
 
         [OperationContract]
-        Compra[] FindAllCompraByLoginAndReferencia(string login, string referencia);
+        IEnumerable<Transacao> FindAllTransacaoByLoginAndReferencia(string login, string referencia);
 
         [OperationContract]
-        Familia[] FindAllFamilia();
+        IEnumerable<Familia> FindAllFamilia();
 
         [OperationContract]
-        Material[] FindAllMaterial();
+        IEnumerable<Material> FindAllMaterial();
 
         [OperationContract]
         int GetCountFechadas(int codCliente);
@@ -25,15 +26,39 @@ namespace Dataweb.Dilab.Model.Service
         int GetCountEmProducao(int codCliente);
 
         [OperationContract]
-        Item[] FindAllServico(int codFamilia);
+        IEnumerable<Item> FindAllServico(int codFamilia);
 
         [OperationContract]
-        Item[] FindAllProduto(int codFamilia);
+        IEnumerable<Item> FindAllProduto(int codFamilia);
+
+        [OperationContract]
+        Transacao GetTransacao(int codEmpresa, int codTransacao);
+
+        [OperationContract]
+        OrdemServico GetOrdemServico(int codEmpresa, int codTransacao);
+
+        [OperationContract]
+        Pedido GetPedido(int codEmpresa, int codTransacao);
 
         [OperationContract]
         OrdemServico InsertOrdemServico(OrdemServico dto);
 
         [OperationContract]
         Pedido InsertPedido(Pedido dto);
+
+        [OperationContract]
+        IEnumerable<Fatura> FindAllFatura(int codEmpresa);
+
+        [OperationContract]
+        IEnumerable<Lancamento> FindAllLancamento(int codEmpresa);
+
+        [OperationContract]
+        IEnumerable<NotaFiscal> FindAllNotaFiscal(int codEmpresa);
+
+        [OperationContract]
+        Fatura GetFatura(int codEmpresa, int codFatura);
+
+        [OperationContract]
+        NotaFiscal GetNotaFiscal(int codEmpresa, int codNotaFiscal);
     }
 }

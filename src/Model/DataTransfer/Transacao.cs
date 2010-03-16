@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Dataweb.Dilab.Model.DataTransfer
@@ -12,14 +13,16 @@ namespace Dataweb.Dilab.Model.DataTransfer
         Finalizada = 4
     }
 
-    public enum TipoCompra
+    public enum TipoTransacao
     {
         Pedido = 1,
         OrdemServico = 2
     }
 
     [DataContract]
-    public class Compra : DataTransferBase
+    [KnownType(typeof(OrdemServico))]
+    [KnownType(typeof(Pedido))]
+    public class Transacao : DataTransferBase
     {
         [DataMember]
         public int CodEmpresa { get; set; } // RCODEMPRESA
@@ -55,9 +58,9 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public string Observacao { get; set; }
 
         [DataMember]
-        public TipoCompra Tipo { get; set; }
+        public TipoTransacao Tipo { get; set; }
 
         [DataMember]
-        public ItemTransacao[] Itens { get; set; }
+        public IEnumerable<ItemTransacao> Itens { get; set; }
     }
 }

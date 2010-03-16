@@ -3,7 +3,7 @@
 namespace Dataweb.Dilab.Model.DataTransfer
 {
     [DataContract]
-    public class OrdemServico : Compra
+    public class OrdemServico : Transacao
     {
         [DataMember]
         public string DescricaoArmacao { get; set; }
@@ -49,7 +49,7 @@ namespace Dataweb.Dilab.Model.DataTransfer
 
         public OrdemServico()
         {
-            Tipo = TipoCompra.OrdemServico;
+            Tipo = TipoTransacao.OrdemServico;
         }
     }
 }

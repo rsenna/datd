@@ -92,7 +92,7 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
                     ".Net Framework Data Provider for Firebird",
                     "FirebirdSql.Data.FirebirdClient",
                     "FirebirdSql.Data.FirebirdClient.FirebirdClientFactory, FirebirdSql.Data.FirebirdClient, Version=2.5.1.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c"
-                );
+                    );
             }
 
             AddConnectionString(new ConnectionStringSettings("DilabDatabase",
@@ -120,18 +120,15 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
         }
 
         [Test]
-        public void CanGetByLogin()
+        public void CanDetailPacotes()
         {
             var service = new ClienteService();
-            Assert.IsNotNull(service);
-        }
 
-        [Test]
-        public void CanListPacotes()
-        {
-            var service = new ClienteService();
-            var result = service.FindAllPacoteCredito(526); // VISUAL - URUGUAIANA
-            Assert.Greater(result.Length, 0);
+            var result1 = service.FindPacoteCredito(526, "1018760");
+            Assert.IsNotNull(result1);
+
+            var result2 = service.FindAllPacoteHistorico(526, "1018760");
+            Assert.IsNotNull(result2.GetEnumerator().Current);
         }
 
         [Test]
@@ -143,15 +140,18 @@ namespace Dataweb.Dilab.Model.Wcf.Tests
         }
 
         [Test]
-        public void CanDetailPacotes()          
+        public void CanGetByLogin()
         {
             var service = new ClienteService();
+            Assert.IsNotNull(service);
+        }
 
-            var result1 = service.FindPacoteCredito(526, "1018760");
-            Assert.IsNotNull(result1);
-
-            var result2 = service.FindAllPacoteHistorico(526, "1018760");
-            Assert.Greater(result2.Length, 0);
+        [Test]
+        public void CanListPacotes()
+        {
+            var service = new ClienteService();
+            var result = service.FindAllPacoteCredito(526); // VISUAL - URUGUAIANA
+            Assert.IsNotNull(result.GetEnumerator().Current);
         }
     }
 }

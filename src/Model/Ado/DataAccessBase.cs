@@ -6,7 +6,7 @@ using System.Transactions;
 namespace Dataweb.Dilab.Model.Ado
 {
     public abstract class DataAccessBase<T> : IDataAccessBase<T>
-        where T: DataTransferBase
+        where T: DataTransferBase, new()
     {
         protected DataAccessBase()
         {
@@ -16,57 +16,70 @@ namespace Dataweb.Dilab.Model.Ado
             }
         }
 
+        public QueryDepth Depth { get; set; }
         public ISession Session { get; set; }
 
-        public virtual T FetchDto(DbCommand c)
+        public virtual T InitDto(DbCommand c, T dto)
         {
-            T result = null;
-
             using (var reader = c.ExecuteReader())
             {
                 if (reader.Read())
                 {
-                    result = FetchDto(reader);
+                    return InitDto(reader, dto);
                 }
             }
 
-            return result;
+            return dto;
         }
 
-        public abstract T FetchDto(IDataRecord record);
+        public abstract T InitDto(IDataRecord record, T dto);
 
-        public virtual T[] FetchDtos(DbCommand c)
+        public virtual IEnumerable<T> InitDtos(DbCommand c, IList<T> dtos)
         {
-            var result = new List<T>();
-
             using (var reader = c.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    var item = FetchDto(reader);
-                    result.Add(item);
+                    var item = InitDto(reader, new T());
+                    dtos.Add(item);
                 }
             }
 
-            return result.ToArray();
+            return dtos;
         }
 
-        public abstract T[] FindAll();
+        public abstract IEnumerable<T> FindAll();
         public abstract T FindByPrimaryKey(object pk);
         public abstract T Insert(T dto);
         public abstract T Update(T dto);
 
-        protected T[] FindAll(string sqlStmt)
+        protected IEnumerable<T> FindAll(string sqlStmt)
         {
-            T[] result = null;
+            IEnumerable<T> result = null;
 
             Helper.UsingCommand(Session.Connection, c =>
             {
                 c.CommandText = sqlStmt;
-                result = FetchDtos(c);
+                result = InitDtos(c, new List<T>());
             });
 
             return result;
+        }
+
+        protected QueryDepth GetDetailDepth()
+        {
+            switch (Depth)
+            {
+                case QueryDepth.None:
+                case QueryDepth.FirstLevel:
+                    return QueryDepth.None;
+
+                case QueryDepth.Complete:
+                    return QueryDepth.Complete;
+
+                default:
+                    return Depth - 1;
+            }
         }
     }
 }

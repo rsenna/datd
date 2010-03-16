@@ -5,12 +5,12 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
     public class MaterialDao : DataAccessBase<Material>, IMaterialDao
     {
-        public override Material FetchDto()
+        public override Material InitDto(Material dto)
         {
-            return new Material {
-                CodMaterial = GenerateInt32(),
-                Descricao = GenerateName(4).ToUpper()
-            };
+            dto.CodMaterial = GenerateInt32();
+            dto.Descricao = GenerateName(4).ToUpper();
+
+            return dto;
         }
     }
 }

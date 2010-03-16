@@ -51,15 +51,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\IFaturaDao.cs" />
+    <Compile Include="DataAccess\INotaFiscalDao.cs" />
+    <Compile Include="DataAccess\ILancamentoDao.cs" />
+    <Compile Include="DataAccess\IPedidoDao.cs" />
     <Compile Include="DataAccess\IItemDao.cs" />
-    <Compile Include="DataAccess\ICompraDao.cs" />
+    <Compile Include="DataAccess\IOrdemServicoDao.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DataAccess\ITransacaoDao.cs" />
     <Compile Include="DataAccess\IItemTransacaoDao.cs" />
     <Compile Include="DataAccess\IPacoteHistoricoDao.cs" />
     <Compile Include="DataAccess\IPacoteCreditoDao.cs" />
     <Compile Include="DataAccess\IOrdemServicoLenteDao.cs" />
     <Compile Include="DataAccess\IMaterialDao.cs" />
     <Compile Include="DataAccess\IFamiliaDao.cs" />
-    <Compile Include="DataTransfer\Compra.cs" />
+    <Compile Include="DataTransfer\Fatura.cs" />
+    <Compile Include="DataTransfer\Lancamento.cs" />
+    <Compile Include="DataTransfer\NotaFiscal.cs" />
+    <Compile Include="DataTransfer\Transacao.cs" />
     <Compile Include="DataTransfer\ItemTransacao.cs" />
     <Compile Include="DataTransfer\PacoteCredito.cs" />
     <Compile Include="DataTransfer\PacoteHistorico.cs" />

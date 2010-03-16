@@ -8,29 +8,29 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
         // CPF 14 CNPJ 19
         private const string SENHA = "teste123";
 
-        public override Cliente FetchDto()
+        public override Cliente InitDto(Cliente dto)
         {
-            return new Cliente {
-                CodCliente = GenerateInt32(),
-                Identificador = GenerateInt32(),
-                Cnpj = GenerateCode(19),
-                Nome = GenerateName(3),
-                Senha = SENHA,
-                CodEmpresa = GenerateInt32(),
-                NomeEmpresa = GenerateName(5),
-                EmailNotificacao = GenerateEmail(),
-                ReceberNotificacao = GenerateBoolean()
-            };
+            dto.CodCliente = GenerateInt32();
+            dto.Identificador = GenerateInt32();
+            dto.Cnpj = GenerateCode(19);
+            dto.Nome = GenerateName(3);
+            dto.Senha = SENHA;
+            dto.CodEmpresa = GenerateInt32();
+            dto.NomeEmpresa = GenerateName(5);
+            dto.EmailNotificacao = GenerateEmail();
+            dto.ReceberNotificacao = GenerateBoolean();
+
+            return dto;
         }
 
         public Cliente FindByIdentificador(int identificador)
         {
-            return FetchDto();
+            return InitDto(new Cliente());
         }
 
         public Cliente FindByCnpj(string cnpj)
         {
-            return FetchDto();
+            return InitDto(new Cliente());
         }
     }
 }

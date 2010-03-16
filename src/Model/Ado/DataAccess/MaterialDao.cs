@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -18,12 +19,12 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 descricao
         ";
 
-        public override Material FetchDto(IDataRecord reader)
+        public override Material InitDto(IDataRecord reader, Material dto)
         {
-            return new Material {
-                CodMaterial = Helper.ReadInt32(reader, "cod_oticalentematerial").Value,
-                Descricao = Helper.ReadString(reader, "descricao")
-            };
+            dto.CodMaterial = Helper.ReadInt32(reader, "cod_oticalentematerial").Value;
+            dto.Descricao = Helper.ReadString(reader, "descricao");
+
+            return dto;
         }
 
         public override Material FindByPrimaryKey(object pk)
@@ -36,7 +37,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public override Material[] FindAll()
+        public override IEnumerable<Material> FindAll()
         {
             return FindAll(SQL_STMT_FIND_ALL);
         }

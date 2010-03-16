@@ -1,10 +1,11 @@
-﻿using Dataweb.Dilab.Model.DataTransfer;
+﻿using System.Collections.Generic;
+using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.DataAccess
 {
     public interface IItemTransacaoDao : IDataAccessBase<ItemTransacao>
     {
-        ItemTransacao[] FindByTransacao(int codEmpresa, int codTransacao);
-        ItemTransacao[] Insert(ItemTransacao[] dtos);
+        IEnumerable<ItemTransacao> FindAll(int codEmpresa, int codTransacao);
+        IEnumerable<ItemTransacao> Insert(IEnumerable<ItemTransacao> dtos);
     }
 }

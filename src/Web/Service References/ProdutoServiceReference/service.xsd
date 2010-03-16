@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" />
-  <xs:element name="FindAllCompraByLogin">
+  <xs:element name="FindAllTransacaoByLogin">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="FindAllCompraByLoginResponse">
+  <xs:element name="FindAllTransacaoByLoginResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllCompraByLoginResult" nillable="true" type="q1:ArrayOfCompra" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllTransacaoByLoginResult" nillable="true" type="q1:ArrayOfTransacao" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="FindAllCompraByLoginAndReferencia">
+  <xs:element name="FindAllTransacaoByLoginAndReferencia">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
@@ -23,10 +23,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="FindAllCompraByLoginAndReferenciaResponse">
+  <xs:element name="FindAllTransacaoByLoginAndReferenciaResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllCompraByLoginAndReferenciaResult" nillable="true" type="q2:ArrayOfCompra" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllTransacaoByLoginAndReferenciaResult" nillable="true" type="q2:ArrayOfTransacao" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -110,31 +110,148 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetTransacao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="codTransacao" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetTransacaoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="GetTransacaoResult" nillable="true" type="q7:Transacao" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrdemServico">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="codTransacao" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetOrdemServicoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="GetOrdemServicoResult" nillable="true" type="q8:OrdemServico" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPedido">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="codTransacao" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetPedidoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="GetPedidoResult" nillable="true" type="q9:Pedido" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="InsertOrdemServico">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q7:OrdemServico" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q10:OrdemServico" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertOrdemServicoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="InsertOrdemServicoResult" nillable="true" type="q8:OrdemServico" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="InsertOrdemServicoResult" nillable="true" type="q11:OrdemServico" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertPedido">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q9:Pedido" />
+        <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="dto" nillable="true" type="q12:Pedido" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InsertPedidoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="InsertPedidoResult" nillable="true" type="q10:Pedido" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="InsertPedidoResult" nillable="true" type="q13:Pedido" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllFatura">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllFaturaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllFaturaResult" nillable="true" type="q14:ArrayOfFatura" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllLancamento">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllLancamentoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllLancamentoResult" nillable="true" type="q15:ArrayOfLancamento" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllNotaFiscal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FindAllNotaFiscalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="FindAllNotaFiscalResult" nillable="true" type="q16:ArrayOfNotaFiscal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFatura">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="codFatura" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetFaturaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="GetFaturaResult" nillable="true" type="q17:Fatura" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNotaFiscal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="codNotaFiscal" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetNotaFiscalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="GetNotaFiscalResult" nillable="true" type="q18:NotaFiscal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

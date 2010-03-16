@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ServiceModel;
 using Dataweb.Dilab.Model.DataTransfer;
 
@@ -23,9 +24,9 @@ namespace Dataweb.Dilab.Model.Service
         PacoteCredito FindPacoteCredito(int codCliente, string codPacoteCliente);
 
         [OperationContract]
-        PacoteCredito[] FindAllPacoteCredito(int codCliente);
+        IEnumerable<PacoteCredito> FindAllPacoteCredito(int codCliente);
 
         [OperationContract]
-        PacoteHistorico[] FindAllPacoteHistorico(int codCliente, string codPacoteCliente);
+        IEnumerable<PacoteHistorico> FindAllPacoteHistorico(int codCliente, string codPacoteCliente);
     }
 }

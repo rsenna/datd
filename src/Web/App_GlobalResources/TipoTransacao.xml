@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<enum type="Dataweb.Dilab.Model.DataTransfer.TipoTransacao">
+  <item value="Pedido" text="Pedido"/>
+  <item value="OrdemServico" text="Ordem de Serviço"/>
+</enum>

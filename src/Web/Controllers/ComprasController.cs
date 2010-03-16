@@ -16,13 +16,41 @@ namespace Dataweb.Dilab.Web.Controllers
         public ActionResult Index(string referencia)
         {
             var login = GetLogin();
-            var compras = string.IsNullOrEmpty(referencia)?
-                ProdutoSC.FindAllCompraByLogin(login) :
-                ProdutoSC.FindAllCompraByLoginAndReferencia(login, referencia);
+            var transacoes = string.IsNullOrEmpty(referencia)?
+                ProdutoSC.FindAllTransacaoByLogin(login) :
+                ProdutoSC.FindAllTransacaoByLoginAndReferencia(login, referencia);
 
             var viewModel = new ComprasIndex {
-                OrdensServico = compras.Where(item => item.Tipo == TipoCompra.OrdemServico),
-                Pedidos = compras.Where(item => item.Tipo == TipoCompra.Pedido)
+                OrdensServico = transacoes.Where(item => item.Tipo == TipoTransacao.OrdemServico),
+                Pedidos = transacoes.Where(item => item.Tipo == TipoTransacao.Pedido)
+            };
+
+            return View(viewModel);
+        }
+
+        [Authorize]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult Detalhar(int codEmpresa, int codTransacao, TipoTransacao tipo)
+        {
+            Transacao transacao;
+
+            switch (tipo)
+            {
+                case TipoTransacao.OrdemServico:
+                    transacao = ProdutoSC.GetOrdemServico(codEmpresa, codTransacao);
+                    break;
+
+                case TipoTransacao.Pedido:
+                    transacao = ProdutoSC.GetPedido(codEmpresa, codTransacao);
+                    break;
+
+                default:
+                    transacao = ProdutoSC.GetTransacao(codEmpresa, codTransacao);
+                    break;
+            }
+
+            var viewModel = new ComprasDetalhar {
+                Transacao = transacao
             };
 
             return View(viewModel);

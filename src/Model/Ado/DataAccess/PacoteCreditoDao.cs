@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -31,10 +32,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 STP_WEBCONSULTARPACOTES(@PCOD_CLIENTE)
         ";
 
-        public override PacoteCredito FetchDto(IDataRecord record)
+        public override PacoteCredito InitDto(IDataRecord record, PacoteCredito result)
         {
-            var result = new PacoteCredito();
-
             result.CodPacoteCredito = Helper.ReadString(record, "RCODPACOTE");
             result.Quantidade = Helper.ReadDecimal(record, "RQUANTIDADEDISPONIVEL").Value;
             result.Descricao = Helper.ReadString(record, "RDESCRICAO");
@@ -42,20 +41,20 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
-        public PacoteCredito[] FindAll(int codCliente)
+        public IEnumerable<PacoteCredito> FindAll(int codCliente)
         {
-            PacoteCredito[] result = null;
+            var result = new List<PacoteCredito>();
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_COD_CLIENTE;
                 Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
-                result = FetchDtos(c);
+                InitDtos(c, result);
             });
 
             return result;
         }
 
-        public override PacoteCredito[] FindAll()
+        public override IEnumerable<PacoteCredito> FindAll()
         {
             throw new NotImplementedException();
         }
@@ -67,13 +66,13 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public PacoteCredito FindByPrimaryKey(int codCliente, string codPacoteCliente)
         {
-            PacoteCredito result = null;
+            var result = new PacoteCredito();
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
                 Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
                 Helper.AddParameter(c, "@PCOD_PACOTE", DbType.String, codPacoteCliente);
-                result = FetchDto(c);
+                result = InitDto(c, result);
             });
 
             return result;

@@ -81,6 +81,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ComprasDetalhar.cs" />
     <Compile Include="Models\ComprasIndex.cs" />
     <Compile Include="Models\ComprasNovaOs.cs" />
     <Compile Include="Models\ComprasNovoPedido.cs" />
@@ -157,6 +158,7 @@
     <None Include="Service References\ClienteServiceReference\service1.xsd" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_GlobalResources\TipoTransacao.xml" />
     <Content Include="App_GlobalResources\TipoEtapa.xml" />
     <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\bg_top_table.gif" />
@@ -171,9 +173,13 @@
     <Content Include="Scripts\jquery.rules.js" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Compra.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.CompraDetalhe.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Fatura.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Item.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Lancamento.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.NotaFiscal.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.OrdemServicoOtica.datasource" />
     <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Pedido.datasource" />
+    <None Include="Properties\DataSources\Dataweb.Dilab.Model.DataTransfer.Transacao.datasource" />
     <None Include="Service References\ClienteServiceReference\configuration.svcinfo" />
     <None Include="Service References\ClienteServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
@@ -191,6 +197,8 @@
     </None>
     <None Include="Service References\ProdutoServiceReference\configuration91.svcinfo" />
     <Content Include="Views\Compras\Detalhar.aspx" />
+    <Content Include="Views\Compras\DetalharItens.ascx" />
+    <Content Include="Views\Compras\DetalharOs.ascx" />
     <Content Include="Views\Compras\NovoPedidoSucesso.aspx" />
     <Content Include="Views\Compras\Index.aspx" />
     <Content Include="Views\Compras\NovaOs.aspx" />

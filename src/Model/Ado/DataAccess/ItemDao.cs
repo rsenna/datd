@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -51,10 +52,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 ITEM.descricao
         ";
 
-        public override Item FetchDto(IDataRecord record)
+        public override Item InitDto(IDataRecord record, Item result)
         {
-            var result = new Item();
-
             result.CodItem = Helper.ReadString(record, "cod_item");
             result.CodBarra = Helper.ReadString(record, "codigobarra");
             result.Obrigatorio = Helper.ReadBoolean(record, "obrigatorio").Value;
@@ -65,20 +64,20 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
-        public override Item[] FindAll()
+        public override IEnumerable<Item> FindAll()
         {
             throw new NotImplementedException();
         }
 
-        public Item[] FindAll(int codFamilia, TipoItem tipo)
+        public IEnumerable<Item> FindAll(int codFamilia, TipoItem tipo)
         {
-            Item[] result = null;
+            var result = new List<Item>();
             var proc = tipo == TipoItem.Produto ? SQL_STMT_FIND_ALL_PRODUTO_BY_COD_FAMILIA : SQL_STMT_FIND_ALL_SERVICO_BY_COD_FAMILIA;
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = proc;
                 Helper.AddParameter(c, "@COD_PRODUTOFAMILIA", DbType.Int32, codFamilia);
-                result = FetchDtos(c);
+                InitDtos(c, result);
             });
 
             return result;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -8,9 +9,30 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
     public class OrdemServicoLenteDao : DataAccessBase<OrdemServicoLente>, IOrdemServicoLenteDao
     {
         // TODO: [STP]
-        // TODO: [Detalhe Transacao] Definir a consulta de lentes por ordem de serviço.
         private const string SQL_STMT_FIND_ALL_BY_COD_EMPRESA_AND_COD_TRANSACAO = @"
-            A DEFINIR;
+            SELECT
+                OSOL.cod_empresa,
+                OSOL.cod_ordemservicootica,
+                OSOL.cod_ordemservicooticalente,
+                PROD.cod_produtofamilia,
+                OSOL.descricaolente,
+                OSOL.longe_esf,
+                OSOL.longe_cil,
+                OSOL.longe_eixo,
+                OSOL.adicao,
+                OSOL.perto_esf,
+                OSOL.perto_cil,
+                OSOL.perto_eixo,
+                OSOL.dnp,
+                OSOL.alt
+            FROM
+                otiordemservicootica_lente OSOL
+                INNER JOIN produto PROD ON
+                    PROD.cod_produto = OSOL.cod_produtolente
+            WHERE
+                OSOL.cod_empresa = @PCOD_EMPRESA AND
+                OSOL.cod_ordemservicootica = @PCOD_ORDEMSERVICOOTICA AND
+                OSOL.cod_ordemservicooticalente = @PCOD_ORDEMSERVICOOTICALENTE
         ";
 
         private const string SQL_STMT_INSERT = @"
@@ -30,7 +52,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 @PALT
             )";
 
-        public override OrdemServicoLente[] FindAll()
+        public override IEnumerable<OrdemServicoLente> FindAll()
         {
             throw new NotImplementedException();
         }
@@ -40,16 +62,19 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public OrdemServicoLente FindByTransacao(Compra compra)
+        public OrdemServicoLente FindByPrimaryKey(int codEmpresa, int codTransacao, TipoLente tipoLente)
         {
-            OrdemServicoLente result = null;
+            var result = new OrdemServicoLente();
 
             Helper.UsingCommand(Session.Connection, c =>
             {
                 c.CommandText = SQL_STMT_FIND_ALL_BY_COD_EMPRESA_AND_COD_TRANSACAO;
-                Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, compra.CodCliente);
-                Helper.AddParameter(c, "@PCOD_TRANSACAO", DbType.Int32, compra.CodTransacao);
-                result = FetchDto(c);
+
+                Helper.AddParameter(c, "@PCOD_EMPRESA", DbType.Int32, codEmpresa);
+                Helper.AddParameter(c, "@PCOD_ORDEMSERVICOOTICA", DbType.Int32, codTransacao);
+                Helper.AddParameter(c, "@PCOD_ORDEMSERVICOOTICALENTE", DbType.Int32, (int) tipoLente);
+
+                InitDto(c, result);
             });
 
             return result;
@@ -60,7 +85,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public OrdemServicoLente[] FindAll(int codOrdemServico)
+        public IEnumerable<OrdemServicoLente> FindAll(int codOrdemServico)
         {
             throw new NotImplementedException();
         }
@@ -87,27 +112,26 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 c.ExecuteNonQuery();
             });
 
-            return dto; // Deveria ser atualizado com valor gerado de PK (se é que isso ocorre; pela proc pelo menos nada é indicado).
+            return dto;
         }
 
-        public override OrdemServicoLente FetchDto(IDataRecord record)
+        public override OrdemServicoLente InitDto(IDataRecord record, OrdemServicoLente dto)
         {
-            // TODO: [Detalhe Transacao] Definir os nomes dos campos da lente.
-            return new OrdemServicoLente {
-                CodEmpresa = Helper.ReadInt32(record, "").Value,
-                CodTransacao = Helper.ReadInt32(record, "").Value,
-                CodOrdemServicoLente = Helper.ReadInt32(record, "").Value,
-                Descricao = Helper.ReadString(record, ""),
-                LongeEsf = Helper.ReadDecimal(record, "").Value,
-                LongeCil = Helper.ReadDecimal(record, "").Value,
-                LongeEixo = Helper.ReadDecimal(record, "").Value,
-                Adicao = Helper.ReadDecimal(record, "").Value,
-                PertoEsf = Helper.ReadDecimal(record, "").Value,
-                PertoCil = Helper.ReadDecimal(record, "").Value,
-                PertoEixo = Helper.ReadDecimal(record, "").Value,
-                Dnp = Helper.ReadDecimal(record, "").Value,
-                Alt = Helper.ReadDecimal(record, "").Value
-            };
+            dto.CodEmpresa = Helper.ReadInt32(record, "cod_empresa").Value;
+            dto.CodTransacao = Helper.ReadInt32(record, "cod_ordemservicootica").Value;
+            dto.TipoLente = (TipoLente) Helper.ReadInt32(record, "cod_ordemservicooticalente").Value;
+            dto.Descricao = Helper.ReadString(record, "descricaolente");
+            dto.LongeEsf = Helper.ReadDecimal(record, "longe_esf").Value;
+            dto.LongeCil = Helper.ReadDecimal(record, "longe_cil").Value;
+            dto.LongeEixo = Helper.ReadDecimal(record, "longe_eixo").Value;
+            dto.Adicao = Helper.ReadDecimal(record, "adicao").Value;
+            dto.PertoEsf = Helper.ReadDecimal(record, "perto_esf").Value;
+            dto.PertoCil = Helper.ReadDecimal(record, "perto_cil").Value;
+            dto.PertoEixo = Helper.ReadDecimal(record, "perto_eixo").Value;
+            dto.Dnp = Helper.ReadDecimal(record, "dnp").Value;
+            dto.Alt = Helper.ReadDecimal(record, "alt").Value;
+
+            return dto;
         }
     }
 }

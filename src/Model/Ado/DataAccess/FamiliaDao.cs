@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -31,22 +32,22 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 PRFA.descricao
         ";
 
-        public override Familia FetchDto(IDataRecord reader)
+        public override Familia InitDto(IDataRecord reader, Familia dto)
         {
-            return new Familia {
-                CodFamilia = Helper.ReadInt32(reader, "cod_produtofamilia").Value,
-                Descricao = Helper.ReadString(reader, "descricao")
-            };
+            dto.CodFamilia = Helper.ReadInt32(reader, "cod_produtofamilia").Value;
+            dto.Descricao = Helper.ReadString(reader, "descricao");
+
+            return dto;
         }
 
         public override Familia FindByPrimaryKey(object pk)
         {
-            Familia result = null;
+            var result = new Familia();
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
                 Helper.AddParameter(c, "@PCOD_PRODUTOFAMILIA", DbType.Int32, pk);
-                result = FetchDto(c);
+                result = InitDto(c, result);
             });
 
             return result;
@@ -57,7 +58,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             throw new NotImplementedException();
         }
 
-        public override Familia[] FindAll()
+        public override IEnumerable<Familia> FindAll()
         {
             return FindAll(SQL_STMT_FIND_ALL);
         }

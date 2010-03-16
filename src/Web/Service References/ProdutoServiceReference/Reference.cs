@@ -15,11 +15,11 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ProdutoServiceReference.IProdutoService")]
     public interface IProdutoService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllCompraByLogin", ReplyAction="http://tempuri.org/IProdutoService/FindAllCompraByLoginResponse")]
-        Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByLogin(string login);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllTransacaoByLogin", ReplyAction="http://tempuri.org/IProdutoService/FindAllTransacaoByLoginResponse")]
+        Dataweb.Dilab.Model.DataTransfer.Transacao[] FindAllTransacaoByLogin(string login);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferencia", ReplyAction="http://tempuri.org/IProdutoService/FindAllCompraByLoginAndReferenciaResponse")]
-        Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByLoginAndReferencia(string login, string referencia);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllTransacaoByLoginAndReferencia", ReplyAction="http://tempuri.org/IProdutoService/FindAllTransacaoByLoginAndReferenciaResponse")]
+        Dataweb.Dilab.Model.DataTransfer.Transacao[] FindAllTransacaoByLoginAndReferencia(string login, string referencia);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllFamilia", ReplyAction="http://tempuri.org/IProdutoService/FindAllFamiliaResponse")]
         Dataweb.Dilab.Model.DataTransfer.Familia[] FindAllFamilia();
@@ -39,11 +39,37 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllProduto", ReplyAction="http://tempuri.org/IProdutoService/FindAllProdutoResponse")]
         Dataweb.Dilab.Model.DataTransfer.Item[] FindAllProduto(int codFamilia);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/GetTransacao", ReplyAction="http://tempuri.org/IProdutoService/GetTransacaoResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Dataweb.Dilab.Model.DataTransfer.Pedido))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Dataweb.Dilab.Model.DataTransfer.OrdemServico))]
+        Dataweb.Dilab.Model.DataTransfer.Transacao GetTransacao(int codEmpresa, int codTransacao);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/GetOrdemServico", ReplyAction="http://tempuri.org/IProdutoService/GetOrdemServicoResponse")]
+        Dataweb.Dilab.Model.DataTransfer.OrdemServico GetOrdemServico(int codEmpresa, int codTransacao);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/GetPedido", ReplyAction="http://tempuri.org/IProdutoService/GetPedidoResponse")]
+        Dataweb.Dilab.Model.DataTransfer.Pedido GetPedido(int codEmpresa, int codTransacao);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/InsertOrdemServico", ReplyAction="http://tempuri.org/IProdutoService/InsertOrdemServicoResponse")]
         Dataweb.Dilab.Model.DataTransfer.OrdemServico InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServico dto);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/InsertPedido", ReplyAction="http://tempuri.org/IProdutoService/InsertPedidoResponse")]
         Dataweb.Dilab.Model.DataTransfer.Pedido InsertPedido(Dataweb.Dilab.Model.DataTransfer.Pedido dto);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllFatura", ReplyAction="http://tempuri.org/IProdutoService/FindAllFaturaResponse")]
+        Dataweb.Dilab.Model.DataTransfer.Fatura[] FindAllFatura(int codEmpresa);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllLancamento", ReplyAction="http://tempuri.org/IProdutoService/FindAllLancamentoResponse")]
+        Dataweb.Dilab.Model.DataTransfer.Lancamento[] FindAllLancamento(int codEmpresa);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/FindAllNotaFiscal", ReplyAction="http://tempuri.org/IProdutoService/FindAllNotaFiscalResponse")]
+        Dataweb.Dilab.Model.DataTransfer.NotaFiscal[] FindAllNotaFiscal(int codEmpresa);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/GetFatura", ReplyAction="http://tempuri.org/IProdutoService/GetFaturaResponse")]
+        Dataweb.Dilab.Model.DataTransfer.Fatura GetFatura(int codEmpresa, int codFatura);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProdutoService/GetNotaFiscal", ReplyAction="http://tempuri.org/IProdutoService/GetNotaFiscalResponse")]
+        Dataweb.Dilab.Model.DataTransfer.NotaFiscal GetNotaFiscal(int codEmpresa, int codNotaFiscal);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
@@ -73,12 +99,12 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
                 base(binding, remoteAddress) {
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByLogin(string login) {
-            return base.Channel.FindAllCompraByLogin(login);
+        public Dataweb.Dilab.Model.DataTransfer.Transacao[] FindAllTransacaoByLogin(string login) {
+            return base.Channel.FindAllTransacaoByLogin(login);
         }
         
-        public Dataweb.Dilab.Model.DataTransfer.Compra[] FindAllCompraByLoginAndReferencia(string login, string referencia) {
-            return base.Channel.FindAllCompraByLoginAndReferencia(login, referencia);
+        public Dataweb.Dilab.Model.DataTransfer.Transacao[] FindAllTransacaoByLoginAndReferencia(string login, string referencia) {
+            return base.Channel.FindAllTransacaoByLoginAndReferencia(login, referencia);
         }
         
         public Dataweb.Dilab.Model.DataTransfer.Familia[] FindAllFamilia() {
@@ -105,12 +131,44 @@ namespace Dataweb.Dilab.Web.ProdutoServiceReference {
             return base.Channel.FindAllProduto(codFamilia);
         }
         
+        public Dataweb.Dilab.Model.DataTransfer.Transacao GetTransacao(int codEmpresa, int codTransacao) {
+            return base.Channel.GetTransacao(codEmpresa, codTransacao);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.OrdemServico GetOrdemServico(int codEmpresa, int codTransacao) {
+            return base.Channel.GetOrdemServico(codEmpresa, codTransacao);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.Pedido GetPedido(int codEmpresa, int codTransacao) {
+            return base.Channel.GetPedido(codEmpresa, codTransacao);
+        }
+        
         public Dataweb.Dilab.Model.DataTransfer.OrdemServico InsertOrdemServico(Dataweb.Dilab.Model.DataTransfer.OrdemServico dto) {
             return base.Channel.InsertOrdemServico(dto);
         }
         
         public Dataweb.Dilab.Model.DataTransfer.Pedido InsertPedido(Dataweb.Dilab.Model.DataTransfer.Pedido dto) {
             return base.Channel.InsertPedido(dto);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.Fatura[] FindAllFatura(int codEmpresa) {
+            return base.Channel.FindAllFatura(codEmpresa);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.Lancamento[] FindAllLancamento(int codEmpresa) {
+            return base.Channel.FindAllLancamento(codEmpresa);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.NotaFiscal[] FindAllNotaFiscal(int codEmpresa) {
+            return base.Channel.FindAllNotaFiscal(codEmpresa);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.Fatura GetFatura(int codEmpresa, int codFatura) {
+            return base.Channel.GetFatura(codEmpresa, codFatura);
+        }
+        
+        public Dataweb.Dilab.Model.DataTransfer.NotaFiscal GetNotaFiscal(int codEmpresa, int codNotaFiscal) {
+            return base.Channel.GetNotaFiscal(codEmpresa, codNotaFiscal);
         }
     }
 }

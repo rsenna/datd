@@ -3,11 +3,11 @@
 namespace Dataweb.Dilab.Model.DataTransfer
 {
     [DataContract]
-    public class Pedido : Compra
+    public class Pedido : Transacao
     {
         public Pedido()
         {
-            Tipo = TipoCompra.Pedido;
+            Tipo = TipoTransacao.Pedido;
         }
     }
 }

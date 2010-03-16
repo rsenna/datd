@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 
@@ -9,7 +7,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
     public class ItemDao : DataAccessBase<Item>, IItemDao
     {
-        public Item[] FindAll(int codFamilia)
+        public IEnumerable<Item> FindAll(int codFamilia)
         {
             return FindAll();
         }
@@ -24,7 +22,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             throw new NotImplementedException();
         }
 
-        public Item[] FindAll(int codFamilia, TipoItem tipo)
+        public IEnumerable<Item> FindAll(int codFamilia, TipoItem tipo)
         {
             return FindAll();
         }
@@ -34,17 +32,16 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             throw new NotImplementedException();
         }
 
-        public override Item FetchDto()
+        public override Item InitDto(Item dto)
         {
-            return new Item
-            {
-                CodItem = GenerateCode(10),
-                CodBarra = GenerateCode(10),
-                Descricao = GenerateName(4),
-                Obrigatorio = GenerateBoolean(),
-                ServicoInterno = GenerateBoolean(),
-                Tipo = (TipoItem) GenerateInt32(1, 2)
-            };
+            dto.CodItem = GenerateCode(10);
+            dto.CodBarra = GenerateCode(10);
+            dto.Descricao = GenerateName(4).ToUpper();
+            dto.Obrigatorio = GenerateBoolean();
+            dto.ServicoInterno = GenerateBoolean();
+            dto.Tipo = (TipoItem) GenerateInt32(1, 2);
+
+            return dto;
         }
     }
 }

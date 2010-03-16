@@ -1,26 +1,26 @@
-﻿using Dataweb.Dilab.Model.DataAccess;
+﻿using System.Collections.Generic;
+using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
     public class PacoteCreditoDao : DataAccessBase<PacoteCredito>, IPacoteCreditoDao
     {
-        public override PacoteCredito FetchDto()
+        public override PacoteCredito InitDto(PacoteCredito dto)
         {
-            return new PacoteCredito
-            {
-                CodPacoteCredito = GenerateCode(10),
-                Descricao = GenerateName(2),
-                Quantidade = GenerateInt32(100)
-            };
+            dto.CodPacoteCredito = GenerateCode(10);
+            dto.Descricao = GenerateName(2);
+            dto.Quantidade = GenerateInt32(100);
+
+            return dto;
         }
 
         public PacoteCredito FindByPrimaryKey(int codCliente, string codPacoteCliente)
         {
-            return FetchDto();
+            return InitDto(new PacoteCredito());
         }
 
-        public PacoteCredito[] FindAll(int codCliente)
+        public IEnumerable<PacoteCredito> FindAll(int codCliente)
         {
             return base.FindAll();
         }

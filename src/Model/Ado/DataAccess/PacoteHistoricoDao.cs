@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -18,24 +19,22 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 STP_WEBCONSULTARPACOTE(@PCODCLIENTE, @PCODPACOTE)
         ";
 
-        public PacoteHistorico[] FindAll(int codCliente, string codPacoteCliente)
+        public IEnumerable<PacoteHistorico> FindAll(int codCliente, string codPacoteCliente)
         {
-            PacoteHistorico[] result = null;
+            var result = new List<PacoteHistorico>();
 
             Helper.UsingCommand(Session.Connection, c => {
                 c.CommandText = SQL_STMT_FIND_BY_COD_CLIENTE_AND_COD_PACOTE;
                 Helper.AddParameter(c, "@PCODCLIENTE", DbType.Int32, codCliente);
                 Helper.AddParameter(c, "@PCODPACOTE", DbType.String, codPacoteCliente);
-                result = FetchDtos(c);
+                InitDtos(c, result);
             });
 
             return result;
         }
 
-        public override PacoteHistorico FetchDto(IDataRecord record)
+        public override PacoteHistorico InitDto(IDataRecord record, PacoteHistorico result)
         {
-            var result = new PacoteHistorico();
-
             result.Data = Helper.ReadDateTime(record, "RDATA").Value;
             result.NumeroOS = Helper.ReadInt32(record, "RNUMEROORDEMSERVICO");
             result.Quantidade = Helper.ReadDecimal(record, "RQUANTIDADE").Value;
@@ -45,7 +44,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
-        public override PacoteHistorico[] FindAll()
+        public override IEnumerable<PacoteHistorico> FindAll()
         {
             throw new NotImplementedException();
         }
