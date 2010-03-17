@@ -186,7 +186,7 @@
   <xs:element name="FindAllFatura">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -200,7 +200,7 @@
   <xs:element name="FindAllLancamento">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -214,7 +214,7 @@
   <xs:element name="FindAllNotaFiscal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
+        <xs:element minOccurs="0" name="login" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -228,7 +228,6 @@
   <xs:element name="GetFatura">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
         <xs:element minOccurs="0" name="codFatura" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -243,7 +242,6 @@
   <xs:element name="GetNotaFiscal">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="codEmpresa" type="xs:int" />
         <xs:element minOccurs="0" name="codNotaFiscal" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -252,6 +250,20 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model.DataTransfer" minOccurs="0" name="GetNotaFiscalResult" nillable="true" type="q18:NotaFiscal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetXmlNotaFiscalEletronica">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="codNotaFiscal" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetXmlNotaFiscalEletronicaResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetXmlNotaFiscalEletronicaResult" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -5,13 +5,16 @@ using Dataweb.Dilab.Model.DataTransfer;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class TransacaoDao : DataAccessBase<Transacao>, ITransacaoDao
+    public class TransacaoDao : TransacaoDao<Transacao>, ITransacaoDao { }
+
+    public abstract class TransacaoDao<T> : DataAccessBase<T>, ITransacaoDao<T>
+        where T : Transacao, new()
     {
         private const int MAX_FECHADAS = 20;
         private const int MAX_EM_PRODUCAO = 20;
         private const int MAX_DIAS = 20;
 
-        public override Transacao InitDto(Transacao dto)
+        public override T InitDto(T dto)
         {
             dto.Tipo = (TipoTransacao) GenerateInt32(1, 2);
             dto.CodEmpresa = GenerateInt32();
@@ -34,24 +37,24 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return dto;
         }
 
-        public override Transacao FindByPrimaryKey(object pk)
+        public override T FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();
         }
 
-        public override Transacao Update(Transacao dto)
+        public override T Update(T dto)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Transacao> FindAll(int codCliente)
+        public IEnumerable<T> FindAll(int codCliente)
         {
             return FindAll();
         }
 
-        public Transacao FindByPrimaryKey(int codEmpresa, int codTransacao)
+        public T FindByPrimaryKey(int codEmpresa, int codTransacao)
         {
-            return InitDto(new Transacao());
+            return InitDto(new T());
         }
 
         public int GetCountFechadas(int codCliente)
@@ -64,12 +67,12 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return GenerateInt32(MAX_EM_PRODUCAO);
         }
 
-        public Transacao Close(Transacao dto)
+        public T Close(T dto)
         {
             return dto;
         }
 
-        public override Transacao Insert(Transacao dto)
+        public override T Insert(T dto)
         {
             dto.Numero = GenerateInt32();
             return dto;

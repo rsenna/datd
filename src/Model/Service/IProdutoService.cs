@@ -47,18 +47,21 @@ namespace Dataweb.Dilab.Model.Service
         Pedido InsertPedido(Pedido dto);
 
         [OperationContract]
-        IEnumerable<Fatura> FindAllFatura(int codEmpresa);
+        IEnumerable<Fatura> FindAllFatura(string login);
 
         [OperationContract]
-        IEnumerable<Lancamento> FindAllLancamento(int codEmpresa);
+        IEnumerable<Lancamento> FindAllLancamento(string login);
 
         [OperationContract]
-        IEnumerable<NotaFiscal> FindAllNotaFiscal(int codEmpresa);
+        IEnumerable<NotaFiscal> FindAllNotaFiscal(string login);
 
         [OperationContract]
-        Fatura GetFatura(int codEmpresa, int codFatura);
+        Fatura GetFatura(int codFatura);
 
         [OperationContract]
-        NotaFiscal GetNotaFiscal(int codEmpresa, int codNotaFiscal);
+        NotaFiscal GetNotaFiscal(int codNotaFiscal);
+
+        [OperationContract]
+        string GetXmlNotaFiscalEletronica(int codNotaFiscal);
     }
 }

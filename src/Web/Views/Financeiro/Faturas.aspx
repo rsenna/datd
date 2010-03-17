@@ -4,12 +4,12 @@
 <%@ Import Namespace="Dataweb.Dilab.Web"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-	Dilab Online - Financeiro - Faturas
+	Dilab Online - Financeiro - Minhas Faturas
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-    <h2>Pacotes</h2>
+    <h2>Minhas Faturas</h2>
 
     <% if (Model.Count() == 0) { %>
 
@@ -37,10 +37,10 @@
                         <%= Html.Encode(item.Numero) %>
                     </td>
                     <td>
-                        <%= Html.Encode(item.Data) %>
+                        <%= Html.EncodeDate(item.Data) %>
                     </td>
                     <td>
-                        <%= Html.Encode(item.Total) %>
+                        <%= Html.EncodeCurrency(item.Total) %>
                     </td>
                     <td>
                         <%= Html.ActionLink("Detalhe", "DetalharFatura", new {codFatura = item.CodFatura})%>

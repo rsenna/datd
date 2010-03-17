@@ -12,7 +12,7 @@ namespace Dataweb.Dilab.Web
 
             routes.MapRoute(
                 "Compras-Detalhar",
-                "Compras/{codEmpresa}/{codTransacao}",
+                "Compras/{codEmpresa}/{tipo}/{codTransacao}",
                 new {controller = "Compras", action = "Detalhar"},
                 new {codEmpresa = @"\d+", codTransacao = @"\d+"}
                 );
@@ -27,7 +27,28 @@ namespace Dataweb.Dilab.Web
             routes.MapRoute(
                 "Pacotes-Detalhar",
                 "Pacotes/{codPacoteCliente}",
-                new { controller = "Pacotes", action = "Detalhar" }
+                new {controller = "Pacotes", action = "Detalhar"}
+                );
+
+            routes.MapRoute(
+                "Financeiro-DetalharFatura",
+                "Financeiro/Faturas/{codFatura}",
+                new {controller = "Financeiro", action = "DetalharFatura"},
+                new {codFatura = @"\d+"}
+                );
+
+            routes.MapRoute(
+                "Financeiro-DetalharNotaFiscal",
+                "Financeiro/NotasFiscais/{codNotaFiscal}",
+                new {controller = "Financeiro", action = "DetalharNotaFiscal"},
+                new {codNotaFiscal = @"\d+"}
+                );
+
+            routes.MapRoute(
+                "Financeiro-NotaFiscalEletronica",
+                "Financeiro/NotasFiscais/{codNotaFiscal}/nfe",
+                new {controller = "Financeiro", action = "NotaFiscalEletronica"},
+                new {codNotaFiscal = @"\d+"}
                 );
 
             routes.MapRoute(

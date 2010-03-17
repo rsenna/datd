@@ -5,7 +5,8 @@ namespace Dataweb.Dilab.Model.DataAccess
 {
     public interface INotaFiscalDao : IDataAccessBase<NotaFiscal>
     {
-        IEnumerable<NotaFiscal> FindAll(int codEmpresa);
-        NotaFiscal FindByPrimaryKey(int codEmpresa, int codNotaFiscal);
+        IEnumerable<NotaFiscal> FindAll(int codCliente);
+        NotaFiscal FindByPrimaryKey(int codNotaFiscal);
+        string GetXml(int codNotaFiscal);
     }
 }

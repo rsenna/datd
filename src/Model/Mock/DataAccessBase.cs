@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Xml;
 using NLipsum.Core;
 
 #endregion
@@ -167,6 +169,54 @@ namespace Dataweb.Dilab.Model.Mock
         {
             var result = LipsumGenerator.Generate(words, Features.Words, FormatStrings.Unformatted, NameGenerator);
             return CultureInfo.CurrentUICulture.TextInfo.ToTitleCase(result);
+        }
+
+        protected static IEnumerable<string> GenerateWords(int words)
+        {
+            var text = LipsumGenerator.Generate(words, Features.Words, FormatStrings.Unformatted, TextGenerator);
+            return text.Split(' ');
+        }
+
+        protected static string GenerateXml()
+        {
+            var doc = new XmlDocument();
+
+            var declaration = doc.CreateNode(XmlNodeType.XmlDeclaration, "declaration", null);
+            doc.AppendChild(declaration);
+
+            var root = doc.CreateElement("articles");
+            doc.AppendChild(root);
+
+            var cItens = GenerateInt32(1, 20);
+            for (var i = 0; i < cItens; i++)
+            {
+                var item = doc.CreateElement("article");
+                root.AppendChild(item);
+
+                var author = doc.CreateElement("author");
+                author.InnerText = GenerateName(2);
+                item.AppendChild(author);
+
+                var isadmin = doc.CreateAttribute("isadmin");
+                isadmin.Value = GenerateBoolean().ToString();
+                author.Attributes.Append(isadmin);
+
+                var title = doc.CreateElement("title");
+                title.InnerText = GenerateName(3);
+                item.AppendChild(title);
+
+                var body = doc.CreateElement("body");
+                var cdata = doc.CreateCDataSection(GenerateParagraph());
+                body.AppendChild(cdata);
+                item.AppendChild(body);
+            }
+
+            using (var stringWriter = new StringWriter())
+            using (var xmlTextWriter = new XmlTextWriter(stringWriter))
+            {
+                doc.WriteTo(xmlTextWriter);
+                return stringWriter.ToString();
+            }
         }
     }
 }

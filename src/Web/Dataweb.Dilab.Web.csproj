@@ -85,6 +85,7 @@
     <Compile Include="Models\ComprasIndex.cs" />
     <Compile Include="Models\ComprasNovaOs.cs" />
     <Compile Include="Models\ComprasNovoPedido.cs" />
+    <Compile Include="Models\FinanceiroDetalharNotaFiscal.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IHasTenant.cs" />
     <Compile Include="Models\PacotesDetalhar.cs" />
@@ -109,7 +110,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery.autoNumeric-1.0.2.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Views\Financeiro\Index.aspx" />
+    <Content Include="Views\Financeiro\Faturas.aspx" />
     <Content Include="Views\Home\Index.aspx" />
     <Content Include="Web.config" />
     <Content Include="Content\Site.css" />
@@ -197,13 +198,21 @@
     </None>
     <None Include="Service References\ProdutoServiceReference\configuration91.svcinfo" />
     <Content Include="Views\Compras\Detalhar.aspx" />
-    <Content Include="Views\Compras\DetalharItens.ascx" />
-    <Content Include="Views\Compras\DetalharOs.ascx" />
+    <Content Include="Views\Shared\DetalharItens.ascx" />
+    <Content Include="Views\Shared\DetalharOs.ascx" />
+    <Content Include="Views\Shared\ListarOrdensServico.ascx" />
+    <Content Include="Views\Shared\ListarPedidos.ascx" />
     <Content Include="Views\Compras\NovoPedidoSucesso.aspx" />
     <Content Include="Views\Compras\Index.aspx" />
     <Content Include="Views\Compras\NovaOs.aspx" />
     <Content Include="Views\Compras\NovaOsSucesso.aspx" />
     <Content Include="Views\Compras\NovoPedido.aspx" />
+    <Content Include="Views\Financeiro\DetalharNotaFiscal.aspx" />
+    <Content Include="Views\Financeiro\DetalharFatura.aspx" />
+    <Content Include="Views\Shared\ListarLancamentos.ascx" />
+    <Content Include="Views\Shared\ListarNotasFiscais.ascx" />
+    <Content Include="Views\Financeiro\NotasFiscais.aspx" />
+    <Content Include="Views\Financeiro\Lancamentos.aspx" />
     <Content Include="Views\Pacotes\Detalhar.aspx" />
     <Content Include="Views\Pacotes\Index.aspx" />
   </ItemGroup>

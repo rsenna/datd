@@ -167,6 +167,9 @@ ul.topnav li a {
 ul.topnav li a:hover {
     background: url(img/topnav_hover.gif) no-repeat center top;
 }
+ul.topnav li a:visited {
+    color: #fff;
+}
 ul.topnav li span {
     /*--Drop down trigger styles--*/
     width: 17px;
@@ -348,7 +351,21 @@ select.auto-width {
     text-align: right;
 }
 
-/* jquery.autoNumeric-1.0.2.js */
+/* GERAL */
+
+.field {
+    padding: 3px;
+    float:left;
+    margin-right: 10px;
+}
+span.coluna {
+    width: 430px;
+}
+
+label {
+    font-weight: bold;
+    color: #696969;
+}
 
 /* Home */
 
@@ -373,6 +390,10 @@ input#txtReferencia {
 
 /* Compras/NovaOs.aspx */
 
+form#frmNovaOs {
+    margin-right: -20px;
+}
+
 div#divNumeroOS {
     width: 133px;
 }
@@ -385,7 +406,7 @@ div#divInfo {
 }
 div.coluna {
     float: left;
-    width: 440px;
+    width: 460px;
 }
 .separador {
     float: left;
@@ -393,8 +414,7 @@ div.coluna {
     height: 35px;
 }
 div.divcom1 {
-    margin-left: auto;
-    margin-right: auto;
+    margin-right: 20px;
 }
 form#frmNovaOs input[type="text"]:not(.small) {
     width: 100%;
@@ -419,6 +439,7 @@ div.divcom3 {
 div.div1de3 {
     float: left;
     width: 133px;
+    margin-right: 20px;
 }
 div.divcom2 {
     width: 100%;
@@ -429,6 +450,7 @@ div.divcom2 {
 div.div1de2 {
     float: left;
     width: 210px;
+    margin-right: 20px;
 }
 #divcom6 {
     width: 100%;
@@ -439,6 +461,7 @@ div.div1de2 {
 div.div1de6 {
     float: left;
     width: 133px;
+    margin-right: 20px;
 }
 
 div#divItens {
@@ -470,9 +493,6 @@ tr.summary td {
     border-right: hidden;
     border-bottom: hidden;
     font-style: italic;
-}
-.title {
-    font-weight: bold;
 }
 
 /* Compras/NovoPedido.aspx */
@@ -547,3 +567,15 @@ form#frmNovoPedido textarea {
     height: 100px;
 }
 
+/* Compras/Detalhar */
+div#divComprasDetalhar {
+    margin-right: -20px;
+}
+
+/* Financeiro */
+.pagamentoAtrasado {
+    color: Red;
+}
+.pagamentoAberto {
+    color: Blue;
+}

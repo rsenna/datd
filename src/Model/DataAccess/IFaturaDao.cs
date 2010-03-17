@@ -5,7 +5,7 @@ namespace Dataweb.Dilab.Model.DataAccess
 {
     public interface IFaturaDao : IDataAccessBase<Fatura>
     {
-        IEnumerable<Fatura> FindAll(int codEmpresa);
-        Fatura FindByPrimaryKey(int codEmpresa, int codFatura);
+        IEnumerable<Fatura> FindAll(int codCliente);
+        Fatura FindByPrimaryKey(int codFatura);
     }
 }

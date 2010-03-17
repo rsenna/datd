@@ -7,9 +7,6 @@ namespace Dataweb.Dilab.Model.DataTransfer
     public class NotaFiscal : DataTransferBase
     {
         [DataMember]
-        public int CodEmpresa { get; set; }
-
-        [DataMember]
         public int CodNotaFiscal { get; set; }
 
         [DataMember]

@@ -8,9 +8,6 @@ namespace Dataweb.Dilab.Model.DataTransfer
     public class Fatura : DataTransferBase
     {
         [DataMember]
-        public int CodEmpresa { get; set; }
-
-        [DataMember]
         public int CodFatura { get; set; }
 
         [DataMember]

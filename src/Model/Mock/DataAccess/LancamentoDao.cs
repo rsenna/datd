@@ -9,7 +9,6 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
     {
         public override Lancamento InitDto(Lancamento dto)
         {
-            dto.CodEmpresa = GenerateInt32();
             dto.CodLancamento = GenerateInt32();
             dto.CodCliente = GenerateInt32();
             dto.CodFatura = GenerateInt32();
@@ -26,17 +25,17 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return dto;
         }
 
-        public IEnumerable<Lancamento> FindAll(int codEmpresa)
+        public IEnumerable<Lancamento> FindAll(int codCliente)
         {
             return FindAll();
         }
 
         public override Lancamento FindByPrimaryKey(object pk)
         {
-            throw new NotImplementedException();
+            return FindByPrimaryKey(Convert.ToInt32(pk));
         }
 
-        public Lancamento FindByPrimaryKey(int codEmpresa, int codLancamento)
+        public Lancamento FindByPrimaryKey(int codLancamento)
         {
             return InitDto(new Lancamento());
         }

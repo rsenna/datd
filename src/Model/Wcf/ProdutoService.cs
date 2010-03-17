@@ -31,7 +31,7 @@ namespace Dataweb.Dilab.Model.Wcf
             session.Dispose();
         }
 
-        private int GetCodClienteByLogin(string login)
+        private int GetCodCliente(string login)
         {
             var clienteService = new ClienteService(session); // Obs.: a instância do serviço, neste caso, é LOCAL (e não remota).
             var cliente = clienteService.FindByLogin(login);
@@ -74,7 +74,7 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public IEnumerable<Transacao> FindAllTransacaoByLogin(string login)
         {
-            return FindAllTransacaoByCodCliente(GetCodClienteByLogin(login));
+            return FindAllTransacaoByCodCliente(GetCodCliente(login));
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public IEnumerable<Transacao> FindAllTransacaoByLoginAndReferencia(string login, string referencia)
         {
-            return FindAllTransacaoByCodClienteAndReferencia(GetCodClienteByLogin(login), referencia);
+            return FindAllTransacaoByCodClienteAndReferencia(GetCodCliente(login), referencia);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
@@ -180,43 +180,49 @@ namespace Dataweb.Dilab.Model.Wcf
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public IEnumerable<Fatura> FindAllFatura(int codEmpresa)
+        public IEnumerable<Fatura> FindAllFatura(string login)
         {
             var faturaDao = DataAccessFactory.CreateDao<IFaturaDao>(session);
             faturaDao.Depth = QueryDepth.FirstLevel;
-            return faturaDao.FindAll(codEmpresa);
+            return faturaDao.FindAll(GetCodCliente(login));
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public IEnumerable<Lancamento> FindAllLancamento(int codEmpresa)
+        public IEnumerable<Lancamento> FindAllLancamento(string login)
         {
             var lancamentoDao = DataAccessFactory.CreateDao<ILancamentoDao>(session);
             lancamentoDao.Depth = QueryDepth.FirstLevel;
-            return lancamentoDao.FindAll(codEmpresa);
+            return lancamentoDao.FindAll(GetCodCliente(login));
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public IEnumerable<NotaFiscal> FindAllNotaFiscal(int codEmpresa)
+        public IEnumerable<NotaFiscal> FindAllNotaFiscal(string login)
         {
             var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session);
             notaFiscalDao.Depth = QueryDepth.FirstLevel;
-            return notaFiscalDao.FindAll(codEmpresa);
+            return notaFiscalDao.FindAll(GetCodCliente(login));
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public Fatura GetFatura(int codEmpresa, int codFatura)
+        public Fatura GetFatura(int codFatura)
         {
             var faturaDao = DataAccessFactory.CreateDao<IFaturaDao>(session);
             faturaDao.Depth = QueryDepth.SecondLevel;
-            return faturaDao.FindByPrimaryKey(codEmpresa, codFatura);
+            return faturaDao.FindByPrimaryKey(codFatura);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
-        public NotaFiscal GetNotaFiscal(int codEmpresa, int codNotaFiscal)
+        public NotaFiscal GetNotaFiscal(int codNotaFiscal)
         {
             var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session);
             notaFiscalDao.Depth = QueryDepth.SecondLevel;
-            return notaFiscalDao.FindByPrimaryKey(codEmpresa, codNotaFiscal);
+            return notaFiscalDao.FindByPrimaryKey(codNotaFiscal);
+        }
+
+        public string GetXmlNotaFiscalEletronica(int codNotaFiscal)
+        {
+            var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session);
+            return notaFiscalDao.GetXml(codNotaFiscal);
         }
     }
 }

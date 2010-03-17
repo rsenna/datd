@@ -6,9 +6,6 @@ namespace Dataweb.Dilab.Model.DataTransfer
     public class Lancamento : DataTransferBase
     {
         [DataMember]
-        public int CodEmpresa { get; set; }
-
-        [DataMember]
         public int CodLancamento { get; set; }
 
         [DataMember]

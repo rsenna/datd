@@ -237,7 +237,6 @@
       <xs:extension xmlns:q7="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q7:DataTransferBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="CodCliente" type="xs:int" />
-          <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
           <xs:element minOccurs="0" name="CodFatura" type="xs:int" />
           <xs:element minOccurs="0" name="Data" type="xs:dateTime" />
           <xs:element minOccurs="0" name="Lancamentos" nillable="true" type="tns:ArrayOfLancamento" />
@@ -260,7 +259,6 @@
       <xs:extension xmlns:q8="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q8:DataTransferBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="CodCliente" type="xs:int" />
-          <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
           <xs:element minOccurs="0" name="CodFatura" type="xs:int" />
           <xs:element minOccurs="0" name="CodLancamento" type="xs:int" />
           <xs:element minOccurs="0" name="Numero" type="xs:int" />
@@ -283,7 +281,6 @@
       <xs:extension xmlns:q9="http://schemas.datacontract.org/2004/07/Dataweb.Dilab.Model" base="q9:DataTransferBase">
         <xs:sequence>
           <xs:element minOccurs="0" name="CodCliente" type="xs:int" />
-          <xs:element minOccurs="0" name="CodEmpresa" type="xs:int" />
           <xs:element minOccurs="0" name="CodFatura" type="xs:int" />
           <xs:element minOccurs="0" name="CodNotaFiscal" type="xs:int" />
           <xs:element minOccurs="0" name="Data" type="xs:dateTime" />

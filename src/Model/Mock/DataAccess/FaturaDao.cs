@@ -9,7 +9,6 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
     {
         public override Fatura InitDto(Fatura dto)
         {
-            dto.CodEmpresa = GenerateInt32();
             dto.CodFatura = GenerateInt32();
             dto.CodCliente = GenerateInt32();
             dto.Numero = GenerateInt32();
@@ -28,17 +27,17 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return dto;
         }
 
-        public IEnumerable<Fatura> FindAll(int codEmpresa)
+        public IEnumerable<Fatura> FindAll(int codCliente)
         {
             return FindAll();
         }
 
         public override Fatura FindByPrimaryKey(object pk)
         {
-            throw new NotImplementedException();
+            return FindByPrimaryKey(Convert.ToInt32(pk));
         }
 
-        public Fatura FindByPrimaryKey(int codEmpresa, int codFatura)
+        public Fatura FindByPrimaryKey(int codFatura)
         {
             return InitDto(new Fatura());
         }

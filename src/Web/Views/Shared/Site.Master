@@ -50,9 +50,9 @@
                         </li>
                         <li><%= Html.ActionLink("Pacotes", "Index", "Pacotes")%></li>
                         <li>
-                            <%= Html.ActionLink("Financeiro", "Faturas", "Financeiro")%>
+                            <%= Html.ActionLink("Financeiro", "Index", "Financeiro")%>
                             <ul class="subnav">
-                                <li><%= Html.ActionLink("Minhas Faturas", "Index", "Financeiro")%></li>
+                                <li><%= Html.ActionLink("Minhas Faturas", "Faturas", "Financeiro")%></li>
                                 <li><%= Html.ActionLink("Minhas Notas Fiscais", "NotasFiscais", "Financeiro")%></li>
                                 <li><%= Html.ActionLink("Meus Lançamentos", "Lancamentos", "Financeiro")%></li>
                             </ul>

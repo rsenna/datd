@@ -9,6 +9,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
     {
         public override OrdemServico InitDto(IDataRecord record, OrdemServico dto)
         {
+            base.InitDto(record, dto);
+
             dto.DescricaoArmacao = Helper.ReadString(record, "RDESCRICAOARMACAO");
             dto.ObservacaoArmacao = Helper.ReadString(record, "ROBSERVACAOARMACAO");
             dto.CodMaterial = Helper.ReadInt32(record, "RCODOTICALENTEMATERIAL").Value;

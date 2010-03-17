@@ -10,51 +10,7 @@
 <asp:Content ID="indexContent" ContentPlaceHolderID="MainContent" runat="server">
     <div id="divCompras">
         <h2>Minhas Compras</h2>
-        <h3>Ordens de Serviço</h3>
-        <% if (Model.OrdensServico.Any()) { %>
-            <table summary="Ordens de Serviço">
-                <tr>
-                    <th>Nº/Entrada</th>
-                    <th>Referência</th>
-                    <th>Etapa</th>
-                    <th>Previsão<br />Encerramento</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <% foreach (var item in Model.OrdensServico) { %>
-                    <tr>
-                        <td><b><%=item.Numero %></b><br /><%=Html.EncodeDate(item.Emissao) %></td>
-                        <td><%=item.Referencia %></td>
-                        <td><%=Html.Encode<TipoEtapa>(item.Etapa) %></td>
-                        <td><%=Html.EncodeDate(item.Previsao) %></td>
-                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao, tipo = TipoTransacao.OrdemServico })%></td>
-                    </tr>
-                <% } // end-foreach %>
-            </table>
-        <% } else { %>
-            Não existem ordens de serviço disponíveis.
-        <% } %>
-        <h3>Pedidos</h3>
-        <% if (Model.Pedidos.Any()) { %>
-            <table summary="Pedidos">
-                <tr>
-                    <th>Nº/Entrada</th>
-                    <th>Referência</th>
-                    <th>Etapa</th>
-                    <th>Previsão<br />Encerramento</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <% foreach (var item in Model.Pedidos) { %>
-                    <tr>
-                        <td><b><%=item.Numero %></b><br /><%=Html.EncodeDate(item.Emissao) %></td>
-                        <td><%=item.Referencia %></td>
-                        <td><%=Html.Encode<TipoEtapa>(item.Etapa) %></td>
-                        <td><%=Html.EncodeDate(item.Previsao) %></td>
-                        <td><%= Html.ActionLink("Detalhe", "Detalhar", new { codEmpresa = item.CodEmpresa, codTransacao = item.CodTransacao, tipo = TipoTransacao.Pedido })%></td>
-                    </tr>
-                <% } // end-foreach %>
-            </table>
-        <% } else { %>
-            Não existem pedidos disponíveis.
-        <% } %>
+        <% Html.RenderPartial("ListarOrdensServico", Model.OrdensServico); %>
+        <% Html.RenderPartial("ListarPedidos", Model.Pedidos); %>
     </div>
 </asp:Content>

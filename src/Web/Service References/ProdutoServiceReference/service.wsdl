@@ -116,6 +116,12 @@
   <wsdl:message name="IProdutoService_GetNotaFiscal_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetNotaFiscalResponse" />
   </wsdl:message>
+  <wsdl:message name="IProdutoService_GetXmlNotaFiscalEletronica_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetXmlNotaFiscalEletronica" />
+  </wsdl:message>
+  <wsdl:message name="IProdutoService_GetXmlNotaFiscalEletronica_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetXmlNotaFiscalEletronicaResponse" />
+  </wsdl:message>
   <wsdl:portType name="IProdutoService">
     <wsdl:operation name="FindAllTransacaoByLogin">
       <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/FindAllTransacaoByLogin" message="tns:IProdutoService_FindAllTransacaoByLogin_InputMessage" />
@@ -188,6 +194,10 @@
     <wsdl:operation name="GetNotaFiscal">
       <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/GetNotaFiscal" message="tns:IProdutoService_GetNotaFiscal_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/GetNotaFiscalResponse" message="tns:IProdutoService_GetNotaFiscal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlNotaFiscalEletronica">
+      <wsdl:input wsaw:Action="http://tempuri.org/IProdutoService/GetXmlNotaFiscalEletronica" message="tns:IProdutoService_GetXmlNotaFiscalEletronica_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IProdutoService/GetXmlNotaFiscalEletronicaResponse" message="tns:IProdutoService_GetXmlNotaFiscalEletronica_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IProdutoService" type="tns:IProdutoService">
@@ -347,6 +357,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetNotaFiscal">
       <soap:operation soapAction="http://tempuri.org/IProdutoService/GetNotaFiscal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXmlNotaFiscalEletronica">
+      <soap:operation soapAction="http://tempuri.org/IProdutoService/GetXmlNotaFiscalEletronica" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

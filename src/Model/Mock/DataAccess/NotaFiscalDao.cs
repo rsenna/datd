@@ -9,7 +9,6 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
     {
         public override NotaFiscal InitDto(NotaFiscal dto)
         {
-            dto.CodEmpresa = GenerateInt32();
             dto.CodNotaFiscal = GenerateInt32();
             dto.CodCliente = GenerateInt32();
             dto.CodFatura = GenerateInt32();
@@ -26,19 +25,24 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return dto;
         }
 
-        public IEnumerable<NotaFiscal> FindAll(int codEmpresa)
+        public IEnumerable<NotaFiscal> FindAll(int codCliente)
         {
             return FindAll();
         }
 
         public override NotaFiscal FindByPrimaryKey(object pk)
         {
-            throw new NotImplementedException();
+            return FindByPrimaryKey(Convert.ToInt32(pk));
         }
 
-        public NotaFiscal FindByPrimaryKey(int codEmpresa, int codNotaFiscal)
+        public NotaFiscal FindByPrimaryKey(int codNotaFiscal)
         {
             return InitDto(new NotaFiscal());
+        }
+
+        public string GetXml(int codNotaFiscal)
+        {
+            return GenerateXml();
         }
 
         public override NotaFiscal Insert(NotaFiscal dto)
