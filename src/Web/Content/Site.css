@@ -472,12 +472,22 @@ div#divItens {
     padding: 10px;
     width: 880px;
 }
+
 div#divItensOD {
     padding: 10px;
 }
+
 div#divItensOE {
     padding: 10px;
 }
+
+
+
+
+
+
+
+
 
 th {
     border-left: 1px solid #CCCCCC;
@@ -573,9 +583,15 @@ div#divComprasDetalhar {
 }
 
 /* Financeiro */
-.pagamentoAtrasado {
+.pendente.atrasado {
     color: Red;
 }
-.pagamentoAberto {
-    color: Blue;
+.pendente.ok {
+    color: Gray;
+}
+.efetuado.atrasado {
+    color: Orange;
+}
+.efetuado.ok {
+    color: Green;
 }

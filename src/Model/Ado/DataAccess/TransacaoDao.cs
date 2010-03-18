@@ -126,7 +126,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             if (Depth > QueryDepth.FirstLevel)
             {
                 var itemTransacaoDao = new ItemTransacaoDao {Depth = GetDetailDepth(), Session = Session};
-                dto.Itens = itemTransacaoDao.FindAll(dto.CodEmpresa, dto.CodTransacao);
+                dto.Itens = (ItemTransacao[])itemTransacaoDao.FindAll(dto.CodEmpresa, dto.CodTransacao);
             }
 
             return dto;

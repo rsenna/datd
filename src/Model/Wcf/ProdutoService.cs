@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
@@ -155,28 +154,22 @@ namespace Dataweb.Dilab.Model.Wcf
             return pedidoDao.FindByPrimaryKey(codEmpresa, codTransacao);
         }
 
-        private T InsertTransacao<TInterface, T>(T dto)
-            where TInterface : ITransacaoDao<T>
-            where T : Transacao
-        {
-            var dao = DataAccessFactory.CreateDao<TInterface>(session);
-
-            dto = dao.Insert(dto);
-            dao.Close(dto);
-
-            return dto;
-        }
-
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public OrdemServico InsertOrdemServico(OrdemServico dto)
         {
-            return InsertTransacao<IOrdemServicoDao, OrdemServico>(dto);
+            var dao = DataAccessFactory.CreateDao<IOrdemServicoDao>(session);
+            dao.Insert(dto);
+            dao.Close(dto);
+            return dto;
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public Pedido InsertPedido(Pedido dto)
         {
-            return InsertTransacao<IPedidoDao, Pedido>(dto);
+            var dao = DataAccessFactory.CreateDao<IPedidoDao>(session);
+            dao.Insert(dto);
+            dao.Close(dto);
+            return dto;
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
@@ -219,6 +212,7 @@ namespace Dataweb.Dilab.Model.Wcf
             return notaFiscalDao.FindByPrimaryKey(codNotaFiscal);
         }
 
+        [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public string GetXmlNotaFiscalEletronica(int codNotaFiscal)
         {
             var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session);

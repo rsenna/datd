@@ -33,16 +33,15 @@
 
             if ($(tags.thisDivServicos).is(':hidden') && $(tags.thatDivServicos).is(':hidden')) {
                 $('div#divMsgSemServicos').show();
-                $('div#divSeparator').hide();
+                $('div#divSeparatorServicos').remove();
             } else {
                 $('div#divMsgSemServicos').hide();
 
                 // Mostra ou esconde separador entre divs:
                 if ($(tags.thisDivServicos).is(':visible') && $(tags.thatDivServicos).is(':visible')) {
-                    $('div#divSeparator').height(20);
-                    $('div#divSeparator').show();
+                    $('<div id="divSeparatorServicos"></div>').insertAfter('div#divServicosOD').height(20);
                 } else {
-                    $('div#divSeparator').hide();
+                    $('div#divSeparatorServicos').remove();
                 }
             }
         }
@@ -206,8 +205,8 @@
     }
 
     /* hacks para o IE:
-        - IE não permite options com largura maior que o select - implementado comportamento "auto width" como solução
-        - inputs com "width: auto" não respeitam limite de largura do parent
+    - IE não permite options com largura maior que o select - implementado comportamento "auto width" como solução
+    - inputs com "width: auto" não respeitam limite de largura do parent
     */
     if ($.browser.msie) {
         // Correção da largura auto de inputs:
@@ -217,7 +216,7 @@
                 $(this).width(parentWidth);
             }
         });
-        
+
         // function to expand the selection box
         var expand = function() {
             var origWidthPx = $(this).width();
@@ -234,7 +233,7 @@
                 var zmax = 0;
                 $(this).siblings().each(function() {
                     var zcur = $(this).css('z-index');
-                    zmax = zcur > zmax? zcur : zmax;
+                    zmax = zcur > zmax ? zcur : zmax;
                 });
                 $(this).css('z-index', zmax + 1);
 

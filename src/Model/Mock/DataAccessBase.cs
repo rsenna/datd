@@ -45,11 +45,11 @@ namespace Dataweb.Dilab.Model.Mock
         public virtual IEnumerable<T> FindAll()
         {
             var count = GenerateInt32(FIND_ALL_MAX_COUNT);
-            var result = new T[count];
+            var result = new List<T>();
 
             for (var i = 0; i < count; i++)
             {
-                result[i] = InitDto(new T());
+                result.Add(InitDto(new T()));
             }
 
             return result;

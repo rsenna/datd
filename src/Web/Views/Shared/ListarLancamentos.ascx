@@ -36,12 +36,18 @@
                     <%= Html.EncodeCurrency(item.Total)%>
                 </td>
                 <td>
-                    <% if (item.Pagamento != null) { %>
-                        <%= Html.EncodeDate(item.Pagamento) %>
-                    <% } else if (item.Vencimento.Date < DateTime.Today) { %>
-                        <span class="pagamentoAtrasado">(atrasado)</span>
+                    <% if (item.Pagamento == null) { %>
+                        <% if (item.Vencimento.Date < DateTime.Today) { %>
+                            <span class="pendente atrasado">(atrasado)</span>
+                        <% } else { %>
+                            <span class="pendente ok">(aberto)</span>
+                        <% } %>
                     <% } else { %>
-                        <span class="pagamentoAberto">(aberto)</span>
+                        <% if (item.Vencimento.Date < item.Pagamento.Value.Date) { %>
+                            <span class="efetuado atrasado"><%= Html.EncodeDate(item.Pagamento) %></span>
+                        <% } else { %>
+                            <span class="efetuado ok"><%= Html.EncodeDate(item.Pagamento) %></span>
+                        <% } %>
                     <% } // end if item.Pagamento %>
                 </td>
             </tr>

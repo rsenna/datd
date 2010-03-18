@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Dataweb.Dilab.Model.DataTransfer
@@ -23,9 +22,9 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public decimal Total { get; set; }
 
         [DataMember]
-        public IEnumerable<NotaFiscal> NotasFiscais { get; set; }
+        public NotaFiscal[] NotasFiscais { get; set; }
 
         [DataMember]
-        public IEnumerable<Lancamento> Lancamentos { get; set; }
+        public Lancamento[] Lancamentos { get; set; }
     }
 }

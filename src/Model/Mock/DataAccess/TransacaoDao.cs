@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 
@@ -31,7 +32,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             if (Depth > QueryDepth.FirstLevel)
             {
                 var itemTransacaoDao = new ItemTransacaoDao {Depth = GetDetailDepth()};
-                dto.Itens = itemTransacaoDao.FindAll(dto.CodEmpresa, dto.CodTransacao);
+                dto.Itens = itemTransacaoDao.FindAll(dto.CodEmpresa, dto.CodTransacao).ToArray();
             }
 
             return dto;

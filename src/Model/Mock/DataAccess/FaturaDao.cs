@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 
@@ -18,10 +19,10 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             if (Depth > QueryDepth.FirstLevel)
             {
                 var notaFiscalDao = new NotaFiscalDao {Depth = GetDetailDepth()};
-                dto.NotasFiscais = notaFiscalDao.FindAll();
+                dto.NotasFiscais = notaFiscalDao.FindAll().ToArray();
 
                 var lancamentoDao = new LancamentoDao {Depth = GetDetailDepth()};
-                dto.Lancamentos = lancamentoDao.FindAll();
+                dto.Lancamentos = lancamentoDao.FindAll().ToArray();
             }
 
             return dto;

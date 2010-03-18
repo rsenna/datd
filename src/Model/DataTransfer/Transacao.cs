@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace Dataweb.Dilab.Model.DataTransfer
@@ -40,7 +39,7 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public string Referencia { get; set; } // RREFERENCIA
 
         [DataMember]
-        public DateTime Emissao { get; set; } // RDATAHORAEMISSAO
+        public DateTime? Emissao { get; set; } // RDATAHORAEMISSAO
 
         [DataMember]
         public DateTime? Previsao { get; set; } // RDATAHORAPREVISAO
@@ -61,6 +60,6 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public TipoTransacao Tipo { get; set; }
 
         [DataMember]
-        public IEnumerable<ItemTransacao> Itens { get; set; }
+        public ItemTransacao[] Itens { get; set; }
     }
 }
