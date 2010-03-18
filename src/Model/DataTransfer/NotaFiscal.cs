@@ -24,6 +24,9 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public decimal Total { get; set; }
 
         [DataMember]
+        public bool Nfe { get; set; }
+
+        [DataMember]
         public Transacao[] Transacoes { get; set; }
     }
 }

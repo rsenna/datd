@@ -151,6 +151,11 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
+        public IEnumerable<T> FindAll(int codCliente, int codNotaFiscal)
+        {
+            return FindAll();
+        }
+
         public override T FindByPrimaryKey(object pk)
         {
             throw new NotImplementedException();
@@ -171,7 +176,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return result;
         }
 
-        protected virtual void PrepareParameters(DbCommand c, T dto)
+        protected virtual void PrepareParameters(IDbCommand c, T dto)
         {
             // Parâmetros abaixo só são utilizados para OS, portanto vão em branco:
             Helper.AddParameter(c, "@PREFERENCIA", DbType.String, DBNull.Value);

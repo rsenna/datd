@@ -5,9 +5,9 @@ namespace Dataweb.Dilab.Model.Ado
 {
     public sealed class Session : ISession
     {
-        private DbConnection connection;
+        private IDbConnection connection;
 
-        public DbConnection Connection
+        public IDbConnection Connection
         {
             get
             {

@@ -13,6 +13,7 @@ namespace Dataweb.Dilab.Model.DataAccess
         where T: Transacao
     {
         IEnumerable<T> FindAll(int codCliente);
+        IEnumerable<T> FindAll(int codCliente, int codNotaFiscal);
         T FindByPrimaryKey(int codEmpresa, int codTransacao);
         T Close(T dto);
     }

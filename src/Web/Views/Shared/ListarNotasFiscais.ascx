@@ -38,7 +38,7 @@
                     <%= Html.ActionLink("Detalhe", "DetalharNotaFiscal", new {codNotaFiscal = item.CodNotaFiscal})%>
                 </td>
                 <td>
-                    <%= Html.ActionLink("NFE", "NotaFiscalEletronica", new { codNotaFiscal = item.CodNotaFiscal })%>
+                    <%= item.Nfe? Html.ActionLink("NFE", "NotaFiscalEletronica", new { codNotaFiscal = item.CodNotaFiscal }) : "&nbsp;" %>
                 </td>
             </tr>
 

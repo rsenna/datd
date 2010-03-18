@@ -53,6 +53,11 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return FindAll();
         }
 
+        public IEnumerable<T> FindAll(int codCliente, int codNotaFiscal)
+        {
+            return FindAll();
+        }
+
         public T FindByPrimaryKey(int codEmpresa, int codTransacao)
         {
             return InitDto(new T());

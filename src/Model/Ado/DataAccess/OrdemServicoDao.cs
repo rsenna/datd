@@ -1,5 +1,4 @@
 ﻿using System.Data;
-using System.Data.Common;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 
@@ -26,7 +25,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
             if (Depth > QueryDepth.FirstLevel)
             {
-                var lenteDao = new OrdemServicoLenteDao {Session = Session};
+                var lenteDao = new OrdemServicoLenteDao {Depth = GetDetailDepth(), Session = Session};
                 dto.LenteOd = lenteDao.FindByPrimaryKey(dto.CodEmpresa, dto.CodTransacao, TipoLente.OlhoDireito);
                 dto.LenteOe = lenteDao.FindByPrimaryKey(dto.CodEmpresa, dto.CodTransacao, TipoLente.OlhoEsquerdo);
             }
@@ -34,7 +33,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
             return dto;
         }
 
-        protected override void PrepareParameters(DbCommand c, OrdemServico dto)
+        protected override void PrepareParameters(IDbCommand c, OrdemServico dto)
         {
             Helper.AddParameter(c, "@PDESCRICAOARMACAO", DbType.String, dto.DescricaoArmacao);
             Helper.AddParameter(c, "@POBSERVACAOARMACAO", DbType.String, dto.ObservacaoArmacao);

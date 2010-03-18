@@ -1,15 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
 
-namespace Dataweb.Dilab.Model.Mock.DataAccess
+namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class NotaFiscalDao : DataAccessBase<NotaFiscal>, INotaFiscalDao
     {
-        public override NotaFiscal InitDto(NotaFiscal dto)
+        public override NotaFiscal InitDto(IDataRecord record, NotaFiscal dto)
         {
+            /*
             dto.CodNotaFiscal = GenerateInt32();
             dto.CodCliente = GenerateInt32();
             dto.CodFatura = GenerateInt32();
@@ -17,6 +19,7 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             dto.Data = GenerateDateTime(-10);
             dto.Total = GenerateDecimal(20000);
             dto.Nfe = GenerateBoolean();
+            */
 
             if (Depth > QueryDepth.FirstLevel)
             {
@@ -27,14 +30,21 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return dto;
         }
 
-        public IEnumerable<NotaFiscal> FindAll(int codCliente)
+        public override IEnumerable<NotaFiscal> FindAll()
         {
-            return FindAll();
+            throw new NotImplementedException();
         }
 
+        // TODO: implementação
+        public IEnumerable<NotaFiscal> FindAll(int codCliente)
+        {
+            throw new NotImplementedException();
+        }
+
+        // TODO: implementação
         public IEnumerable<NotaFiscal> FindAll(int codCliente, int codFatura)
         {
-            return FindAll();
+            throw new NotImplementedException();
         }
 
         public override NotaFiscal FindByPrimaryKey(object pk)
@@ -42,14 +52,16 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             return FindByPrimaryKey(Convert.ToInt32(pk));
         }
 
+        // TODO: implementação
         public NotaFiscal FindByPrimaryKey(int codNotaFiscal)
         {
-            return InitDto(new NotaFiscal());
+            throw new NotImplementedException();
         }
 
+        // TODO: implementação
         public string GetXml(int codNotaFiscal)
         {
-            return GenerateXml();
+            throw new NotImplementedException();
         }
 
         public override NotaFiscal Insert(NotaFiscal dto)

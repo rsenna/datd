@@ -44,7 +44,7 @@ namespace Dataweb.Dilab.Model.Wcf
             var isIdentificador = int.TryParse(login, out identificador);
 
             var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session);
-            return isIdentificador? clienteDao.FindByIdentificador(identificador) :  clienteDao.FindByCnpj(login);
+            return isIdentificador? clienteDao.FindByIdentificador(identificador) : clienteDao.FindByCnpj(login);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]

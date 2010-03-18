@@ -21,7 +21,7 @@ namespace Dataweb.Dilab.Model.Ado
             return connectionString;
         }
 
-        public static void AddParameter(DbCommand command, string parameterName, DbType dbtype, object value)
+        public static void AddParameter(IDbCommand command, string parameterName, DbType dbtype, object value)
         {
             var parameter = command.CreateParameter();
 
@@ -32,7 +32,7 @@ namespace Dataweb.Dilab.Model.Ado
             command.Parameters.Add(parameter);
         }
 
-        public static DbParameter AddReturnParameter(DbCommand command, string parameterName, DbType dbtype)
+        public static IDataParameter AddReturnParameter(IDbCommand command, string parameterName, DbType dbtype)
         {
             var parameter = command.CreateParameter();
 
@@ -45,7 +45,7 @@ namespace Dataweb.Dilab.Model.Ado
             return parameter;
         }
 
-        public static DbConnection OpenConnection()
+        public static IDbConnection OpenConnection()
         {
             var connectionString = GetConnectionString();
             var factory = DbProviderFactories.GetFactory(connectionString.ProviderName);
@@ -68,7 +68,7 @@ namespace Dataweb.Dilab.Model.Ado
             return connection;
         }
 
-        public static void UsingCommand(DbConnection c, Action<DbCommand> action)
+        public static void UsingCommand(IDbConnection c, Action<IDbCommand> action)
         {
             using (var command = c.CreateCommand())
             {

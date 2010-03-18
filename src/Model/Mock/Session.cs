@@ -1,10 +1,10 @@
-﻿using System.Data.Common;
+﻿using System.Data;
 
 namespace Dataweb.Dilab.Model.Mock
 {
     public sealed class Session : ISession
     {
-        public DbConnection Connection { get; set; }
+        public IDbConnection Connection { get; set; }
         public void Dispose() {}
     }
 }

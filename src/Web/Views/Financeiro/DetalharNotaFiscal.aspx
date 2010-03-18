@@ -23,7 +23,7 @@
     <label>Total</label><br />
     <span class="field numeric"><%= Html.EncodeCurrency(Model.NotaFiscal.Total) %></span><br />
     <br />
-    <%= Html.ActionLink("NFE", "NotaFiscalEletronica", new {codNotaFiscal = Model.NotaFiscal.CodNotaFiscal})%>
+    <%= Model.NotaFiscal.Nfe? Html.ActionLink("NFE", "NotaFiscalEletronica", new {codNotaFiscal = Model.NotaFiscal.CodNotaFiscal}) : "(NFE indisponível)"%>
     <br />
 
     <% Html.RenderPartial("ListarOrdensServico", Model.OrdensServico); %>

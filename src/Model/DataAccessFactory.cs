@@ -2,7 +2,7 @@
 
 namespace Dataweb.Dilab.Model
 {
-    public class DataAccessFactory
+    public static class DataAccessFactory
     {
         private static string assemblyName;
 

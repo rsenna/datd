@@ -19,7 +19,7 @@ namespace Dataweb.Dilab.Model.Ado
         public QueryDepth Depth { get; set; }
         public ISession Session { get; set; }
 
-        public virtual T InitDto(DbCommand c, T dto)
+        public virtual T InitDto(IDbCommand c, T dto)
         {
             using (var reader = c.ExecuteReader())
             {
@@ -34,7 +34,7 @@ namespace Dataweb.Dilab.Model.Ado
 
         public abstract T InitDto(IDataRecord record, T dto);
 
-        public virtual IEnumerable<T> InitDtos(DbCommand c, IList<T> dtos)
+        public virtual IEnumerable<T> InitDtos(IDbCommand c, IList<T> dtos)
         {
             using (var reader = c.ExecuteReader())
             {

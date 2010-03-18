@@ -88,6 +88,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 c.CommandText = SQL_STMT_FIND_BY_IDENTIFICADOR;
 
                 Helper.AddParameter(c, "@IDENTIFICADOR", DbType.Int32, identificador);
+                c.Prepare();
 
                 result = InitDto(c, result);
             });
