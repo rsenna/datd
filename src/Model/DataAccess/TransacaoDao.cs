@@ -53,6 +53,7 @@ namespace Dataweb.Dilab.Model.DataAccess
             {
                 c.CommandText = GetStmtFindAll();
                 c.AddParameter("@PCOD_CLIENTE", DbType.Int32, codCliente);
+                c.AddParameter("@PCOD_NOTAFISCALEMITIDA", DbType.Int32, DBNull.Value);
                 InitDtos(c, result);
             }
 

@@ -1,11 +1,23 @@
-using System;
 using System.Data;
+using System.Transactions;
 
 namespace Dataweb.Dilab.Model.Ado
 {
     public sealed class FbCommand : ICommand
     {
-        public string CommandText { get; set; }
+        public string CommandText
+        {
+            get
+            {
+                return DbCommand.CommandText;
+            }
+
+            set
+            {
+                DbCommand.CommandText = value;
+            }
+        }
+
         public ISession Session { get; set; }
 
         private FbSession FbSession
@@ -28,6 +40,14 @@ namespace Dataweb.Dilab.Model.Ado
                 }
 
                 return dbCommand;
+            }
+        }
+
+        public FbCommand()
+        {
+            if (Transaction.Current == null)
+            {
+                throw new TransactionException("Para executar um método DAO, é necessário estar em um TransactionScope.");
             }
         }
 

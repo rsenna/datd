@@ -22,7 +22,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RAVISOMENSAGEM,
                 RTIPO
             FROM
-                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE)
+                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE, @PCOD_NOTAFISCALEMITIDA)
         ";
 
         internal const string SQL_STMT_FIND_ONE_BY_COD_EMPRESA_AND_COD_TRANSACAO = @"

@@ -2,7 +2,6 @@
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Transactions;
 
 namespace Dataweb.Dilab.Model.Ado
 {
@@ -11,14 +10,6 @@ namespace Dataweb.Dilab.Model.Ado
         public const string CONNECTION_STRING_NAME = "DilabDatabase";
 
         private IDbConnection connection;
-
-        public FbSession()
-        {
-            if (Transaction.Current == null)
-            {
-                throw new TransactionException("Para criar um DAO, é necessário estar em um TransactionScope.");
-            }
-        }
 
         private static ConnectionStringSettings GetConnectionString()
         {

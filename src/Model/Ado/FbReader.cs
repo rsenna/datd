@@ -18,7 +18,7 @@ namespace Dataweb.Dilab.Model.Ado
             return DataReader.Read();
         }
 
-        private object ReadObject(string name)
+        private object ReadObject<T>(string name)
         {
             var fieldIndex = DataReader.GetOrdinal(name);
 
@@ -27,7 +27,12 @@ namespace Dataweb.Dilab.Model.Ado
                 return null;
             }
 
-            var type = DataReader.GetFieldType(fieldIndex);
+            var type = typeof (T);
+
+            if (type.IsEnum)
+            {
+                return Enum.ToObject(type, DataReader.GetValue(fieldIndex));
+            }
 
             if (type == typeof(decimal))
             {
@@ -46,21 +51,27 @@ namespace Dataweb.Dilab.Model.Ado
         public T? ReadOptional<T>(string name)
             where T : struct
         {
-            var result = ReadObject(name);
-            return (T?) Convert.ChangeType(result, typeof (T?));
+            var result = ReadObject<T>(name);
+
+            if (result == null)
+            {
+                return null;
+            }
+
+            return (T?) Convert.ChangeType(result, typeof (T));
         }
 
         public string ReadOptional(string name)
         {
-            var result = ReadObject(name);
+            var result = ReadObject<string>(name);
             return Convert.ToString(result);
         }
 
         public T ReadRequired<T>(string name)
         {
-            var result = ReadObject(name);
+            var result = ReadObject<T>(name);
 
-            if (result == null || result == DBNull.Value)
+            if (result == null)
             {
                 throw new InvalidOperationException(string.Format(
                     "Campo \"{0}\" é obrigatório, mas foi lido um valor nulo.",
