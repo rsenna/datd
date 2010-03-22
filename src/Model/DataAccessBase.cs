@@ -1,29 +1,18 @@
 ﻿using System.Collections.Generic;
-using System.Data;
-using System.Data.Common;
-using System.Transactions;
 
-namespace Dataweb.Dilab.Model.Ado
+namespace Dataweb.Dilab.Model
 {
     public abstract class DataAccessBase<T> : IDataAccessBase<T>
         where T: DataTransferBase, new()
     {
-        protected DataAccessBase()
-        {
-            if (Transaction.Current == null)
-            {
-                throw new TransactionException("Para criar um DAO, é necessário estar em um TransactionScope.");
-            }
-        }
-
         public QueryDepth Depth { get; set; }
         public ISession Session { get; set; }
 
-        public virtual T InitDto(IDbCommand c, T dto)
+        public virtual T InitDto(ICommand c, T dto)
         {
             using (var reader = c.ExecuteReader())
             {
-                if (reader.Read())
+                if (reader.ReadRecord())
                 {
                     return InitDto(reader, dto);
                 }
@@ -32,13 +21,13 @@ namespace Dataweb.Dilab.Model.Ado
             return dto;
         }
 
-        public abstract T InitDto(IDataRecord record, T dto);
+        public abstract T InitDto(IReader reader, T dto);
 
-        public virtual IEnumerable<T> InitDtos(IDbCommand c, IList<T> dtos)
+        public virtual IEnumerable<T> InitDtos(ICommand c, IList<T> dtos)
         {
             using (var reader = c.ExecuteReader())
             {
-                while (reader.Read())
+                while (reader.ReadRecord())
                 {
                     var item = InitDto(reader, new T());
                     dtos.Add(item);
@@ -55,18 +44,18 @@ namespace Dataweb.Dilab.Model.Ado
 
         protected IEnumerable<T> FindAll(string sqlStmt)
         {
-            IEnumerable<T> result = null;
+            IEnumerable<T> result;
 
-            Helper.UsingCommand(Session.Connection, c =>
+            using (var c = Session.CreateCommand())
             {
                 c.CommandText = sqlStmt;
                 result = InitDtos(c, new List<T>());
-            });
+            }
 
             return result;
         }
 
-        protected QueryDepth GetDetailDepth()
+        public QueryDepth GetDetailDepth()
         {
             switch (Depth)
             {

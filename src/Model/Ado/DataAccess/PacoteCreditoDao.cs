@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class PacoteCreditoDao : DataAccessBase<PacoteCredito>, IPacoteCreditoDao
+    public class PacoteCreditoDao : Base.PacoteCreditoDao
     {
         // TODO: [STP]
         private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
@@ -32,60 +28,14 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 STP_WEBCONSULTARPACOTES(@PCOD_CLIENTE)
         ";
 
-        public override PacoteCredito InitDto(IDataRecord record, PacoteCredito result)
+        public override string GetStmtFindByCodCliente()
         {
-            result.CodPacoteCredito = Helper.ReadString(record, "RCODPACOTE");
-            result.Quantidade = Helper.ReadDecimal(record, "RQUANTIDADEDISPONIVEL").Value;
-            result.Descricao = Helper.ReadString(record, "RDESCRICAO");
-
-            return result;
+            return SQL_STMT_FIND_BY_COD_CLIENTE;
         }
 
-        public IEnumerable<PacoteCredito> FindAll(int codCliente)
+        public override string GetStmtFindByPrimaryKey()
         {
-            var result = new List<PacoteCredito>();
-
-            Helper.UsingCommand(Session.Connection, c => {
-                c.CommandText = SQL_STMT_FIND_BY_COD_CLIENTE;
-                Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
-                InitDtos(c, result);
-            });
-
-            return result;
-        }
-
-        public override IEnumerable<PacoteCredito> FindAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override PacoteCredito FindByPrimaryKey(object pk)
-        {
-            throw new NotImplementedException();
-        }
-
-        public PacoteCredito FindByPrimaryKey(int codCliente, string codPacoteCliente)
-        {
-            var result = new PacoteCredito();
-
-            Helper.UsingCommand(Session.Connection, c => {
-                c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
-                Helper.AddParameter(c, "@PCOD_CLIENTE", DbType.Int32, codCliente);
-                Helper.AddParameter(c, "@PCOD_PACOTE", DbType.String, codPacoteCliente);
-                result = InitDto(c, result);
-            });
-
-            return result;
-        }
-
-        public override PacoteCredito Insert(PacoteCredito dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override PacoteCredito Update(PacoteCredito dto)
-        {
-            throw new NotImplementedException();
+            return SQL_STMT_FIND_BY_PRIMARY_KEY;
         }
     }
 }

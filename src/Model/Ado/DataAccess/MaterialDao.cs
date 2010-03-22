@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class MaterialDao : DataAccessBase<Material>, IMaterialDao
+    public class MaterialDao : Base.MaterialDao
     {
         // TODO: [STP]
         private const string SQL_STMT_FIND_ALL = @"
@@ -19,32 +15,9 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 descricao
         ";
 
-        public override Material InitDto(IDataRecord reader, Material dto)
+        public override string GetStmtFindAll()
         {
-            dto.CodMaterial = Helper.ReadInt32(reader, "cod_oticalentematerial").Value;
-            dto.Descricao = Helper.ReadString(reader, "descricao");
-
-            return dto;
-        }
-
-        public override Material FindByPrimaryKey(object pk)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Material Update(Material dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IEnumerable<Material> FindAll()
-        {
-            return FindAll(SQL_STMT_FIND_ALL);
-        }
-
-        public override Material Insert(Material dto)
-        {
-            throw new NotImplementedException();
+            return SQL_STMT_FIND_ALL;
         }
     }
 }

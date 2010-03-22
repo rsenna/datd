@@ -1,58 +1,36 @@
 ﻿using System;
-using System.Collections.Generic;
-using Dataweb.Dilab.Model.DataAccess;
 using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class LancamentoDao : DataAccessBase<Lancamento>, ILancamentoDao
+    public class LancamentoDao : Base.LancamentoDao
     {
-        public override Lancamento InitDto(Lancamento dto)
+        public override Lancamento InitDto(IReader reader, Lancamento dto)
         {
-            dto.CodLancamento = GenerateInt32();
-            dto.CodCliente = GenerateInt32();
-            dto.CodFatura = GenerateInt32();
-            dto.Numero = GenerateInt32();
-            dto.Vencimento = GenerateDateTime(-5, 5);
+            base.InitDto(reader, dto);
 
-            if (GenerateBoolean())
-            {
-                dto.Pagamento = GenerateDateTime(-5);
-            }
-
-            dto.Total = GenerateDecimal(20000);
+            // Sobreescreve a geração default para estes campos:
+            dto.Vencimento = MockReader.GenerateDateTime(-5, 5);
+            dto.Pagamento = MockReader.Maybe<int, DateTime>(MockReader.GenerateDateTime, -5, 50);
+            dto.Total = MockReader.GenerateDecimal(20000);
 
             return dto;
         }
 
-        public IEnumerable<Lancamento> FindAll(int codCliente)
+        public override string GetStmtFindAllByCodCliente()
         {
-            return FindAll();
+            return string.Empty;
         }
 
-        public IEnumerable<Lancamento> FindAll(int codCliente, int codFatura)
+        public override string GetStmtFindAllByCodClienteAndCodFatura()
         {
-            return FindAll();
+            return string.Empty;
         }
 
-        public override Lancamento FindByPrimaryKey(object pk)
+        public override string GetStmtFindByPrimaryKey()
         {
-            return FindByPrimaryKey(Convert.ToInt32(pk));
-        }
-
-        public Lancamento FindByPrimaryKey(int codLancamento)
-        {
-            return InitDto(new Lancamento());
-        }
-
-        public override Lancamento Insert(Lancamento dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Lancamento Update(Lancamento dto)
-        {
-            throw new NotImplementedException();
+            return string.Empty;
         }
     }
 }

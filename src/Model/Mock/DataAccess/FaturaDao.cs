@@ -1,56 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class FaturaDao : DataAccessBase<Fatura>, IFaturaDao
+    public class FaturaDao : Base.FaturaDao
     {
-        public override Fatura InitDto(Fatura dto)
+        public override Fatura InitDto(IReader reader, Fatura dto)
         {
-            dto.CodFatura = GenerateInt32();
-            dto.CodCliente = GenerateInt32();
-            dto.Numero = GenerateInt32();
-            dto.Data = GenerateDateTime(-5, 5);
-            dto.Total = GenerateDecimal(20000);
+            base.InitDto(reader, dto);
 
-            if (Depth > QueryDepth.FirstLevel)
-            {
-                var notaFiscalDao = new NotaFiscalDao {Depth = GetDetailDepth()};
-                dto.NotasFiscais = notaFiscalDao.FindAll(dto.CodFatura).ToArray();
-
-                var lancamentoDao = new LancamentoDao {Depth = GetDetailDepth()};
-                dto.Lancamentos = lancamentoDao.FindAll(dto.CodFatura).ToArray();
-            }
+            // Sobreescreve a geração default para estes campos:
+            dto.Data = MockReader.GenerateDateTime(-5, 5);
+            dto.Total = MockReader.GenerateDecimal(20000);
 
             return dto;
         }
 
-        public IEnumerable<Fatura> FindAll(int codCliente)
+        public override string GetStmtFindAllByCodCliente()
         {
-            return FindAll();
+            return string.Empty;
         }
 
-        public override Fatura FindByPrimaryKey(object pk)
+        public override string GetStmtFindByPrimaryKey()
         {
-            return FindByPrimaryKey(Convert.ToInt32(pk));
-        }
-
-        public Fatura FindByPrimaryKey(int codFatura)
-        {
-            return InitDto(new Fatura());
-        }
-
-        public override Fatura Insert(Fatura dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Fatura Update(Fatura dto)
-        {
-            throw new NotImplementedException();
+            return string.Empty;
         }
     }
 }

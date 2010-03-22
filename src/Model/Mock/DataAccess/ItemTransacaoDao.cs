@@ -1,46 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class ItemTransacaoDao : DataAccessBase<ItemTransacao>, IItemTransacaoDao
+    public class ItemTransacaoDao : Base.ItemTransacaoDao
     {
-        public override ItemTransacao InitDto(ItemTransacao dto)
+        public override ItemTransacao InitDto(IReader reader, ItemTransacao dto)
         {
-            dto.CodEmpresa = GenerateInt32();
-            dto.CodTransacao = GenerateInt32();
-            dto.CodItem = GenerateCode(10);
-            dto.Quantidade = GenerateInt32(1, 999);
-            dto.Descricao = GenerateName(4).ToUpper();
+            base.InitDto(reader, dto);
+
+            // Sobreescreve a geração default para estes campos:
+            dto.CodItem = MockReader.GenerateCode(10);
+            dto.Quantidade = MockReader.GenerateInt32(1, 999);
+            dto.Descricao = MockReader.GenerateName(4).ToUpper();
 
             return dto;
         }
 
-        public IEnumerable<ItemTransacao> FindAll(int codEmpresa, int codTransacao)
+        public override string GetStmtFindAllByCodEmpresaAndCodTransacao()
         {
-            return FindAll();
+            return string.Empty;
         }
 
-        public override ItemTransacao FindByPrimaryKey(object pk)
+        public override string GetStmtInsert()
         {
-            throw new NotImplementedException();
-        }
-
-        public override ItemTransacao Insert(ItemTransacao dto)
-        {
-            return dto;
-        }
-
-        public IEnumerable<ItemTransacao> Insert(IEnumerable<ItemTransacao> dtos)
-        {
-            return dtos;
-        }
-
-        public override ItemTransacao Update(ItemTransacao dto)
-        {
-            throw new NotImplementedException();
+            return string.Empty;
         }
     }
 }

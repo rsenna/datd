@@ -1,16 +1,28 @@
-﻿using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class FamiliaDao : DataAccessBase<Familia>, IFamiliaDao
+    public class FamiliaDao : Base.FamiliaDao
     {
-        public override Familia InitDto(Familia dto)
+        public override Familia InitDto(IReader reader, Familia dto)
         {
-            dto.CodFamilia = GenerateInt32();
-            dto.Descricao = GenerateName(4).ToUpper();
+            base.InitDto(reader, dto);
+
+            // Sobreescreve a geração default para estes campos:
+            dto.Descricao = MockReader.GenerateName(4).ToUpper();
 
             return dto;
+        }
+
+        public override string GetStmtFindByPrimaryKey()
+        {
+            return string.Empty;
+        }
+
+        public override string GetStmtFindAll()
+        {
+            return string.Empty;
         }
     }
 }

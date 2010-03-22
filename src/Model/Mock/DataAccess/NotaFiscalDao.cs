@@ -1,65 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class NotaFiscalDao : DataAccessBase<NotaFiscal>, INotaFiscalDao
+    public class NotaFiscalDao : Base.NotaFiscalDao
     {
-        public override NotaFiscal InitDto(NotaFiscal dto)
+        public override NotaFiscal InitDto(IReader reader, NotaFiscal dto)
         {
-            dto.CodNotaFiscal = GenerateInt32();
-            dto.CodCliente = GenerateInt32();
-            dto.CodFatura = GenerateInt32();
-            dto.Numero = GenerateInt32();
-            dto.Data = GenerateDateTime(-10);
-            dto.Total = GenerateDecimal(20000);
-            dto.Nfe = GenerateBoolean();
+            base.InitDto(reader, dto);
 
-            if (Depth > QueryDepth.FirstLevel)
-            {
-                var transacaoDao = new TransacaoDao {Depth = GetDetailDepth()};
-                dto.Transacoes = transacaoDao.FindAll(dto.CodCliente, dto.CodNotaFiscal).ToArray();
-            }
+            // Sobreescreve a geração default para estes campos:
+            dto.Data = MockReader.GenerateDateTime(-10);
+            dto.Total = MockReader.GenerateDecimal(20000);
 
             return dto;
         }
 
-        public IEnumerable<NotaFiscal> FindAll(int codCliente)
+        public override string GetXml(int codNotaFiscal)
         {
-            return FindAll();
+            return MockReader.GenerateXml();
         }
 
-        public IEnumerable<NotaFiscal> FindAll(int codCliente, int codFatura)
+        public override string GetStmtFindAllByCodCliente()
         {
-            return FindAll();
+            return string.Empty;
         }
 
-        public override NotaFiscal FindByPrimaryKey(object pk)
+        public override string GetStmtFindAllByCodClienteAndCodFatura()
         {
-            return FindByPrimaryKey(Convert.ToInt32(pk));
+            return string.Empty;
         }
 
-        public NotaFiscal FindByPrimaryKey(int codNotaFiscal)
+        public override string GetStmtFindByPrimaryKey()
         {
-            return InitDto(new NotaFiscal());
-        }
-
-        public string GetXml(int codNotaFiscal)
-        {
-            return GenerateXml();
-        }
-
-        public override NotaFiscal Insert(NotaFiscal dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override NotaFiscal Update(NotaFiscal dto)
-        {
-            throw new NotImplementedException();
+            return string.Empty;
         }
     }
 }

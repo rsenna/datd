@@ -1,36 +1,45 @@
-﻿using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class ClienteDao : DataAccessBase<Cliente>, IClienteDao
+    public class ClienteDao : Base.ClienteDao
     {
         // CPF 14 CNPJ 19
         private const string SENHA = "teste123";
 
-        public override Cliente InitDto(Cliente dto)
+        public override Cliente InitDto(IReader reader, Cliente dto)
         {
-            dto.CodCliente = GenerateInt32();
-            dto.Identificador = GenerateInt32();
-            dto.Cnpj = GenerateCode(19);
-            dto.Nome = GenerateName(3);
+            base.InitDto(reader, dto);
+
+            // Sobreescreve a geração default para estes campos:
+            dto.Cnpj = MockReader.GenerateCode(19);
+            dto.Nome = MockReader.GenerateName(3);
             dto.Senha = SENHA;
-            dto.CodEmpresa = GenerateInt32();
-            dto.NomeEmpresa = GenerateName(5);
-            dto.EmailNotificacao = GenerateEmail();
-            dto.ReceberNotificacao = GenerateBoolean();
+            dto.NomeEmpresa = MockReader.GenerateName(5);
+            dto.EmailNotificacao = MockReader.GenerateEmail();
 
             return dto;
         }
 
-        public Cliente FindByIdentificador(int identificador)
+        public override string GetStmtFindByIdentificador()
         {
-            return InitDto(new Cliente());
+            return string.Empty;
         }
 
-        public Cliente FindByCnpj(string cnpj)
+        public override string GetStmtFindByCnpj()
         {
-            return InitDto(new Cliente());
+            return string.Empty;
+        }
+
+        public override string GetStmtFindByPrimaryKey()
+        {
+            return string.Empty;
+        }
+
+        public override string GetStmtUpdate()
+        {
+            return string.Empty;
         }
     }
 }

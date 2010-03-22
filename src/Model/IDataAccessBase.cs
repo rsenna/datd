@@ -15,6 +15,8 @@ namespace Dataweb.Dilab.Model
     {
         QueryDepth Depth { get; set; }
         ISession Session { get; set; }
+
+        QueryDepth GetDetailDepth();
     }
 
     public interface IDataAccessBase<T> : IDataAccessBase
