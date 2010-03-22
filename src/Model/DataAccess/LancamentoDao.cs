@@ -16,8 +16,8 @@ namespace Dataweb.Dilab.Model.DataAccess
         {
             dto.CodLancamento = reader.ReadRequired<int>("RCOD_LANCAMENTO");
             dto.CodCliente = reader.ReadRequired<int>("RCOD_PESSOA");
-            dto.CodFatura = reader.ReadRequired<int>("RCOD_FATURATRANSACAO");
-            dto.Numero = reader.ReadRequired<int>("RNUMERODOCUMENTO");
+            dto.CodFatura = reader.ReadOptional<int>("RCOD_FATURATRANSACAO");
+            dto.Documento = reader.ReadRequired<string>("RNUMERODOCUMENTO");
             dto.Vencimento = reader.ReadRequired<DateTime>("RDATAVENCIMENTO");
             dto.Pagamento = reader.ReadOptional<DateTime>("RDATAPAGAMENTO");
             dto.Total = reader.ReadRequired<decimal>("RTOTAL");

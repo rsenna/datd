@@ -27,7 +27,7 @@
 
             <tr>
                 <td>
-                    <%= Html.Encode(item.Numero) %>
+                    <%= Html.Encode(item.Documento) %>
                 </td>
                 <td>
                     <%= Html.EncodeDate(item.Vencimento) %>

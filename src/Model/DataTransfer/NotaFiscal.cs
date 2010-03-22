@@ -12,7 +12,7 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public int CodCliente { get; set; }
 
         [DataMember]
-        public int CodFatura { get; set; }
+        public int? CodFatura { get; set; }
 
         [DataMember]
         public int Numero { get; set; }

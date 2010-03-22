@@ -53,7 +53,6 @@ namespace Dataweb.Dilab.Model.DataAccess
             {
                 c.CommandText = GetStmtFindAll();
                 c.AddParameter("@PCOD_CLIENTE", DbType.Int32, codCliente);
-                c.AddParameter("@PCOD_NOTAFISCALEMITIDA", DbType.Int32, DBNull.Value);
                 InitDtos(c, result);
             }
 
@@ -102,7 +101,7 @@ namespace Dataweb.Dilab.Model.DataAccess
             c.AddParameter("@PDESCRICAOARMACAO", DbType.String, DBNull.Value);
             c.AddParameter("@POBSERVACAOARMACAO", DbType.String, DBNull.Value);
             c.AddParameter("@PCOD_OTICALENTEMATERIAL", DbType.Int32, DBNull.Value);
-            c.AddParameter("@PTIPOVT", DbType.Int32, 0);
+            c.AddParameter("@PTIPOVT", DbType.Int32, (object) 0);
             c.AddParameter("@PTA", DbType.Decimal, DBNull.Value);
             c.AddParameter("@PMD", DbType.Decimal, DBNull.Value);
             c.AddParameter("@PDIAMETRO", DbType.Decimal, DBNull.Value);

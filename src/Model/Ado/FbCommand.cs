@@ -63,7 +63,8 @@ namespace Dataweb.Dilab.Model.Ado
         {
             get
             {
-                return DbCommand.Parameters[parameterName];
+                var param = (IDbDataParameter) DbCommand.Parameters[parameterName];
+                return param.Value;
             }
         }
 

@@ -11,7 +11,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override string GetStmtFindAllByCodClienteAndCodNotaFiscal()
         {
-            return TransacaoDao.SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_NOTA_FISCAL;
+            return TransacaoDao.SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_NOTAFISCAL;
         }
 
         public override string GetStmtFindOneByCodEmpresaAndCodTransacao()

@@ -6,8 +6,21 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class TransacaoDao : Base.TransacaoDao<Transacao>, ITransacaoDao
     {
-        // TODO: Transacao: Definir SQL busca por COD_CLIENTE e COD_NOTA_FISCAL.
-        internal const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_NOTA_FISCAL = "???";
+        internal const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_NOTAFISCAL = @"
+            SELECT
+                RCODEMPRESA,
+                RCODTRANSACAO,
+                RNUMEROORDEMSERVICO,
+                RREFERENCIA,
+                RDATAHORAEMISSAO,
+                RDATAHORAPREVISAO,
+                RDATAHORAEXPEDICAO,
+                RCODETAPA,
+                RAVISOMENSAGEM,
+                RTIPO
+            FROM
+                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE, @PCOD_NOTAFISCAL)
+        ";
 
         internal const string SQL_STMT_FIND_ALL = @"
             SELECT
@@ -22,7 +35,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RAVISOMENSAGEM,
                 RTIPO
             FROM
-                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE, @PCOD_NOTAFISCALEMITIDA)
+                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE, NULL)
         ";
 
         internal const string SQL_STMT_FIND_ONE_BY_COD_EMPRESA_AND_COD_TRANSACAO = @"
@@ -114,7 +127,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 
         public override string GetStmtFindAllByCodClienteAndCodNotaFiscal()
         {
-            return SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_NOTA_FISCAL;
+            return SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_NOTAFISCAL;
         }
 
         public override string GetStmtFindOneByCodEmpresaAndCodTransacao()
