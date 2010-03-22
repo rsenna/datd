@@ -4,10 +4,27 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class FaturaDao : Base.FaturaDao
     {
-        // TODO: Fatura: Definir SQL_STMT_FIND_ALL_BY_COD_CLIENTE
-        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE = "TODO";
-        // TODO: Fatura: Definir SQL_STMT_FIND_BY_PRIMARY_KEY
-        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = "TODO";
+        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE = @"
+            select
+                RCOD_FATURATRANSACAO,
+                RCOD_PESSOA,
+                RNUMEROFATURA,
+                RDATAEMISSAO,
+                RTOTAL
+            from
+                STP_WEBCONSULTARFATURAS(@PCOD_CLIENTE)
+        ";
+
+        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
+            select
+                RCOD_FATURATRANSACAO,
+                RCOD_PESSOA,
+                RNUMEROFATURA,
+                RDATAEMISSAO,
+                RTOTAL
+            from
+                STP_WEBCONSULTARFATURA(@PCOD_FATURA)
+        ";
 
         public override string GetStmtFindAllByCodCliente()
         {

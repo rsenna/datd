@@ -5,11 +5,44 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
     public class LancamentoDao : Base.LancamentoDao
     {
         // TODO: Lancamento: Definir SQL_STMT_FIND_BY_PRIMARY_KEY
-        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = "TODO";
-        // TODO: Lancamento: Definir SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA
-        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA = "TODO";
-        // TODO: Lancamento: Definir SQL_STMT_FIND_ALL_BY_COD_CLIENTE
-        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE = "TODO";
+        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
+            select
+                RCOD_LANCAMENTO,
+                RCOD_PESSOA,
+                RCOD_FATURATRANSACAO,
+                RNUMERODOCUMENTO,
+                RDATAVENCIMENTO,
+                RDATAPAGAMENTO,
+                RTOTAL
+            from
+                STP_WEBCONSULTARLANCAMENTO(@PCOD_LANCAMENTO)
+        ";
+
+        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA = @"
+            select
+                RCOD_LANCAMENTO,
+                RCOD_PESSOA,
+                RCOD_FATURATRANSACAO,
+                RNUMERODOCUMENTO,
+                RDATAVENCIMENTO,
+                RDATAPAGAMENTO,
+                RTOTAL
+            from
+                STP_WEBCONSULTARLANCAMENTOS(@PCOD_CLIENTE, @PCOD_FATURA)
+        ";
+
+        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE = @"
+            select
+                RCOD_LANCAMENTO,
+                RCOD_PESSOA,
+                RCOD_FATURATRANSACAO,
+                RNUMERODOCUMENTO,
+                RDATAVENCIMENTO,
+                RDATAPAGAMENTO,
+                RTOTAL
+            from
+                STP_WEBCONSULTARLANCAMENTOS(@PCOD_CLIENTE, NULL)
+        ";
 
         public override string GetStmtFindAllByCodCliente()
         {

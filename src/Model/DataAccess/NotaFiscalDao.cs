@@ -15,14 +15,13 @@ namespace Dataweb.Dilab.Model.DataAccess
 
         public override NotaFiscal InitDto(IReader reader, NotaFiscal dto)
         {
-            // TODO: Lancamento: Definir campos a serem lidos.
-            dto.CodNotaFiscal = reader.ReadRequired<int>("???");
-            dto.CodCliente = reader.ReadRequired<int>("???");
-            dto.CodFatura = reader.ReadRequired<int>("???");
-            dto.Numero = reader.ReadRequired<int>("???");
-            dto.Data = reader.ReadRequired<DateTime>("???");
-            dto.Total = reader.ReadRequired<decimal>("???");
-            dto.Nfe = reader.ReadRequired<bool>("???");
+            dto.CodNotaFiscal = reader.ReadRequired<int>("RCOD_NOTAFISCALEMITIDA");
+            dto.CodCliente = reader.ReadRequired<int>("RCOD_PESSOA");
+            dto.CodFatura = reader.ReadRequired<int>("RCOD_FATURATRANSACAO");
+            dto.Numero = reader.ReadRequired<int>("RNUMERONOTAFISCAL");
+            dto.Data = reader.ReadRequired<DateTime>("RDATAEMISSAO");
+            dto.Total = reader.ReadRequired<decimal>("RTOTAL");
+            dto.Nfe = reader.ReadRequired<bool>("RNFE");
 
             if (Depth > QueryDepth.FirstLevel)
             {

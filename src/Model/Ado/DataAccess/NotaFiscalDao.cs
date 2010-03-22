@@ -5,12 +5,44 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
     public class NotaFiscalDao : Base.NotaFiscalDao
     {
-        // TODO: NotaFiscal: Definir SQL_STMT_FIND_ALL_BY_COD_CLIENTE
-        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE = "TODO";
-        // TODO: NotaFiscal: Definir SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA
-        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA = "TODO";
-        // TODO: NotaFiscal: Definir SQL_STMT_FIND_BY_PRIMARY_KEY
-        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = "TODO";
+        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE = @"
+            select
+                RCOD_NOTAFISCALEMITIDA,
+                RCOD_PESSOA,
+                RCOD_FATURATRANSACAO,
+                RNUMERONOTAFISCAL,
+                RDATAEMISSAO,
+                RTOTAL,
+                RNFE
+            from
+                STP_WEBCONSULTARNOTASFISCAIS(@PCOD_CLIENTE, NULL)
+        ";
+
+        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA = @"
+            select
+                RCOD_NOTAFISCALEMITIDA,
+                RCOD_PESSOA,
+                RCOD_FATURATRANSACAO,
+                RNUMERONOTAFISCAL,
+                RDATAEMISSAO,
+                RTOTAL,
+                RNFE
+            from
+                STP_WEBCONSULTARNOTASFISCAIS(@PCOD_CLIENTE, @PCOD_FATURA)
+        ";
+
+        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
+            select
+                RCOD_NOTAFISCALEMITIDA,
+                RCOD_PESSOA,
+                RCOD_FATURATRANSACAO,
+                RNUMERONOTAFISCAL,
+                RDATAEMISSAO,
+                RTOTAL,
+                RNFE
+            from
+                STP_WEBCONSULTARNOTASFISCAL(@PCOD_NOTAFISCAL)
+        ";
 
         public override string GetStmtFindAllByCodCliente()
         {

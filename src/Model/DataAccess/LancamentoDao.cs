@@ -14,14 +14,13 @@ namespace Dataweb.Dilab.Model.DataAccess
 
         public override Lancamento InitDto(IReader reader, Lancamento dto)
         {
-            // TODO: Lancamento: Definir campos a serem lidos.
-            dto.CodLancamento = reader.ReadRequired<int>("???");
-            dto.CodCliente = reader.ReadRequired<int>("???");
-            dto.CodFatura = reader.ReadRequired<int>("???");
-            dto.Numero = reader.ReadRequired<int>("???");
-            dto.Vencimento = reader.ReadRequired<DateTime>("???");
-            dto.Pagamento = reader.ReadOptional<DateTime>("???");
-            dto.Total = reader.ReadRequired<decimal>("???");
+            dto.CodLancamento = reader.ReadRequired<int>("RCOD_LANCAMENTO");
+            dto.CodCliente = reader.ReadRequired<int>("RCOD_PESSOA");
+            dto.CodFatura = reader.ReadRequired<int>("RCOD_FATURATRANSACAO");
+            dto.Numero = reader.ReadRequired<int>("RNUMERODOCUMENTO");
+            dto.Vencimento = reader.ReadRequired<DateTime>("RDATAVENCIMENTO");
+            dto.Pagamento = reader.ReadOptional<DateTime>("RDATAPAGAMENTO");
+            dto.Total = reader.ReadRequired<decimal>("RTOTAL");
 
             return dto;
         }

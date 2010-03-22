@@ -14,12 +14,11 @@ namespace Dataweb.Dilab.Model.DataAccess
 
         public override Fatura InitDto(IReader reader, Fatura dto)
         {
-            // TODO: Fatura: Definir campos a serem lidos.
-            dto.CodFatura = reader.ReadRequired<int>("???");
-            dto.CodCliente = reader.ReadRequired<int>("???");
-            dto.Numero = reader.ReadRequired<int>("???");
-            dto.Data = reader.ReadRequired<DateTime>("???");
-            dto.Total = reader.ReadRequired<decimal>("???");
+            dto.CodFatura = reader.ReadRequired<int>("RCOD_FATURATRANSACAO");
+            dto.CodCliente = reader.ReadRequired<int>("RCOD_PESSOA");
+            dto.Numero = reader.ReadRequired<int>("RNUMEROFATURA");
+            dto.Data = reader.ReadRequired<DateTime>("RDATAEMISSAO");
+            dto.Total = reader.ReadRequired<decimal>("RTOTAL");
 
             if (Depth > QueryDepth.FirstLevel)
             {
