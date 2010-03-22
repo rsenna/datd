@@ -1,87 +1,74 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Dataweb.Dilab.Model.DataAccess;
+﻿using System.Linq;
+using Dataweb.Dilab.Model.DataAccess.Contracts;
 using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class TransacaoDao : TransacaoDao<Transacao>, ITransacaoDao { }
-
-    public abstract class TransacaoDao<T> : DataAccessBase<T>, ITransacaoDao<T>
-        where T : Transacao, new()
+    public class TransacaoDao : Base.TransacaoDao<Transacao>, ITransacaoDao
     {
         private const int MAX_FECHADAS = 20;
         private const int MAX_EM_PRODUCAO = 20;
         private const int MAX_DIAS = 20;
 
-        public override T InitDto(T dto)
+        public override Transacao InitDto(IReader reader, Transacao dto)
         {
-            dto.Tipo = (TipoTransacao) GenerateInt32(1, 2);
-            dto.CodEmpresa = GenerateInt32();
-            dto.CodTransacao = GenerateInt32();
-            dto.Numero = GenerateInt32();
-            dto.Referencia = GenerateCode(7);
-            dto.Emissao = GenerateDateTime(-MAX_DIAS);
-            dto.Previsao = GenerateDateTime(MAX_DIAS);
-            dto.Expedicao = GenerateDateTime(MAX_DIAS);
-            dto.Etapa = (TipoEtapa) GenerateInt32(4);
-            dto.AvisoMensagem = GeneratePhrase();
-            dto.Observacao = GeneratePhrase();
+            base.InitDto(reader, dto);
 
-            if (Depth > QueryDepth.FirstLevel)
-            {
-                var itemTransacaoDao = new ItemTransacaoDao {Depth = GetDetailDepth()};
-                dto.Itens = itemTransacaoDao.FindAll(dto.CodEmpresa, dto.CodTransacao).ToArray();
-            }
+            // Sobreescreve a geração default para estes campos:
+            dto.Referencia = MockReader.GenerateCode(7);
+            dto.Emissao = MockReader.GenerateDateTime(-MAX_DIAS);
+            dto.Previsao = MockReader.GenerateDateTime(MAX_DIAS);
+            dto.Expedicao = MockReader.GenerateDateTime(MAX_DIAS);
+            dto.AvisoMensagem = MockReader.GeneratePhrase();
+            dto.Observacao = MockReader.GeneratePhrase();
 
             return dto;
         }
 
-        public override T FindByPrimaryKey(object pk)
+        public override int GetCountFechadas(int codCliente)
         {
-            throw new NotImplementedException();
+            return MockReader.GenerateInt32(MAX_FECHADAS);
         }
 
-        public override T Update(T dto)
+        public override int GetCountEmProducao(int codCliente)
         {
-            throw new NotImplementedException();
+            return MockReader.GenerateInt32(MAX_EM_PRODUCAO);
         }
 
-        public IEnumerable<T> FindAll(int codCliente)
+        public override string GetStmtFindAll()
         {
-            return FindAll();
+            return string.Empty;
         }
 
-        public IEnumerable<T> FindAll(int codCliente, int codNotaFiscal)
+        public override string GetStmtFindAllByCodClienteAndCodNotaFiscal()
         {
-            return FindAll();
+            return string.Empty;
         }
 
-        public T FindByPrimaryKey(int codEmpresa, int codTransacao)
+        public override string GetStmtFindOneByCodEmpresaAndCodTransacao()
         {
-            return InitDto(new T());
+            return string.Empty;
         }
 
-        public int GetCountFechadas(int codCliente)
+        public override string GetStmtInsert()
         {
-            return GenerateInt32(MAX_FECHADAS);
+            return string.Empty;
         }
 
-        public int GetCountEmProducao(int codCliente)
+        public override string GetStmtCountFechadas()
         {
-            return GenerateInt32(MAX_EM_PRODUCAO);
+            return string.Empty;
         }
 
-        public T Close(T dto)
+        public override string GetStmtCountEmProducao()
         {
-            return dto;
+            return string.Empty;
         }
 
-        public override T Insert(T dto)
+        public override string GetStmtClose()
         {
-            dto.Numero = GenerateInt32();
-            return dto;
+            return string.Empty;
         }
     }
 }

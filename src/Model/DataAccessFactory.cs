@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace Dataweb.Dilab.Model
 {
@@ -26,38 +27,53 @@ namespace Dataweb.Dilab.Model
             assemblyName = ASSEMBLY_NAME_DEFAULT;
         }
 
-        private static object CreateDataAccessObject(string className)
+        private static T CreateModelObject<T>()
         {
-            var fullClassName = string.Format("{0}.{1}", AssemblyName, className);
-            var objectHandle = Activator.CreateInstance(AssemblyName, fullClassName);
+            var asm = Assembly.Load(AssemblyName);
+            var types = asm.GetTypes();
 
-            if (objectHandle != null)
+            foreach (var type in types)
             {
-                var instance = objectHandle.Unwrap();
-                return instance;
+                if (type.IsClass && !type.IsAbstract && typeof(T).IsAssignableFrom(type))
+                {
+                    var instance = Activator.CreateInstance(type);
+
+                    if (instance != null)
+                    {
+                        return (T) instance;
+                    }
+                }
             }
 
-            return null;
+            throw new ArgumentException(string.Format("[{0}] é um tipo desconhecido.", typeof(T).Name));
         }
 
-        public static T CreateDao<T>(ISession session) where T : IDataAccessBase
+        public static T CreateDao<T>(ISession session, QueryDepth depth)
+            where T : IDataAccessBase
         {
-            var interfaceName = typeof(T).Name;
-            var className = interfaceName.Remove(0, 1);
-            var instance = CreateDataAccessObject(string.Format("DataAccess." + className));
-
-            if (instance != null && instance is T)
+            try
             {
-                ((T) instance).Session = session;
-                return (T) instance;
-            }
+                var instance = CreateModelObject<T>();
 
-            throw new ArgumentException("Tipo de DAO desconhecido.", interfaceName);
+                instance.Session = session;
+                instance.Depth = depth;
+
+                return instance;
+            }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException("Tipo de DAO desconhecido.", typeof(T).Name, ex);
+            }
+        }
+
+        public static T CreateDao<T>(IDataAccessBase parent) where T : IDataAccessBase
+        {
+            return CreateDao<T>(parent.Session, parent.GetDetailDepth());
         }
 
         public static ISession CreateSession()
         {
-            return (ISession) CreateDataAccessObject("Session");
+            return CreateModelObject<ISession>();
         }
     }
 }

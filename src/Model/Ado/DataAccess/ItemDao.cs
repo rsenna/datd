@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class ItemDao : DataAccessBase<Item>, IItemDao
+    public class ItemDao : Base.ItemDao
     {
         // TODO: Como não usa mais tabela estoque, não dá para verificar se estoque.cod_estoquelocal = 1 - verificar se está tudo bem desta forma.
         // TODO: [STP]
@@ -52,50 +48,14 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 ITEM.descricao
         ";
 
-        public override Item InitDto(IDataRecord record, Item result)
+        public override string GetStmtFindAllProdutoByCodFamilia()
         {
-            result.CodItem = Helper.ReadString(record, "cod_item");
-            result.CodBarra = Helper.ReadString(record, "codigobarra");
-            result.Obrigatorio = Helper.ReadBoolean(record, "obrigatorio").Value;
-            result.Descricao = Helper.ReadString(record, "descricao");
-            result.ServicoInterno = Helper.ReadBoolean(record, "servicointerno").Value;
-            result.Tipo = (TipoItem) Helper.ReadInt32(record, "tipo").Value;
-
-            return result;
+            return SQL_STMT_FIND_ALL_PRODUTO_BY_COD_FAMILIA;
         }
 
-        public override IEnumerable<Item> FindAll()
+        public override string GetStmtFindAllServicoByCodFamilia()
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Item> FindAll(int codFamilia, TipoItem tipo)
-        {
-            var result = new List<Item>();
-            var proc = tipo == TipoItem.Produto ? SQL_STMT_FIND_ALL_PRODUTO_BY_COD_FAMILIA : SQL_STMT_FIND_ALL_SERVICO_BY_COD_FAMILIA;
-
-            Helper.UsingCommand(Session.Connection, c => {
-                c.CommandText = proc;
-                Helper.AddParameter(c, "@COD_PRODUTOFAMILIA", DbType.Int32, codFamilia);
-                InitDtos(c, result);
-            });
-
-            return result;
-        }
-
-        public override Item FindByPrimaryKey(object pk)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Item Update(Item dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Item Insert(Item dto)
-        {
-            throw new NotImplementedException();
+            return SQL_STMT_FIND_ALL_SERVICO_BY_COD_FAMILIA;
         }
     }
 }

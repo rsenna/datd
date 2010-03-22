@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ServiceModel;
 using System.Transactions;
-using Dataweb.Dilab.Model.DataAccess;
+using Dataweb.Dilab.Model.DataAccess.Contracts;
 using Dataweb.Dilab.Model.DataTransfer;
 using Dataweb.Dilab.Model.Service;
 
@@ -43,7 +43,7 @@ namespace Dataweb.Dilab.Model.Wcf
             int identificador;
             var isIdentificador = int.TryParse(login, out identificador);
 
-            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session);
+            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session, QueryDepth.FirstLevel);
             return isIdentificador? clienteDao.FindByIdentificador(identificador) : clienteDao.FindByCnpj(login);
         }
 
@@ -63,7 +63,7 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public void ChangePassword(string login, string currentPassword, string newPassword)
         {
-            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session);
+            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session, QueryDepth.FirstLevel);
             var cliente = FindByLogin(login);
 
             if (cliente.Senha != currentPassword)
@@ -78,7 +78,7 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public void ChangeEmail(string login, string emailNotificacao, bool receberNotificacao)
         {
-            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session);
+            var clienteDao = DataAccessFactory.CreateDao<IClienteDao>(session, QueryDepth.FirstLevel);
             var cliente = FindByLogin(login);
 
             cliente.EmailNotificacao = emailNotificacao;
@@ -90,21 +90,21 @@ namespace Dataweb.Dilab.Model.Wcf
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public IEnumerable<PacoteCredito> FindAllPacoteCredito(int codCliente)
         {
-            var pacoteCreditoDao = DataAccessFactory.CreateDao<IPacoteCreditoDao>(session);
+            var pacoteCreditoDao = DataAccessFactory.CreateDao<IPacoteCreditoDao>(session, QueryDepth.FirstLevel);
             return pacoteCreditoDao.FindAll(codCliente);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public PacoteCredito FindPacoteCredito(int codCliente, string codPacoteCliente)
         {
-            var pacoteCreditoDao = DataAccessFactory.CreateDao<IPacoteCreditoDao>(session);
+            var pacoteCreditoDao = DataAccessFactory.CreateDao<IPacoteCreditoDao>(session, QueryDepth.FirstLevel);
             return pacoteCreditoDao.FindByPrimaryKey(codCliente, codPacoteCliente);
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public IEnumerable<PacoteHistorico> FindAllPacoteHistorico(int codCliente, string codPacoteCliente)
         {
-            var pacoteHistoricoDao = DataAccessFactory.CreateDao<IPacoteHistoricoDao>(session);
+            var pacoteHistoricoDao = DataAccessFactory.CreateDao<IPacoteHistoricoDao>(session, QueryDepth.FirstLevel);
             return pacoteHistoricoDao.FindAll(codCliente, codPacoteCliente);
         }
     }

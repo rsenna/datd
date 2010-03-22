@@ -1,25 +1,25 @@
-﻿using System.Collections.Generic;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class PacoteHistoricoDao : DataAccessBase<PacoteHistorico>, IPacoteHistoricoDao
+    public class PacoteHistoricoDao : Base.PacoteHistoricoDao
     {
-        public override PacoteHistorico InitDto(PacoteHistorico dto)
+        public override PacoteHistorico InitDto(IReader reader, PacoteHistorico dto)
         {
-            dto.Data = GenerateDateTime(-10);
-            dto.NumeroOS = GenerateInt32();
-            dto.Quantidade = GenerateInt32(100);
-            dto.Valor = GenerateDecimal(10000);
-            dto.Tipo = (TipoPacoteHistorico)GenerateInt32(1, 2);
+            base.InitDto(reader, dto);
+
+            // Sobreescreve a geração default para estes campos:
+            dto.Data = MockReader.GenerateDateTime(-10);
+            dto.Quantidade = MockReader.GenerateInt32(100);
+            dto.Valor = MockReader.GenerateDecimal(10000);
 
             return dto;
         }
 
-        public IEnumerable<PacoteHistorico> FindAll(int codCliente, string codPacoteCliente)
+        public override string GetStmtFindByCodClienteAndCodPacote()
         {
-            return base.FindAll();
+            return string.Empty;
         }
     }
 }

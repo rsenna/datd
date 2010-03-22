@@ -1,70 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
-using Dataweb.Dilab.Model.Ado;
+﻿using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class LancamentoDao : DataAccessBase<Lancamento>, ILancamentoDao
+    public class LancamentoDao : Base.LancamentoDao
     {
-        public override Lancamento InitDto(IDataRecord reader, Lancamento dto)
+        // TODO: Lancamento: Definir SQL_STMT_FIND_BY_PRIMARY_KEY
+        private const string SQL_STMT_FIND_BY_PRIMARY_KEY = "TODO";
+        // TODO: Lancamento: Definir SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA
+        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA = "TODO";
+        // TODO: Lancamento: Definir SQL_STMT_FIND_ALL_BY_COD_CLIENTE
+        private const string SQL_STMT_FIND_ALL_BY_COD_CLIENTE = "TODO";
+
+        public override string GetStmtFindAllByCodCliente()
         {
-            /*
-            dto.CodLancamento = GenerateInt32();
-            dto.CodCliente = GenerateInt32();
-            dto.CodFatura = GenerateInt32();
-            dto.Numero = GenerateInt32();
-            dto.Vencimento = GenerateDateTime(-5, 5);
-
-            if (GenerateBoolean())
-            {
-                dto.Pagamento = GenerateDateTime(-5);
-            }
-
-            dto.Total = GenerateDecimal(20000);
-            */
-
-            return dto;
+            return SQL_STMT_FIND_ALL_BY_COD_CLIENTE;
         }
 
-        public override IEnumerable<Lancamento> FindAll()
+        public override string GetStmtFindAllByCodClienteAndCodFatura()
         {
-            throw new NotImplementedException();
+            return SQL_STMT_FIND_ALL_BY_COD_CLIENTE_AND_COD_FATURA;
         }
 
-        // TODO: ---
-        public IEnumerable<Lancamento> FindAll(int codCliente)
+        public override string GetStmtFindByPrimaryKey()
         {
-            throw new NotImplementedException();
-        }
-
-        // TODO: ---
-        public IEnumerable<Lancamento> FindAll(int codCliente, int codFatura)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Lancamento FindByPrimaryKey(object pk)
-        {
-            return FindByPrimaryKey(Convert.ToInt32(pk));
-        }
-
-        // TODO: ---
-        public Lancamento FindByPrimaryKey(int codLancamento)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Lancamento Insert(Lancamento dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Lancamento Update(Lancamento dto)
-        {
-            throw new NotImplementedException();
+            return SQL_STMT_FIND_BY_PRIMARY_KEY;
         }
     }
 }

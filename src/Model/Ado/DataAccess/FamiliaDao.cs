@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Ado.DataAccess
 {
-    public class FamiliaDao : DataAccessBase<Familia>, IFamiliaDao
+    public class FamiliaDao : Base.FamiliaDao
     {
         // TODO: [STP]
         private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"
@@ -32,40 +28,14 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 PRFA.descricao
         ";
 
-        public override Familia InitDto(IDataRecord reader, Familia dto)
+        public override string GetStmtFindByPrimaryKey()
         {
-            dto.CodFamilia = Helper.ReadInt32(reader, "cod_produtofamilia").Value;
-            dto.Descricao = Helper.ReadString(reader, "descricao");
-
-            return dto;
+            return SQL_STMT_FIND_BY_PRIMARY_KEY;
         }
 
-        public override Familia FindByPrimaryKey(object pk)
+        public override string GetStmtFindAll()
         {
-            var result = new Familia();
-
-            Helper.UsingCommand(Session.Connection, c => {
-                c.CommandText = SQL_STMT_FIND_BY_PRIMARY_KEY;
-                Helper.AddParameter(c, "@PCOD_PRODUTOFAMILIA", DbType.Int32, pk);
-                result = InitDto(c, result);
-            });
-
-            return result;
-        }
-
-        public override Familia Update(Familia dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override IEnumerable<Familia> FindAll()
-        {
-            return FindAll(SQL_STMT_FIND_ALL);
-        }
-
-        public override Familia Insert(Familia dto)
-        {
-            throw new NotImplementedException();
+            return SQL_STMT_FIND_ALL;
         }
     }
 }

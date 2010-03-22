@@ -1,47 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using Dataweb.Dilab.Model.DataAccess;
-using Dataweb.Dilab.Model.DataTransfer;
+﻿using Dataweb.Dilab.Model.DataTransfer;
+using Base=Dataweb.Dilab.Model.DataAccess;
 
 namespace Dataweb.Dilab.Model.Mock.DataAccess
 {
-    public class ItemDao : DataAccessBase<Item>, IItemDao
+    public class ItemDao : Base.ItemDao
     {
-        public IEnumerable<Item> FindAll(int codFamilia)
+        public override Item InitDto(IReader reader, Item dto)
         {
-            return FindAll();
-        }
+            base.InitDto(reader, dto);
 
-        public override Item FindByPrimaryKey(object pk)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Item Update(Item dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Item> FindAll(int codFamilia, TipoItem tipo)
-        {
-            return FindAll();
-        }
-
-        public override Item Insert(Item dto)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Item InitDto(Item dto)
-        {
-            dto.CodItem = GenerateCode(10);
-            dto.CodBarra = GenerateCode(10);
-            dto.Descricao = GenerateName(4).ToUpper();
-            dto.Obrigatorio = GenerateBoolean();
-            dto.ServicoInterno = GenerateBoolean();
-            dto.Tipo = (TipoItem) GenerateInt32(1, 2);
+            // Sobreescreve a geração default para estes campos:
+            dto.CodItem = MockReader.GenerateCode(10);
+            dto.CodBarra = MockReader.GenerateCode(10);
+            dto.Descricao = MockReader.GenerateName(4).ToUpper();
+            dto.Tipo = (TipoItem) MockReader.GenerateInt32(1, 2);
 
             return dto;
+        }
+
+        public override string GetStmtFindAllProdutoByCodFamilia()
+        {
+            return string.Empty;
+        }
+
+        public override string GetStmtFindAllServicoByCodFamilia()
+        {
+            return string.Empty;
         }
     }
 }

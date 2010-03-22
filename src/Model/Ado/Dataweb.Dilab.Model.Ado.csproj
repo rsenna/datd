@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccessBase.cs" />
     <Compile Include="DataAccess\FaturaDao.cs" />
     <Compile Include="DataAccess\LancamentoDao.cs" />
     <Compile Include="DataAccess\NotaFiscalDao.cs" />
@@ -63,10 +62,11 @@
     <Compile Include="DataAccess\OrdemServicoLenteDao.cs" />
     <Compile Include="DataAccess\PacoteCreditoDao.cs" />
     <Compile Include="DataAccess\PacoteHistoricoDao.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="FbCommand.cs" />
+    <Compile Include="FbReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataAccess\ClienteDao.cs" />
-    <Compile Include="Session.cs" />
+    <Compile Include="FbSession.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dataweb.Dilab.Model.csproj">
