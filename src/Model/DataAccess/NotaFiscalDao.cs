@@ -22,9 +22,11 @@ namespace Dataweb.Dilab.Model.DataAccess
             dto.Data = reader.ReadRequired<DateTime>("RDATAEMISSAO");
             dto.Total = reader.ReadRequired<decimal>("RTOTAL");
             dto.Nfe = reader.ReadRequired<bool>("RNFE");
+            dto.NfeXml = reader.ReadOptional("RNFEXML");
 
             if (Depth > QueryDepth.FirstLevel)
             {
+                // Lê as transações associadas à nota fiscal:
                 var transacaoDao = DataAccessFactory.CreateDao<ITransacaoDao>(this);
                 dto.Transacoes = transacaoDao.FindAll(dto.CodCliente, dto.CodNotaFiscal).ToArray();
             }
@@ -88,8 +90,6 @@ namespace Dataweb.Dilab.Model.DataAccess
 
             return result;
         }
-
-        public abstract string GetXml(int codNotaFiscal);
 
         public override NotaFiscal Insert(NotaFiscal dto)
         {

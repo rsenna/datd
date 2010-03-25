@@ -13,12 +13,10 @@ namespace Dataweb.Dilab.Model.Mock.DataAccess
             dto.Data = MockReader.GenerateDateTime(-10);
             dto.Total = MockReader.GenerateDecimal(20000);
 
-            return dto;
-        }
+            // Corrige geração do xml:
+            dto.NfeXml = dto.Nfe? MockReader.GenerateXml() : null;
 
-        public override string GetXml(int codNotaFiscal)
-        {
-            return MockReader.GenerateXml();
+            return dto;
         }
 
         public override string GetStmtFindAllByCodCliente()

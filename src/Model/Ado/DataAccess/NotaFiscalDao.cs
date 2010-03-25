@@ -13,7 +13,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RNUMERONOTAFISCAL,
                 RDATAEMISSAO,
                 RTOTAL,
-                RNFE
+                RNFE,
+                RNFEXML
             from
                 STP_WEBCONSULTARNOTASFISCAIS(@PCOD_CLIENTE, NULL)
         ";
@@ -26,7 +27,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RNUMERONOTAFISCAL,
                 RDATAEMISSAO,
                 RTOTAL,
-                RNFE
+                RNFE,
+                RNFEXML
             from
                 STP_WEBCONSULTARNOTASFISCAIS(@PCOD_CLIENTE, @PCOD_FATURA)
         ";
@@ -39,9 +41,10 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RNUMERONOTAFISCAL,
                 RDATAEMISSAO,
                 RTOTAL,
-                RNFE
+                RNFE,
+                RNFEXML
             from
-                STP_WEBCONSULTARNOTASFISCAL(@PCOD_NOTAFISCAL)
+                STP_WEBCONSULTARNOTAFISCAL(@PCOD_NOTAFISCAL)
         ";
 
         public override string GetStmtFindAllByCodCliente()
@@ -57,12 +60,6 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
         public override string GetStmtFindByPrimaryKey()
         {
             return SQL_STMT_FIND_BY_PRIMARY_KEY;
-        }
-
-        // TODO: NotaFiscal: Definir como buscar XML
-        public override string GetXml(int codNotaFiscal)
-        {
-            throw new NotImplementedException();
         }
     }
 }

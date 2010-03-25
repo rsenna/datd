@@ -27,6 +27,9 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public bool Nfe { get; set; }
 
         [DataMember]
+        public string NfeXml { get; set; }
+
+        [DataMember]
         public Transacao[] Transacoes { get; set; }
     }
 }

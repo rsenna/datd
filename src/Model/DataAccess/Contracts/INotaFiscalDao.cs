@@ -8,6 +8,5 @@ namespace Dataweb.Dilab.Model.DataAccess.Contracts
         IEnumerable<NotaFiscal> FindAll(int codCliente);
         IEnumerable<NotaFiscal> FindAll(int codCliente, int codFatura);
         NotaFiscal FindByPrimaryKey(int codNotaFiscal);
-        string GetXml(int codNotaFiscal);
     }
 }

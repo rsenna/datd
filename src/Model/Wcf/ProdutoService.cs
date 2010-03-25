@@ -209,14 +209,18 @@ namespace Dataweb.Dilab.Model.Wcf
         {
             var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session, QueryDepth.Complete);
             notaFiscalDao.Depth = QueryDepth.SecondLevel;
-            return notaFiscalDao.FindByPrimaryKey(codNotaFiscal);
+            var dto = notaFiscalDao.FindByPrimaryKey(codNotaFiscal);
+            dto.NfeXml = null; // Para poupar transmissao de dados, ja que existe rotina específica para o envio do xml.
+            return dto;
         }
 
         [OperationBehavior(TransactionScopeRequired = true, TransactionAutoComplete = true)]
         public string GetXmlNotaFiscalEletronica(int codNotaFiscal)
         {
             var notaFiscalDao = DataAccessFactory.CreateDao<INotaFiscalDao>(session, QueryDepth.FirstLevel);
-            return notaFiscalDao.GetXml(codNotaFiscal);
+            notaFiscalDao.Depth = QueryDepth.FirstLevel;
+            var dto = notaFiscalDao.FindByPrimaryKey(codNotaFiscal);
+            return dto.NfeXml;
         }
     }
 }
