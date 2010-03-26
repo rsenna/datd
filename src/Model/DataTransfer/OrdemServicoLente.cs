@@ -27,30 +27,30 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public string Descricao { get; set; }
 
         [DataMember]
-        public decimal LongeEsf { get; set; }
+        public decimal? LongeEsf { get; set; }
 
         [DataMember]
-        public decimal LongeCil { get; set; }
+        public decimal? LongeCil { get; set; }
 
         [DataMember]
-        public decimal LongeEixo { get; set; }
+        public decimal? LongeEixo { get; set; }
 
         [DataMember]
-        public decimal Adicao { get; set; }
+        public decimal? Adicao { get; set; }
 
         [DataMember]
-        public decimal PertoEsf { get; set; }
+        public decimal? PertoEsf { get; set; }
 
         [DataMember]
-        public decimal PertoCil { get; set; }
+        public decimal? PertoCil { get; set; }
 
         [DataMember]
-        public decimal PertoEixo { get; set; }
+        public decimal? PertoEixo { get; set; }
 
         [DataMember]
-        public decimal Dnp { get; set; }
+        public decimal? Dnp { get; set; }
 
         [DataMember]
-        public decimal Alt { get; set; }
+        public decimal? Alt { get; set; }
     }
 }

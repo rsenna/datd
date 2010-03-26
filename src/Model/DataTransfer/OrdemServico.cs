@@ -12,34 +12,34 @@ namespace Dataweb.Dilab.Model.DataTransfer
         public string ObservacaoArmacao { get; set; }
 
         [DataMember]
-        public int CodMaterial { get; set; }
+        public int? CodMaterial { get; set; }
 
         [DataMember]
-        public int TipoVt { get; set; }
+        public int? TipoVt { get; set; }
 
         [DataMember]
-        public decimal Ta { get; set; }
+        public decimal? Ta { get; set; }
 
         [DataMember]
-        public decimal Md { get; set; }
+        public decimal? Md { get; set; }
 
         [DataMember]
-        public decimal Diametro { get; set; }
+        public decimal? Diametro { get; set; }
 
         [DataMember]
         public string ObservacaoLente { get; set; }
 
         [DataMember]
-        public decimal Dp { get; set; }
+        public decimal? Dp { get; set; }
 
         [DataMember]
-        public decimal Aa { get; set; }
+        public decimal? Aa { get; set; }
 
         [DataMember]
-        public decimal Eixo { get; set; }
+        public decimal? Eixo { get; set; }
 
         [DataMember]
-        public decimal Ponte { get; set; }
+        public decimal? Ponte { get; set; }
 
         [DataMember]
         public OrdemServicoLente LenteOd { get; set; }

@@ -12,16 +12,16 @@ namespace Dataweb.Dilab.Model.DataAccess
 
             dto.DescricaoArmacao = reader.ReadOptional("RDESCRICAOARMACAO");
             dto.ObservacaoArmacao = reader.ReadOptional("ROBSERVACAOARMACAO");
-            dto.CodMaterial = reader.ReadRequired<int>("RCODOTICALENTEMATERIAL");
-            dto.TipoVt = reader.ReadRequired<int>("RTIPOVT");
-            dto.Ta = reader.ReadRequired<decimal>("RTA");
-            dto.Md = reader.ReadRequired<decimal>("RMD");
-            dto.Diametro = reader.ReadRequired<decimal>("RDIAMETRO");
+            dto.CodMaterial = reader.ReadOptional<int>("RCODOTICALENTEMATERIAL");
+            dto.TipoVt = reader.ReadOptional<int>("RTIPOVT");
+            dto.Ta = reader.ReadOptional<decimal>("RTA");
+            dto.Md = reader.ReadOptional<decimal>("RMD");
+            dto.Diametro = reader.ReadOptional<decimal>("RDIAMETRO");
             dto.ObservacaoLente = reader.ReadOptional("ROBSERVACAOLENTE");
-            dto.Dp = reader.ReadRequired<decimal>("RDP");
-            dto.Aa = reader.ReadRequired<decimal>("RAA");
-            dto.Eixo = reader.ReadRequired<decimal>("REIXO");
-            dto.Ponte = reader.ReadRequired<decimal>("RPONTE");
+            dto.Dp = reader.ReadOptional<decimal>("RDP");
+            dto.Aa = reader.ReadOptional<decimal>("RAA");
+            dto.Eixo = reader.ReadOptional<decimal>("REIXO");
+            dto.Ponte = reader.ReadOptional<decimal>("RPONTE");
 
             if (Depth > QueryDepth.FirstLevel)
             {

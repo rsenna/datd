@@ -17,15 +17,15 @@ namespace Dataweb.Dilab.Model.DataAccess
             dto.CodTransacao = reader.ReadRequired<int>("cod_ordemservicootica");
             dto.TipoLente = reader.ReadRequired<TipoLente>("cod_ordemservicooticalente");
             dto.Descricao = reader.ReadOptional("descricaolente");
-            dto.LongeEsf = reader.ReadRequired<decimal>("longe_esf");
-            dto.LongeCil = reader.ReadRequired<decimal>("longe_cil");
-            dto.LongeEixo = reader.ReadRequired<decimal>("longe_eixo");
-            dto.Adicao = reader.ReadRequired<decimal>("adicao");
-            dto.PertoEsf = reader.ReadRequired<decimal>("perto_esf");
-            dto.PertoCil = reader.ReadRequired<decimal>("perto_cil");
-            dto.PertoEixo = reader.ReadRequired<decimal>("perto_eixo");
-            dto.Dnp = reader.ReadRequired<decimal>("dnp");
-            dto.Alt = reader.ReadRequired<decimal>("alt");
+            dto.LongeEsf = reader.ReadOptional<decimal>("longe_esf");
+            dto.LongeCil = reader.ReadOptional<decimal>("longe_cil");
+            dto.LongeEixo = reader.ReadOptional<decimal>("longe_eixo");
+            dto.Adicao = reader.ReadOptional<decimal>("adicao");
+            dto.PertoEsf = reader.ReadOptional<decimal>("perto_esf");
+            dto.PertoCil = reader.ReadOptional<decimal>("perto_cil");
+            dto.PertoEixo = reader.ReadOptional<decimal>("perto_eixo");
+            dto.Dnp = reader.ReadOptional<decimal>("dnp");
+            dto.Alt = reader.ReadOptional<decimal>("alt");
 
             return dto;
         }
