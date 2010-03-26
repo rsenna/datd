@@ -19,7 +19,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RAVISOMENSAGEM,
                 RTIPO
             FROM
-                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE, @PCOD_NOTAFISCAL)
+                STP_WEBCONSULTARTRANSACOES(@PCOD_CLIENTE, @PCOD_NOTAFISCAL)
         ";
 
         internal const string SQL_STMT_FIND_ALL = @"
@@ -35,7 +35,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RAVISOMENSAGEM,
                 RTIPO
             FROM
-                STP_WEBORDEMSERVICO_CONSULTAR(@PCOD_CLIENTE, NULL)
+                STP_WEBCONSULTARTRANSACOES(@PCOD_CLIENTE, NULL)
         ";
 
         internal const string SQL_STMT_FIND_ONE_BY_COD_EMPRESA_AND_COD_TRANSACAO = @"

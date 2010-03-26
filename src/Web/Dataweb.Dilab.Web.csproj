@@ -197,6 +197,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Service References\ProdutoServiceReference\configuration91.svcinfo" />
+    <Content Include="Views\Account\LogOnInvalido.aspx" />
     <Content Include="Views\Compras\Detalhar.aspx" />
     <Content Include="Views\Shared\DetalharItens.ascx" />
     <Content Include="Views\Shared\DetalharOs.ascx" />

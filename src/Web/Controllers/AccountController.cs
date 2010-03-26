@@ -40,7 +40,7 @@ namespace Dataweb.Dilab.Web.Controllers
         {
             if (!ClienteSC.ValidateLogin(login, password))
             {
-                throw new Exception("Login inválido. Verifique o usuário e a senha.");
+                RedirectToAction("LogOnInvalido");
             }
 
             FormsAuthentication.SetAuthCookie(login, rememberMe);
@@ -51,6 +51,11 @@ namespace Dataweb.Dilab.Web.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        public ActionResult LogOnInvalido()
+        {
+            return View();
         }
 
         public ActionResult LogOff()

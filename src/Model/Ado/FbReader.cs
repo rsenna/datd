@@ -15,7 +15,8 @@ namespace Dataweb.Dilab.Model.Ado
 
         public bool ReadRecord()
         {
-            return DataReader.Read();
+            var result = DataReader.Read();
+            return result;
         }
 
         private object ReadObject<T>(string name)

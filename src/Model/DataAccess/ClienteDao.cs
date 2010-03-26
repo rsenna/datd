@@ -54,7 +54,7 @@ namespace Dataweb.Dilab.Model.DataAccess
 
                 c.AddParameter("@CNPJ", DbType.String, cnpj);
 
-                InitDto(c, result);
+                result = InitDto(c, result);
             }
 
             return result;

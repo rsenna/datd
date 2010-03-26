@@ -12,13 +12,8 @@ namespace Dataweb.Dilab.Model
         {
             using (var reader = c.ExecuteReader())
             {
-                if (reader.ReadRecord())
-                {
-                    return InitDto(reader, dto);
-                }
+                return reader.ReadRecord()? InitDto(reader, dto) : null;
             }
-
-            return dto;
         }
 
         public abstract T InitDto(IReader reader, T dto);

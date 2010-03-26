@@ -11,6 +11,11 @@ namespace Dataweb.Dilab.Web.Controllers
             var login = GetLogin();
             var viewModel = new HomeViewModel {Cliente = ClienteSC.FindByLogin(login)};
 
+            if (viewModel.Cliente == null)
+            {
+                return RedirectToAction("LogOn", "Account");
+            }
+
             viewModel.EmProducao = ProdutoSC.GetCountEmProducao(viewModel.Cliente.CodCliente);
             viewModel.Fechadas = ProdutoSC.GetCountFechadas(viewModel.Cliente.CodCliente);
 
