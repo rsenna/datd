@@ -23,7 +23,7 @@
             </th>
         </tr>
 
-        <% foreach (var item in Model) { %>
+        <% var totalGeral = 0m; foreach (var item in Model) { totalGeral += item.Total; %>
 
             <tr>
                 <td>
@@ -53,5 +53,12 @@
             </tr>
 
         <% } // end foreach %>
+        <tr class="summary">
+            <td>&nbsp;</td>
+            <td class="title">Total:</td>
+            <td><%= Html.EncodeCurrency(totalGeral) %></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
     </table>
 <% } // end if %>

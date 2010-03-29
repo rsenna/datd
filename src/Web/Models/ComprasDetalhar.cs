@@ -5,6 +5,7 @@ namespace Dataweb.Dilab.Web.Models
     public class ComprasDetalhar
     {
         public Transacao Transacao { get; set; }
+        public string Material { get; set; }
 
         public OrdemServico OrdemServico
         {

@@ -30,7 +30,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RNFE,
                 RNFEXML
             from
-                STP_WEBCONSULTARNOTASFISCAIS(@PCOD_CLIENTE, @PCOD_FATURA)
+                STP_WEBCONSULTARNOTASFISCAIS(NULL, @PCOD_FATURA)
         ";
 
         private const string SQL_STMT_FIND_BY_PRIMARY_KEY = @"

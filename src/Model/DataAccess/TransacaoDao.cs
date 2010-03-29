@@ -30,6 +30,7 @@ namespace Dataweb.Dilab.Model.DataAccess
             dto.Etapa = reader.ReadRequired<TipoEtapa>("RCODETAPA");
             dto.AvisoMensagem = reader.ReadOptional("RAVISOMENSAGEM");
             dto.Tipo = reader.ReadRequired<TipoTransacao>("RTIPO");
+            dto.Observacao = reader.ReadOptional("ROBSERVACAO");
 
             if (Depth > QueryDepth.FirstLevel)
             {
@@ -67,7 +68,7 @@ namespace Dataweb.Dilab.Model.DataAccess
             {
                 c.CommandText = GetStmtFindAllByCodClienteAndCodNotaFiscal();
                 c.AddParameter("@PCOD_CLIENTE", DbType.Int32, codCliente);
-                c.AddParameter("@PCOD_NOTAFISCAL", DbType.Int32, codCliente);
+                c.AddParameter("@PCOD_NOTAFISCAL", DbType.Int32, codNotaFiscal);
                 InitDtos(c, result);
             }
 

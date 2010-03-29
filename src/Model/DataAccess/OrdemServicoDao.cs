@@ -33,6 +33,7 @@ namespace Dataweb.Dilab.Model.DataAccess
             return dto;
         }
 
+        // TODO: Falta passar campo dto.Observacao (OBSERVACAOGERAL)
         protected override void PrepareParameters(ICommand c, OrdemServico dto)
         {
             c.AddParameter("@PDESCRICAOARMACAO", DbType.String, dto.DescricaoArmacao);

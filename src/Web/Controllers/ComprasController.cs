@@ -28,16 +28,25 @@ namespace Dataweb.Dilab.Web.Controllers
             return View(viewModel);
         }
 
+        private string GetDescricaoMaterial(OrdemServico os)
+        {
+            var materiais = ProdutoSC.FindAllMaterial();
+            var material = materiais.First(m => m.CodMaterial == os.CodMaterial);
+            return material == null? null : material.Descricao;
+        }
+
         [Authorize]
         [AcceptVerbs(HttpVerbs.Get)]
         public ActionResult Detalhar(int codEmpresa, int codTransacao, TipoTransacao tipo)
         {
             Transacao transacao;
+            string descricaoMaterial = null;
 
             switch (tipo)
             {
                 case TipoTransacao.OrdemServico:
                     transacao = ProdutoSC.GetOrdemServico(codEmpresa, codTransacao);
+                    descricaoMaterial = GetDescricaoMaterial((OrdemServico) transacao);
                     break;
 
                 case TipoTransacao.Pedido:
@@ -50,7 +59,8 @@ namespace Dataweb.Dilab.Web.Controllers
             }
 
             var viewModel = new ComprasDetalhar {
-                Transacao = transacao
+                Transacao = transacao,
+                Material = descricaoMaterial
             };
 
             return View(viewModel);
@@ -79,7 +89,7 @@ namespace Dataweb.Dilab.Web.Controllers
                 CodCliente = GetCodCliente(),
                 Observacao = viewModel.ObservacaoGeral,
                 Referencia = viewModel.Referencia,
-                DescricaoArmacao = string.Empty,
+                DescricaoArmacao = viewModel.Armacao,
                 ObservacaoArmacao = viewModel.ObservacaoArmacao,
                 CodMaterial = viewModel.MaterialArmacao,
                 TipoVt = 1,

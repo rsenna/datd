@@ -3,7 +3,7 @@
 
 <div id="divLentes">
     <div id="divOD" class="coluna">
-        <h3>Olho Direito</h3>
+        <h4>Olho Direito</h4>
 
         <div id="divLongeOD" class="divcom3">
             <h4>Longe</h4>
@@ -60,7 +60,7 @@
     </div>
 
     <div id="divOE" class="coluna">
-        <h3>Olho Esquerdo</h3>
+        <h4>Olho Esquerdo</h4>
 
         <div id="divLongeOE" class="divcom3">
             <h4>Longe</h4>
@@ -126,7 +126,7 @@
 <br clear="all" />
 
 <div id="divParam">
-    <h3>Parâmetros</h3>
+    <h4>Parâmetros</h4>
     <div class="div1de6">
         <label>T.A.:</label><br />
         <span class="field"><%= Model.OrdemServico.Ta %></span>
@@ -155,7 +155,7 @@
 <br clear="all" />
 
 <div id="divInfo">
-    <h3>Informações Adicionais</h3>
+    <h4>Informações Adicionais</h4>
     <div class="coluna" id="divColunaE">
         <div class="divcom1">
             <label>Armação:</label><br />
@@ -169,7 +169,7 @@
     <div class="coluna" id="divColunaD">
         <div class="divcom1">
             <label>Material da Armação:</label><br />
-            <span class="field coluna"><%= Model.OrdemServico.CodMaterial %></span>
+            <span class="field coluna"><%= Model.Material %></span>
             <br clear="all" />
             <br />
             <label>Observação Geral:</label><br />

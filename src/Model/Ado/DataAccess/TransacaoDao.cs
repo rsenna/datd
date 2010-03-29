@@ -17,7 +17,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RDATAHORAEXPEDICAO,
                 RCODETAPA,
                 RAVISOMENSAGEM,
-                RTIPO
+                RTIPO,
+                NULL AS ROBSERVACAO
             FROM
                 STP_WEBCONSULTARTRANSACOES(@PCOD_CLIENTE, @PCOD_NOTAFISCAL)
         ";
@@ -33,7 +34,8 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RDATAHORAEXPEDICAO,
                 RCODETAPA,
                 RAVISOMENSAGEM,
-                RTIPO
+                RTIPO,
+                NULL AS ROBSERVACAO
             FROM
                 STP_WEBCONSULTARTRANSACOES(@PCOD_CLIENTE, NULL)
         ";
@@ -62,6 +64,7 @@ namespace Dataweb.Dilab.Model.Ado.DataAccess
                 RCODOTICALENTEMATERIAL,
                 RDESCRICAOMATERIAL,
                 RDESCRICAOARMACAO,
+                ROBSERVACAO,
                 ROBSERVACAOARMACAO,
                 ROBSERVACAOLENTE
             FROM

@@ -15,12 +15,16 @@
         <% if (Model != null) { %>
 
             <div id="divNumeroOS">
-                <h3>Número:</h3>
+                <h4>Número:</h4>
                 <%= Model.Transacao.Numero %>
             </div>
 
             <% if (Model.IsOrdemServico) Html.RenderPartial("DetalharOs", Model); %>
             <% Html.RenderPartial("DetalharItens", Model); %>
+            <% if (Model.IsPedido) { %>
+                <h4>Observações:</h4>
+                <%= Html.Encode(Model.Pedido.Observacao) %>
+            <% } %>
 
         <% } else { %>
             Não há detalhes para apresentar.
